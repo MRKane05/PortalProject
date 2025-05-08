@@ -227,6 +227,10 @@ Prefab:
       propertyPath: _exitPortal
       value: 
       objectReference: {fileID: 415809625}
+    - target: {fileID: 1900981056965284, guid: bc8a60c77915aca43acf8063f39ee6e3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc8a60c77915aca43acf8063f39ee6e3, type: 2}
   m_IsPrefabAsset: 0
@@ -241,11 +245,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d,
     type: 2}
   m_PrefabInternal: {fileID: 1973230348}
---- !u!1 &415809623 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1900981056965284, guid: bc8a60c77915aca43acf8063f39ee6e3,
-    type: 2}
-  m_PrefabInternal: {fileID: 853421604}
 --- !u!114 &415809625 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114275461052025110, guid: bc8a60c77915aca43acf8063f39ee6e3,
@@ -619,6 +618,10 @@ Prefab:
       propertyPath: _exitPortal
       value: 
       objectReference: {fileID: 204118521}
+    - target: {fileID: 1900981056965284, guid: bc8a60c77915aca43acf8063f39ee6e3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc8a60c77915aca43acf8063f39ee6e3, type: 2}
   m_IsPrefabAsset: 0
@@ -1342,7 +1345,8 @@ Prefab:
         type: 2}
       propertyPath: _portalPrefab
       value: 
-      objectReference: {fileID: 415809623}
+      objectReference: {fileID: 1900981056965284, guid: bc8a60c77915aca43acf8063f39ee6e3,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
   m_IsPrefabAsset: 0
