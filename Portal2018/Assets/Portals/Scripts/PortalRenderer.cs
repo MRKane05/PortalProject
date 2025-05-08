@@ -388,7 +388,7 @@ namespace Portals {
             // Get camera for next depth level
             PortalCamera portalCamera = GetOrCreatePortalCamera(Camera.current);
 
-            // Save which portal is rendering 
+            // Save which portal is rendering
             var parentPortal = _currentlyRenderingPortal;
             _currentlyRenderingPortal = _portal;
             _currentRenderDepth++;

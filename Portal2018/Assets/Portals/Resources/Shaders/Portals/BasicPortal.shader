@@ -56,15 +56,20 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
-				o.screenUV = ComputeNonStereoScreenPos(o.vertex);
+				o.screenUV = ComputeScreenPos(o.vertex);
+				//Calc screenspace (more potential optimisation here later)
+			
+
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag(v2f i) : SV_Target
 			{
+				float2 sUV = i.screenUV.xy / i.screenUV.w;
+				fixed4 col = tex2D(_LeftEyeTexture, sUV);
 				// sample the texture
-				i.screenUV /= i.screenUV.w;
-				fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);
+				//i.screenUV /= i.screenUV.w;
+				//fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);
 				//fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
