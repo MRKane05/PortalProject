@@ -93,7 +93,8 @@ public class SpawnPortalOnClick : MonoBehaviour {
         if (hitWall) {
             Portal portal = hit.collider.GetComponent<Portal>();
             if (portal) {
-                WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
+                //For this implementation we don't much care about fancy effects
+                //WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
             } else {
                 bool spawnedPortal = TrySpawnPortal(polarity, hit);
                 if (!spawnedPortal) {
@@ -143,7 +144,8 @@ public class SpawnPortalOnClick : MonoBehaviour {
     Portal SpawnPortal(Vector3 location, Quaternion rotation, Color color) {
         GameObject obj = Instantiate(_portalPrefab, location, rotation);
         Portal portal = obj.GetComponent<Portal>();
-
+        portal.PortalColor = color;
+        //While this is cool I'm 100% sure we're not going to have the FPS to pipe it
         ParticleSystem particles = portal.GetComponentInChildren<ParticleSystem>();
         if (particles) {
             ParticleSystem.MainModule main = particles.main;
@@ -358,6 +360,7 @@ public class SpawnPortalOnClick : MonoBehaviour {
     }
 
     void SpawnSplashParticles(Vector3 position, Vector3 direction, Color color) {
+        if (!_splashParticles) { return; } //Don't do anything if we don't have a prefab
         GameObject obj = Instantiate(_splashParticles);
         obj.transform.position = position;
         obj.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);

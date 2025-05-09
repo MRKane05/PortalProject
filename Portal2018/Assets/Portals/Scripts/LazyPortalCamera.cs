@@ -12,13 +12,15 @@ public class LazyPortalCamera : MonoBehaviour {
 	public Portal ourPortal;
 
 	// Use this for initialization
-	void Start () {
+	IEnumerator Start () {
+        yield return null; //Wait for the portal class to intilize etc.
 		//Get a fresh set of everything for us
 		ourRenderTexture = new RenderTexture(ourRenderTexture); //Clone our rendertexture
 		ourRenderTexture.name = "~RenderTexture";
 		ourCamera.targetTexture = ourRenderTexture;
 		planeMat = ourPortalPlane.materials[0];    //Lazy grab
 		planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        planeMat.SetColor("_Color", ourPortal.PortalColor);
 		ourPortalPlane.materials[0] = planeMat;
 
 		//ourPortal = gameObject.GetComponent<Portal>();

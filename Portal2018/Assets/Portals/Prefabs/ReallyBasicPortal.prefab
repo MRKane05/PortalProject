@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitPortal: {fileID: 0}
   _defaultTexture: {fileID: 2800000, guid: 7fb0f9c086568d944b17335cd5c171ca, type: 3}
-  _transparencyMask: {fileID: 2800000, guid: 6a75f8e62e1890848966a1c6b78f0cee, type: 3}
+  _transparencyMask: {fileID: 2800000, guid: 506e4e616989679458439ca3e8fc4f07, type: 3}
   _maxRecursion: 2
   _fakeInfiniteRecursion: 0
   _modifyGravity: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
       m_Bits: 311
     supportedCameraTypes: 1
     debugEnabled: 0
+  PortalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114413267523486798
 MonoBehaviour:
   m_ObjectHideFlags: 1

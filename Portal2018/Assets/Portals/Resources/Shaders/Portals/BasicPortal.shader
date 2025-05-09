@@ -5,6 +5,7 @@
 		_MainTex("DefaultTexture", 2D) = "white" {}
 		_LeftEyeTexture("LeftEyeTexture", 2D) = "bump" {}
 		_TransparencyMask("TransparencyMask", 2D) = "white" {}
+		_Color("Portal Tint", Color) = (1,1,1,1)
 	}
 	SubShader
 	{
@@ -48,7 +49,9 @@
 
 			sampler2D _MainTex;
 			sampler2D _LeftEyeTexture;
+			sampler2D _TransparencyMask;
 			float4 _MainTex_ST;
+			fixed4 _Color;
 			
 			v2f vert (appdata v)
 			{
@@ -67,6 +70,11 @@
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
+				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
+
+				col.a = portalCol.a;	//Set alpha based off of image alpha
+				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
+				//col = portalCol;
 				// sample the texture
 				//i.screenUV /= i.screenUV.w;
 				//fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);

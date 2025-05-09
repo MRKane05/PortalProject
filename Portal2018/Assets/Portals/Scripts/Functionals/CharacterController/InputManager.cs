@@ -70,13 +70,20 @@ public class InputManager : MonoBehaviour {
 
 #if !UNITY_EDITOR
         //Vita controls!!!
-        moveDir += new Vector3(Input.GetAxis("Left Stick Horizontal"), 0, Input.GetAxis("Left Stick Vertical"));  //This is inverted for some weird reason
+        moveDir += Camera.main.transform.forward * -Input.GetAxis("Left Stick Vertical");
+        moveDir += Camera.main.transform.right * Input.GetAxis("Left Stick Horizontal");
+        //new Vector3(Input.GetAxis("Left Stick Horizontal"), 0, Input.GetAxis("Left Stick Vertical"));  //This is inverted for some weird reason
 
         if (moveDir.sqrMagnitude > 0f)
         {
             moved = true;
         }
 #endif
+
+        if (Input.GetButtonDown("Triangle") || Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.transform.position = Vector3.up * 5f;
+        }
 
         if (_autowalk) {
             moveDir += Camera.main.transform.forward;
