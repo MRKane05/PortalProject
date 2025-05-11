@@ -108,6 +108,8 @@ public class SpawnPortalOnClick : MonoBehaviour {
             SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
     }
 
+    public float PortalScale = 0.1f;
+
     private bool TrySpawnPortal(Polarity polarity, RaycastHit hit) {
         Portal portal = polarity == Polarity.Left ? _leftPortal : _rightPortal;
 
@@ -133,7 +135,7 @@ public class SpawnPortalOnClick : MonoBehaviour {
             // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
             Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
             //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface
-            SetScaleOverTime(portalRenderer.transform, Vector3.zero, Vector3.one * 0.1f, _portalSpawnCurve, _portalSpawnTime);
+            SetScaleOverTime(portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
 
             return true;
         }

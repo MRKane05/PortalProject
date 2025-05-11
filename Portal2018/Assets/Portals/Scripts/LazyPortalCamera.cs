@@ -10,16 +10,32 @@ public class LazyPortalCamera : MonoBehaviour {
 	public MeshRenderer ourPortalPlane;
 	public Material planeMat;
 	public Portal ourPortal;
-
-	// Use this for initialization
-	IEnumerator Start () {
+    public Texture2D RenderTextureDump;
+    public bool bDoRecursiveDump = true;
+    // Use this for initialization
+    IEnumerator Start () {
         yield return null; //Wait for the portal class to intilize etc.
 		//Get a fresh set of everything for us
 		ourRenderTexture = new RenderTexture(ourRenderTexture); //Clone our rendertexture
-		ourRenderTexture.name = "~RenderTexture";
+
+        if (bDoRecursiveDump)
+        {
+            RenderTextureDump = new Texture2D(ourRenderTexture.width, ourRenderTexture.height, TextureFormat.RGBA32, false);
+        }
+
+
+        ourRenderTexture.name = "~RenderTexture";
 		ourCamera.targetTexture = ourRenderTexture;
 		planeMat = ourPortalPlane.materials[0];    //Lazy grab
-		planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+                                                   //planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        if (bDoRecursiveDump)
+        {
+            planeMat.SetTexture("_LeftEyeTexture", RenderTextureDump);
+        } else
+        {
+            planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        }
+
         planeMat.SetColor("_Color", ourPortal.PortalColor);
 		ourPortalPlane.materials[0] = planeMat;
 
@@ -32,9 +48,17 @@ public class LazyPortalCamera : MonoBehaviour {
 		if (ourPortal && ourPortal.ExitPortal)
         {
             SetCameraPositions();
-
+            if (bDoRecursiveDump)
+            {
+                GraphicsShift();
+            }
 		}
 	}
+
+    void GraphicsShift()
+    {
+        Graphics.CopyTexture(ourRenderTexture, RenderTextureDump);
+    }
 
 	void SetCameraPositions()
     {
@@ -105,17 +129,18 @@ public class LazyPortalCamera : MonoBehaviour {
             {
                 ourCamera.useOcclusionCulling = false;
             }
-            /*
-            RenderTexture texture = GetTemporaryRT();
+
+            //RenderTexture texture = GetTemporaryRT();
 
             if (ourPortal.FakeInfiniteRecursion)
             {
                 // RenderTexture must be cleared when using fake infinite recursion because
                 // we might sometimes sample uninitialized garbage pixels otherwise, which can
                 // cause significant visual artifacts.
-                ClearRenderTexture(texture);
+                
+                //ClearRenderTexture(texture);
             }
-
+            /*
             ourCamera.targetTexture = texture;
             ourCamera.Render();
 
@@ -123,10 +148,23 @@ public class LazyPortalCamera : MonoBehaviour {
 
             return texture;
             
+            
         }
             */
         
     }
+    /*
+    private void ClearRenderTexture(RenderTexture rt)
+    {
+        // TODO: This is probably a fairly expensive operation. We can make it cheaper by using
+        // CommandBuffers to avoid swapping the active texture, but we have to clear the whole screen
+        // instead of just the portion that is rendering
+        var oldRT = RenderTexture.active;
+        RenderTexture.active = rt;
+        GL.Clear(false, true, Color.black);
+        RenderTexture.active = oldRT;
+    }*/
+
     private const float ObliqueClippingOffset = 0.001f;
 
     Matrix4x4 CalculateObliqueProjectionMatrix(Matrix4x4 projectionMatrix)

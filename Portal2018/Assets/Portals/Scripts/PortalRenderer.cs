@@ -480,7 +480,7 @@ namespace Portals {
             _meshFilter.sharedMesh = PortalRenderer.Mesh;
             if (!_portalMaterial || !_backfaceMaterial) {
                 Material portalMaterial = new Material(Shader.Find("Portals/BasicPortal"));
-                Material backFaceMaterial = new Material(Shader.Find("Portals/BasicPortal"));  //PortalBackface"));
+                Material backFaceMaterial = new Material(Shader.Find("Portals/BasicPortalBackface"));  //PortalBackface"));
 
                 _portalMaterial = portalMaterial;
                 _backfaceMaterial = backFaceMaterial;

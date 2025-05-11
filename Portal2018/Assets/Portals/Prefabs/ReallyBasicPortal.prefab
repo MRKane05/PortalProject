@@ -302,7 +302,7 @@ MonoBehaviour:
   _advancedSettings:
     useObliqueProjectionMatrix: 1
     useOcclusionMatrix: 0
-    useScissorRect: 0
+    useScissorRect: 1
     clippingOffset: 0.01
     copyGlobalIllumination: 0
     useRaycastOcclusion: 0
@@ -328,3 +328,5 @@ MonoBehaviour:
   ourPortalPlane: {fileID: 23211048213650880}
   planeMat: {fileID: 0}
   ourPortal: {fileID: 114275461052025110}
+  RenderTextureDump: {fileID: 0}
+  bDoRecursiveDump: 0
