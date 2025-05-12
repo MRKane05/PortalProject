@@ -354,11 +354,11 @@ namespace Portals {
             Camera currentCam = Camera.current;
             if (ShouldRenderPortal(currentCam)) {
                 RenderPortal(currentCam);
-            } /*else if (ShouldRenderPreviousFrame(currentCam)) {   //Disable complicated portal re-sampling
+            } else if (ShouldRenderPreviousFrame(currentCam)) {   //Disable complicated portal re-sampling
                 RenderPreviousFrame(currentCam);
             } else {
                 RenderDefaultTexture();
-            }*/
+            }
         }
 
         protected override void PostRender() {
@@ -449,6 +449,7 @@ namespace Portals {
 
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
                 _portalMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
+                _backfaceMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
                 _portalMaterial.SetTexture(sampler, texture);
             } else {
                 // We are viewing another portal.

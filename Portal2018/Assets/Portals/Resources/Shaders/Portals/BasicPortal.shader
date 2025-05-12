@@ -52,6 +52,8 @@
 			sampler2D _TransparencyMask;
 			float4 _MainTex_ST;
 			fixed4 _Color;
+
+			float4x4 PORTAL_MATRIX_VP;
 			
 			v2f vert (appdata v)
 			{
@@ -61,8 +63,13 @@
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				//Calc screenspace (more potential optimisation here later)
-			
-
+				/*
+				//Section for handling recursive sampling
+				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
+				clipPos.y *= _ProjectionParams.x;
+				//clipPos.z = 1;
+				o.screenUV = ComputeScreenPos(clipPos);
+				*/
 				return o;
 			}
 			

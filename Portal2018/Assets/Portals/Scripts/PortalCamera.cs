@@ -188,7 +188,7 @@ namespace Portals {
                 _camera.ResetProjectionMatrix();
             }
 
-            if (_portal.UseScissorRect) {
+            if (_portal.UseScissorRect && _camera.projectionMatrix.ValidTRS()) {
                 _camera.rect = viewportRect;
                 _camera.projectionMatrix = MathUtil.ScissorsMatrix(_camera.projectionMatrix, viewportRect);
             } else {

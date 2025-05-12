@@ -63,6 +63,8 @@
 			fixed4 _Color;
 			float _AlphaCutoff;
 
+			float4x4 PORTAL_MATRIX_VP;
+
 			float4 reconstructFrontFaceUV(float4 objPos) {
 				float3 objSpaceCameraPos = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, 1)).xyz;
 				float3 camToVertex = objSpaceCameraPos - objPos.xyz;
@@ -82,9 +84,17 @@
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
-				//o.objUV = reconstructFrontFaceUV(v.vertex);
 				o.objPos = v.vertex;
-				//Calc screenspace (more potential optimisation here later)
+				
+				//Section for handling recursive sampling
+				// calculate the clip position of the portal from a higher level portal. PORTAL_MATRIX_VP == camera.projectionMatrix.
+				//PORTAL_MATRIX_VP = camProjectionMatrix * worldToCameraMatrix
+				/*
+				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
+				clipPos.y *= _ProjectionParams.x;
+				//clipPos.z = 1;    
+				o.screenUV = ComputeScreenPos(clipPos);
+				*/
 			
 
 				return o;
@@ -95,7 +105,7 @@
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
 				//i.objUV = reconstructFrontFaceUV(i.vertex);
-				float4 reconUV = reconstructFrontFaceUV(i.objPos);
+				float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
 				fixed4 portalCol = tex2D(_TransparencyMask, reconUV.xy);
 				clip(portalCol.a - _AlphaCutoff);
 				//col.a = portalCol.a;	//Set alpha based off of image alpha
