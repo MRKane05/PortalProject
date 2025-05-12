@@ -22,8 +22,8 @@
 			
 			Blend One Zero
 			ZWrite Off
-			//ZTest LEqual
-			ZTest Always
+			ZTest LEqual
+			//ZTest Always
 			Cull Back
 			
 			/*			
@@ -51,7 +51,7 @@
 			{
 				float2 uv : TEXCOORD0;
 				float4 screenUV : TEXCOORD1;
-				float4 objUV : TEXCOORD2;
+				float4 objPos : TEXCOORD2;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
@@ -82,7 +82,8 @@
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
-				o.objUV = reconstructFrontFaceUV(o.vertex);
+				//o.objUV = reconstructFrontFaceUV(v.vertex);
+				o.objPos = v.vertex;
 				//Calc screenspace (more potential optimisation here later)
 			
 
@@ -93,10 +94,12 @@
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-				fixed4 portalCol = tex2D(_TransparencyMask, i.objUV.xy);
+				//i.objUV = reconstructFrontFaceUV(i.vertex);
+				float4 reconUV = reconstructFrontFaceUV(i.objPos);
+				fixed4 portalCol = tex2D(_TransparencyMask, reconUV.xy);
 				clip(portalCol.a - _AlphaCutoff);
 				//col.a = portalCol.a;	//Set alpha based off of image alpha
-				//col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
+				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 				//col = portalCol;
 				// sample the texture
 				//i.screenUV /= i.screenUV.w;

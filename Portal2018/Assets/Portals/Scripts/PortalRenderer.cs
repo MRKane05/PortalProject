@@ -660,6 +660,99 @@ namespace Portals {
         }
 
         private static Mesh MakePortalMesh() {
+            //Create an unlinked front to lessen the shader calcs we need to do
+
+
+            // Front:
+            //  1  2
+            //  0  3
+
+            // Back
+            //  5+4  6+4
+            //  4+4  7+4
+            float portalDepth = 0.25f;
+            Vector3[] vertices = new Vector3[] {
+                // Isolated Front
+                new Vector3(-0.5f, -0.5f, 0),
+                new Vector3(-0.5f,  0.5f, 0),
+                new Vector3(0.5f,  0.5f, 0),
+                new Vector3(0.5f, -0.5f, 0),
+                
+                //Point front
+                new Vector3(-0.5f, -0.5f, 0),
+                new Vector3(-0.5f,  0.5f, 0),
+                new Vector3(0.5f,  0.5f, 0),
+                new Vector3(0.5f, -0.5f, 0),
+
+                
+                // Back
+                new Vector3(-0.5f, -0.5f, portalDepth),
+                new Vector3(-0.5f,  0.5f, portalDepth),
+                new Vector3(0.5f,  0.5f, portalDepth),
+                new Vector3(0.5f, -0.5f, portalDepth),
+            };
+
+            Vector2[] uvs = new Vector2[] {
+                // Front
+                new Vector2(0, 0),
+                new Vector2(0, 1),
+                new Vector2(1, 1),
+                new Vector2(1, 0),
+
+                // Back
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                
+            };
+
+            int[] frontFaceTriangles = new int[] {
+                // Front
+                0, 1, 2,
+                2, 3, 0
+            };
+
+            int[] backFaceTriangles = new int[] {
+                // Left
+                0+4, 1+4, 5+4,
+                5+4, 4+4, 0+4,
+
+                // Back
+                4+4, 5+4, 6+4,
+                6+4, 7+4, 4+4,
+
+                // Right
+                7+4, 6+4, 2+4,
+                2+4, 3+4, 7+4,
+
+                // Top
+                6+4, 5+4, 1+4,
+                1+4, 2+4, 6+4,
+
+                // Bottom
+                0+4, 4+4, 7+4,
+                7+4, 3+4, 0+4
+            };
+
+            Mesh mesh = new Mesh();
+            mesh.name = "Portal Mesh";
+            mesh.subMeshCount = 2;
+            mesh.vertices = vertices;
+            mesh.uv = uvs;
+            mesh.SetTriangles(frontFaceTriangles, 0);
+            mesh.SetTriangles(backFaceTriangles, 1);
+
+            return mesh;
+        }
+
+        private static Mesh OldMakePortalMesh()
+        {
             // Front:
             //  1  2
             //  0  3
@@ -693,6 +786,13 @@ namespace Portals {
                 new Vector2(0, 1),
                 new Vector2(1, 1),
                 new Vector2(1, 0),
+                
+                /*
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                */
             };
 
             int[] frontFaceTriangles = new int[] {
