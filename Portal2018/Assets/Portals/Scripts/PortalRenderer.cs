@@ -61,6 +61,8 @@ namespace Portals {
 
         public Material FrontFaceMaterial; // => _portalMaterial;
         public Material BackFaceMaterial;// => _backfaceMaterial;
+
+        public Color portalColor = Color.white;
         #endregion
 
         #region Enums
@@ -76,6 +78,13 @@ namespace Portals {
 
         private struct CameraData {
 
+        }
+
+        public void setPortalColor(Color newColor)
+        {
+            portalColor = newColor;
+            _portalMaterial.SetColor("_Color", _portal.PortalColor);
+            _backfaceMaterial.SetColor("_Color", _portal.PortalColor);
         }
 
         private Vector4 WorldToViewportPoint(Matrix4x4 vp, Vector3 worldPoint) {
@@ -405,9 +414,9 @@ namespace Portals {
                 }
             } else {
             */
-                // Mono rendering. Render only one eye, but set which texture to use based on the camera's target eye.
-                RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Mono, viewportRect, renderBackface);
-                block.SetTexture("_LeftEyeTexture", tex);
+            // Mono rendering. Render only one eye, but set which texture to use based on the camera's target eye.
+            RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Mono, viewportRect, renderBackface);
+            block.SetTexture("_LeftEyeTexture", tex);
             //}
             _currentRenderDepth--;
             _currentlyRenderingPortal = parentPortal;
@@ -485,6 +494,9 @@ namespace Portals {
 
                 _portalMaterial = portalMaterial;
                 _backfaceMaterial = backFaceMaterial;
+
+                _portalMaterial.SetColor("_Color", portalColor);
+                _backfaceMaterial.SetColor("_Color", portalColor);
 
                 _portalMaterial.SetTexture("_TransparencyMask", _portal.TransparencyMask);
                 _portalMaterial.SetTexture("_DefaultTexture", _portal.DefaultTexture);

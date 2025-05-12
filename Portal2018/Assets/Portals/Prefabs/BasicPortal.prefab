@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FrontFaceMaterial: {fileID: 2100000, guid: d9e6e59ae7f94e142a63622087218792, type: 2}
   BackFaceMaterial: {fileID: 2100000, guid: f009da675d1c8c14e8e39a707f5febcb, type: 2}
+  portalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114557290012706242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,12 +237,12 @@ MonoBehaviour:
   _exitPortal: {fileID: 0}
   _defaultTexture: {fileID: 2800000, guid: 7fb0f9c086568d944b17335cd5c171ca, type: 3}
   _transparencyMask: {fileID: 2800000, guid: 506e4e616989679458439ca3e8fc4f07, type: 3}
-  _maxRecursion: 2
+  _maxRecursion: 1
   _fakeInfiniteRecursion: 0
   _modifyGravity: 0
   _ignoredColliders: []
   _qualitySettings:
-    downscaling: 1
+    downscaling: 4
     depthBufferQuality: 16
   _advancedSettings:
     useObliqueProjectionMatrix: 1
@@ -252,7 +253,7 @@ MonoBehaviour:
     useRaycastOcclusion: 0
     raycastOccluders:
       serializedVersion: 2
-      m_Bits: 311
+      m_Bits: 279
     supportedCameraTypes: 1
-    debugEnabled: 1
+    debugEnabled: 0
   PortalColor: {r: 1, g: 1, b: 1, a: 1}

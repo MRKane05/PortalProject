@@ -58,6 +58,12 @@ namespace Portals {
         public static List<Portal> AllPortals = new List<Portal>();
 
         public Color PortalColor = Color.white;
+
+        public void setPortalColor(Color newColor)
+        {
+            PortalColor = newColor;
+            PortalRenderer.setPortalColor(PortalColor);
+        }
         /// <summary>
         /// Returns the PortalRenderer component responbile for doing the actual rendering
         /// </summary>

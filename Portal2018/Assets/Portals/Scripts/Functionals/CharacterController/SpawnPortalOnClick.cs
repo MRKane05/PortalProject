@@ -12,8 +12,8 @@ static internal class AnimationCurves {
 }
 
 public class SpawnPortalOnClick : MonoBehaviour {
-    private static Color RightPortalColor = new Color(255, 0, 0);
-    private static Color LeftPortalColor = new Color(0, 240, 255);
+    private static Color RightPortalColor = new Color(255, 160, 0);
+    private static Color LeftPortalColor = new Color(0, 160, 255);
 
     [SerializeField] Camera _camera;
     [SerializeField] GameObject _bulletPrefab;
@@ -146,6 +146,7 @@ public class SpawnPortalOnClick : MonoBehaviour {
     Portal SpawnPortal(Vector3 location, Quaternion rotation, Color color) {
         GameObject obj = Instantiate(_portalPrefab, location, rotation);
         Portal portal = obj.GetComponent<Portal>();
+        portal.setPortalColor(color);
         portal.PortalColor = color;
         //While this is cool I'm 100% sure we're not going to have the FPS to pipe it
         ParticleSystem particles = portal.GetComponentInChildren<ParticleSystem>();

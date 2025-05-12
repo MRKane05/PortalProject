@@ -302,7 +302,7 @@ MonoBehaviour:
   _advancedSettings:
     useObliqueProjectionMatrix: 1
     useOcclusionMatrix: 0
-    useScissorRect: 1
+    useScissorRect: 0
     clippingOffset: 0.01
     copyGlobalIllumination: 0
     useRaycastOcclusion: 0

@@ -133,8 +133,8 @@ namespace Portals {
         }
         
         private RenderTexture GetTemporaryRT() {
-            int w = 512;// Camera.current.pixelWidth / _portal.Downscaling;
-            int h = 512; // Camera.current.pixelHeight / _portal.Downscaling;
+            int w = Camera.current.pixelWidth / _portal.Downscaling;
+            int h = Camera.current.pixelHeight / _portal.Downscaling;
             //int w = Screen.width;
             //int h = Screen.height;
             int depth = (int)_portal.DepthBufferQuality;
