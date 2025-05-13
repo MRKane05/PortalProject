@@ -453,7 +453,7 @@ namespace Portals {
                 projectionMatrix = frameData.leftEyeProjectionMatrix;
                 worldToCameraMatrix = frameData.leftEyeWorldToCameraMatrix;
                 texture = frameData.leftEyeTexture;
-                sampler = "_LeftEyeTexture";
+                sampler = "_RecursiveTexture";  //The texture that we're going to blend back into our main texture system
 
 
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
@@ -489,8 +489,8 @@ namespace Portals {
 
             _meshFilter.sharedMesh = PortalRenderer.Mesh;
             if (!_portalMaterial || !_backfaceMaterial) {
-                Material portalMaterial = new Material(Shader.Find("Portals/BasicPortal"));
-                Material backFaceMaterial = new Material(Shader.Find("Portals/BasicPortalBackface"));  //PortalBackface"));
+                Material portalMaterial = new Material(Shader.Find("Portals/BasicPortal_InRecursive"));
+                Material backFaceMaterial = new Material(Shader.Find("Portals/BasicPortal_InRecursive"));  //PortalBackface"));
 
                 _portalMaterial = portalMaterial;
                 _backfaceMaterial = backFaceMaterial;

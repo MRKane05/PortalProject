@@ -52,8 +52,41 @@ public class LazyPortalCamera : MonoBehaviour {
             {
                 GraphicsShift();
             }
+
+            SetMaterialTexOffsetScale();
 		}
 	}
+
+    public float distanceDividor = 10f;
+
+    void SetMaterialTexOffsetScale()
+    {
+        //For this we need to know what the orientations are for our cameras/portals, and the distances between them, and of course the player
+        //Lets start with the dstances
+        float distance = 1f + Vector3.Distance(transform.position, ourPortal.ExitPortal.transform.position) / distanceDividor; //Man I have no idea what this should be...
+        //Debug.Log("distnace:" + distance);
+        /*
+        			float2 cpy_offset;
+			float cpy_scale;
+        */
+        //Our offset needs to be the screen position of the center of the portal from the player
+        Vector3 distantPortalPos = ourPortal.TeleportVector(ourPortal.ExitPortal.transform.position);
+        //Flipflop to get our far portal pos to try and get a good offset
+        Vector3 farPortalPos = distantPortalPos;
+        for(int i=0; i<4; i++)
+        {
+            farPortalPos = ourPortal.ExitPortal.TeleportVector(farPortalPos);
+            farPortalPos = ourPortal.TeleportVector(farPortalPos);
+        }
+        Vector3 portalScreenCenter = Camera.main.WorldToViewportPoint(distantPortalPos);// gameObject.transform.position);   //Need to do this on a point through the portal, and maybe one further still
+        //Documentation seems to differ with what WorldToViewportPoint actually is. Zero is the center of the screen? The extents seem to be about 1.3f
+        //portalScreenCenter = portalScreenCenter* 0.5f + Vector3.one * 0.5f; //normalise our offsets into texture space
+
+        if (planeMat)
+            //Debug.Log(new Vector4(portalScreenCenter.x, portalScreenCenter.y, distance, 1));
+            planeMat.SetVector("cpy_offset", new Vector4(portalScreenCenter.x, portalScreenCenter.y, distance, 1));
+        
+    }
 
     void GraphicsShift()
     {
@@ -68,9 +101,9 @@ public class LazyPortalCamera : MonoBehaviour {
 
             // Copy parent camera's settings
             CopyCameraSettings(Camera.main, ourCamera);*/
-            //ourCamera.farClipPlane = Camera.main.farClipPlane * ourPortal.PortalScaleAverage();
+        //ourCamera.farClipPlane = Camera.main.farClipPlane * ourPortal.PortalScaleAverage();
 
-            Matrix4x4 projectionMatrix;
+        Matrix4x4 projectionMatrix;
             Matrix4x4 worldToCameraMatrix;
             projectionMatrix = Camera.main.projectionMatrix;
             worldToCameraMatrix = Camera.main.worldToCameraMatrix;
