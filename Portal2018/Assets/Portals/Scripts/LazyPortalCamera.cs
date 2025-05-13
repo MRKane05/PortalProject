@@ -28,6 +28,7 @@ public class LazyPortalCamera : MonoBehaviour {
 		ourCamera.targetTexture = ourRenderTexture;
 		planeMat = ourPortalPlane.materials[0];    //Lazy grab
                                                    //planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        planeMat.SetFloat("portal_rec", portalRecs);
         if (bDoRecursiveDump)
         {
             planeMat.SetTexture("_LeftEyeTexture", RenderTextureDump);
@@ -59,32 +60,30 @@ public class LazyPortalCamera : MonoBehaviour {
 
     public float distanceDividor = 10f;
 
+    public int portalRecs = 4;
+
     void SetMaterialTexOffsetScale()
     {
         //For this we need to know what the orientations are for our cameras/portals, and the distances between them, and of course the player
-        //Lets start with the dstances
-        float distance = 1f + Vector3.Distance(transform.position, ourPortal.ExitPortal.transform.position) / distanceDividor; //Man I have no idea what this should be...
-        //Debug.Log("distnace:" + distance);
-        /*
-        			float2 cpy_offset;
-			float cpy_scale;
-        */
-        //Our offset needs to be the screen position of the center of the portal from the player
-        Vector3 distantPortalPos = ourPortal.TeleportVector(ourPortal.ExitPortal.transform.position);
-        //Flipflop to get our far portal pos to try and get a good offset
-        Vector3 farPortalPos = distantPortalPos;
-        for(int i=0; i<4; i++)
-        {
-            farPortalPos = ourPortal.ExitPortal.TeleportVector(farPortalPos);
-            farPortalPos = ourPortal.TeleportVector(farPortalPos);
-        }
-        Vector3 portalScreenCenter = Camera.main.WorldToViewportPoint(distantPortalPos);// gameObject.transform.position);   //Need to do this on a point through the portal, and maybe one further still
-        //Documentation seems to differ with what WorldToViewportPoint actually is. Zero is the center of the screen? The extents seem to be about 1.3f
-        //portalScreenCenter = portalScreenCenter* 0.5f + Vector3.one * 0.5f; //normalise our offsets into texture space
+        //The first portal is one beyond the rendered portal
+        Vector3 portalDir = transform.position - ourPortal.ExitPortal.transform.position;
+        
+        Vector3 closeDistancePos = transform.position + portalDir * 2f;
+        Vector3 farDistancePos = transform.position + portalDir * (2f + portalRecs);
 
-        if (planeMat)
+        float closeDistanceScale = 1f + Vector3.Distance(transform.position, closeDistancePos) / distanceDividor;
+        float farDistanceScale = 1f + Vector3.Distance(transform.position, farDistancePos) / distanceDividor;
+
+        Vector3 portalScreenCenter = Camera.main.WorldToViewportPoint(closeDistancePos);// gameObject.transform.position);   //Need to do this on a point through the portal, and maybe one further still
+        Vector3 portalScreenFar = Camera.main.WorldToViewportPoint(farDistancePos);
+        
+
+        if (planeMat) {
             //Debug.Log(new Vector4(portalScreenCenter.x, portalScreenCenter.y, distance, 1));
-            planeMat.SetVector("cpy_offset", new Vector4(portalScreenCenter.x, portalScreenCenter.y, distance, 1));
+            planeMat.SetVector("offset_close", new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f));
+            planeMat.SetVector("offset_far", new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
+            //Debug.Log("DT:" + new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f) + ", " + new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
+        }
         
     }
 

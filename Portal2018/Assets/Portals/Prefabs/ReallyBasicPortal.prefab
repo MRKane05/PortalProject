@@ -403,3 +403,5 @@ MonoBehaviour:
   ourPortal: {fileID: 114275461052025110}
   RenderTextureDump: {fileID: 0}
   bDoRecursiveDump: 0
+  distanceDividor: 10
+  portalRecs: 10
