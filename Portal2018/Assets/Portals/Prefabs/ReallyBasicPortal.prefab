@@ -378,7 +378,7 @@ MonoBehaviour:
     useScissorRect: 0
     clippingOffset: 0.01
     copyGlobalIllumination: 0
-    useRaycastOcclusion: 0
+    useRaycastOcclusion: 1
     raycastOccluders:
       serializedVersion: 2
       m_Bits: 311

@@ -470,5 +470,10 @@ namespace Portals {
 
             public bool debugEnabled;
         }
+
+        public void PortalSetPosition(Vector3 newPos, Vector3 newNormal)
+        {
+
+        }
     }
 }
