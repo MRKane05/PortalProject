@@ -1,4 +1,4 @@
-﻿Shader "Portals/BasicPortal"
+﻿Shader "Portals/BasicPortal_Recursive"
 {
 	Properties
 	{
@@ -6,7 +6,6 @@
 		_LeftEyeTexture("LeftEyeTexture", 2D) = "bump" {}
 		_TransparencyMask("TransparencyMask", 2D) = "white" {}
 		_Color("Portal Tint", Color) = (1,1,1,1)
-		//offset_close("Copy Offsets", Vector) = (0,0,1,1)
 	}
 	SubShader
 	{
@@ -54,9 +53,12 @@
 			float4 _MainTex_ST;
 			fixed4 _Color;
 
+			uniform float portalViewAlpha = 1.0; //1 means that our view is fully visible
+
+			//Our details for recursive portal rendering
 			uniform float4 offset_close;
 			uniform float4 offset_far;
-			uniform float portal_rec = 10.0;
+			uniform int portal_rec = 10;
 
 			v2f vert (appdata v)
 			{
@@ -79,15 +81,24 @@
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
 
-				for (float t = 0.0; t < portal_rec; t++) {
-					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t/portal_rec));
+				for (int t = 0; t < portal_rec; t++) {
+					//Technically we need to apply a fog effect to this
+					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t/(float)portal_rec));
 					col = lerp(backCol, col, col.a);
 				}
 
 				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
 
+				col = lerp(_Color, col, col.a * portalViewAlpha);
+
 				col.a = portalCol.a;	//Set alpha based off of image alpha
+
+				
+
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
+
+
+
 				//col = portalCol;
 				// sample the texture
 				//i.screenUV /= i.screenUV.w;

@@ -135,7 +135,7 @@ public class SpawnPortalOnClick : MonoBehaviour {
             // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
             Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
             //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface
-            SetScaleOverTime(portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
+            SetScaleOverTime(portal.gameObject, portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
 
             return true;
         }
@@ -311,13 +311,15 @@ public class SpawnPortalOnClick : MonoBehaviour {
         return true;
     }
 
-    void SetScaleOverTime(Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio) {
-        StartCoroutine(ScaleOverTimeRoutine(t, startSize, endSize, curve, duratio));
+    void SetScaleOverTime(GameObject parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio) {
+        StartCoroutine(ScaleOverTimeRoutine(parentPortal, t, startSize, endSize, curve, duratio));
     }
 
-    IEnumerator ScaleOverTimeRoutine(Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duration) {
+    IEnumerator ScaleOverTimeRoutine(GameObject parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duration) {
         float elapsed = 0;
+        LazyPortalCamera lazyPortal = parentPortal.GetComponent<LazyPortalCamera>();
         while (elapsed < duration) {
+            lazyPortal.portalScale = Mathf.Clamp01(curve.Evaluate(elapsed / duration));
             t.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
             yield return null;
             elapsed += Time.deltaTime;

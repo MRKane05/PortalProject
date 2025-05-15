@@ -13,9 +13,13 @@ public class LazyPortalCamera : MonoBehaviour {
     public Texture2D RenderTextureDump;
     public bool bDoRecursiveDump = true;
 
+    public LazyPortalCamera exitPortalCamera;
+    public float portalScale = 0f;
+
     IEnumerator Start () {
         yield return null; //Wait for the portal class to intilize etc.
-		//Get a fresh set of everything for us
+                           //Get a fresh set of everything for us
+        exitPortalCamera = ourPortal.ExitPortal.gameObject.GetComponent<LazyPortalCamera>();
 		ourRenderTexture = new RenderTexture(ourRenderTexture); //Clone our rendertexture
 
         if (bDoRecursiveDump)
@@ -49,9 +53,21 @@ public class LazyPortalCamera : MonoBehaviour {
         {
             SetCameraPositions();
 
-            SetMaterialTexOffsetScale();
+            HandlePortalRendering();
 		}
 	}
+
+    void HandlePortalRendering()
+    {
+        //Couple of things to do here:
+        //-Check and see if our portal (or our exit portal) is transitioning and assign blend values
+        //-Check to see if the portals can "see" each other and assign the optimised material if they cannot (or just set the recs to 0)
+        if (exitPortalCamera)
+        {
+            planeMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
+        }
+        SetMaterialTexOffsetScale();
+    }
 
     public float distanceDividor = 10f;
 
@@ -82,19 +98,11 @@ public class LazyPortalCamera : MonoBehaviour {
         {
             Vector3 vp = cam.WorldToViewportPoint(corner);
 
-            // Optionally skip corners behind the camera
-            if (vp.z < 0)
-                continue;
-
             minX = Mathf.Min(minX, vp.x);
             minY = Mathf.Min(minY, vp.y);
             maxX = Mathf.Max(maxX, vp.x);
             maxY = Mathf.Max(maxY, vp.y);
         }
-
-        // If all corners were behind the camera
-        if (minX > maxX || minY > maxY)
-            return Rect.zero;
 
         return Rect.MinMaxRect(minX, minY, maxX, maxY);
     }
@@ -105,42 +113,64 @@ public class LazyPortalCamera : MonoBehaviour {
         return basePortal.Overlaps(ChildPortal);
     }
 
+    float maxRepeats = 10;
+    float maxRepeatScale = 7;
+    int currentRepeats = 10;
+    void setRepeats(int newRepeat)
+    {
+        if (currentRepeats != newRepeat && planeMat)
+        {
+            Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
+            currentRepeats = newRepeat;
+            planeMat.SetFloat("portal_rec", (float)currentRepeats);
+        }
+    }
 
     void SetMaterialTexOffsetScale()
     {
 
-        //bool exitPortalVisible = PortalVisible(ourPortal.ExitPortal, ourCamera);    //Except it's ourselves we should be looking at...
-        //Debug.Log("ExitPortalVisible: " + exitPortalVisible);
-        //Debug.Log("Portal through Visible: " + IsPortalOccluded(ourPortal.ExitPortal, ourCamera));
+        //OK, just do a march on this to either maximum scale, or maximum recursion
 
-        //portalRecs can be calculated from a "maximum allowed zoom" which will be defined by how far apart our portals are (if it's too large we end up wasting ticks)
-        //portalRecs is also calculated based off of how much each portal can see the other
-        //if portalRecs is zero then we need to disable everything and forget it
-
-        //For this we need to know what the orientations are for our cameras/portals, and the distances between them, and of course the player
-        //The first portal is one beyond the rendered portal
         Vector3 portalDir = transform.position - ourPortal.ExitPortal.transform.position;
         
-        Vector3 closeDistancePos = transform.position + portalDir * 2f;
-        Vector3 farDistancePos = transform.position + portalDir * (2f + portalRecs);
+        //We need to calculate the max recs...
 
+        Vector3 closeDistancePos = transform.position + portalDir * 2f;
         float closeDistanceScale = 1f + Vector3.Distance(transform.position, closeDistancePos) / distanceDividor;
+
+        //An initial grab portal
+        Vector3 farDistancePos = transform.position + portalDir * (2f + portalRecs);
         float farDistanceScale = 1f + Vector3.Distance(transform.position, farDistancePos) / distanceDividor;
 
         Vector3 portalScreenCenter = Camera.main.WorldToViewportPoint(closeDistancePos);// gameObject.transform.position);   //Need to do this on a point through the portal, and maybe one further still
         Vector3 portalScreenFar = Camera.main.WorldToViewportPoint(farDistancePos);
-
+        int localReps = 0;
+        //I can't handle all use-cases with this because sometimes the main portal rec will be invalid
         Rect MainPortalRect = GetViewportRectFromBounds(Camera.main, ourPortal.gameObject.GetComponent<Collider>().bounds);
         
-        //We can use our positions to get the centers for our recursive portals
-        bool bPortalRecurseVisible = PortalVisible(portalScreenCenter, MainPortalRect, closeDistanceScale); //This works
-        Debug.Log(bPortalRecurseVisible);
+        for (int i = 0; i < maxRepeats; i++)
+        {
+            farDistancePos = transform.position + portalDir * (2f + i);
+            farDistanceScale = 1f + Vector3.Distance(transform.position, farDistancePos) / distanceDividor;
+            Vector3 portalScreenPos = Camera.main.WorldToViewportPoint(farDistancePos);
+            //We can use our positions to get the centers for our recursive portals
+            bool bPortalRecurseVisible = PortalVisible(portalScreenPos, MainPortalRect, farDistanceScale); //This works
+            if (!bPortalRecurseVisible || farDistanceScale > maxRepeatScale)
+            {
+                localReps = i;
+                break;
+            }
+            //And a check to see that we've made it to the end of our pass
+            if (i >= maxRepeats-1)
+            {
+                localReps = Mathf.RoundToInt(maxRepeats);
+            }
+        }
+        setRepeats(localReps);
 
         if (planeMat) {
-            //Debug.Log(new Vector4(portalScreenCenter.x, portalScreenCenter.y, distance, 1));
             planeMat.SetVector("offset_close", new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f));
             planeMat.SetVector("offset_far", new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
-            //Debug.Log("DT:" + new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f) + ", " + new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
         }
         
     }
@@ -176,6 +206,7 @@ public class LazyPortalCamera : MonoBehaviour {
             }
 
         /*
+        //PROBLEM: Need to get this working again and perhaps break down the ScissorsMatrix function to put some checks in place?
         if (ourPortal.UseScissorRect)
         {
             ourCamera.rect = viewportRect;
