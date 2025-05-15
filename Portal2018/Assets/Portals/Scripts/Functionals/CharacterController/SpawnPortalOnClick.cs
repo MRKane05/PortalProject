@@ -12,8 +12,8 @@ static internal class AnimationCurves {
 }
 
 public class SpawnPortalOnClick : MonoBehaviour {
-    private static Color RightPortalColor = new Color(255, 160, 0);
-    private static Color LeftPortalColor = new Color(0, 160, 255);
+    private static Color RightPortalColor = new Color(1f, 0.627f, 0);
+    private static Color LeftPortalColor = new Color(0, 0.627f, 1f);
 
     [SerializeField] Camera _camera;
     [SerializeField] GameObject _bulletPrefab;

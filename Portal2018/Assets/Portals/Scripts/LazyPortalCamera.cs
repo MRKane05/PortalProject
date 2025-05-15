@@ -113,14 +113,14 @@ public class LazyPortalCamera : MonoBehaviour {
         return basePortal.Overlaps(ChildPortal);
     }
 
-    float maxRepeats = 10;
+    float maxRepeats = 5;
     float maxRepeatScale = 7;
-    int currentRepeats = 10;
+    int currentRepeats = 7;
     void setRepeats(int newRepeat)
     {
         if (currentRepeats != newRepeat && planeMat)
         {
-            Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
+            //Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
             currentRepeats = newRepeat;
             planeMat.SetFloat("portal_rec", (float)currentRepeats);
         }
@@ -166,7 +166,7 @@ public class LazyPortalCamera : MonoBehaviour {
                 localReps = Mathf.RoundToInt(maxRepeats);
             }
         }
-        setRepeats(localReps);
+        setRepeats(localReps == 0 ? 0 : (int)maxRepeats);
 
         if (planeMat) {
             planeMat.SetVector("offset_close", new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f));

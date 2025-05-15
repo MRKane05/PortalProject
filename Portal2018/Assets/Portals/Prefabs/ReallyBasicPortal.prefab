@@ -403,5 +403,7 @@ MonoBehaviour:
   ourPortal: {fileID: 114275461052025110}
   RenderTextureDump: {fileID: 0}
   bDoRecursiveDump: 0
+  exitPortalCamera: {fileID: 0}
+  portalScale: 0
   distanceDividor: 10
   portalRecs: 10

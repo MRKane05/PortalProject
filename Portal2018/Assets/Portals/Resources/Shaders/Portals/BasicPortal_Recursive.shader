@@ -58,7 +58,7 @@
 			//Our details for recursive portal rendering
 			uniform float4 offset_close;
 			uniform float4 offset_far;
-			uniform int portal_rec = 10;
+			uniform int portal_rec = 7;
 
 			v2f vert (appdata v)
 			{
@@ -88,8 +88,8 @@
 				}
 
 				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
-
-				col = lerp(_Color, col, col.a * portalViewAlpha);
+				fixed4 portalTerminusCol = tex2D(_MainTex, i.uv.xy) * _Color;
+				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 
 				col.a = portalCol.a;	//Set alpha based off of image alpha
 
