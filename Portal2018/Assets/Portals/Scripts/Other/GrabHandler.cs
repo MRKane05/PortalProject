@@ -8,10 +8,11 @@ namespace Portals {
         // Anchor point that IS NOT affected by portals
         [SerializeField]
         private Transform _staticAnchor;
+        public Transform _staticAnchorClone;
 
         // Anchor point that IS affected by portals
-        [SerializeField]
-        private Rigidbody _floatingAnchor;
+        //[SerializeField]
+        //private Rigidbody _floatingAnchor;
         [SerializeField]
         private float _pickupRange = 2.0f;
         [SerializeField]
@@ -22,6 +23,9 @@ namespace Portals {
         private Portal _currentObjectPortal;
         private static GrabHandler _instance;
         #endregion
+
+        float holdDistance = 2f;
+        public LayerMask traceLayer;
 
         #region Public Members
         public static GrabHandler instance {
@@ -42,10 +46,18 @@ namespace Portals {
         void Awake() {
             _camera = Camera.main;
             heldObject = null;
-            _joint = _floatingAnchor.gameObject.GetComponent<ConfigurableJoint>();
+            holdDistance = Vector3.Distance(Camera.main.transform.position, _staticAnchor.transform.position);
+            /*
+            _staticAnchorClone = new GameObject("staticAnchorClone").transform;
+            _staticAnchorClone.transform.eulerAngles = _staticAnchor.transform.eulerAngles;
+            _staticAnchorClone.transform.position = _staticAnchor.transform.position;
+            _staticAnchorClone.transform.SetParent(_staticAnchor.transform.parent);*/
+
+            //_joint = _floatingAnchor.gameObject.GetComponent<ConfigurableJoint>();
+            /*
             if (_joint == null) {
                 Debug.LogError("Anchor object needs a ConfigurableJoint");
-            }
+            }*/
         }
 
         void OnEnable() {
@@ -105,7 +117,10 @@ namespace Portals {
             }
 
             rigidbody.useGravity = false;
-            _joint.connectedBody = rigidbody;
+            rigidbody.drag = 10f;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
+            //_joint.connectedBody = rigidbody;
             heldObject = obj;
 
             if (onObjectGrabbed != null) {
@@ -122,7 +137,7 @@ namespace Portals {
             }
 
             rigidbody.useGravity = true;
-            _joint.connectedBody = null;
+            //_joint.connectedBody = null;
             _currentObjectPortal = null;
             heldObject = null;
 
@@ -133,6 +148,56 @@ namespace Portals {
 
         public bool CarryingObject() {
             return heldObject != null;
+        }
+
+        public float carryForce = 1f;
+
+
+        Vector3 cloneholdPosition = Vector3.zero;
+        public void CarryObject()
+        {
+
+            if (heldObject)
+            {
+                //See if we can get a point reflected in a portal
+                RaycastHit hit;
+                Ray newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
+                Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + newRay.direction * holdDistance * 1.5f, Color.red, 0.5f);
+
+                if (Physics.Raycast(newRay, out hit, holdDistance * 1.5f, traceLayer))
+                {
+                    //we've got a hit so project the position of this object through the portal
+                    Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();
+                    if (hitPortal)
+                    {
+                        cloneholdPosition = hitPortal.TeleportPoint(_staticAnchor.transform.position);
+                        _staticAnchorClone.transform.position = cloneholdPosition;
+                    }
+                } else
+                {
+                    cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
+                    _staticAnchorClone.transform.position = _staticAnchor.transform.position;
+                }
+
+                
+                if (Vector3.Distance(heldObject.transform.position, _staticAnchor.transform.position) < 0.1f || Vector3.Distance(heldObject.transform.position, cloneholdPosition) < 0.1f)
+                {
+                    //We've no need to move this
+                } else
+                {
+                    //See if we should move to our clone position as it's closest for the hold
+                    Vector3 forceDirection = Vector3.zero;
+                    if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) { 
+                        forceDirection = _staticAnchor.transform.position - heldObject.transform.position;
+                        Debug.Log("Static anchor");
+                    } else
+                    {
+                        Debug.Log("Clone position");
+                        forceDirection = cloneholdPosition - heldObject.transform.position;
+                    }
+                    heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
+                }
+            }
         }
 
         public void Grab() {
@@ -178,14 +243,18 @@ namespace Portals {
         }
 
         void FixedUpdate() {
+            //We need to see if we should put a point on the other side of a portal
+            CarryObject();
+
+
             if (_currentObjectPortal) {
                 // Current object on other side of portal, let's warp our position
-                _currentObjectPortal.TeleportTransform(_floatingAnchor.transform, _staticAnchor.transform);
+                //_currentObjectPortal.TeleportTransform(_staticAnchorClone.transform, _staticAnchor.transform);
             } else {
-                _floatingAnchor.transform.position = _staticAnchor.transform.position;
-                _floatingAnchor.transform.rotation = _staticAnchor.transform.rotation;
+                //_staticAnchorClone.transform.position = _staticAnchor.transform.position;
+                //_staticAnchorClone.transform.rotation = _staticAnchor.transform.rotation;
             }
-            _joint.gameObject.SetActive(true);
+            //_joint.gameObject.SetActive(true);
         }
     }
 }
