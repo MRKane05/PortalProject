@@ -28,7 +28,7 @@ namespace Portals {
         float holdDistance = 2f;
         public LayerMask traceLayer;
         RigidbodyConstraints grabbedObjectInitialConstraints;
-
+        float maxSqrCarryDistance = 1.5f;  //We'll drop what we're carrying if the distance from the intended point is more than this
         #region Public Members
         public static GrabHandler instance {
             get {
@@ -118,11 +118,11 @@ namespace Portals {
                 string objectName = obj.name.Replace("(Clone)", "");
                 obj = GameObject.Find(objectName);
                 rigidbody = obj.GetComponent<Rigidbody>();
-                Debug.LogError("Opted to get original instead of Clone");
+                //Debug.LogError("Opted to get original instead of Clone");
             }
 
             rigidbody.useGravity = false;
-            rigidbody.drag = 10f;
+            rigidbody.drag = 20f;
             grabbedObjectInitialConstraints = rigidbody.constraints;
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -135,6 +135,8 @@ namespace Portals {
         }
 
         void ReleaseObject() {
+            iPortalCarry = 0;
+
             GameObject obj = heldObject;
             Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
             if (rigidbody == null) {
@@ -159,20 +161,29 @@ namespace Portals {
             return heldObject != null;
         }
 
-        public float carryForce = 1f;
+        public float carryForce = 4f;
 
 
         Vector3 cloneholdPosition = Vector3.zero;
+        int iPortalCarry = 0; //0: Ordinary carry, 1: carry in portal, 2: transitioned from carrying in portal this tick
         public void CarryObject()
         {
             if (heldObject)
             {
+
+                bool bObjectObstructed = bCarriedObjectObstructed();
+
+                if (bObjectObstructed)
+                {
+                    ReleaseObject();
+                    return;
+                }
                 //See if we can get a point reflected in a portal
                 RaycastHit hit;
                 Ray newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
-                Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + newRay.direction * holdDistance * 1.5f, Color.red, 0.5f);
 
-                if (Physics.Raycast(newRay, out hit, holdDistance * 1.5f, traceLayer))
+                bool bCanHoldInPortal = false;
+                if (Physics.Raycast(newRay, out hit, holdDistance * 1.5f, traceLayer))  //Detect if we're looking into a portal
                 {
                     //we've got a hit so project the position of this object through the portal
                     Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();
@@ -180,11 +191,17 @@ namespace Portals {
                     {
                         cloneholdPosition = hitPortal.TeleportPoint(_staticAnchor.transform.position);
                         _staticAnchorClone.transform.position = cloneholdPosition;
+                        bCanHoldInPortal = true;
+                    } else
+                    {
+
                     }
                 } else
                 {
-                    cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
+                    //If this happens after the above there's a possibility we should drop our item...
+                    //cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
                     _staticAnchorClone.transform.position = _staticAnchor.transform.position;
+
                 }
 
                 
@@ -195,14 +212,24 @@ namespace Portals {
                 {
                     //See if we should move to our clone position as it's closest for the hold
                     Vector3 forceDirection = Vector3.zero;
-                    if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) { 
+                    if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) {
                         forceDirection = _staticAnchor.transform.position - heldObject.transform.position;
                     } else
                     {
-                        forceDirection = cloneholdPosition - heldObject.transform.position;
+                        if (bCanHoldInPortal)
+                        {
+                            forceDirection = cloneholdPosition - heldObject.transform.position;
+                            heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
+                        }
+                        else
+                        {
+                            ReleaseObject();
+                        }
                     }
-                    heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
+                    
                 }
+
+
             }
         }
         private const float PortalThroughOffset = 0.01f;
@@ -246,6 +273,67 @@ namespace Portals {
                 Debug.LogError("Grab() called while already holding an object");
             }
         }
+
+        bool bCarriedObjectObstructed()
+        {
+            RaycastHit hit;
+            Vector3 carryDir = heldObject.transform.position - Camera.main.transform.position;
+  
+            float carryDistance = carryDir.magnitude;
+
+            if (Physics.Raycast(_camera.transform.position, carryDir.normalized, out hit, carryDistance, _layer, QueryTriggerInteraction.UseGlobal))
+            {
+                GameObject obj = hit.collider.gameObject;
+                if (hit.collider.gameObject.GetComponent<Portal>())
+                {
+                    //See if we're grabbing something through the portal
+                    RaycastHit portalHit;
+                    Portal portal = hit.collider.GetComponent<Portal>();
+                    if (!portal)
+                    {
+                        string msg = string.Format("{0} is on Portal layer, but is not a portal", hit.collider.gameObject);
+                        throw new System.Exception(msg);
+                    }
+
+                    Matrix4x4 portalMatrix = portal.PortalMatrix;
+                    Vector3 newDirection = portalMatrix.MultiplyVector(_camera.transform.forward);
+                    // Offset by Epsilon so we can't hit the exit portal on our way out
+                    Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * PortalThroughOffset;
+                    float newDistance = _pickupRange - hit.distance - PortalThroughOffset;
+
+
+                    if (Physics.Raycast(newOrigin, newDirection, out portalHit, newDistance, portalGrabLayer, QueryTriggerInteraction.UseGlobal))
+                    {
+                        if (portalHit.collider.gameObject)
+                        {
+                            if (portalHit.collider.gameObject == heldObject)
+                            {
+                                return false;
+                            } else
+                            {
+                                return true;     //We're intersectin with a wall or something
+                            }
+                        }
+                    }
+                } else
+                {
+                    if (hit.collider.gameObject == heldObject)
+                    {
+                        return false; //We're not obstructed
+                    }
+                    else
+                    {
+                        return true;     //We're intersectin with a wall or something
+                    }
+                }
+            } else
+            {
+                //we really should be hitting the object we're carrying, but lets assume we're doing a positive based obstruction instead
+            }
+            return false; //default return
+        }
+    
+
 
         public void Release() {
             if (CarryingObject()) {

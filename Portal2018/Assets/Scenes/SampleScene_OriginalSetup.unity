@@ -1065,6 +1065,7 @@ GameObject:
   - component: {fileID: 1609256506}
   - component: {fileID: 1609256505}
   - component: {fileID: 1609256510}
+  - component: {fileID: 1609256511}
   m_Layer: 12
   m_Name: PhysicsCube
   m_TagString: Interactable
@@ -1169,6 +1170,25 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _replacementShader: {fileID: 4800000, guid: f919f642bd5df034c9810c0bba3ec5a5, type: 3}
   _spawnCloneOnAwake: 1
+  lastExitedPortal: {fileID: 0}
+--- !u!114 &1609256511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1609256504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532bb8160f376c444b17d9db65b2589d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visiblePortal: {fileID: 0}
+  layer_world:
+    serializedVersion: 2
+    m_Bits: 1
+  layer_portal:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1790044032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1531,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.71
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1519,7 +1539,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1527,7 +1547,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_RootOrder
@@ -1542,6 +1562,15 @@ Prefab:
         type: 2}
       propertyPath: _layer.m_Bits
       value: 4609
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877131622275036, guid: 638471f7ca84fa8499eb8cee8968e88d,
+        type: 2}
+      propertyPath: traceLayer.m_Bits
+      value: 513
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}

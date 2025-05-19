@@ -439,9 +439,11 @@ namespace Portals {
             }
         }
 
+        public Portal lastExitedPortal = null;
+
         private void ExitPortal(Portal portal) {
             PortalContext context = _contextByPortal[portal];
-
+            lastExitedPortal = portal;
             // Do an extra teleport check in case...
             //  1. We're using Update to check for teleports instead of FixedUpdate (we have a first person camera)
             //  2. We exit the trigger before the Update loop has a chance to see that the camera crossed the portal plane
@@ -687,6 +689,37 @@ namespace Portals {
             public int framesRemaining;
             public bool isInFrontOfPortal;
 
+        }
+        #endregion
+
+        #region visibility functions
+
+        public Vector3 ReflectPositionOnPortals(Vector3 basePosition, Portal lookingPortal)
+        {
+            Vector3 offsetPosition = basePosition - lookingPortal.ExitPortal.transform.position;    //Take this...
+            Quaternion rotatePosition = lookingPortal.transform.rotation * Quaternion.Inverse(lookingPortal.ExitPortal.transform.rotation);
+            offsetPosition = rotatePosition * offsetPosition;
+            return lookingPortal.transform.position + offsetPosition;
+        }
+
+        public Portal VisibleToPlayerThroughPortal()
+        {
+            LayerMask portalLayer = LayerMask.NameToLayer("Portal");
+            foreach (Portal portal in _contextByPortal.Keys.ToList())
+            {
+                //PROBLEM: Need to check that the portal is open
+                Vector3 reflectedPosition = ReflectPositionOnPortals(transform.position, portal);
+                RaycastHit hit;
+                float rayDist = Vector3.SqrMagnitude(reflectedPosition - Camera.main.transform.position);
+                if (Physics.Raycast(Camera.main.transform.position, (reflectedPosition - Camera.main.transform.position).normalized, out hit, rayDist, portalLayer))
+                {
+                    if (hit.collider.gameObject.GetComponent<Portal>() == portal)
+                    {
+                        return hit.collider.gameObject.GetComponent<Portal>();
+                    }
+                }
+            }
+            return null;
         }
         #endregion
     }
