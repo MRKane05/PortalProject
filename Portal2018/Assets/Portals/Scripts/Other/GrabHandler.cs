@@ -17,6 +17,7 @@ namespace Portals {
         private float _pickupRange = 2.0f;
         [SerializeField]
         private LayerMask _layer;
+        public LayerMask portalGrabLayer;
 
         private Camera _camera;
         private ConfigurableJoint _joint;
@@ -26,6 +27,7 @@ namespace Portals {
 
         float holdDistance = 2f;
         public LayerMask traceLayer;
+        RigidbodyConstraints grabbedObjectInitialConstraints;
 
         #region Public Members
         public static GrabHandler instance {
@@ -43,21 +45,11 @@ namespace Portals {
         public GameObject heldObject;
         #endregion
 
-        void Awake() {
+        void Awake()
+        {
             _camera = Camera.main;
             heldObject = null;
             holdDistance = Vector3.Distance(Camera.main.transform.position, _staticAnchor.transform.position);
-            /*
-            _staticAnchorClone = new GameObject("staticAnchorClone").transform;
-            _staticAnchorClone.transform.eulerAngles = _staticAnchor.transform.eulerAngles;
-            _staticAnchorClone.transform.position = _staticAnchor.transform.position;
-            _staticAnchorClone.transform.SetParent(_staticAnchor.transform.parent);*/
-
-            //_joint = _floatingAnchor.gameObject.GetComponent<ConfigurableJoint>();
-            /*
-            if (_joint == null) {
-                Debug.LogError("Anchor object needs a ConfigurableJoint");
-            }*/
         }
 
         void OnEnable() {
@@ -116,8 +108,22 @@ namespace Portals {
                 return;
             }
 
+            if (obj.tag != "Interactable")
+            {
+                Debug.LogError("Cannot grab object that's not tagged as being interactable");
+                return;
+            }
+
+            if (obj.name.Contains("(Clone)")) {   //We don't want to grab the clone, but instead grab the original
+                string objectName = obj.name.Replace("(Clone)", "");
+                obj = GameObject.Find(objectName);
+                rigidbody = obj.GetComponent<Rigidbody>();
+                Debug.LogError("Opted to get original instead of Clone");
+            }
+
             rigidbody.useGravity = false;
             rigidbody.drag = 10f;
+            grabbedObjectInitialConstraints = rigidbody.constraints;
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
             //_joint.connectedBody = rigidbody;
@@ -136,7 +142,10 @@ namespace Portals {
                 return;
             }
 
+            rigidbody.drag = 0f;
             rigidbody.useGravity = true;
+            rigidbody.constraints = grabbedObjectInitialConstraints;
+
             //_joint.connectedBody = null;
             _currentObjectPortal = null;
             heldObject = null;
@@ -156,7 +165,6 @@ namespace Portals {
         Vector3 cloneholdPosition = Vector3.zero;
         public void CarryObject()
         {
-
             if (heldObject)
             {
                 //See if we can get a point reflected in a portal
@@ -189,31 +197,50 @@ namespace Portals {
                     Vector3 forceDirection = Vector3.zero;
                     if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) { 
                         forceDirection = _staticAnchor.transform.position - heldObject.transform.position;
-                        Debug.Log("Static anchor");
                     } else
                     {
-                        Debug.Log("Clone position");
                         forceDirection = cloneholdPosition - heldObject.transform.position;
                     }
                     heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
                 }
             }
         }
-
+        private const float PortalThroughOffset = 0.01f;
         public void Grab() {
             if (!CarryingObject()) {
                 RaycastHit hit;
                 if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _pickupRange, _layer, QueryTriggerInteraction.UseGlobal)) {
                     GameObject obj = hit.collider.gameObject;
-                    //Debug.Log(obj);
-                    //PortalClone portalClone = obj.GetComponent<PortalClone>();
-                    //if (portalClone) {
-                    //    // This is a clone, we should grab the real object instead
-                    //    GrabObject(portalClone.target.gameObject);
-                    //} else {
-                        // Just pickin it up
-                    GrabObject(obj);
-                    //}
+                    if (hit.collider.gameObject.GetComponent<Portal>())
+                    {
+                        //See if we're grabbing something through the portal
+                        RaycastHit portalHit;
+                        Portal portal = hit.collider.GetComponent<Portal>();
+                        if (!portal)
+                        {
+                            string msg = string.Format("{0} is on Portal layer, but is not a portal", hit.collider.gameObject);
+                            throw new System.Exception(msg);
+                        }
+
+                        Matrix4x4 portalMatrix = portal.PortalMatrix;
+                        Vector3 newDirection = portalMatrix.MultiplyVector(_camera.transform.forward);
+                        // Offset by Epsilon so we can't hit the exit portal on our way out
+                        Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * PortalThroughOffset;
+                        float newDistance = _pickupRange - hit.distance - PortalThroughOffset;
+
+
+                        if (Physics.Raycast(newOrigin, newDirection, out portalHit, newDistance, portalGrabLayer, QueryTriggerInteraction.UseGlobal))
+                        {
+                            if (portalHit.collider.gameObject)
+                            {
+                                GrabObject(portalHit.collider.gameObject);
+                            }
+                        }
+                    }
+                    else //Try to do a "normal" grab
+                    {
+                        GrabObject(obj);
+                    }
                 }
             } else {
                 Debug.LogError("Grab() called while already holding an object");

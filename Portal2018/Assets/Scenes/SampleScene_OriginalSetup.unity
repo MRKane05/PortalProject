@@ -1065,9 +1065,9 @@ GameObject:
   - component: {fileID: 1609256506}
   - component: {fileID: 1609256505}
   - component: {fileID: 1609256510}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PhysicsCube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1532,6 +1532,16 @@ Prefab:
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877131622275036, guid: 638471f7ca84fa8499eb8cee8968e88d,
+        type: 2}
+      propertyPath: portalGrabLayer.m_Bits
+      value: 4609
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877131622275036, guid: 638471f7ca84fa8499eb8cee8968e88d,
+        type: 2}
+      propertyPath: _layer.m_Bits
+      value: 4609
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}

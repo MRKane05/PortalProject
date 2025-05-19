@@ -196,7 +196,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 5943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -419,7 +419,10 @@ MonoBehaviour:
   _pickupRange: 2
   _layer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4609
+  portalGrabLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   traceLayer:
     serializedVersion: 2
     m_Bits: 512
