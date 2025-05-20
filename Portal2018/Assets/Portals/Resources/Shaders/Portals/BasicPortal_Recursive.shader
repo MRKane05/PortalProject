@@ -6,6 +6,8 @@
 		_LeftEyeTexture("LeftEyeTexture", 2D) = "bump" {}
 		_TransparencyMask("TransparencyMask", 2D) = "white" {}
 		_Color("Portal Tint", Color) = (1,1,1,1)
+
+		_AlphaCutoff("Alpha Cutoff", float) = 0.1
 	}
 	SubShader
 	{
@@ -19,7 +21,8 @@
 		Pass
 		{
 
-			Blend SrcAlpha OneMinusSrcAlpha
+			//Blend SrcAlpha OneMinusSrcAlpha
+			Blend One Zero
 			ZWrite On
 			ZTest LEqual
 			Lighting Off
@@ -52,6 +55,7 @@
 			sampler2D _TransparencyMask;
 			float4 _MainTex_ST;
 			fixed4 _Color;
+			float _AlphaCutoff;
 
 			uniform float portalViewAlpha = 1.0; //1 means that our view is fully visible
 
@@ -91,19 +95,11 @@
 				fixed4 portalTerminusCol = tex2D(_MainTex, i.uv.xy) * _Color;
 				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 
-				col.a = portalCol.a;	//Set alpha based off of image alpha
-
-				
-
+				clip(portalCol.a - _AlphaCutoff);
+				//col.a = portalCol.a;	//Set alpha based off of image alpha
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 
 
-
-				//col = portalCol;
-				// sample the texture
-				//i.screenUV /= i.screenUV.w;
-				//fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);
-				//fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;

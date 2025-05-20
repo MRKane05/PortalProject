@@ -22,8 +22,8 @@
 			
 			Blend One Zero
 			ZWrite Off
-			ZTest LEqual
-			//ZTest Always
+			//ZTest LEqual
+			ZTest Always
 			Cull Back
 			
 			/*			
@@ -52,6 +52,7 @@
 				float2 uv : TEXCOORD0;
 				float4 screenUV : TEXCOORD1;
 				float4 objPos : TEXCOORD2;
+				float4 reconUV : TEXCOORD3;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};

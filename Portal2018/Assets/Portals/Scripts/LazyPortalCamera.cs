@@ -7,14 +7,18 @@ using UnityEngine;
 public class LazyPortalCamera : MonoBehaviour {
 	public RenderTexture ourRenderTexture;
 	public Camera ourCamera;
+    public Transform portalBase;
 	public MeshRenderer ourPortalPlane;
+    public MeshRenderer ourPortalBackface;
 	public Material planeMat;
+    public Material backfaceMat;
 	public Portal ourPortal;
-    public Texture2D RenderTextureDump;
-    public bool bDoRecursiveDump = true;
 
     public LazyPortalCamera exitPortalCamera;
     public float portalScale = 0f;
+
+    // Buffer for calculating near plane corners
+    private static Vector3[] _nearPlaneCorners;
 
     IEnumerator Start () {
         yield return null; //Wait for the portal class to intilize etc.
@@ -22,39 +26,93 @@ public class LazyPortalCamera : MonoBehaviour {
         exitPortalCamera = ourPortal.ExitPortal.gameObject.GetComponent<LazyPortalCamera>();
 		ourRenderTexture = new RenderTexture(ourRenderTexture); //Clone our rendertexture
 
-        if (bDoRecursiveDump)
-        {
-            RenderTextureDump = new Texture2D(ourRenderTexture.width, ourRenderTexture.height, TextureFormat.RGBA32, false);
-        }
-
         ourRenderTexture.name = "~RenderTexture";
 		ourCamera.targetTexture = ourRenderTexture;
 		planeMat = ourPortalPlane.materials[0];    //Lazy grab
-                                                   //planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        backfaceMat = ourPortalBackface.materials[0];
+
+        planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+        backfaceMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
+
         planeMat.SetFloat("portal_rec", portalRecs);
-        if (bDoRecursiveDump)
-        {
-            planeMat.SetTexture("_LeftEyeTexture", RenderTextureDump);
-        } else
-        {
-            planeMat.SetTexture("_LeftEyeTexture", ourRenderTexture);
-        }
+        backfaceMat.SetFloat("portal_rec", portalRecs);
 
         planeMat.SetColor("_Color", ourPortal.PortalColor);
-		ourPortalPlane.materials[0] = planeMat;
+        backfaceMat.SetColor("_Color", ourPortal.PortalColor);
+
+        ourPortalPlane.materials[0] = planeMat;
+        ourPortalBackface.materials[0] = backfaceMat;
 
 		//ourPortal = gameObject.GetComponent<Portal>();
 	}
 
-	//Position our camera!
-	void LateUpdate()
+    private bool CameraIsInFrontOfPortal(Camera camera, Portal portal)
+    {
+        Vector3 cameraPosWS = Camera.main.transform.position;
+        if (portal.Plane.GetSide(cameraPosWS))
+        {
+            return false;
+        }
+
+        // Check if camera is inside the rectangular bounds of portal
+        float extents = 0.5f;
+        Vector3 cameraPosOS = transform.InverseTransformPoint(cameraPosWS);
+        if (cameraPosOS.x < -extents) return false;
+        if (cameraPosOS.x > extents) return false;
+        if (cameraPosOS.y > extents) return false;
+        if (cameraPosOS.y < -extents) return false;
+        return true;
+    }
+
+
+    private bool NearClipPlaneIsBehindPortal(Camera camera, Portal portal)
+    {
+        if (_nearPlaneCorners == null)
+        {
+            _nearPlaneCorners = new Vector3[4];
+        }
+
+        Vector4 portalPlaneWorldSpace = ourPortal.VectorPlane;
+        Vector4 portalPlaneViewSpace = camera.worldToCameraMatrix.inverse.transpose * portalPlaneWorldSpace;
+        portalPlaneViewSpace.z *= -1; // TODO: Why is this necessary?
+        Plane p = new Plane((Vector3)portalPlaneViewSpace, portalPlaneViewSpace.w);
+
+        camera.CalculateFrustumCorners(camera.rect, camera.nearClipPlane, camera.stereoActiveEye, _nearPlaneCorners);
+        for (int i = 0; i < _nearPlaneCorners.Length; i++)
+        {
+            Vector3 corner = _nearPlaneCorners[i];
+
+            // Return as soon as a single corner is found behind the portal
+            bool behindPortalPlane = p.GetSide(corner);
+            if (behindPortalPlane)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool ShouldRenderBackface(Camera camera)
+    {
+        // Don't render back face for recursive calls
+        if (!CameraIsInFrontOfPortal(camera, ourPortal)) { return false; }
+        if (!NearClipPlaneIsBehindPortal(camera, ourPortal)) { return false; }
+        return true;
+    }
+
+    //Position our camera!
+    void LateUpdate()
 	{
 		if (ourPortal && ourPortal.ExitPortal)
         {
             SetCameraPositions();
 
             HandlePortalRendering();
-		}
+
+            bool renderBackface = ShouldRenderBackface(Camera.main);
+            //backfaceMat.SetFloat("_BackfaceAlpha", renderBackface ? 1.0f : 0.0f); //This doesn't need to be a float, we can just turn this off
+            ourPortalBackface.gameObject.SetActive(renderBackface);
+        }
 	}
 
     void HandlePortalRendering()
@@ -65,6 +123,7 @@ public class LazyPortalCamera : MonoBehaviour {
         if (exitPortalCamera)
         {
             planeMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
+            backfaceMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
         }
         SetMaterialTexOffsetScale();
     }
@@ -123,6 +182,7 @@ public class LazyPortalCamera : MonoBehaviour {
             //Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
             currentRepeats = newRepeat;
             planeMat.SetFloat("portal_rec", (float)currentRepeats);
+            backfaceMat.SetFloat("portal_rec", (float)currentRepeats);
         }
     }
 
@@ -172,12 +232,11 @@ public class LazyPortalCamera : MonoBehaviour {
             planeMat.SetVector("offset_close", new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f));
             planeMat.SetVector("offset_far", new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
         }
-        
-    }
-
-    void GraphicsShift()
-    {
-        Graphics.CopyTexture(ourRenderTexture, RenderTextureDump);
+        if (backfaceMat)
+        {
+            backfaceMat.SetVector("offset_close", new Vector4(portalScreenCenter.x, portalScreenCenter.y, closeDistanceScale, 1f));
+            backfaceMat.SetVector("offset_far", new Vector4(portalScreenFar.x, portalScreenFar.y, farDistanceScale, 1f));
+        }
     }
 
 	void SetCameraPositions()

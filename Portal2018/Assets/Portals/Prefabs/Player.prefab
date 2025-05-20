@@ -146,15 +146,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.9, z: 2.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
   - {fileID: 4068778981482640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4940399808014620
 Transform:
   m_ObjectHideFlags: 1
@@ -344,7 +344,7 @@ MonoBehaviour:
   _meshColliderIterationCount: 10
   _portalWaveAmplitude: 0.2
   _portalWaveDuration: 0.5
-  PortalScale: 0.1
+  PortalScale: 1
 --- !u!114 &114579552365318066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,6 +360,7 @@ MonoBehaviour:
   _camera: {fileID: 20543485654963758}
   _replacementShader: {fileID: 4800000, guid: f919f642bd5df034c9810c0bba3ec5a5, type: 3}
   _spawnCloneOnAwake: 1
+  lastExitedPortal: {fileID: 0}
 --- !u!114 &114603961447189572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,10 +423,10 @@ MonoBehaviour:
     m_Bits: 4609
   portalGrabLayer:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4609
   traceLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 513
   heldObject: {fileID: 0}
   carryForce: 150
 --- !u!114 &114950017476972466

@@ -320,7 +320,7 @@ public class SpawnPortalOnClick : MonoBehaviour {
         LazyPortalCamera lazyPortal = parentPortal.GetComponent<LazyPortalCamera>();
         while (elapsed < duration) {
             lazyPortal.portalScale = Mathf.Clamp01(curve.Evaluate(elapsed / duration));
-            t.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
+            lazyPortal.portalBase.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
             yield return null;
             elapsed += Time.deltaTime;
         }
