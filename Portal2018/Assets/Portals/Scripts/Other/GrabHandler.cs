@@ -16,7 +16,7 @@ namespace Portals {
         [SerializeField]
         private float _pickupRange = 2.0f;
         [SerializeField]
-        private LayerMask _layer;
+        private LayerMask _carryLayer;
         public LayerMask portalGrabLayer;
 
         private Camera _camera;
@@ -135,7 +135,6 @@ namespace Portals {
         }
 
         void ReleaseObject() {
-            iPortalCarry = 0;
 
             GameObject obj = heldObject;
             Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
@@ -194,7 +193,7 @@ namespace Portals {
                         bCanHoldInPortal = true;
                     } else
                     {
-
+                        cloneholdPosition = Vector3.one * 10000f;
                     }
                 } else
                 {
@@ -214,6 +213,7 @@ namespace Portals {
                     Vector3 forceDirection = Vector3.zero;
                     if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) {
                         forceDirection = _staticAnchor.transform.position - heldObject.transform.position;
+                        heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
                     } else
                     {
                         if (bCanHoldInPortal)
@@ -225,18 +225,16 @@ namespace Portals {
                         {
                             ReleaseObject();
                         }
-                    }
-                    
+                    }                    
                 }
-
-
             }
         }
+
         private const float PortalThroughOffset = 0.01f;
         public void Grab() {
             if (!CarryingObject()) {
                 RaycastHit hit;
-                if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _pickupRange, _layer, QueryTriggerInteraction.UseGlobal)) {
+                if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, _pickupRange, _carryLayer, QueryTriggerInteraction.UseGlobal)) {
                     GameObject obj = hit.collider.gameObject;
                     if (hit.collider.gameObject.GetComponent<Portal>())
                     {
@@ -281,7 +279,7 @@ namespace Portals {
   
             float carryDistance = carryDir.magnitude;
 
-            if (Physics.Raycast(_camera.transform.position, carryDir.normalized, out hit, carryDistance, _layer, QueryTriggerInteraction.UseGlobal))
+            if (Physics.Raycast(_camera.transform.position, carryDir.normalized, out hit, carryDistance, _carryLayer, QueryTriggerInteraction.UseGlobal))
             {
                 GameObject obj = hit.collider.gameObject;
                 if (hit.collider.gameObject.GetComponent<Portal>())

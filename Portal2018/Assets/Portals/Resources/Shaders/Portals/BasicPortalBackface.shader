@@ -61,6 +61,8 @@
 			uniform float4 offset_far;
 			uniform int portal_rec = 7;
 
+			uniform float portalViewAlpha = 1.0;
+
 
 			float4 reconstructFrontFaceUV(float4 objPos) {
 				float3 objSpaceCameraPos = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, 1)).xyz;
@@ -105,9 +107,9 @@
 
 				//float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
 				fixed4 portalCol = tex2D(_TransparencyMask, i.reconUV.xy);
-				fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy);// *_Color;
-				//col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
-				clip(portalCol.a - _AlphaCutoff);
+				fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy) *_Color;
+				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
+				//clip(portalCol.a - _AlphaCutoff);	//We shouldn't have to clip this because it's already shaped by the mesh
 				
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 

@@ -47,6 +47,8 @@ namespace Portals {
         private RigidbodyInfo _rigidbodyLastTick;
         private Vector3 _cameraPositionLastFrame;
 
+        public bool bReplaceShaders = false;
+
         #endregion
 
         #region Events
@@ -343,14 +345,18 @@ namespace Portals {
 
         #endregion
 
+
         #region Teleportation
         private void EnterPortal(Portal portal) {
             Teleportable clone = SpawnClone();
             clone.gameObject.SetActive(true);
             clone.SaveRigidbodyInfo();
 
-            ReplaceShaders(this.gameObject, portal);
-            ReplaceShaders(clone.gameObject, portal.ExitPortal);
+            if (bReplaceShaders)
+            {
+                ReplaceShaders(this.gameObject, portal);
+                ReplaceShaders(clone.gameObject, portal.ExitPortal);
+            }
 
             IgnoreCollisions(portal.IgnoredColliders, true);
             clone.IgnoreCollisions(portal.ExitPortal.IgnoredColliders, true);
@@ -373,7 +379,10 @@ namespace Portals {
             ctx.framesRemaining = 1;
 
             // Always replace our shader because we only support 1 clipping plane at the moment
-            ReplaceShaders(this.gameObject, portal.ExitPortal);
+            if (bReplaceShaders)
+            {
+                ReplaceShaders(this.gameObject, portal.ExitPortal);
+            }
 
             bool alreadyInExitPortal = _contextByPortal.ContainsKey(portal.ExitPortal);
             if (alreadyInExitPortal) {
@@ -396,7 +405,10 @@ namespace Portals {
 
                     IgnoreCollisions(portal.ExitPortal.IgnoredColliders, true);
                     clone.IgnoreCollisions(portal.ExitPortal.ExitPortal.IgnoredColliders, true);
-                    ReplaceShaders(clone.gameObject, portal.ExitPortal.ExitPortal);
+                    if (bReplaceShaders)
+                    {
+                        ReplaceShaders(clone.gameObject, portal.ExitPortal.ExitPortal);
+                    }
 
                     // Swap clones if we're not already standing in the exit portal
                     // This only applies to portals very close together.

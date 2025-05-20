@@ -420,10 +420,10 @@ MonoBehaviour:
   _pickupRange: 2
   _layer:
     serializedVersion: 2
-    m_Bits: 4609
+    m_Bits: 8193
   portalGrabLayer:
     serializedVersion: 2
-    m_Bits: 4609
+    m_Bits: 12801
   traceLayer:
     serializedVersion: 2
     m_Bits: 513
