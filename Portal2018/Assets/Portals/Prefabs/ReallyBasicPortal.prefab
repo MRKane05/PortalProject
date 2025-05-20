@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4919449996573586}
   - component: {fileID: 33150233130945042}
   - component: {fileID: 23987093103782836}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: PortalBackface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 15159
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1da7647019312d54d9574444358c07c0, type: 2}
   m_TargetDisplay: 0

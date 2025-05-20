@@ -177,13 +177,15 @@ public class LazyPortalCamera : MonoBehaviour {
     int currentRepeats = 7;
     void setRepeats(int newRepeat)
     {
+        //We really should be handling things with distinct shaders here
+        /*
         if (currentRepeats != newRepeat && planeMat)
         {
             //Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
             currentRepeats = newRepeat;
             planeMat.SetFloat("portal_rec", (float)currentRepeats);
             backfaceMat.SetFloat("portal_rec", (float)currentRepeats);
-        }
+        }*/
     }
 
     void SetMaterialTexOffsetScale()

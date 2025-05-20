@@ -19,19 +19,11 @@
 
 		Pass
 		{
-			
 			Blend One Zero
 			ZWrite Off
-			//ZTest LEqual
 			ZTest Always
 			Cull Back
-			
-			/*			
-			Blend SrcAlpha OneMinusSrcAlpha
-			ZWrite On
-			ZTest LEqual
-			Lighting Off
-			Cull Back*/
+
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -64,7 +56,11 @@
 			fixed4 _Color;
 			float _AlphaCutoff;
 
-			float4x4 PORTAL_MATRIX_VP;
+			//Our details for recursive portal rendering
+			uniform float4 offset_close;
+			uniform float4 offset_far;
+			uniform int portal_rec = 7;
+
 
 			float4 reconstructFrontFaceUV(float4 objPos) {
 				float3 objSpaceCameraPos = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, 1)).xyz;
@@ -86,36 +82,35 @@
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				o.objPos = v.vertex;
-				
-				//Section for handling recursive sampling
-				// calculate the clip position of the portal from a higher level portal. PORTAL_MATRIX_VP == camera.projectionMatrix.
-				//PORTAL_MATRIX_VP = camProjectionMatrix * worldToCameraMatrix
-				/*
-				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
-				clipPos.y *= _ProjectionParams.x;
-				//clipPos.z = 1;    
-				o.screenUV = ComputeScreenPos(clipPos);
-				*/
-			
+				o.reconUV = reconstructFrontFaceUV(v.vertex);
 
 				return o;
+			}
+
+			fixed4 getTextureMap(float2 baseUV, float4 offset) {
+				//baseUV += offset_close.xy;
+				return tex2D(_LeftEyeTexture, (baseUV - offset.xy) * offset.z + offset.xy);
 			}
 			
 			fixed4 frag(v2f i) : SV_Target
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-				//i.objUV = reconstructFrontFaceUV(i.vertex);
-				float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
-				fixed4 portalCol = tex2D(_TransparencyMask, reconUV.xy);
+
+				for (int t = 0; t < portal_rec; t++) {
+					//Technically we need to apply a fog effect to this
+					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t / (float)portal_rec));
+					col = lerp(backCol, col, col.a);
+				}
+
+				//float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
+				fixed4 portalCol = tex2D(_TransparencyMask, i.reconUV.xy);
+				fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy);// *_Color;
+				//col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 				clip(portalCol.a - _AlphaCutoff);
-				//col.a = portalCol.a;	//Set alpha based off of image alpha
+				
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
-				//col = portalCol;
-				// sample the texture
-				//i.screenUV /= i.screenUV.w;
-				//fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);
-				//fixed4 col = tex2D(_MainTex, i.uv);
+
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
