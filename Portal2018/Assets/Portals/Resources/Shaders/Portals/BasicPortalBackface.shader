@@ -19,7 +19,7 @@
 
 		Pass
 		{
-			Blend One Zero
+			//Blend One Zero
 			ZWrite Off
 			ZTest Always
 			Cull Back
@@ -98,7 +98,7 @@
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-
+				/*
 				for (int t = 0; t < portal_rec; t++) {
 					//Technically we need to apply a fog effect to this
 					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t / (float)portal_rec));
@@ -112,7 +112,7 @@
 				//clip(portalCol.a - _AlphaCutoff);	//We shouldn't have to clip this because it's already shaped by the mesh
 				
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
-
+				*/
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;

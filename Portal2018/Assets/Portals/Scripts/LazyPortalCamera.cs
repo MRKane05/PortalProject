@@ -100,10 +100,33 @@ public class LazyPortalCamera : MonoBehaviour {
         return true;
     }
 
+
+    Plane[] planes;
+    Collider portalCollider;
+    bool isPortalVisible()
+    {
+        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+
+        if (!portalCollider)
+        {
+            portalCollider = ourPortal.GetComponent<Collider>();
+        }
+
+        if (GeometryUtility.TestPlanesAABB(planes, portalCollider.bounds))
+        {
+            return true;
+        }
+        return false;
+    }
+
     //Position our camera!
+    public bool portalVisible = false;
     void LateUpdate()
 	{
-		if (ourPortal && ourPortal.ExitPortal)
+        portalVisible = isPortalVisible();
+        ourCamera.gameObject.SetActive(portalVisible);
+
+		if (ourPortal && ourPortal.ExitPortal && portalVisible)
         {
             SetCameraPositions();
 
@@ -112,6 +135,7 @@ public class LazyPortalCamera : MonoBehaviour {
             bool renderBackface = ShouldRenderBackface(Camera.main);
             //backfaceMat.SetFloat("_BackfaceAlpha", renderBackface ? 1.0f : 0.0f); //This doesn't need to be a float, we can just turn this off
             ourPortalBackface.gameObject.SetActive(renderBackface);
+            //ourPortalBackface.gameObject.SetActive(false); // turn the backface portal off
         }
 	}
 
@@ -125,7 +149,7 @@ public class LazyPortalCamera : MonoBehaviour {
             planeMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
             backfaceMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
         }
-        SetMaterialTexOffsetScale();
+       // SetMaterialTexOffsetScale();
     }
 
     public float distanceDividor = 10f;
@@ -483,5 +507,37 @@ public class LazyPortalCamera : MonoBehaviour {
             float far = ourCamera.farClipPlane;
             return MathUtil.OffAxisProjectionMatrix(near, far, pa, pb, pc, pe);
         }
+    }
+
+    private bool ShouldRenderPortal(Camera camera)
+    {
+        // Don't render if renderer disabled. Not sure if this is possible anyway, but better to be safe.
+        /*
+        bool isRendererEnabled = enabled && _renderer && _renderer.enabled;
+        if (!isRendererEnabled) { return false; }
+        */
+        // Don't render non-supported camera types (preview cameras can cause issues)
+        bool isCameraSupported = (ourPortal.SupportedCameraTypes & camera.cameraType) == camera.cameraType;
+        if (!isCameraSupported) { return false; }
+
+        // Only render if an exit portal is set
+        bool isExitPortalSet = ourPortal.ExitPortal != null;
+        if (!isExitPortalSet) { return false; }
+
+        // Don't ever render an exit portal
+        // TODO: Disable portal until end of frame
+        /*
+        bool isRenderingExitPortal = _currentRenderDepth > 0 && _currentlyRenderingPortal == _portal.ExitPortal;
+        if (isRenderingExitPortal) { return false; }
+        
+        // Don't render too deep
+        bool isAtMaxDepth = _currentRenderDepth >= _portal.MaxRecursion;
+        if (isAtMaxDepth) { return false; }
+        */
+        // Don't render if hidden behind objects
+        bool isOccluded = IsPortalOccluded(ourPortal, camera);
+        if (isOccluded) { return false; }
+
+        return true;
     }
 }

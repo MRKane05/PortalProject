@@ -346,7 +346,7 @@ namespace Portals {
         }
 
         void Update() {
-            if (Input.GetKeyDown(KeyCode.E)) {
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetButton("Circle")) {
                 if (CarryingObject()) {
                     Release();
                 } else {
