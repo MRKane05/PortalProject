@@ -82,6 +82,9 @@
 
 			fixed4 frag(v2f i) : SV_Target
 			{
+				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
+				clip(portalCol.a - _AlphaCutoff);
+
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
 
@@ -91,11 +94,10 @@
 					col = lerp(backCol, col, col.a);
 				}
 
-				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
+				
 				fixed4 portalTerminusCol = tex2D(_MainTex, i.uv.xy) * _Color;
 				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 
-				clip(portalCol.a - _AlphaCutoff);
 				//col.a = portalCol.a;	//Set alpha based off of image alpha
 				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 

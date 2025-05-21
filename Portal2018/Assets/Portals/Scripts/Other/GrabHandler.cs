@@ -104,13 +104,13 @@ namespace Portals {
         void GrabObject(GameObject obj) {
             Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
             if (rigidbody == null) {
-                Debug.LogError("Cannot grab object without a Rigidbody");
+                Debug.Log("Cannot grab object without a Rigidbody");
                 return;
             }
 
             if (obj.tag != "Interactable")
             {
-                Debug.LogError("Cannot grab object that's not tagged as being interactable");
+                Debug.Log("Cannot grab object that's not tagged as being interactable");
                 return;
             }
 
