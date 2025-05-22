@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121410240758288}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.38, y: 1.36, z: -2.94}
+  m_LocalPosition: {x: -3.38, y: 1.36, z: 0.13}
   m_LocalScale: {x: 2, y: 3, z: 2}
   m_Children:
   - {fileID: 4022374885719464}
@@ -220,8 +220,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b6c57c2ef0a3444b71d3dcab97b7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frontFaceShader: {fileID: 4800000, guid: 8194179dcbe63ba42a45e5da6ffa28c3, type: 3}
+  backFaceShader: {fileID: 4800000, guid: 7ecf3ca7a1ab8ef41996c84fec1c08bc, type: 3}
+  invisibleShader: {fileID: 4800000, guid: 6f0b39f1f852be14fb9bccea86b34ea8, type: 3}
   FrontFaceMaterial: {fileID: 2100000, guid: d9e6e59ae7f94e142a63622087218792, type: 2}
   BackFaceMaterial: {fileID: 2100000, guid: f009da675d1c8c14e8e39a707f5febcb, type: 2}
+  InvisibleMaterial: {fileID: 0}
   portalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114557290012706242
 MonoBehaviour:

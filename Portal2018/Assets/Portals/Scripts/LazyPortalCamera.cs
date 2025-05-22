@@ -149,7 +149,7 @@ public class LazyPortalCamera : MonoBehaviour {
             planeMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
             backfaceMat.SetFloat("portalViewAlpha", portalScale * exitPortalCamera.portalScale);
         }
-       // SetMaterialTexOffsetScale();
+        SetMaterialTexOffsetScale();
     }
 
     public float distanceDividor = 10f;
@@ -202,19 +202,108 @@ public class LazyPortalCamera : MonoBehaviour {
     void setRepeats(int newRepeat)
     {
         //We really should be handling things with distinct shaders here
-        /*
         if (currentRepeats != newRepeat && planeMat)
         {
             //Debug.Log("Setting portalRecs: " + newRepeat + ", " + currentRepeats);
             currentRepeats = newRepeat;
             planeMat.SetFloat("portal_rec", (float)currentRepeats);
             backfaceMat.SetFloat("portal_rec", (float)currentRepeats);
-        }*/
+        }
     }
 
     void SetMaterialTexOffsetScale()
     {
+        //We need a case for having no recursions etc. and to set shaders accordingly
 
+        //Because we're simplifying our mapping to only right angles we can get away with cheating a bit when it comes to how we'll do our "through visibility" on portals
+        float PortalsFacing = Mathf.Abs(Vector3.Dot(ourPortal.transform.forward, ourPortal.ExitPortal.transform.forward));
+        if (PortalsFacing > 0.5f)  //Assume parallel
+        {
+            SetMaterialTexOffsetScale_Straight();
+        } else  //Assume perpendicular
+        {
+            SetMaterialTexOffsetScale_Perpendicular();
+        }
+
+    }
+
+    //Terrible copy past of what should be a ma
+    public Vector3 ReflectPositionOnPortals(Vector3 basePosition, Portal lookingPortal)
+    {
+        Vector3 offsetPosition = basePosition - lookingPortal.ExitPortal.transform.position;    //Take this...
+        Quaternion rotatePosition = lookingPortal.transform.rotation * Quaternion.Inverse(lookingPortal.ExitPortal.transform.rotation);
+        offsetPosition = rotatePosition * offsetPosition;
+        return lookingPortal.transform.position + offsetPosition;
+    }
+
+    void SetMaterialTexOffsetScale_Perpendicular()
+    {
+        //So my theory here is to use a single recursion, but have the bracket pan from the far side of the image to the through view position
+        //that we should hypothetically see when we step through the portal.
+
+        //Need to do this, but with the "virtual" portal that we can see through everything...
+        Rect MainPortalRect = GetViewportRectFromBounds(Camera.main, ourPortal.gameObject.GetComponent<Collider>().bounds);
+        //Technically we'll be looking at our exit portal
+        Vector3 center = ourPortal.ExitPortal.GetComponent<Collider>().bounds.center;
+        Vector3 extents = ourPortal.ExitPortal.GetComponent<Collider>().bounds.extents;
+
+        Vector3[] corners = new Vector3[8];
+        corners[0] = center + new Vector3(-extents.x, -extents.y, -extents.z);
+        corners[1] = center + new Vector3(-extents.x, -extents.y, extents.z);
+        corners[2] = center + new Vector3(-extents.x, extents.y, -extents.z);
+        corners[3] = center + new Vector3(-extents.x, extents.y, extents.z);
+        corners[4] = center + new Vector3(extents.x, -extents.y, -extents.z);
+        corners[5] = center + new Vector3(extents.x, -extents.y, extents.z);
+        corners[6] = center + new Vector3(extents.x, extents.y, -extents.z);
+        corners[7] = center + new Vector3(extents.x, extents.y, extents.z);
+
+        //Convert those points into world space to account for rotations
+        for (int i=0; i<corners.Length; i++)
+        {
+            //These corners are in world space. I'd best remember that!
+            //corners[i] = ourPortal.ExitPortal.transform.TransformPoint(corners[i]);
+            //Reflect our position into the portal we're looking into
+            corners[i] = ReflectPositionOnPortals(corners[i], ourPortal);
+            Debug.DrawLine(corners[i], corners[i] + Vector3.up * 0.5f, Color.red, 0.5f);
+        }
+
+        float minX = float.MaxValue;
+        float minY = float.MaxValue;
+        float maxX = float.MinValue;
+        float maxY = float.MinValue;
+
+        foreach (Vector3 corner in corners)
+        {
+            Vector3 vp = Camera.main.WorldToViewportPoint(corner);
+
+            minX = Mathf.Min(minX, vp.x);
+            minY = Mathf.Min(minY, vp.y);
+            maxX = Mathf.Max(maxX, vp.x);
+            maxY = Mathf.Max(maxY, vp.y);
+        }
+
+        Rect cornerViewRect = Rect.MinMaxRect(minX, minY, maxX, maxY);  //In theory this should be self-correcting as we move through it
+        setRepeats(1);
+        //The above rect needs to be turned into a position and scale offset
+        cornerViewRect.center = new Vector2(0.5f - (cornerViewRect.center.x - 0.5f), cornerViewRect.center.y);  //Screen offset position
+        float scale = MainPortalRect.height / cornerViewRect.height;
+
+        //Zealously ride off of our current shader for the moment
+        if (planeMat)
+        {
+            planeMat.SetVector("offset_close", new Vector4(cornerViewRect.center.x, cornerViewRect.center.y, scale, 1f));
+            planeMat.SetVector("offset_far", new Vector4(cornerViewRect.center.x, cornerViewRect.center.y, scale, 1f));
+        }
+        if (backfaceMat)
+        {
+            backfaceMat.SetVector("offset_close", new Vector4(cornerViewRect.center.x, cornerViewRect.center.y, scale, 1f));
+            backfaceMat.SetVector("offset_far", new Vector4(cornerViewRect.center.x, cornerViewRect.center.y, scale, 1f));
+        }
+
+    }
+
+    void SetMaterialTexOffsetScale_Straight()
+    {
         //OK, just do a march on this to either maximum scale, or maximum recursion
 
         Vector3 portalDir = transform.position - ourPortal.ExitPortal.transform.position;

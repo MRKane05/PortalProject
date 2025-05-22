@@ -63,6 +63,8 @@
 
 			uniform float portalViewAlpha = 1.0;
 
+			float _BackfaceAlpha;
+
 
 			float4 reconstructFrontFaceUV(float4 objPos) {
 				float3 objSpaceCameraPos = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, 1)).xyz;
@@ -96,6 +98,8 @@
 			
 			fixed4 frag(v2f i) : SV_Target
 			{
+				clip(_BackfaceAlpha - _AlphaCutoff);
+
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
 				/*
@@ -104,15 +108,15 @@
 					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t / (float)portal_rec));
 					col = lerp(backCol, col, col.a);
 				}
-
+				*/
 				//float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
-				fixed4 portalCol = tex2D(_TransparencyMask, i.reconUV.xy);
-				fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy) *_Color;
-				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
+				//fixed4 portalCol = tex2D(_TransparencyMask, i.reconUV.xy);
+				//fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy) *_Color;
+				//col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 				//clip(portalCol.a - _AlphaCutoff);	//We shouldn't have to clip this because it's already shaped by the mesh
 				
-				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
-				*/
+				//col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
+				
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;

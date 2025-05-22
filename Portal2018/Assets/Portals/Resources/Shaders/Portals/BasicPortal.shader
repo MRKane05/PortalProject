@@ -80,7 +80,7 @@
 				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
 
 				col.a = portalCol.a;	//Set alpha based off of image alpha
-				col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
+				//col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 				//col = portalCol;
 				// sample the texture
 				//i.screenUV /= i.screenUV.w;

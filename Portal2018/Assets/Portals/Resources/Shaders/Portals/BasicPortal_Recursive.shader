@@ -87,13 +87,12 @@
 
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-				/*
+				
 				for (int t = 0; t < portal_rec; t++) {
 					//Technically we need to apply a fog effect to this
 					fixed4 backCol = getTextureMap(sUV, lerp(offset_close, offset_far, t/(float)portal_rec));
 					col = lerp(backCol, col, col.a);
 				}
-				*/
 				
 				fixed4 portalTerminusCol = tex2D(_MainTex, i.uv.xy) * _Color;
 				col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);

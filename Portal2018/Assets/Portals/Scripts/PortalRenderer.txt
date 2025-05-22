@@ -32,15 +32,9 @@ namespace Portals {
         // Used to track current recursion depth
         private static int _currentRenderDepth;
 
-        public Shader frontFaceShader;
-        public Shader backFaceShader;
-        public Shader invisibleShader;
-
         // Instanced materials
         private Material _portalMaterial;
         private Material _backfaceMaterial;
-        private Material _invisibleMaterial;
-
         private static Material _stencilMaskMaterial;
         private static Material _depthMaskMaterial;
 
@@ -67,7 +61,6 @@ namespace Portals {
 
         public Material FrontFaceMaterial; // => _portalMaterial;
         public Material BackFaceMaterial;// => _backfaceMaterial;
-        public Material InvisibleMaterial;
 
         public Color portalColor = Color.white;
         #endregion
@@ -401,7 +394,6 @@ namespace Portals {
             bool renderBackface = ShouldRenderBackface(Camera.current);
             block.SetFloat("_BackfaceAlpha", renderBackface ? 1.0f : 0.0f);
 
-
             // Get camera for next depth level
             PortalCamera portalCamera = GetOrCreatePortalCamera(Camera.current);
 
@@ -494,23 +486,11 @@ namespace Portals {
 
             //// TODO
             //// this.gameObject.layer = PortalPhysics.PortalLayer;
-            if (frontFaceShader == null)
-            {
-                frontFaceShader = Shader.Find("Portal/BasicPortal");
-            }
-            if (backFaceShader == null)
-            {
-                backFaceShader = Shader.Find("Portal/BasicPortalBackface");
-            }
-            if (invisibleShader == null)
-            {
-                invisibleShader = Shader.Find("Portal/Invisible");
-            }
 
             _meshFilter.sharedMesh = PortalRenderer.Mesh;
-            if ((!_portalMaterial || !_backfaceMaterial || !_invisibleMaterial) && frontFaceShader != null && backFaceShader != null) {
-                Material portalMaterial = new Material(frontFaceShader);
-                Material backFaceMaterial = new Material(backFaceShader);  //PortalBackface"));
+            if (!_portalMaterial || !_backfaceMaterial) {
+                Material portalMaterial = new Material(Shader.Find("Portals/BasicPortal"));
+                Material backFaceMaterial = new Material(Shader.Find("Portals/BasicPortalBackface"));  //PortalBackface"));
 
                 _portalMaterial = portalMaterial;
                 _backfaceMaterial = backFaceMaterial;

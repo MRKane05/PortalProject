@@ -300,7 +300,7 @@ MonoBehaviour:
   _bulletSpawnOffset: 3
   _bulletSpeed: 50
   _splashParticles: {fileID: 0}
-  _portalPrefab: {fileID: 1900981056965284, guid: bc8a60c77915aca43acf8063f39ee6e3,
+  _portalPrefab: {fileID: 1121410240758288, guid: 197d1e575b719e64680ee787b6be0f0d,
     type: 2}
   _canHit:
     serializedVersion: 2
@@ -360,6 +360,7 @@ MonoBehaviour:
   _camera: {fileID: 20543485654963758}
   _replacementShader: {fileID: 4800000, guid: f919f642bd5df034c9810c0bba3ec5a5, type: 3}
   _spawnCloneOnAwake: 1
+  bReplaceShaders: 0
   lastExitedPortal: {fileID: 0}
 --- !u!114 &114603961447189572
 MonoBehaviour:
@@ -418,15 +419,15 @@ MonoBehaviour:
   _staticAnchor: {fileID: 4256365880553150}
   _staticAnchorClone: {fileID: 4940399808014620}
   _pickupRange: 2
-  _layer:
+  _carryLayer:
     serializedVersion: 2
-    m_Bits: 8193
+    m_Bits: 8705
   portalGrabLayer:
     serializedVersion: 2
-    m_Bits: 12801
+    m_Bits: 8705
   traceLayer:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 8705
   heldObject: {fileID: 0}
   carryForce: 150
 --- !u!114 &114950017476972466

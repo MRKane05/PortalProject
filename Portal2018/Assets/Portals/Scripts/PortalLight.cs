@@ -129,7 +129,8 @@ namespace Portals {
             if (_portal.ExitPortal.TransparencyMask) {
                 block.SetTexture("_TransparencyMask", _portal.ExitPortal.TransparencyMask);
             }
-            _commandBuffer.DrawMesh(PortalRenderer.Mesh, _portal.ExitPortal.PortalRenderer.transform.localToWorldMatrix, _depthPunchMaterial, 0, 0, block);
+            //PROBLEM: Have disabled this to try and get around other bits and pieces. Don't think it'll be used
+            //_commandBuffer.DrawMesh(PortalRenderer.Mesh, _portal.ExitPortal.PortalRenderer.transform.localToWorldMatrix, _depthPunchMaterial, 0, 0, block);
             _propertyBlockPool.Give(block);
         }
 

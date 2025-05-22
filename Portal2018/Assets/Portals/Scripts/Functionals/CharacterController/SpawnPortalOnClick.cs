@@ -318,9 +318,13 @@ public class SpawnPortalOnClick : MonoBehaviour {
     IEnumerator ScaleOverTimeRoutine(GameObject parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duration) {
         float elapsed = 0;
         LazyPortalCamera lazyPortal = parentPortal.GetComponent<LazyPortalCamera>();
+        
         while (elapsed < duration) {
-            lazyPortal.portalScale = Mathf.Clamp01(curve.Evaluate(elapsed / duration));
-            lazyPortal.portalBase.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
+            if (lazyPortal)
+            {
+                lazyPortal.portalScale = Mathf.Clamp01(curve.Evaluate(elapsed / duration));
+                lazyPortal.portalBase.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
+            }
             yield return null;
             elapsed += Time.deltaTime;
         }
