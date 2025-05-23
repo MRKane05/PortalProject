@@ -21,9 +21,9 @@ float _PortalMultiPassCurrentEye;
 #endif
 
 
-#ifdef SAMPLE_PREVIOUS_FRAME
+//#ifdef SAMPLE_PREVIOUS_FRAME
 float4x4 PORTAL_MATRIX_VP;
-#endif
+//#endif
 
 static const float _AlphaCutoff = 0.1;
 
@@ -52,13 +52,15 @@ struct v2f {
     float4 objPos : TEXCOORD2; // TODO: Can be combined with objUV for performance gains
 };
 
+uniform float _samplePreviousFrame;
+
 v2f vertPortal(appdata v)
 {
 	v2f o;
 	o.pos = UnityObjectToClipPos(v.vertex);
     o.objPos = v.vertex;
 	o.objUV = v.uv;
-
+/*
 #ifdef SAMPLE_PREVIOUS_FRAME
 	// Instead of getting the clip position of our portal from the currently rendering camera,
 	// calculate the clip position of the portal from a higher level portal. PORTAL_MATRIX_VP == camera.projectionMatrix.
@@ -69,6 +71,12 @@ v2f vertPortal(appdata v)
 #else
 	o.screenUV = ComputeNonStereoScreenPos(o.pos);
 #endif
+*/
+	float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
+	clipPos.y *= _ProjectionParams.x;
+
+	o.screenUV = lerp(ComputeNonStereoScreenPos(o.pos), ComputeNonStereoScreenPos(clipPos), _samplePreviousFrame);
+
 	return o;
 }
 

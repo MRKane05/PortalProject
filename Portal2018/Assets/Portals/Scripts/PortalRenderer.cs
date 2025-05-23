@@ -39,7 +39,6 @@ namespace Portals {
         // Instanced materials
         private Material _portalMaterial;
         private Material _backfaceMaterial;
-        private Material _invisibleMaterial;
 
         private static Material _stencilMaskMaterial;
         private static Material _depthMaskMaterial;
@@ -461,9 +460,9 @@ namespace Portals {
                 projectionMatrix = frameData.leftEyeProjectionMatrix;
                 worldToCameraMatrix = frameData.leftEyeWorldToCameraMatrix;
                 texture = frameData.leftEyeTexture;
-                sampler = "_RecursiveTexture";  //The texture that we're going to blend back into our main texture system
+                sampler = "_LeftEyeTexture";
 
-
+                setSamplePreviousFrame(true);
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
                 _portalMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
                 _backfaceMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
@@ -475,7 +474,13 @@ namespace Portals {
             }
         }
 
+        private void setSamplePreviousFrame(bool bState)
+        {
+            _portalMaterial.SetFloat("_samplePreviousFrame", bState ? 1f : 0f);
+        }
+
         private void RenderDefaultTexture() {
+            setSamplePreviousFrame(false);
             _portalMaterial.DisableKeyword("SAMPLE_PREVIOUS_FRAME");
             _portalMaterial.EnableKeyword("SAMPLE_DEFAULT_TEXTURE");
         }
@@ -508,7 +513,7 @@ namespace Portals {
             }
 
             _meshFilter.sharedMesh = PortalRenderer.Mesh;
-            if ((!_portalMaterial || !_backfaceMaterial || !_invisibleMaterial) && frontFaceShader != null && backFaceShader != null) {
+            if ((!_portalMaterial || !_backfaceMaterial) && frontFaceShader != null && backFaceShader != null) {
                 Material portalMaterial = new Material(frontFaceShader);
                 Material backFaceMaterial = new Material(backFaceShader);  //PortalBackface"));
 
@@ -626,8 +631,10 @@ namespace Portals {
 
             ShaderKeyword keywords = _shaderKeywordStack.Pop();
             if ((keywords & ShaderKeyword.SamplePreviousFrame) == ShaderKeyword.SamplePreviousFrame) {
+                setSamplePreviousFrame(true);
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
             } else {
+                setSamplePreviousFrame(false);
                 _portalMaterial.DisableKeyword("SAMPLE_PREVIOUS_FRAME");
             }
 

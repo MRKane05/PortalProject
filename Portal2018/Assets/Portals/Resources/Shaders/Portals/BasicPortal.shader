@@ -53,7 +53,8 @@
 			float4 _MainTex_ST;
 			fixed4 _Color;
 
-			float4x4 PORTAL_MATRIX_VP;
+			uniform float4x4 PORTAL_MATRIX_VP;
+			uniform float _samplePreviousFrame = 0;
 			
 			v2f vert (appdata v)
 			{
@@ -61,15 +62,14 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
-				o.screenUV = ComputeScreenPos(o.vertex);
-				//Calc screenspace (more potential optimisation here later)
-				/*
-				//Section for handling recursive sampling
+
+				// Instead of getting the clip position of our portal from the currently rendering camera,
+				// calculate the clip position of the portal from a higher level portal. PORTAL_MATRIX_VP == camera.projectionMatrix.
 				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
 				clipPos.y *= _ProjectionParams.x;
-				//clipPos.z = 1;
-				o.screenUV = ComputeScreenPos(clipPos);
-				*/
+
+				o.screenUV = lerp(ComputeScreenPos(o.vertex), ComputeScreenPos(clipPos), _samplePreviousFrame);
+				
 				return o;
 			}
 			
@@ -77,16 +77,11 @@
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);
+				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);	//This'll need to be a stacked image of sorts
 
 				col.a = portalCol.a;	//Set alpha based off of image alpha
-				//col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
-				//col = portalCol;
-				// sample the texture
-				//i.screenUV /= i.screenUV.w;
-				//fixed4 col = tex2Dproj(_LeftEyeTexture, i.screenUV); //tex2D(_MainTex, i.uv);
-				//fixed4 col = tex2D(_MainTex, i.uv);
-				// apply fog
+				
+
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}

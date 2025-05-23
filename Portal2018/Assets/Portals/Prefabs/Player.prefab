@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1965427446319756
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   _bulletSpawnOffset: 3
   _bulletSpeed: 50
   _splashParticles: {fileID: 0}
-  _portalPrefab: {fileID: 1121410240758288, guid: 197d1e575b719e64680ee787b6be0f0d,
+  _portalPrefab: {fileID: 1121410240758288, guid: ea96bf8a46f3e6543a431ead4b901172,
     type: 2}
   _canHit:
     serializedVersion: 2
