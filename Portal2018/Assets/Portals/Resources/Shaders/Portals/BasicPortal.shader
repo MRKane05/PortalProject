@@ -4,6 +4,7 @@
 	{
 		_MainTex("DefaultTexture", 2D) = "white" {}
 		_LeftEyeTexture("LeftEyeTexture", 2D) = "bump" {}
+		_RecurseTexture("Recursive Texture", 2D) = "bump" {}
 		_TransparencyMask("TransparencyMask", 2D) = "white" {}
 		_Color("Portal Tint", Color) = (1,1,1,1)
 	}
@@ -43,12 +44,14 @@
 			{
 				float2 uv : TEXCOORD0;
 				float4 screenUV : TEXCOORD1;
+				float4 recScreenUV: TEXCOORD2;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
 
 			sampler2D _MainTex;
 			sampler2D _LeftEyeTexture;
+			sampler2D _RecurseTexture;
 			sampler2D _TransparencyMask;
 			float4 _MainTex_ST;
 			fixed4 _Color;
@@ -68,7 +71,9 @@
 				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
 				clipPos.y *= _ProjectionParams.x;
 
-				o.screenUV = lerp(ComputeScreenPos(o.vertex), ComputeScreenPos(clipPos), _samplePreviousFrame);
+				//o.screenUV = lerp(ComputeScreenPos(o.vertex), ComputeScreenPos(clipPos), _samplePreviousFrame);
+				o.screenUV = ComputeScreenPos(o.vertex);
+				o.recScreenUV = ComputeScreenPos(clipPos);
 				
 				return o;
 			}
@@ -77,6 +82,11 @@
 			{
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
+				float2 rUV = i.recScreenUV.xy / i.recScreenUV.w;
+				fixed4 recCol = tex2D(_RecurseTexture, rUV);
+
+				col = lerp(col, recCol, _samplePreviousFrame);
+
 				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy);	//This'll need to be a stacked image of sorts
 
 				col.a = portalCol.a;	//Set alpha based off of image alpha

@@ -460,7 +460,7 @@ namespace Portals {
                 projectionMatrix = frameData.leftEyeProjectionMatrix;
                 worldToCameraMatrix = frameData.leftEyeWorldToCameraMatrix;
                 texture = frameData.leftEyeTexture;
-                sampler = "_LeftEyeTexture";
+                sampler = "_RecurseTexture"; //"_LeftEyeTexture";
 
                 setSamplePreviousFrame(true);
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
