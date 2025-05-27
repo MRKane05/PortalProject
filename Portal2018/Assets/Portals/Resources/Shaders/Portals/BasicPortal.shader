@@ -74,7 +74,8 @@
 				//o.screenUV = lerp(ComputeScreenPos(o.vertex), ComputeScreenPos(clipPos), _samplePreviousFrame);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				o.recScreenUV = ComputeScreenPos(clipPos);
-				
+				o.screenUV = lerp(o.screenUV, o.recScreenUV, _samplePreviousFrame);
+
 				return o;
 			}
 			

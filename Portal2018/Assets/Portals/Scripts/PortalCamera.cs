@@ -220,7 +220,8 @@ namespace Portals {
                 // RenderTexture must be cleared when using fake infinite recursion because
                 // we might sometimes sample uninitialized garbage pixels otherwise, which can
                 // cause significant visual artifacts.
-                ClearRenderTexture(texture);
+                //ClearRenderTexture(texture);
+                ClearRenderTextureWithCommandBuffer(texture);
             }
 
             _camera.targetTexture = texture;
@@ -239,6 +240,28 @@ namespace Portals {
             RenderTexture.active = rt;
             GL.Clear(false, true, Color.black);
             RenderTexture.active = oldRT;
+        }
+
+        private CommandBuffer clearCommandBuffer;
+
+        public void InitializeClearBuffer()
+        {
+            if (clearCommandBuffer == null)
+            {
+                clearCommandBuffer = new CommandBuffer();
+                clearCommandBuffer.name = "Clear Portal RT";
+            }
+        }
+
+        private void ClearRenderTextureWithCommandBuffer(RenderTexture rt)
+        {
+            if (clearCommandBuffer == null) InitializeClearBuffer();
+
+            clearCommandBuffer.Clear();
+            clearCommandBuffer.SetRenderTarget(rt);
+            clearCommandBuffer.ClearRenderTarget(true, true, Color.black);
+
+            Graphics.ExecuteCommandBuffer(clearCommandBuffer);
         }
 
         public static void CopyCameraSettings(Camera src, Camera dst) {

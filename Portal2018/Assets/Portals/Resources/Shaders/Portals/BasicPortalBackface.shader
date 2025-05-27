@@ -102,6 +102,8 @@
 
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
+
+
 				/*
 				for (int t = 0; t < portal_rec; t++) {
 					//Technically we need to apply a fog effect to this
