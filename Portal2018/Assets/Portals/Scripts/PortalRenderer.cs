@@ -432,6 +432,27 @@ namespace Portals {
             _propertyBlockObjectPool.Give(block);
         }
 
+        public RenderTexture recurseTexture;
+        public static void TransferWithBlit(RenderTexture source, RenderTexture destination)
+        {
+            Graphics.Blit(source, destination);
+        }
+
+        public static void TransferWithCopyTexture(RenderTexture source, RenderTexture destination)
+        {
+            // Only works if source and destination have identical formats and sizes
+            if (source.format == destination.format &&
+                source.width == destination.width &&
+                source.height == destination.height)
+            {
+                Graphics.CopyTexture(source, destination);
+            }
+            else
+            {
+                // Fallback to blit if formats don't match
+                Graphics.Blit(source, destination);
+            }
+        }
 
         private void RenderPreviousFrame(Camera currentCam) {
             PortalCamera portalCam = PortalCamera.current;
@@ -459,14 +480,22 @@ namespace Portals {
 
                 projectionMatrix = frameData.leftEyeProjectionMatrix;
                 worldToCameraMatrix = frameData.leftEyeWorldToCameraMatrix;
-                texture = frameData.leftEyeTexture;
+                //texture = frameData.leftEyeTexture;
+                //texture = _portal.DefaultTexture;   //Is this a copy or a reference?
                 sampler = "_RecurseTexture"; //"_LeftEyeTexture";
 
                 setSamplePreviousFrame(true);
                 _portalMaterial.EnableKeyword("SAMPLE_PREVIOUS_FRAME");
                 _portalMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
                 _backfaceMaterial.SetMatrix("PORTAL_MATRIX_VP", projectionMatrix * worldToCameraMatrix);
-                _portalMaterial.SetTexture(sampler, texture);
+                //_portalMaterial.SetTexture(sampler, texture);
+                if (!recurseTexture)
+                {
+                    recurseTexture = new RenderTexture(rootPortalCam.camera.targetTexture);
+                }
+                TransferWithBlit(rootPortalCam.camera.targetTexture, recurseTexture);
+                //TransferWithCopyTexture(rootPortalCam.camera.targetTexture, recurseTexture);
+                _portalMaterial.SetTexture(sampler, recurseTexture);
             } else {
                 // We are viewing another portal.
                 // Render the bottom of the stack with a base texture

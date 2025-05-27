@@ -221,7 +221,8 @@ namespace Portals {
                 // we might sometimes sample uninitialized garbage pixels otherwise, which can
                 // cause significant visual artifacts.
                 //ClearRenderTexture(texture);
-                ClearRenderTextureWithCommandBuffer(texture);
+                //ClearRenderTextureWithCommandBuffer(texture);
+                //TransferWithBlit(texture, )
             }
 
             _camera.targetTexture = texture;
@@ -262,6 +263,11 @@ namespace Portals {
             clearCommandBuffer.ClearRenderTarget(true, true, Color.black);
 
             Graphics.ExecuteCommandBuffer(clearCommandBuffer);
+        }
+
+        public static void TransferWithBlit(RenderTexture source, RenderTexture destination)
+        {
+            Graphics.Blit(source, destination);
         }
 
         public static void CopyCameraSettings(Camera src, Camera dst) {
