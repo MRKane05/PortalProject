@@ -75,7 +75,8 @@ namespace Portals {
                 RenderTexture.ReleaseTemporary(_camera.targetTexture);
             }
             if (_previousFrameData.leftEyeTexture) {
-                RenderTexture.ReleaseTemporary(_previousFrameData.leftEyeTexture);
+                //RenderTexture.ReleaseTemporary(_previousFrameData.leftEyeTexture);
+                ReturnTemporaryRT(_previousFrameData.leftEyeTexture);
             }
         }
 
@@ -123,7 +124,8 @@ namespace Portals {
         */
         private void SaveFrameData(Camera.MonoOrStereoscopicEye eye) {
             if (_previousFrameData.leftEyeTexture) {
-                RenderTexture.ReleaseTemporary(_previousFrameData.leftEyeTexture);
+                //RenderTexture.ReleaseTemporary(_previousFrameData.leftEyeTexture);
+                ReturnTemporaryRT(_previousFrameData.leftEyeTexture);
             }
             // Need to restore original projection matrix for rendering fake recursion
             _camera.ResetProjectionMatrix();
@@ -131,10 +133,25 @@ namespace Portals {
             _previousFrameData.leftEyeWorldToCameraMatrix = _camera.worldToCameraMatrix;
             _previousFrameData.leftEyeTexture = _camera.targetTexture;
         }
+
+        private RenderTexture GetTemporaryRT(int currentDepth)
+        {
+            return RenderTextureCache.Instance.GetRT(
+                _portal.Downscaling * currentDepth,
+                (int)_portal.DepthBufferQuality,
+                _camera.allowHDR
+            );
+        }
+
+        private void ReturnTemporaryRT(RenderTexture rt)
+        {
+            RenderTextureCache.Instance.ReturnRT(rt);
+        }
+
         
-        private RenderTexture GetTemporaryRT() {
-            int w = Camera.current.pixelWidth / _portal.Downscaling;
-            int h = Camera.current.pixelHeight / _portal.Downscaling;
+        private RenderTexture OriginalGetTemporaryRT() {
+            int w = 512 / _portal.Downscaling; //Camera.current.pixelWidth / _portal.Downscaling;
+            int h = 512 / _portal.Downscaling; //Camera.current.pixelHeight / _portal.Downscaling;
             //int w = Screen.width;
             //int h = Screen.height;
             int depth = (int)_portal.DepthBufferQuality;
@@ -161,7 +178,7 @@ namespace Portals {
             return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
         }
 
-        public RenderTexture RenderToTexture(Camera.MonoOrStereoscopicEye eye, Rect viewportRect, bool renderBackface) {
+        public RenderTexture RenderToTexture(Camera.MonoOrStereoscopicEye eye, Rect viewportRect, bool renderBackface, int _currentRenderDepth) {
             _framesSinceLastUse = 0;
 
             // Copy parent camera's settings
@@ -214,7 +231,7 @@ namespace Portals {
                 _camera.useOcclusionCulling = false;
             }
 
-            RenderTexture texture = GetTemporaryRT();
+            RenderTexture texture = GetTemporaryRT(_currentRenderDepth);
 
             if (_portal.FakeInfiniteRecursion) {
                 // RenderTexture must be cleared when using fake infinite recursion because
@@ -226,6 +243,7 @@ namespace Portals {
             }
 
             _camera.targetTexture = texture;
+
             _camera.Render();
 
             SaveFrameData(eye);

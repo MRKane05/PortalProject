@@ -227,6 +227,7 @@ MonoBehaviour:
   BackFaceMaterial: {fileID: 2100000, guid: f009da675d1c8c14e8e39a707f5febcb, type: 2}
   InvisibleMaterial: {fileID: 0}
   portalColor: {r: 1, g: 1, b: 1, a: 1}
+  recurseTexture: {fileID: 0}
 --- !u!114 &114557290012706242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,12 +247,12 @@ MonoBehaviour:
   _modifyGravity: 0
   _ignoredColliders: []
   _qualitySettings:
-    downscaling: 2
+    downscaling: 1
     depthBufferQuality: 16
   _advancedSettings:
     useObliqueProjectionMatrix: 1
     useOcclusionMatrix: 1
-    useScissorRect: 0
+    useScissorRect: 1
     clippingOffset: 0.01
     copyGlobalIllumination: 0
     useRaycastOcclusion: 0

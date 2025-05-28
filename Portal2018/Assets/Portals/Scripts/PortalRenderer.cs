@@ -422,7 +422,7 @@ namespace Portals {
             } else {
             */
             // Mono rendering. Render only one eye, but set which texture to use based on the camera's target eye.
-            RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Mono, viewportRect, renderBackface);
+            RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Mono, viewportRect, renderBackface, _currentRenderDepth);
             block.SetTexture("_LeftEyeTexture", tex);
             //}
             _currentRenderDepth--;
@@ -433,9 +433,58 @@ namespace Portals {
         }
 
         public RenderTexture recurseTexture;
+        /*
         public static void TransferWithBlit(RenderTexture source, RenderTexture destination)
         {
             Graphics.Blit(source, destination);
+        }*/
+
+        public static void TransferWithBlit(RenderTexture source, RenderTexture destination)
+        {
+            // Validate inputs
+            if (source == null || destination == null)
+            {
+                Debug.LogError("Source or destination RenderTexture is null!");
+                return;
+            }
+
+            if (!source.IsCreated())
+            {
+                Debug.LogError("Source RenderTexture is not created!");
+                return;
+            }
+
+            if (!destination.IsCreated())
+            {
+                //Debug.LogError("Destination RenderTexture is not created!");
+                destination.Create();
+            }
+
+            // Store the current active RT to restore later
+            RenderTexture previousActive = RenderTexture.active;
+
+            try
+            {
+                RenderTexture.active = destination;
+                // Method 1: Standard blit (try this first)
+                Graphics.Blit(source, destination);
+
+                // If that doesn't work, try Method 2: Manual blit with material
+                // Graphics.SetRenderTarget(destination);
+                // Graphics.Blit(source, destination, (Material)null);
+
+                // Method 3: If you need more control, use this approach:
+                // RenderTexture.active = destination;
+                // GL.PushMatrix();
+                // GL.LoadOrtho();
+                // Graphics.DrawTexture(new Rect(0, 0, 1, 1), source);
+                // GL.PopMatrix();
+            }
+            finally
+            {
+                // Always restore the previous active RT
+                RenderTexture.active = previousActive;
+            }
         }
 
         public static void TransferWithCopyTexture(RenderTexture source, RenderTexture destination)
@@ -491,9 +540,11 @@ namespace Portals {
                 //_portalMaterial.SetTexture(sampler, texture);
                 if (!recurseTexture)
                 {
-                    recurseTexture = new RenderTexture(rootPortalCam.camera.targetTexture);
+                    //recurseTexture = new RenderTexture(rootPortalCam.camera.targetTexture);
+                    recurseTexture = RenderTextureCache.Instance.GetRT(rootPortalCam.camera.targetTexture.width, rootPortalCam.camera.targetTexture.height, rootPortalCam.camera.targetTexture.depth);  //new RenderTexture(rootPortalCam.camera.targetTexture);
                 }
                 TransferWithBlit(rootPortalCam.camera.targetTexture, recurseTexture);
+                //recurseTexture = rootPortalCam.camera.targetTexture;
                 //TransferWithCopyTexture(rootPortalCam.camera.targetTexture, recurseTexture);
                 _portalMaterial.SetTexture(sampler, recurseTexture);
             } else {
