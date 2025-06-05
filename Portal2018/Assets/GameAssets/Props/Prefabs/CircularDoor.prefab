@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4395953780447602}
   - component: {fileID: 33510956385032226}
   - component: {fileID: 23259926001761848}
-  m_Layer: 0
+  - component: {fileID: 65095492272254962}
+  - component: {fileID: 114508828158253012}
+  m_Layer: 14
   m_Name: CircularDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,6 +233,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841550166810900}
   m_Mesh: {fileID: 4300006, guid: 2e31a0136081d714fa5f64713db99560, type: 3}
+--- !u!65 &65095492272254962
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592289696974122}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5025764, y: 2.1033914, z: 2}
+  m_Center: {x: 0, y: 1.0516976, z: 0.00002130121}
 --- !u!65 &65429443636469434
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -255,3 +269,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1081948, y: 1.9408247, z: 0.27103996}
   m_Center: {x: -0.5540974, y: 0.9704124, z: 0}
+--- !u!114 &114508828158253012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592289696974122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87cd3ffa02df9da4f84ac58f1d7312c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bStateLocked: 0
+  bDoorOpen: 0
+  playerTriggerDistance: 3
+  doorOffsetPosition: {x: 1, y: 0, z: 0}
+  doorLerpSpeed: 5
+  DoorLeft: {fileID: 1841550166810900}
+  DoorRight: {fileID: 1697405470474858}

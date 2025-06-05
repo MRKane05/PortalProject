@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 [ExecuteInEditMode]
@@ -6,7 +7,7 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Renderer))]
 public class LightProbeSampler : MonoBehaviour
 {
-    private Renderer m_Renderer;
+    public List<Renderer> m_Renderers = new List<Renderer>();
     private MaterialPropertyBlock m_PropertyBlock;
 
     // Cache the property IDs for better performance
@@ -30,9 +31,18 @@ public class LightProbeSampler : MonoBehaviour
 
     private float m_LastUpdateTime;
 
+    public float updateDistance = 0.125f;    //Update every eigths of a meter we move
+    float squareUpdateDistance = 0.0625f;
+    Vector3 lastUpdatePosition = Vector3.zero;
+
+
     void Start()
     {
-        m_Renderer = GetComponent<Renderer>();
+        squareUpdateDistance = updateDistance * updateDistance;
+        if (m_Renderers.Count == 0)
+        {
+            m_Renderers.Add(gameObject.GetComponent<Renderer>());
+        }
         m_PropertyBlock = new MaterialPropertyBlock();
 
         // Initial sampling
@@ -42,7 +52,9 @@ public class LightProbeSampler : MonoBehaviour
     void Update()
     {
         // Update at specified interval for performance
-        if (Time.time - m_LastUpdateTime >= updateInterval)
+        //if (Time.time - m_LastUpdateTime >= updateInterval)
+        //Alternatively only update if we've moved
+        if (Vector3.SqrMagnitude(lastUpdatePosition - transform.position) > squareUpdateDistance)
         {
             SampleLightProbes();
             m_LastUpdateTime = Time.time;
@@ -78,6 +90,10 @@ public class LightProbeSampler : MonoBehaviour
 
         Vector4 SHC = new Vector4(sh[0, 8], sh[1, 8], sh[2, 8], 1.0f);
 
+        if (m_PropertyBlock == null)
+        {
+            m_PropertyBlock = new MaterialPropertyBlock();
+        }
         // Pass all SH coefficients to shader
         m_PropertyBlock.SetVector(SHAr_ID, SHAr);
         m_PropertyBlock.SetVector(SHAg_ID, SHAg);
@@ -87,7 +103,10 @@ public class LightProbeSampler : MonoBehaviour
         m_PropertyBlock.SetVector(SHBb_ID, SHBb);
         m_PropertyBlock.SetVector(SHC_ID, SHC);
 
-        m_Renderer.SetPropertyBlock(m_PropertyBlock);
+        for (int i = 0; i < m_Renderers.Count; i++)
+        {
+            m_Renderers[i].SetPropertyBlock(m_PropertyBlock);
+        }
     }
 
 
