@@ -1,58 +1,54 @@
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
-
 // Unlit shader. Simplest possible textured shader.
 // - SUPPORTS lightmap
+// - SUPPORTS cubemap reflections
 // - no lighting
 // - no per-material color
 
 Shader "Mobile/Unlit Cubemap(Supports Lightmap)" {
-Properties {
-    _MainTex ("Base (RGB)", 2D) = "white" {}
-    _Tint("Reflection Tint", Color) = (1,1,1,1)
-    _Cube("Cubemap", CUBE) = "" {}
-}
-
-SubShader {
-    Tags { "RenderType"="Opaque" }
-    LOD 100
-
-    // Non-lightmapped
-    Pass {
-        Tags { "LightMode" = "Vertex" }
-        Lighting Off
-        SetTexture [_MainTex] {
-            constantColor (1,1,1,1)
-            combine texture, constant // UNITY_OPAQUE_ALPHA_FFP
-        }
+    Properties{
+        _MainTex("Base (RGB)", 2D) = "white" {}
+        _Tint("Reflection Tint", Color) = (1,1,1,1)
+        _Cube("Cubemap", CUBE) = "" {}
     }
+        SubShader{
+            Tags { "RenderType" = "Opaque" }
+            LOD 100
 
-    // Lightmapped
-    Pass
-    {
-        Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
+        // Non-lightmapped
+        Pass {
+            Tags { "LightMode" = "Vertex" }
+            Lighting Off
+            SetTexture[_MainTex] {
+                constantColor(1,1,1,1)
+                combine texture, constant // UNITY_OPAQUE_ALPHA_FFP
+            }
+        }
 
-        CGPROGRAM
-
-        #pragma vertex vert
-        #pragma fragment frag
-        #pragma target 2.0
-        #include "UnityCG.cginc"
-        #pragma multi_compile_fog
-        #define USING_FOG (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
+        // Lightmapped
+        Pass
+        {
+            Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #pragma target 2.0
+            #include "UnityCG.cginc"
+            #pragma multi_compile_fog
+            #define USING_FOG (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
 
         // uniforms
+        sampler2D _MainTex;
         float4 _MainTex_ST;
         samplerCUBE _Cube;
-        half4 _Tint;
+        fixed4 _Tint;
 
         // vertex shader input data
         struct appdata
         {
-            float3 pos : POSITION;
-            float3 uv1 : TEXCOORD1;
-            float3 uv0 : TEXCOORD0;
+            float4 pos : POSITION;
+            float2 uv1 : TEXCOORD1;
+            float2 uv0 : TEXCOORD0;
             float3 normal : NORMAL;
             UNITY_VERTEX_INPUT_INSTANCE_ID
         };
@@ -83,12 +79,11 @@ SubShader {
 
             // fog
 #if USING_FOG
-            float3 eyePos = UnityObjectToViewPos(float4(IN.pos, 1));
+            float3 eyePos = UnityObjectToViewPos(IN.pos);
             float fogCoord = length(eyePos.xyz);  // radial fog distance
             UNITY_CALC_FOG_FACTOR_RAW(fogCoord);
             o.fog = saturate(unityFogFactor);
 #endif
-
             // transform position
             o.pos = UnityObjectToClipPos(IN.pos);
 
@@ -104,15 +99,12 @@ SubShader {
             return o;
         }
 
-        // textures
-        sampler2D _MainTex;
-
         // fragment shader
         fixed4 frag(v2f IN) : SV_Target
         {
             fixed4 col, tex;
 
-            // Fetch lightmap
+        // Fetch lightmap
             half4 bakedColorTex = UNITY_SAMPLE_TEX2D(unity_Lightmap, IN.uv0.xy);
             col.rgb = DecodeLightmap(bakedColorTex);
 
@@ -122,16 +114,16 @@ SubShader {
             col.a = 1;
 
             //Cubemap reflection
-            col.rgb += texCUBE(_Cube, IN.worldRefl) * _Tint.rgb;
-
+            half4 reflcol = texCUBE(_Cube, IN.worldRefl);
+            col.rgb += reflcol.rgb * _Tint.rgb * tex.a;
+            //col.rgb = fixed4(tex.a, tex.a, tex.a, 1);
             // fog
     #if USING_FOG
             col.rgb = lerp(unity_FogColor.rgb, col.rgb, IN.fog);
     #endif
-            return col;
-        }
-
-        ENDCG
+        return col;
     }
+    ENDCG
 }
+    }
 }

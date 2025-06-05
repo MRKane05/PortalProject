@@ -85,8 +85,8 @@
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
-				o.objPos = v.vertex;
-				o.reconUV = reconstructFrontFaceUV(v.vertex);
+				//o.objPos = v.vertex;
+				//o.reconUV = reconstructFrontFaceUV(v.vertex);
 
 				return o;
 			}
@@ -102,7 +102,6 @@
 
 				float2 sUV = i.screenUV.xy / i.screenUV.w;
 				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-
 
 				/*
 				for (int t = 0; t < portal_rec; t++) {

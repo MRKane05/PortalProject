@@ -15,7 +15,7 @@ public class WeightButton : MonoBehaviour
     public List<GameObject> objectsOn = new List<GameObject>();
 
     bool bSufficientWeight = false;
-    Vector3 buttonDepressed = new Vector3(0, -0.05f, 0);
+    Vector3 buttonDepressed = new Vector3(0, -0.08f, 0);
 
     float lerpTime = 0f;
     float buttonLerpSpeed = 3f;
@@ -68,7 +68,7 @@ public class WeightButton : MonoBehaviour
         {
             lerpTime = Mathf.Lerp(lerpTime, 0f, Time.deltaTime * buttonLerpSpeed);
             transform.localPosition = buttonDepressed * lerpTime;
-            if (lerpTime < 0.5f && !bButtonTriggered)
+            if (lerpTime < 0.5f && bButtonTriggered)
             {
                 bButtonTriggered = false;
                 OnButtonTriggered.Invoke(bButtonTriggered);

@@ -42,15 +42,20 @@ public class DoorBehaviour : MonoBehaviour {
 		bDoorOpen = bOpen;
 	}
 
+	public void SetDoorLocked(bool bIsUnlocked)	//This will always be true when the button depresses
+    {
+		bStateLocked = !bIsUnlocked;
+	}
+
 	void Update()
     {
-		if (bDoorOpen && !Mathf.Approximately(lerpTime, 1f))
+		if (bDoorOpen && !Mathf.Approximately(lerpTime, 1f) && !bStateLocked)
         {
 			lerpTime = Mathf.Lerp(lerpTime, 1f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;
 			DoorRight.transform.localPosition = doorRightOffsetPosition * lerpTime;
 		}
-		if (!bDoorOpen && !Mathf.Approximately(lerpTime, 0f))
+		if ((!bDoorOpen || bStateLocked) && !Mathf.Approximately(lerpTime, 0f))
         {
 			lerpTime = Mathf.Lerp(lerpTime, 0f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;

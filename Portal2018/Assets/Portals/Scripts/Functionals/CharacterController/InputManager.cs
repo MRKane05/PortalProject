@@ -79,11 +79,11 @@ public class InputManager : MonoBehaviour {
             moved = true;
         }
 #endif
-
+        /*
         if (Input.GetButtonDown("Triangle") || Input.GetKeyDown(KeyCode.Escape))
         {
             gameObject.transform.position = Vector3.up * 5f;
-        }
+        }*/
 
         if (_autowalk) {
             moveDir += Camera.main.transform.forward;

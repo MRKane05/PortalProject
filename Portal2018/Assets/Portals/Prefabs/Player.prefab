@@ -73,14 +73,14 @@ GameObject:
   - component: {fileID: 4068778981482640}
   - component: {fileID: 33357105668525176}
   - component: {fileID: 23445494505711734}
-  - component: {fileID: 65862889283707098}
+  - component: {fileID: 114806287536369406}
   m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1965427446319756
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,15 +146,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.9, z: 2.71}
+  m_LocalRotation: {x: -0, y: -0.09075737, z: -0, w: -0.99587303}
+  m_LocalPosition: {x: 10.12, y: 3.53, z: 15.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
   - {fileID: 4068778981482640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 370.414, z: 0}
 --- !u!4 &4940399808014620
 Transform:
   m_ObjectHideFlags: 1
@@ -196,7 +196,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 14135
+    m_Bits: 30519
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -265,18 +265,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!65 &65862889283707098
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1825981179147098}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81479435809600268
 AudioListener:
   m_ObjectHideFlags: 1
@@ -377,13 +365,13 @@ MonoBehaviour:
   _noClipEnabled: 0
   _flySpeed: 1
   _movementInfo:
-    maxSpeedHorizontal: 20
+    maxSpeedHorizontal: 5
     maxSpeedVertical: 40
     accellerationGrounded: 5
     accellerationAerial: 0.25
     dragGrounded: 0.4
     dragAerial: 0.02
-    jumpForce: 550
+    jumpForce: 160
   _maxLookAngle: 89
   _portalLookSnapAngle: 15
   _groundCheckDistance: 0.01
@@ -405,6 +393,23 @@ MonoBehaviour:
   upVector: {x: 0, y: 1, z: 0}
   useGravity: 1
   invert: 0
+--- !u!114 &114806287536369406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825981179147098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1033f806133d8954bacc243ab05fe309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Renderers:
+  - {fileID: 23445494505711734}
+  updateInterval: 0.1
+  useCustomSamplePosition: 0
+  customSamplePosition: {fileID: 0}
+  updateDistance: 0.125
 --- !u!114 &114877131622275036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,7 +434,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8705
   heldObject: {fileID: 0}
-  carryForce: 150
+  carryForce: 300
 --- !u!114 &114950017476972466
 MonoBehaviour:
   m_ObjectHideFlags: 1

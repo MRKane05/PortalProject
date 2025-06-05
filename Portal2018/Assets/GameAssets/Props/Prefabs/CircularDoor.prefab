@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23259926001761848}
   - component: {fileID: 65095492272254962}
   - component: {fileID: 114508828158253012}
+  - component: {fileID: 114520498466362840}
   m_Layer: 14
   m_Name: CircularDoor
   m_TagString: Untagged
@@ -74,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 1592289696974122}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 9.753, y: 2.438402, z: 13.71}
-  m_LocalScale: {x: 1, y: 1, z: 2.1375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4967260077431264}
   - {fileID: 4725298321982058}
@@ -287,3 +288,21 @@ MonoBehaviour:
   doorLerpSpeed: 5
   DoorLeft: {fileID: 1841550166810900}
   DoorRight: {fileID: 1697405470474858}
+--- !u!114 &114520498466362840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592289696974122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1033f806133d8954bacc243ab05fe309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Renderers:
+  - {fileID: 23654266686061404}
+  - {fileID: 23197900294136448}
+  updateInterval: 0.1
+  useCustomSamplePosition: 0
+  customSamplePosition: {fileID: 0}
+  updateDistance: 0.125
