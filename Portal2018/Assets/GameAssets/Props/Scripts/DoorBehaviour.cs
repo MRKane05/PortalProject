@@ -12,11 +12,15 @@ public class DoorBehaviour : MonoBehaviour {
 	public float doorLerpSpeed = 5f;
 	float lerpTime = 0;
 
+	OcclusionPortal OcclusionLeft, OcclusionRight;
+
 	public GameObject DoorLeft, DoorRight;
 
 	void Start()
     {
-		doorRightOffsetPosition = new Vector3(-doorOffsetPosition.x, 0, 0);	//Flip our stated door position
+		doorRightOffsetPosition = new Vector3(-doorOffsetPosition.x, 0, 0); //Flip our stated door position
+		OcclusionLeft = DoorLeft.GetComponent<OcclusionPortal>();
+		OcclusionRight = DoorRight.GetComponent<OcclusionPortal>();
     }
 
 	//Given we're playing with physics this could be a bad idea...
@@ -40,6 +44,11 @@ public class DoorBehaviour : MonoBehaviour {
 	{
 		if (bOpen == bDoorOpen) { return; } //Don't need to do anything
 		bDoorOpen = bOpen;
+		if (bOpen)
+		{
+			OcclusionLeft.open = true;
+			OcclusionRight.open = true;
+		}
 	}
 
 	public void SetDoorLocked(bool bIsUnlocked)	//This will always be true when the button depresses
@@ -60,6 +69,11 @@ public class DoorBehaviour : MonoBehaviour {
 			lerpTime = Mathf.Lerp(lerpTime, 0f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;
 			DoorRight.transform.localPosition = doorRightOffsetPosition * lerpTime;
+			if (lerpTime < 0.01f)	//Check to see if we should turn our occlusion off
+            {
+				OcclusionLeft.open = false;
+				OcclusionRight.open = false;
+			}
 		}
     }
 }
