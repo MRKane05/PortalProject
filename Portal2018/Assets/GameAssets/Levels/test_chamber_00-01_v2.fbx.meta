@@ -123,6 +123,12 @@ ModelImporter:
     100234: Room001.003
     100236: Room001_Platfom
     100238: Room003
+    100240: Room004
+    100242: Room006
+    100244: Room007
+    100246: Room008
+    100248: Room009
+    100250: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
     400000: bed_cover
     400002: bed_cover|Body_bed_cover_reference.smd|Dupli|1
     400004: blackout|Body_blackout_reference.smd|Dupli|1
@@ -243,6 +249,12 @@ ModelImporter:
     400234: Room001.003
     400236: Room001_Platfom
     400238: Room003
+    400240: Room004
+    400242: Room006
+    400244: Room007
+    400246: Room008
+    400248: Room009
+    400250: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
     2100000: blackin_blackout
     2100002: mapstestchmb_a_00glassglasswindow_frosted
     2100004: chmb_a_00modelsprops_trainstationtrainstation_clock_glass001
@@ -289,6 +301,8 @@ ModelImporter:
     2100086: Round_elevator_body_Elevator_glass
     2100088: Round_elevator_body_Round_elevator_sheet_2
     2100090: ElevatorWall
+    2100092: CONCRETECONCRETE_MODULAR_WALL001C
+    2100094: CONCRETECONCRETE_MODULAR_WALL001F
     2300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     2300002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     2300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -336,6 +350,12 @@ ModelImporter:
     2300088: Room001.003
     2300090: Room001_Platfom
     2300092: Room003
+    2300094: Room004
+    2300096: Room006
+    2300098: Room007
+    2300100: Room008
+    2300102: Room009
+    2300104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
     3300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     3300002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     3300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -383,6 +403,12 @@ ModelImporter:
     3300088: Room001.003
     3300090: Room001_Platfom
     3300092: Room003
+    3300094: Room004
+    3300096: Room006
+    3300098: Room007
+    3300100: Room008
+    3300102: Room009
+    3300104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
     4300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     4300002: func_brush_695336_maps/testchmb_a_00/glass/glasswindow_frosted_
     4300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -430,6 +456,12 @@ ModelImporter:
     4300088: Room003
     4300090: Room001.002
     4300092: Room001.001
+    4300094: Room009
+    4300096: Room008
+    4300098: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    4300100: Room007
+    4300102: Room004
+    4300104: Room006
     6400000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     6400002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     6400004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -477,6 +509,12 @@ ModelImporter:
     6400088: Room001.003
     6400090: Room001_Platfom
     6400092: Room003
+    6400094: Room004
+    6400096: Room006
+    6400098: Room007
+    6400100: Room008
+    6400102: Room009
+    6400104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -506,12 +544,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_WALL001C
+    second: {fileID: 2100000, guid: 6c419373a296ea945a9aa146574ac97d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: CONCRETECONCRETE_MODULAR_WALL001D
     second: {fileID: 2100000, guid: b94d42fbef0e0dd4787554045bf4b65e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CONCRETECONCRETE_MODULAR_WALL001E
+    second: {fileID: 2100000, guid: 57d1239cff566514aaefc3abdff4934e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_WALL001F
     second: {fileID: 2100000, guid: 57d1239cff566514aaefc3abdff4934e, type: 2}
   - first:
       type: UnityEngine:Material
@@ -684,9 +732,9 @@ ModelImporter:
     preserveHierarchy: 0
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVPackMargin: 6
     useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
