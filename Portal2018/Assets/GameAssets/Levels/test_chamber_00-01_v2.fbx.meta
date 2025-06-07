@@ -129,6 +129,13 @@ ModelImporter:
     100246: Room008
     100248: Room009
     100250: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    100252: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100254: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100256: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100258: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100260: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100262: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    100264: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
     400000: bed_cover
     400002: bed_cover|Body_bed_cover_reference.smd|Dupli|1
     400004: blackout|Body_blackout_reference.smd|Dupli|1
@@ -255,6 +262,13 @@ ModelImporter:
     400246: Room008
     400248: Room009
     400250: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    400252: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400254: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400256: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400258: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400260: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400262: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    400264: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
     2100000: blackin_blackout
     2100002: mapstestchmb_a_00glassglasswindow_frosted
     2100004: chmb_a_00modelsprops_trainstationtrainstation_clock_glass001
@@ -303,6 +317,7 @@ ModelImporter:
     2100090: ElevatorWall
     2100092: CONCRETECONCRETE_MODULAR_WALL001C
     2100094: CONCRETECONCRETE_MODULAR_WALL001F
+    2100096: button_base_reference_M_Fixture_Superbutton_BaseShape
     2300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     2300002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     2300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -356,6 +371,13 @@ ModelImporter:
     2300100: Room008
     2300102: Room009
     2300104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    2300106: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300108: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300110: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300112: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300114: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300116: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    2300118: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
     3300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     3300002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     3300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -409,6 +431,13 @@ ModelImporter:
     3300100: Room008
     3300102: Room009
     3300104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    3300106: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300108: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300110: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300112: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300114: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300116: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    3300118: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
     4300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     4300002: func_brush_695336_maps/testchmb_a_00/glass/glasswindow_frosted_
     4300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -462,6 +491,13 @@ ModelImporter:
     4300100: Room007
     4300102: Room004
     4300104: Room006
+    4300106: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300108: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300110: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300112: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300114: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300116: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    4300118: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
     6400000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     6400002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     6400004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -515,6 +551,13 @@ ModelImporter:
     6400100: Room008
     6400102: Room009
     6400104: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001A_0.003
+    6400106: func_brush_695420_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400108: func_brush_695428_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400110: func_brush_695436_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400112: func_brush_695444_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400114: func_brush_695452_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400116: func_brush_695460_maps/testchmb_a_00/glass/glasswindow_frosted_
+    6400118: static_prop_0|button_base_reference.smd|Dupli|_button_base_refe
   externalObjects:
   - first:
       type: UnityEngine:Material

@@ -5,12 +5,12 @@
 // - no lighting
 // - no per-material color
 
-Shader "Mobile/Unlit Brightness Cubemap(Supports Lightmap)" {
+Shader "Mobile/Unlit Reflection Multipled Cubemap(Supports Lightmap)" {
     Properties{
         _MainTex("Base (RGB)", 2D) = "white" {}
         _Tint("Reflection Tint", Color) = (1,1,1,1)
         _Cube("Cubemap", CUBE) = "" {}
-        _AlphaMultiplier("Tex Brightness Multiplier", Range(0.25, 5.0)) = 0.25
+        _AlphaMultiplier("Tex Reflection Brightness Multiplier", Range(0.25, 5.0)) = 0.25
     }
         SubShader{
             Tags { "RenderType" = "Opaque" }
