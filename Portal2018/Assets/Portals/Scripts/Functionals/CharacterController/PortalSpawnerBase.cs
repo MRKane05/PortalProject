@@ -3,53 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoPortalGovenor : PortalSpawnerBase {
-	public AutoportalBehavior BaseAutoportal; //The portal that won't change, this'll be our right-hand portal
-	public List<AutoportalBehavior> CyclingPortals; //The portals that'll cycle
-    int currentPortalIndex = 0;
-	public float cycleTime = 4f; //How many seconds before we spawn the portal and move it somewhere else?
+public class PortalSpawnerBase : MonoBehaviour {
+    protected static Color RightPortalColor = new Color(1f, 0.627f, 0);
+    protected static Color LeftPortalColor = new Color(0, 0.627f, 1f);
 
-    /*
-    private static Color RightPortalColor = new Color(1f, 0.627f, 0);
-    private static Color LeftPortalColor = new Color(0, 0.627f, 1f);
+    [SerializeField] protected GameObject _portalPrefab;
+    [SerializeField] protected LayerMask _canHit = -1;
+    [SerializeField] protected float _normalOffset = 0.05f;
+    [SerializeField] protected float _portalSpawnTime = 0.25f;
+    [SerializeField] protected AnimationCurve _portalSpawnCurve = AnimationCurves.Overshoot;
+    [SerializeField] protected int _meshColliderIterationCount = 10;
 
-    [SerializeField] GameObject _portalPrefab;
-    [SerializeField] LayerMask _canHit = -1;
-    [SerializeField] float _normalOffset = 0.05f;
-    [SerializeField] float _portalSpawnTime = 0.25f;
-    [SerializeField] AnimationCurve _portalSpawnCurve = AnimationCurves.Overshoot;
-    [SerializeField] int _meshColliderIterationCount = 10;
+    protected Portal _leftPortal;
+    protected Portal _rightPortal;
 
-    Portal _leftPortal;
-    Portal _rightPortal;
-    */
 
-    void Start()
-    {
-        if (!isActiveAndEnabled)
-        {
-            return;
-        }
 
-        _leftPortal = SpawnPortal(Vector3.zero, Quaternion.identity, LeftPortalColor);
-        _rightPortal = SpawnPortal(Vector3.zero, Quaternion.identity, RightPortalColor);
-
-        _leftPortal.ExitPortal = _rightPortal;
-        _rightPortal.ExitPortal = _leftPortal;
-
-        _leftPortal.name = "Left AutoPortal";
-        _rightPortal.name = "Right AutoPortal";
-
-        _leftPortal.gameObject.SetActive(false);
-        _rightPortal.gameObject.SetActive(false);
-
-        //For the moment
-        TriggerActive(true);
-
-    }
-    /*
     //PROBLEM: Really need to refactor the entire portal spawner base to make things more manageable
-    Portal SpawnPortal(Vector3 location, Quaternion rotation, Color color)
+    public Portal SpawnPortal(Vector3 location, Quaternion rotation, Color color)
     {
         GameObject obj = Instantiate(_portalPrefab, location, rotation);
         Portal portal = obj.GetComponent<Portal>();
@@ -65,12 +36,19 @@ public class AutoPortalGovenor : PortalSpawnerBase {
         return portal;
     }
 
-    void PlacePortal(bool bIsLeftPortal, Vector3 startPosition, Vector3 startDirection)
+    public void PlacePortal(bool bIsLeftPortal, Vector3 startPosition, Vector3 startDirection)
     {
         Color color = bIsLeftPortal ? LeftPortalColor : RightPortalColor;
         Ray ray = new Ray(startPosition, startDirection);
         RaycastHit hit;
         bool hitWall;
+
+        /*
+        if (_shootThroughPortals)
+        {
+            hitWall = PortalPhysics.Raycast(ray, out hit, Mathf.Infinity, _canHit, QueryTriggerInteraction.Collide);
+        }
+        else*/
         {
             int mask = _canHit | PortalPhysics.PortalLayerMask;
             hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
@@ -87,9 +65,19 @@ public class AutoPortalGovenor : PortalSpawnerBase {
             else
             {
                 bool spawnedPortal = TrySpawnPortal(bIsLeftPortal, hit, startDirection);
+                /*
+                if (!spawnedPortal)
+                {
+                    SpawnSplashParticles(hit.point, hit.normal, color);
+                }*/
             }
         }
 
+        // Spawn a bullet that will auto-destroy itself after it travels a certain distance
+        /*
+        if (_bulletPrefab)
+            SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
+        */
     }
 
     Quaternion CalculateRotation(Vector3 forward, Vector3 normal)
@@ -107,7 +95,7 @@ public class AutoPortalGovenor : PortalSpawnerBase {
     }
 
     public float PortalScale = 0.1f;
-    private bool TrySpawnPortal(bool bIsLeft, RaycastHit hit, Vector3 forwardDir)
+    public bool TrySpawnPortal(bool bIsLeft, RaycastHit hit, Vector3 forwardDir)
     {
         Portal portal = bIsLeft ? _leftPortal : _rightPortal;
 
@@ -158,7 +146,8 @@ public class AutoPortalGovenor : PortalSpawnerBase {
             {
                 lazyPortal.portalScale = Mathf.Clamp01(curve.Evaluate(elapsed / duration));
                 lazyPortal.portalBase.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
-            } else
+            }
+            else
             {
                 t.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
                 yield return null;
@@ -342,28 +331,4 @@ public class AutoPortalGovenor : PortalSpawnerBase {
         }
         return numHits;
     }
-
-    */
-    float cycleStartTime = 0;
-
-    public void TriggerActive(bool bIsActive)
-    {
-        if (bIsActive)
-        {
-            cycleStartTime = Time.time;
-            PlacePortal(false, BaseAutoportal.AutoPortalSpawnPoint.transform.position, BaseAutoportal.AutoPortalSpawnPoint.transform.forward);
-            PlacePortal(true, CyclingPortals[0].AutoPortalSpawnPoint.transform.position, CyclingPortals[0].AutoPortalSpawnPoint.transform.forward);
-        }
-    }
-
-
-    // Update is called once per frame
-    void Update () {
-		if (Time.time > cycleStartTime + cycleTime)
-        {
-            cycleStartTime = Time.time;
-            currentPortalIndex = (int)Mathf.Repeat(cycleTime++, CyclingPortals.Count);
-            PlacePortal(true, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.position, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.forward);
-        }
-	}
 }
