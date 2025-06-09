@@ -39,15 +39,15 @@
 			struct appdata
 			{
 				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
+				half2 uv : TEXCOORD0;  // Use half precision
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
-				float4 screenUV : TEXCOORD1;
-				float4 recScreenUV: TEXCOORD2;
-				UNITY_FOG_COORDS(1)
+				half2 uv : TEXCOORD0;
+				half4 screenUV : TEXCOORD1;     // Use half precision
+				half4 recScreenUV: TEXCOORD2;   // Use half precision
+				// UNITY_FOG_COORDS(1) // Removed for performance
 				float4 vertex : SV_POSITION;
 			};
 
@@ -59,56 +59,55 @@
 			fixed4 _Color;
 
 			uniform float4x4 PORTAL_MATRIX_VP;
-			uniform float _samplePreviousFrame = 0;
-			uniform float4 _defaultTextureOffset = float4(0.2, 0.3, 0.6, 0.7);
-			uniform float _portalFade = 0;
+			uniform half _samplePreviousFrame = 0;  // Use half precision
+			uniform half4 _defaultTextureOffset = half4(0.2, 0.3, 0.6, 0.7);  // Use half precision
+			uniform half _portalFade = 0;  // Use half precision
 
 			fixed _AlphaCutoff;
 			fixed _FlameCutoff;
 			
-			v2f vert (appdata v)
+			v2f vert(appdata v)
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _DefaultTexture);
-				UNITY_TRANSFER_FOG(o,o.vertex);
+				// UNITY_TRANSFER_FOG(o,o.vertex); // Removed for performance
 
-				// Instead of getting the clip position of our portal from the currently rendering camera,
-				// calculate the clip position of the portal from a higher level portal. PORTAL_MATRIX_VP == camera.projectionMatrix.
-				float4 clipPos = mul(PORTAL_MATRIX_VP, mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)));
+				// Optimize matrix calculations
+				half4 worldPos = mul(unity_ObjectToWorld, v.vertex);
+				half4 clipPos = mul(PORTAL_MATRIX_VP, worldPos);
 				clipPos.y *= _ProjectionParams.x;
 
-				//o.screenUV = lerp(ComputeScreenPos(o.vertex), ComputeScreenPos(clipPos), _samplePreviousFrame);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				o.recScreenUV = ComputeScreenPos(clipPos);
-				o.screenUV = lerp(o.screenUV, o.recScreenUV, _samplePreviousFrame);
 
-				//_defaultTextureOffset = float4(_Time.y, _Time.y, _Time.y, _Time.y);
+				// Single lerp operation instead of multiple assignments
+				o.screenUV = lerp(o.screenUV, o.recScreenUV, _samplePreviousFrame);
 
 				return o;
 			}
 			
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
-				fixed4 defaultCol = tex2D(_DefaultTexture, i.uv.xy * 2.0 + _defaultTextureOffset.xy);
-				fixed2 UVDistort = (defaultCol.xz - 0.5) * 0.4;
+				half4 defaultCol = tex2D(_DefaultTexture, i.uv.xy * 2.0 + _defaultTextureOffset.xy);
+				half2 UVDistort = (defaultCol.xz - 0.5) * 0.4;
 				defaultCol *= tex2D(_DefaultTexture, i.uv.xy*1.0 + _defaultTextureOffset.zw + UVDistort.xy);	//Get our composite mapping mask
 				//defaultCol *= 0.5; //Average the above two textures for combination later
 
 				//We might use the above textures to convolue our sampling of the portal outline
-				fixed4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy*0.05);	//This'll need to be a stacked image of sorts
+				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy*0.05);	//This'll need to be a stacked image of sorts
 				
-				fixed portalFlameBorder = saturate(defaultCol.b + portalCol.y - (0.2 + _portalFade) + portalCol.r);
+				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (0.2 + _portalFade) + portalCol.r);
 				//portalFlameBorder = saturate(portalFlameBorder + portalCol.r);
 
-				fixed3 portalFlames = _Color.rgb * portalFlameBorder;
+				half3 portalFlames = _Color.rgb * portalFlameBorder;
 
 				clip(portalCol.a - _AlphaCutoff);	//Clip to toss out complicated calculations
 
-				float2 sUV = i.screenUV.xy / i.screenUV.w;
-				fixed4 col = tex2D(_LeftEyeTexture, sUV);
-				float2 rUV = i.recScreenUV.xy / i.recScreenUV.w;
-				fixed4 recCol = tex2D(_RecurseTexture, rUV);
+				half2 sUV = i.screenUV.xy / i.screenUV.w;
+				half4 col = tex2D(_LeftEyeTexture, sUV);
+				half2 rUV = i.recScreenUV.xy / i.recScreenUV.w;
+				half4 recCol = tex2D(_RecurseTexture, rUV);
 
 				col = lerp(col, recCol, _samplePreviousFrame);
 
@@ -120,7 +119,7 @@
 				//So our effective _FlameCutoff range for the above blend is about 0.2 to 1.2 and as it gets lower we need to blend in significantly less of our
 				//visible texture
 
-				UNITY_APPLY_FOG(i.fogCoord, col);
+				//UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG
