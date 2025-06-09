@@ -62,7 +62,7 @@ namespace Portals {
         public void setPortalColor(Color newColor)
         {
             PortalColor = newColor;
-            //PortalRenderer.setPortalColor(PortalColor);
+            PortalRenderer.setPortalColor(PortalColor);
         }
         /// <summary>
         /// Returns the PortalRenderer component responbile for doing the actual rendering

@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-		_MainTex("DefaultTexture", 2D) = "white" {}
+		_DefaultTexture("DefaultTexture", 2D) = "white" {}
 		_LeftEyeTexture("LeftEyeTexture", 2D) = "bump" {}
 		_TransparencyMask("TransparencyMask", 2D) = "white" {}
 		_Color("Portal Tint", Color) = (1,1,1,1)
@@ -49,10 +49,10 @@
 				float4 vertex : SV_POSITION;
 			};
 
-			sampler2D _MainTex;
+			sampler2D _DefaultTexture;
 			sampler2D _LeftEyeTexture;
 			sampler2D _TransparencyMask;
-			float4 _MainTex_ST;
+			float4 _DefaultTexture_ST;
 			fixed4 _Color;
 			float _AlphaCutoff;
 
@@ -60,6 +60,8 @@
 			uniform float4 offset_close;
 			uniform float4 offset_far;
 			uniform int portal_rec = 7;
+
+			uniform float _portalFade = 0;
 
 			uniform float portalViewAlpha = 1.0;
 
@@ -82,7 +84,7 @@
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.uv = TRANSFORM_TEX(v.uv, _DefaultTexture);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				//o.objPos = v.vertex;
@@ -112,7 +114,7 @@
 				*/
 				//float4 reconUV = reconstructFrontFaceUV(i.objPos);	//Frustratingly this has to be done here to avoid vertex warping effects
 				//fixed4 portalCol = tex2D(_TransparencyMask, i.reconUV.xy);
-				//fixed4 portalTerminusCol = tex2D(_MainTex, i.reconUV.xy) *_Color;
+				//fixed4 portalTerminusCol = tex2D(_DefaultTexture, i.reconUV.xy) *_Color;
 				//col = lerp(portalTerminusCol, col, col.a * portalViewAlpha);
 				//clip(portalCol.a - _AlphaCutoff);	//We shouldn't have to clip this because it's already shaped by the mesh
 				

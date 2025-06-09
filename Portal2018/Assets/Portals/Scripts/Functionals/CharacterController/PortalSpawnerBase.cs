@@ -122,7 +122,7 @@ public class PortalSpawnerBase : MonoBehaviour {
             // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
             Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
             //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface
-            SetScaleOverTime(portal.gameObject, portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
+            SetScaleOverTime(portal, portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
 
             return true;
         }
@@ -130,12 +130,12 @@ public class PortalSpawnerBase : MonoBehaviour {
         return false;
     }
 
-    void SetScaleOverTime(GameObject parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio)
+    void SetScaleOverTime(Portal parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio)
     {
         StartCoroutine(ScaleOverTimeRoutine(parentPortal, t, startSize, endSize, curve, duratio));
     }
 
-    IEnumerator ScaleOverTimeRoutine(GameObject parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duration)
+    IEnumerator ScaleOverTimeRoutine(Portal parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duration)
     {
         float elapsed = 0;
         LazyPortalCamera lazyPortal = parentPortal.GetComponent<LazyPortalCamera>();
@@ -149,9 +149,11 @@ public class PortalSpawnerBase : MonoBehaviour {
             }
             else
             {
-                t.localScale = Vector3.LerpUnclamped(startSize, endSize, curve.Evaluate(elapsed / duration));
+                float scaleT = curve.Evaluate(elapsed / duration);
+                t.localScale = Vector3.LerpUnclamped(startSize, endSize, scaleT);
                 yield return null;
                 elapsed += Time.deltaTime;
+                parentPortal.PortalRenderer.setPortalAlpha(scaleT);
             }
             yield return null;
             elapsed += Time.deltaTime;

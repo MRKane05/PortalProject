@@ -86,11 +86,42 @@ namespace Portals {
 
         }
 
+        public float portalAlpha = 0;
+        public float portalScale = 0;
+
+        public void setPortalAlpha(float newScale)
+        {
+            portalScale = newScale;
+            //Update our textures here, and also echo to our exit portal to set the fade amount on the occlusion texture
+            if (_portal.ExitPortal != null)
+            {
+                updatePortalAlpha(newScale * _portal.ExitPortal.PortalRenderer.portalScale);
+                _portal.ExitPortal.PortalRenderer.updatePortalAlpha(newScale * _portal.ExitPortal.PortalRenderer.portalScale);
+            } else
+            {
+                updatePortalAlpha(0f); //we've got no exit portal so we don't care
+                _portal.ExitPortal.PortalRenderer.updatePortalAlpha(0);
+            }
+        }
+
+        public void updatePortalAlpha (float newAlpha)
+        {
+            portalAlpha = newAlpha;
+            _portalMaterial.SetFloat("_portalFade", newAlpha);
+            _backfaceMaterial.SetFloat("_portalFade", newAlpha);
+        }
+
         public void setPortalColor(Color newColor)
         {
             portalColor = newColor;
-            _portalMaterial.SetColor("_Color", _portal.PortalColor);
-            _backfaceMaterial.SetColor("_Color", _portal.PortalColor);
+            if (_portalMaterial)
+            {
+                _portalMaterial.SetColor("_Color", _portal.PortalColor);
+            }
+            if (_backfaceMaterial)
+            {
+                _backfaceMaterial.SetColor("_Color", _portal.PortalColor);
+            }
         }
 
         private Vector4 WorldToViewportPoint(Matrix4x4 vp, Vector3 worldPoint) {
@@ -954,5 +985,23 @@ namespace Portals {
             return mesh;
         }
         #endregion
+
+        Vector4 _defaultTextureOffset = new Vector4(0, 0, 0, 0);
+        public Vector4 DefaultTexturePan = new Vector4(0.1f, 0.2f, -0.07f, -0.05f);
+
+        void Update()
+        {
+            //Quick handler for animating our texture movement
+            _defaultTextureOffset = new Vector4(Mathf.Repeat(_defaultTextureOffset.x + DefaultTexturePan.x * Time.deltaTime, 1f),
+                Mathf.Repeat(_defaultTextureOffset.y + DefaultTexturePan.y * Time.deltaTime, 1f),
+                Mathf.Repeat(_defaultTextureOffset.z + DefaultTexturePan.z * Time.deltaTime, 1f),
+                Mathf.Repeat(_defaultTextureOffset.w + DefaultTexturePan.w * Time.deltaTime, 1f));
+
+            if (_portalMaterial)
+            {
+                _portalMaterial.SetVector("_defaultTextureOffset", _defaultTextureOffset);
+                _backfaceMaterial.SetVector("_defaultTextureOffset", _defaultTextureOffset);
+            }
+        }
     }
 }

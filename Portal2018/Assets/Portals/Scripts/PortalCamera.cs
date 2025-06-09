@@ -204,11 +204,35 @@ namespace Portals {
             } else {
                 _camera.ResetProjectionMatrix();
             }
-
+            /*
             if (_portal.UseScissorRect && _camera.projectionMatrix.ValidTRS()) {
                 _camera.rect = viewportRect;
                 _camera.projectionMatrix = MathUtil.ScissorsMatrix(_camera.projectionMatrix, viewportRect);
             } else {
+                _camera.rect = new Rect(0, 0, 1, 1);
+            }*/
+            if (_portal.UseScissorRect && _camera.projectionMatrix.ValidTRS())
+            {
+                // Simple bounds check and clamp
+                float x = Mathf.Clamp01(viewportRect.x);
+                float y = Mathf.Clamp01(viewportRect.y);
+                float width = Mathf.Clamp01(viewportRect.width);
+                float height = Mathf.Clamp01(viewportRect.height);
+
+                // Ensure minimum size and doesn't exceed bounds
+                width = Mathf.Max(width, 0.01f);
+                height = Mathf.Max(height, 0.01f);
+
+                if (x + width > 1.0f) width = 1.0f - x;
+                if (y + height > 1.0f) height = 1.0f - y;
+
+                Rect safeRect = new Rect(x, y, width, height);
+
+                _camera.rect = safeRect;
+                _camera.projectionMatrix = MathUtil.ScissorsMatrix(_camera.projectionMatrix, safeRect);
+            }
+            else
+            {
                 _camera.rect = new Rect(0, 0, 1, 1);
             }
 
