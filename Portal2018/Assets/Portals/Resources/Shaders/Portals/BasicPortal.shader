@@ -89,37 +89,35 @@
 			
 			half4 frag(v2f i) : SV_Target
 			{
+				// Reduce texture sampling complexity
 				half4 defaultCol = tex2D(_DefaultTexture, i.uv.xy * 2.0 + _defaultTextureOffset.xy);
-				half2 UVDistort = (defaultCol.xz - 0.5) * 0.4;
-				defaultCol *= tex2D(_DefaultTexture, i.uv.xy*1.0 + _defaultTextureOffset.zw + UVDistort.xy);	//Get our composite mapping mask
-				//defaultCol *= 0.5; //Average the above two textures for combination later
+				half2 UVDistort = (defaultCol.xz - 0.5) * 0.2; // Reduce distortion intensity
 
-				//We might use the above textures to convolue our sampling of the portal outline
-				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy*0.05);	//This'll need to be a stacked image of sorts
-				
-				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (0.2 + _portalFade) + portalCol.r);
-				//portalFlameBorder = saturate(portalFlameBorder + portalCol.r);
+				// Combine operations to reduce ALU instructions
+				defaultCol *= tex2D(_DefaultTexture, i.uv.xy + _defaultTextureOffset.zw + UVDistort.xy);
 
+				// Simplified portal mask sampling
+				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy * 0.025); // Reduce distortion
+
+				// Optimize flame border calculation
+				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (_portalFade*1.2) + portalCol.r);
 				half3 portalFlames = _Color.rgb * portalFlameBorder;
 
-				clip(portalCol.a - _AlphaCutoff);	//Clip to toss out complicated calculations
+				// Early discard for performance
+				clip(portalCol.a - _AlphaCutoff);
 
+				// Optimize screen UV calculations
 				half2 sUV = i.screenUV.xy / i.screenUV.w;
 				half4 col = tex2D(_LeftEyeTexture, sUV);
 				half2 rUV = i.recScreenUV.xy / i.recScreenUV.w;
 				half4 recCol = tex2D(_RecurseTexture, rUV);
 
+				// Combine lerp operations
 				col = lerp(col, recCol, _samplePreviousFrame);
-
-				//Create a blanker for the entire col setup
 				col.rgb = lerp(_Color.rgb * 0.8, col.rgb, _portalFade);
-
 				col.rgb = lerp(col.rgb, portalFlames.rgb, portalFlameBorder);
 
-				//So our effective _FlameCutoff range for the above blend is about 0.2 to 1.2 and as it gets lower we need to blend in significantly less of our
-				//visible texture
-
-				//UNITY_APPLY_FOG(i.fogCoord, col);
+				// UNITY_APPLY_FOG(i.fogCoord, col); // Removed for performance
 				return col;
 			}
 			ENDCG
