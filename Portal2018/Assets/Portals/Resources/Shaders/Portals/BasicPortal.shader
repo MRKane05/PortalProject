@@ -114,7 +114,7 @@
 
 				// Combine lerp operations
 				col = lerp(col, recCol, _samplePreviousFrame);
-				col.rgb = lerp(_Color.rgb * 0.8, col.rgb, _portalFade);
+				col.rgb = lerp(_Color.rgb * 0.8, col.rgb, saturate(_portalFade*1.1));
 				col.rgb = lerp(col.rgb, portalFlames.rgb, portalFlameBorder);
 
 				// UNITY_APPLY_FOG(i.fogCoord, col); // Removed for performance
