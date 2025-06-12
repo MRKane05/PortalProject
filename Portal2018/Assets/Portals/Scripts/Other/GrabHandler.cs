@@ -324,46 +324,27 @@ namespace Portals {
                         cloneholdPosition = newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point));
 
                         //Ok, see which one we're closest to
+                        //Could also look from the cube to the point to see if we're transitioning
                         if (Vector3.SqrMagnitude(heldObject.transform.position - cloneholdPosition) < Vector3.SqrMagnitude(heldObject.transform.position - _staticAnchor.transform.position))
                         {
                             DoObjectLocation(cloneholdPosition);
                             Debug.Log("Clone Hold Position");
-                        } else
+                        }
+                        else
                         {
                             DoObjectLocation(_staticAnchor.transform.position);
                             Debug.Log("Anchor Hold Position");
                         }
-
-                        //So in theory we still need to figure out which side of this portal our cube is on (including situations where the portal is behind us)
-
-                        /*
-                        //Debug.Log("Before: " + beforeT + " After: " + afterT);
-                        if (!bObjectThroughPortal && false)   //We're not fully transitioned into our portal so lets keep moving along our line
-                        {
-                            Debug.Log("Moving Through Portal");
-                            DoObjectLocation(_staticAnchor.transform.position);
-                        }
-                        else
-                        {
-                            //Calculate where we'd be keeping this item on the opposite side of the portal
-                            Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
-                            Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
-                            // Offset by Epsilon so we can't hit the exit portal on our way out
-                            Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * Epsilon;
-
-                            Debug.Log("Tracking Point beyond Portal");
-                            DoObjectLocation(newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point)));
-                        }*/
-
-                        /*
-                        cloneholdPosition = hitPortal.TeleportPoint(_staticAnchor.transform.position);
-                        _staticAnchorClone.transform.position = cloneholdPosition;
-                        bCanHoldInPortal = true;
-                        */
                     }
                     else
                     {
-
+                        //This is where we'd check for the alignment of our cube (as in how close to our initial ray it is) and also if it's obstructed to see if it should be dropped
+                        Vector3 heldObjectDir = heldObject.transform.position - Camera.main.transform.position;
+                        if (Vector3.Dot(heldObjectDir.normalized, newRay.direction.normalized) < 0.9f) {
+                            //This isn't technically forward of us and we should lose our "grip"
+                            Debug.LogError("Object released as not in front enough");
+                            ReleaseObject();
+                        }
                         //cloneholdPosition = hit.point;  //We just want to have our loation be...the wall.
                         Debug.Log("No Portal Hit Location");
                         DoObjectLocation(_staticAnchor.transform.position);
