@@ -69,7 +69,7 @@ namespace Portals {
         private float _pickupRange = 2.0f;
         [SerializeField]
         private LayerMask _carryLayer;
-        public LayerMask portalGrabLayer;
+        public LayerMask portalGrabLayer;   //For grabbing through a portal
 
         private Camera _camera;
         private ConfigurableJoint _joint;
@@ -78,7 +78,7 @@ namespace Portals {
         #endregion
 
         float holdDistance = 2f;
-        public LayerMask traceLayer;
+        public LayerMask traceLayer;    //For looking for world collisions and portals (doesn't have interactables)
         RigidbodyConstraints grabbedObjectInitialConstraints;
         float maxSqrCarryDistance = 1.5f;  //We'll drop what we're carrying if the distance from the intended point is more than this
         #region Public Members
@@ -275,17 +275,6 @@ namespace Portals {
             //and that way we can set which target the carried object should be moving towards
             if (heldObject)
             {
-                
-                /*
-                //PROBLEM: Need to address our release code
-                bool bObjectObstructed = bCarriedObjectObstructed();
-
-                if (bObjectObstructed)
-                {
-                    ReleaseObject();
-                    return;
-                }*/
-
                 //See if we can get a point reflected in a portal
                 RaycastHit hit;
                 Ray newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
@@ -300,23 +289,6 @@ namespace Portals {
                     Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();  //This doesn't mean that our object is through the portal...
                     if (hitPortal)
                     {
-                        /*
-                        Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
-                        Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
-                        // Offset by Epsilon so we can't hit the exit portal on our way out
-                        Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * Epsilon;
-                        
-                        afterPortal = new LineSegment(newOrigin, newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point)));
-
-                        float beforeT = -1f;
-                        Vector3 beforeClosest = Vector3.zero;
-                        beforePortal.GetClosestPoint(heldObject.transform.position, out beforeT, out beforeClosest);
-
-                        float afterT = -1f;
-                        Vector3 afterClosest = Vector3.zero;
-                        afterPortal.GetClosestPoint(heldObject.transform.position, out afterT, out afterClosest);
-                        */
-
                         Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
                         Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
                         // Offset by Epsilon so we can't hit the exit portal on our way out
@@ -328,25 +300,36 @@ namespace Portals {
                         if (Vector3.SqrMagnitude(heldObject.transform.position - cloneholdPosition) < Vector3.SqrMagnitude(heldObject.transform.position - _staticAnchor.transform.position))
                         {
                             DoObjectLocation(cloneholdPosition);
-                            Debug.Log("Clone Hold Position");
+                            //Debug.Log("Clone Hold Position");
                         }
                         else
                         {
                             DoObjectLocation(_staticAnchor.transform.position);
-                            Debug.Log("Anchor Hold Position");
+                            //Debug.Log("Anchor Hold Position");
                         }
                     }
                     else
                     {
                         //This is where we'd check for the alignment of our cube (as in how close to our initial ray it is) and also if it's obstructed to see if it should be dropped
                         Vector3 heldObjectDir = heldObject.transform.position - Camera.main.transform.position;
-                        if (Vector3.Dot(heldObjectDir.normalized, newRay.direction.normalized) < 0.9f) {
+                        if (Vector3.Dot(heldObjectDir.normalized, newRay.direction.normalized) < 0.9f) {    //This'll also pickup if we're scrubbing off our cube on the edges here
                             //This isn't technically forward of us and we should lose our "grip"
-                            Debug.LogError("Object released as not in front enough");
+                            //Debug.LogError("Object released as not in front enough");
                             ReleaseObject();
+                            return;
                         }
+
+                        //Check to see if we're holding something behind something else
+                        newRay = new Ray(Camera.main.transform.position, (heldObjectDir).normalized);
+                        if (Physics.Raycast(newRay, out hit, Vector3.Distance(Camera.main.transform.position, heldObject.transform.position), traceLayer))
+                        {
+                            //We've potentially hit something between our carried object and ourselves, and it's not a portal (should have been caught in the above loop)
+                            ReleaseObject();
+                            return;
+                        }
+
                         //cloneholdPosition = hit.point;  //We just want to have our loation be...the wall.
-                        Debug.Log("No Portal Hit Location");
+                        //Debug.Log("No Portal Hit Location");
                         DoObjectLocation(_staticAnchor.transform.position);
                     }
 
@@ -356,7 +339,7 @@ namespace Portals {
                     //If this happens after the above there's a possibility we should drop our item...
                     //cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
                     // _staticAnchorClone.transform.position = _staticAnchor.transform.position;
-                    Debug.Log("No Object Hit Location");
+                    //Debug.Log("No Object Hit Location");
                     DoObjectLocation(_staticAnchor.transform.position);
 
                 }
