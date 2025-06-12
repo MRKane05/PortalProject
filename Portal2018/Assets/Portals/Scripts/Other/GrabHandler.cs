@@ -3,6 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Portals {
+
+    public class LineSegment
+    {
+        Vector3 LineStart;
+        Vector3 LineEnd;
+
+        public LineSegment(Vector3 newStart, Vector3 newEnd)
+        {
+            LineStart = newStart;
+            LineEnd = newEnd;
+        }
+
+        /// <summary>
+        /// Finds the closest point on the line segment to a given point
+        /// </summary>
+        /// <param name="point">The point to find the closest position to</param>
+        /// <param name="t">Output: The parametric distance along the line (0-1, clamped to segment)</param>
+        /// <param name="closestPoint">Output: The actual closest point on the line segment</param>
+        /// <returns>The distance from the input point to the closest point on the line</returns>
+        public float GetClosestPoint(Vector3 point, out float t, out Vector3 closestPoint)
+        {
+            Vector3 lineVector = LineEnd - LineStart;
+            Vector3 pointVector = point - LineStart;
+
+            float lineLength = lineVector.magnitude;
+
+            // Handle degenerate case where start and end are the same
+            if (lineLength < Mathf.Epsilon)
+            {
+                t = 0f;
+                closestPoint = LineStart;
+                return Vector3.Distance(point, LineStart);
+            }
+
+            // Project point onto the line
+            float projectionLength = Vector3.Dot(pointVector, lineVector.normalized);
+
+            // Calculate t (parametric distance along line)
+            t = projectionLength / lineLength;
+
+            // Clamp t to the line segment (0-1)
+            t = Mathf.Clamp01(t);
+
+            // Calculate the actual closest point
+            closestPoint = LineStart + lineVector * t;
+
+            // Return distance from input point to closest point
+            return Vector3.Distance(point, closestPoint);
+        }
+
+    }
+
     public class GrabHandler : MonoBehaviour {
         #region Private Members
         // Anchor point that IS NOT affected by portals
@@ -43,6 +95,7 @@ namespace Portals {
         public event GrabEvent onObjectReleased;
 
         public GameObject heldObject;
+        public GameObject playerObject;
         #endregion
 
         void Awake()
@@ -50,6 +103,7 @@ namespace Portals {
             _camera = Camera.main;
             heldObject = null;
             holdDistance = Vector3.Distance(Camera.main.transform.position, _staticAnchor.transform.position);
+            playerObject.GetComponent<Teleportable>().OnTeleport += PlayerTeleported;
         }
 
         void OnEnable() {
@@ -129,9 +183,55 @@ namespace Portals {
             //_joint.connectedBody = rigidbody;
             heldObject = obj;
 
+            heldObject.GetComponent<Teleportable>().OnTeleport += ObjectTeleported;
+
             if (onObjectGrabbed != null) {
                 onObjectGrabbed(this, obj);
             }
+        }
+
+        public bool bObjectThroughPortal = false;
+
+        bool bObjectOccludedByPortal()
+        {
+            //Do a basic raycast from where the player is to the view location
+
+            RaycastHit hit;
+            Ray newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
+
+            bool bCanHoldInPortal = false;
+            if (Physics.Raycast(newRay, out hit, holdDistance, traceLayer))  //Detect if we're looking into a portal
+            {
+                //we've got a hit so project the position of this object through the portal
+                Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();
+                if (hitPortal)
+                {
+                    bObjectThroughPortal = true;
+                }
+                else
+                {
+
+                    //cloneholdPosition = hit.point;  //We just want to have our loation be...the wall.
+                    bObjectThroughPortal = false;
+                }
+
+            }
+            return false;
+        }
+
+
+        void ObjectTeleported(Teleportable sender, Portal portal)
+        {
+            bObjectThroughPortal = bObjectOccludedByPortal();
+            Debug.Log("Object Through Portal: " + bObjectThroughPortal);
+        }
+
+        public Portal playerTransitionPortal = null;
+        void PlayerTeleported(Teleportable sender, Portal portal)
+        {
+            //playerTransitionPortal = portal;    //Which is fine unless we go through it backwards...
+            bObjectThroughPortal = bObjectOccludedByPortal();
+            Debug.Log("Object Through Portal: " + bObjectThroughPortal);
         }
 
         void ReleaseObject() {
@@ -165,69 +265,138 @@ namespace Portals {
 
         Vector3 cloneholdPosition = Vector3.zero;
         int iPortalCarry = 0; //0: Ordinary carry, 1: carry in portal, 2: transitioned from carrying in portal this tick
+
+        public Portal currentInterfacePortal = null;
+
+        private const float Epsilon = 0.001f;
         public void CarryObject()
         {
+            //New idea: Need to re-evaluate the position of the object (in front of/behiond portal) every time the player or object crosses a portal
+            //and that way we can set which target the carried object should be moving towards
             if (heldObject)
             {
-
+                
+                /*
+                //PROBLEM: Need to address our release code
                 bool bObjectObstructed = bCarriedObjectObstructed();
 
                 if (bObjectObstructed)
                 {
                     ReleaseObject();
                     return;
-                }
+                }*/
+
                 //See if we can get a point reflected in a portal
                 RaycastHit hit;
                 Ray newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
+                LineSegment beforePortal = new LineSegment(Camera.main.transform.position, _staticAnchor.transform.position);
+                LineSegment afterPortal;
 
                 bool bCanHoldInPortal = false;
-                if (Physics.Raycast(newRay, out hit, holdDistance * 1.5f, traceLayer))  //Detect if we're looking into a portal
+                if (Physics.Raycast(newRay, out hit, holdDistance*1.25f, traceLayer))  //Detect if we're looking into a portal, and extend our clip so that we can be sure of detecting a transition
                 {
+                    //beforePortal = new LineSegment(Camera.main.transform.position, hit.point + newRay.direction * 0.25f);
                     //we've got a hit so project the position of this object through the portal
-                    Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();
+                    Portal hitPortal = hit.collider.gameObject.GetComponent<Portal>();  //This doesn't mean that our object is through the portal...
                     if (hitPortal)
                     {
-                        cloneholdPosition = hitPortal.TeleportPoint(_staticAnchor.transform.position);
-                        _staticAnchorClone.transform.position = cloneholdPosition;
-                        bCanHoldInPortal = true;
-                    } else
-                    {
-                        cloneholdPosition = Vector3.one * 10000f;
-                    }
-                } else
-                {
-                    //If this happens after the above there's a possibility we should drop our item...
-                    //cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
-                    _staticAnchorClone.transform.position = _staticAnchor.transform.position;
+                        /*
+                        Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
+                        Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
+                        // Offset by Epsilon so we can't hit the exit portal on our way out
+                        Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * Epsilon;
+                        
+                        afterPortal = new LineSegment(newOrigin, newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point)));
 
-                }
+                        float beforeT = -1f;
+                        Vector3 beforeClosest = Vector3.zero;
+                        beforePortal.GetClosestPoint(heldObject.transform.position, out beforeT, out beforeClosest);
 
-                
-                if (Vector3.Distance(heldObject.transform.position, _staticAnchor.transform.position) < 0.1f || Vector3.Distance(heldObject.transform.position, cloneholdPosition) < 0.1f)
-                {
-                    //We've no need to move this
-                } else
-                {
-                    //See if we should move to our clone position as it's closest for the hold
-                    Vector3 forceDirection = Vector3.zero;
-                    if (Vector3.SqrMagnitude(_staticAnchor.transform.position - heldObject.transform.position) < Vector3.SqrMagnitude(cloneholdPosition - heldObject.transform.position)) {
-                        forceDirection = _staticAnchor.transform.position - heldObject.transform.position;
-                        heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
-                    } else
-                    {
-                        if (bCanHoldInPortal)
+                        float afterT = -1f;
+                        Vector3 afterClosest = Vector3.zero;
+                        afterPortal.GetClosestPoint(heldObject.transform.position, out afterT, out afterClosest);
+                        */
+
+                        Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
+                        Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
+                        // Offset by Epsilon so we can't hit the exit portal on our way out
+                        Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * Epsilon;
+                        cloneholdPosition = newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point));
+
+                        //Ok, see which one we're closest to
+                        if (Vector3.SqrMagnitude(heldObject.transform.position - cloneholdPosition) < Vector3.SqrMagnitude(heldObject.transform.position - _staticAnchor.transform.position))
                         {
-                            forceDirection = cloneholdPosition - heldObject.transform.position;
-                            heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
+                            DoObjectLocation(cloneholdPosition);
+                            Debug.Log("Clone Hold Position");
+                        } else
+                        {
+                            DoObjectLocation(_staticAnchor.transform.position);
+                            Debug.Log("Anchor Hold Position");
+                        }
+
+                        //So in theory we still need to figure out which side of this portal our cube is on (including situations where the portal is behind us)
+
+                        /*
+                        //Debug.Log("Before: " + beforeT + " After: " + afterT);
+                        if (!bObjectThroughPortal && false)   //We're not fully transitioned into our portal so lets keep moving along our line
+                        {
+                            Debug.Log("Moving Through Portal");
+                            DoObjectLocation(_staticAnchor.transform.position);
                         }
                         else
                         {
-                            ReleaseObject();
-                        }
-                    }                    
+                            //Calculate where we'd be keeping this item on the opposite side of the portal
+                            Matrix4x4 portalMatrix = hitPortal.PortalMatrix;
+                            Vector3 newDirection = portalMatrix.MultiplyVector(newRay.direction);
+                            // Offset by Epsilon so we can't hit the exit portal on our way out
+                            Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * Epsilon;
+
+                            Debug.Log("Tracking Point beyond Portal");
+                            DoObjectLocation(newOrigin + newDirection * (holdDistance - Vector3.Distance(Camera.main.transform.position, hit.point)));
+                        }*/
+
+                        /*
+                        cloneholdPosition = hitPortal.TeleportPoint(_staticAnchor.transform.position);
+                        _staticAnchorClone.transform.position = cloneholdPosition;
+                        bCanHoldInPortal = true;
+                        */
+                    }
+                    else
+                    {
+
+                        //cloneholdPosition = hit.point;  //We just want to have our loation be...the wall.
+                        Debug.Log("No Portal Hit Location");
+                        DoObjectLocation(_staticAnchor.transform.position);
+                    }
+
                 }
+                else
+                {
+                    //If this happens after the above there's a possibility we should drop our item...
+                    //cloneholdPosition = Vector3.one * 10000f;   // gameObject.transform.position;  //We need some way to nullify this...
+                    // _staticAnchorClone.transform.position = _staticAnchor.transform.position;
+                    Debug.Log("No Object Hit Location");
+                    DoObjectLocation(_staticAnchor.transform.position);
+
+                }
+
             }
+        }
+
+        public void DoObjectLocation(Vector3 toThisPoint) { 
+                
+            if (Vector3.Distance(heldObject.transform.position, toThisPoint) < 0.1f)
+            {
+                //We've no need to move this
+            } else
+            {
+                //See if we should move to our clone position as it's closest for the hold
+                Vector3 forceDirection = Vector3.zero;
+                forceDirection = toThisPoint - heldObject.transform.position;
+                heldObject.GetComponent<Rigidbody>().AddForce(forceDirection * carryForce);
+                      
+            }
+            
         }
 
         private const float PortalThroughOffset = 0.01f;
@@ -345,7 +514,11 @@ namespace Portals {
             _pickupRange *= portal.PortalScaleAverage;
         }
 
+        
         void Update() {
+            if (heldObject)
+                currentInterfacePortal = heldObject.GetComponent<Teleportable>().VisibleToPlayerThroughPortal();
+
             if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Circle")) {
                 if (CarryingObject()) {
                     Release();

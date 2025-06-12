@@ -147,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
   m_LocalRotation: {x: -0, y: -0.09075737, z: -0, w: -0.99587303}
-  m_LocalPosition: {x: 19.76, y: 11.95, z: 4.108}
+  m_LocalPosition: {x: 9.98, y: 4.21, z: 15.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
@@ -283,16 +283,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025cf319ae736e8468120713c2e5aef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 20543485654963758}
-  _bulletPrefab: {fileID: 0}
-  _bulletSpawnOffset: 3
-  _bulletSpeed: 50
-  _splashParticles: {fileID: 0}
   _portalPrefab: {fileID: 1121410240758288, guid: ea96bf8a46f3e6543a431ead4b901172,
     type: 2}
   _canHit:
     serializedVersion: 2
     m_Bits: 791
+  _normalOffset: 0.01
+  _portalSpawnTime: 0.25
   _portalSpawnCurve:
     serializedVersion: 2
     m_Curve:
@@ -326,13 +323,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _portalSpawnTime: 0.25
-  _normalOffset: 0.01
-  _shootThroughPortals: 0
   _meshColliderIterationCount: 10
-  _portalWaveAmplitude: 0.2
-  _portalWaveDuration: 0.5
   PortalScale: 1
+  _camera: {fileID: 20543485654963758}
+  _bulletPrefab: {fileID: 0}
+  _bulletSpawnOffset: 3
+  _bulletSpeed: 50
+  _splashParticles: {fileID: 0}
 --- !u!114 &114579552365318066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,8 +429,9 @@ MonoBehaviour:
     m_Bits: 8705
   traceLayer:
     serializedVersion: 2
-    m_Bits: 8705
+    m_Bits: 513
   heldObject: {fileID: 0}
+  playerObject: {fileID: 1614185999318264}
   carryForce: 300
 --- !u!114 &114950017476972466
 MonoBehaviour:

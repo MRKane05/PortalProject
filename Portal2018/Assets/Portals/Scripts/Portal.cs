@@ -100,6 +100,11 @@ namespace Portals {
             }
         }
 
+        public Vector2 GetPortalSize()
+        {
+            return new Vector2(transform.localScale.x, transform.localScale.y);
+        }
+
         /// <summary>
         /// Get or set the default texture. Setting the default texture will invoke OnDefaultTextureChanged.
         /// </summary>

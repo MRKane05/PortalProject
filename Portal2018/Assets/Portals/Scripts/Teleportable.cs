@@ -714,7 +714,7 @@ namespace Portals {
             return lookingPortal.transform.position + offsetPosition;
         }
 
-        public Portal VisibleToPlayerThroughPortal()
+        public Portal VisibleToPlayerThroughPortal()    //This doesn't work
         {
             LayerMask portalLayer = LayerMask.NameToLayer("Portal");
             foreach (Portal portal in _contextByPortal.Keys.ToList())
