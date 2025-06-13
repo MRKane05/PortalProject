@@ -68,7 +68,7 @@ namespace Portals {
         [SerializeField]
         private float _pickupRange = 2.0f;
         [SerializeField]
-        private LayerMask _carryLayer;
+        private LayerMask _carryLayer;  //Things we can grab/interact with or be blocked by
         public LayerMask portalGrabLayer;   //For grabbing through a portal
 
         private Camera _camera;
@@ -379,19 +379,23 @@ namespace Portals {
                             string msg = string.Format("{0} is on Portal layer, but is not a portal", hit.collider.gameObject);
                             throw new System.Exception(msg);
                         }
-
-                        Matrix4x4 portalMatrix = portal.PortalMatrix;
-                        Vector3 newDirection = portalMatrix.MultiplyVector(_camera.transform.forward);
-                        // Offset by Epsilon so we can't hit the exit portal on our way out
-                        Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * PortalThroughOffset;
-                        float newDistance = _pickupRange - hit.distance - PortalThroughOffset;
-
-
-                        if (Physics.Raycast(newOrigin, newDirection, out portalHit, newDistance, portalGrabLayer, QueryTriggerInteraction.UseGlobal))
+                        else
                         {
-                            if (portalHit.collider.gameObject)
+
+                            //Project the grab through the portal that we've hit
+                            Matrix4x4 portalMatrix = portal.PortalMatrix;
+                            Vector3 newDirection = portalMatrix.MultiplyVector(_camera.transform.forward);
+                            // Offset by Epsilon so we can't hit the exit portal on our way out
+                            Vector3 newOrigin = portalMatrix.MultiplyPoint3x4(hit.point) + newDirection * PortalThroughOffset;
+                            float newDistance = _pickupRange - hit.distance - PortalThroughOffset;
+
+
+                            if (Physics.Raycast(newOrigin, newDirection, out portalHit, newDistance, portalGrabLayer, QueryTriggerInteraction.UseGlobal))
                             {
-                                GrabObject(portalHit.collider.gameObject);
+                                if (portalHit.collider.gameObject)
+                                {
+                                    GrabObject(portalHit.collider.gameObject);
+                                }
                             }
                         }
                     }
