@@ -223,7 +223,7 @@ namespace Portals {
         void ObjectTeleported(Teleportable sender, Portal portal)
         {
             bObjectThroughPortal = bObjectOccludedByPortal();
-            Debug.Log("Object Through Portal: " + bObjectThroughPortal);
+            //Debug.Log("Object Through Portal: " + bObjectThroughPortal);
         }
 
         public Portal playerTransitionPortal = null;
@@ -231,7 +231,7 @@ namespace Portals {
         {
             //playerTransitionPortal = portal;    //Which is fine unless we go through it backwards...
             bObjectThroughPortal = bObjectOccludedByPortal();
-            Debug.Log("Object Through Portal: " + bObjectThroughPortal);
+            //Debug.Log("Object Through Portal: " + bObjectThroughPortal);
         }
 
         void ReleaseObject() {
@@ -269,6 +269,9 @@ namespace Portals {
         public Portal currentInterfacePortal = null;
 
         private const float Epsilon = 0.001f;
+
+        public bool InsidePortal = false;
+
         public void CarryObject()
         {
             //New idea: Need to re-evaluate the position of the object (in front of/behiond portal) every time the player or object crosses a portal
@@ -300,11 +303,13 @@ namespace Portals {
                         if (Vector3.SqrMagnitude(heldObject.transform.position - cloneholdPosition) < Vector3.SqrMagnitude(heldObject.transform.position - _staticAnchor.transform.position))
                         {
                             DoObjectLocation(cloneholdPosition);
+                            InsidePortal = true;
                             //Debug.Log("Clone Hold Position");
                         }
                         else
                         {
                             DoObjectLocation(_staticAnchor.transform.position);
+                            InsidePortal = false;
                             //Debug.Log("Anchor Hold Position");
                         }
                     }
@@ -312,12 +317,14 @@ namespace Portals {
                     {
                         //This is where we'd check for the alignment of our cube (as in how close to our initial ray it is) and also if it's obstructed to see if it should be dropped
                         Vector3 heldObjectDir = heldObject.transform.position - Camera.main.transform.position;
+                        /*
+                        //This is causing bugs
                         if (Vector3.Dot(heldObjectDir.normalized, newRay.direction.normalized) < 0.9f) {    //This'll also pickup if we're scrubbing off our cube on the edges here
                             //This isn't technically forward of us and we should lose our "grip"
                             //Debug.LogError("Object released as not in front enough");
                             ReleaseObject();
                             return;
-                        }
+                        }*/
 
                         //Check to see if we're holding something behind something else
                         newRay = new Ray(Camera.main.transform.position, (heldObjectDir).normalized);
@@ -326,6 +333,21 @@ namespace Portals {
                             //We've potentially hit something between our carried object and ourselves, and it's not a portal (should have been caught in the above loop)
                             ReleaseObject();
                             return;
+                        }
+
+                        if (InsidePortal)
+                        {
+                            newRay = new Ray(Camera.main.transform.position, (_staticAnchor.transform.position - Camera.main.transform.position).normalized);
+                            //Need to check if we can hit or original cube
+                            if (Physics.Raycast(newRay, out hit, holdDistance * 1.25f, _carryLayer))  //Detect if we're looking into a portal, and extend our clip so that we can be sure of detecting a transition
+                            {
+                                if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Interactable")) //We are holding our cube
+                                {
+                                    ReleaseObject(); //Our object has been lost behind a portal
+                                    return;
+                                }
+                            }
+                            
                         }
 
                         //cloneholdPosition = hit.point;  //We just want to have our loation be...the wall.
@@ -395,6 +417,7 @@ namespace Portals {
                                 if (portalHit.collider.gameObject)
                                 {
                                     GrabObject(portalHit.collider.gameObject);
+                                    InsidePortal = true;
                                 }
                             }
                         }
@@ -402,6 +425,7 @@ namespace Portals {
                     else //Try to do a "normal" grab
                     {
                         GrabObject(obj);
+                        InsidePortal = false;
                     }
                 }
             } else {

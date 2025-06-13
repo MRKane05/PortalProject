@@ -5,6 +5,7 @@ using UnityEngine;
 //Basic door. Opens, closes, gets locked/unlocked, opens on command, it'll be added to as the game develops
 public class DoorBehaviour : MonoBehaviour {
 	public bool bStateLocked = false;
+	public bool bOpenWhenTriggered = false;
 	public bool bDoorOpen = false;
 	public float playerTriggerDistance = 3f;    //How close before our door will automatically open?
 	public Vector3 doorOffsetPosition = new Vector3(0.8f, 0, 0);    //What do we lerp to when we're open?
@@ -54,6 +55,10 @@ public class DoorBehaviour : MonoBehaviour {
 	public void SetDoorLocked(bool bIsUnlocked)	//This will always be true when the button depresses
     {
 		bStateLocked = !bIsUnlocked;
+		if (bOpenWhenTriggered)
+        {
+			SetDoorState(bIsUnlocked);
+        }
 	}
 
 	void Update()
