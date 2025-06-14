@@ -330,6 +330,10 @@ ModelImporter:
     100648: world_geometry_METAL/METALHULL003A_0
     100650: world_geometry_SIGNAGE/CLOCK/CLOCK_DOTS_0
     100652: Room002IndicatorLights
+    100654: Room002_Floor
+    100656: Room002IndicatorLights.001
+    100658: Room008_Floor
+    100660: Room009IndicatorLights
     400000: bed_cover
     400002: bed_cover|Body_bed_cover_reference.smd|Dupli|1
     400004: blackout|Body_blackout_reference.smd|Dupli|1
@@ -657,6 +661,10 @@ ModelImporter:
     400648: world_geometry_METAL/METALHULL003A_0
     400650: world_geometry_SIGNAGE/CLOCK/CLOCK_DOTS_0
     400652: Room002IndicatorLights
+    400654: Room002_Floor
+    400656: Room002IndicatorLights.001
+    400658: Room008_Floor
+    400660: Room009IndicatorLights
     2000000: Camera
     2100000: blackin_blackout
     2100002: mapstestchmb_a_00glassglasswindow_frosted
@@ -940,6 +948,10 @@ ModelImporter:
     2300348: world_geometry_METAL/METALHULL003A_0
     2300350: world_geometry_SIGNAGE/CLOCK/CLOCK_DOTS_0
     2300352: Room002IndicatorLights
+    2300354: Room002_Floor
+    2300356: Room002IndicatorLights.001
+    2300358: Room008_Floor
+    2300360: Room009IndicatorLights
     3300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     3300002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     3300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -1117,6 +1129,10 @@ ModelImporter:
     3300348: world_geometry_METAL/METALHULL003A_0
     3300350: world_geometry_SIGNAGE/CLOCK/CLOCK_DOTS_0
     3300352: Room002IndicatorLights
+    3300354: Room002_Floor
+    3300356: Room002IndicatorLights.001
+    3300358: Room008_Floor
+    3300360: Room009IndicatorLights
     4300000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     4300002: func_brush_695336_maps/testchmb_a_00/glass/glasswindow_frosted_
     4300004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -1294,6 +1310,10 @@ ModelImporter:
     4300348: Door_Left
     4300350: Door_Right
     4300352: Room002IndicatorLights
+    4300354: Room002IndicatorLights.001
+    4300356: Room008_Floor
+    4300358: Room002_Floor
+    4300360: Room009IndicatorLights
     6400000: blackout|Body_blackout_reference.smd|Dupli|1_blackin_blackout_0
     6400002: func_brush_695301_maps/testchmb_a_00/glass/glasswindow_frosted_
     6400004: func_brush_695336_chmb_a_00/models/props_trainstation/trainstat
@@ -1471,6 +1491,10 @@ ModelImporter:
     6400348: world_geometry_METAL/METALHULL003A_0
     6400350: world_geometry_SIGNAGE/CLOCK/CLOCK_DOTS_0
     6400352: Room002IndicatorLights
+    6400354: Room002_Floor
+    6400356: Room002IndicatorLights.001
+    6400358: Room008_Floor
+    6400360: Room009IndicatorLights
   externalObjects:
   - first:
       type: UnityEngine:Material
