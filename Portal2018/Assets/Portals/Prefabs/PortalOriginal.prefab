@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121410240758288}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.38, y: 1.36, z: 0.13}
+  m_LocalPosition: {x: 13.14, y: 3.78, z: 21.24}
   m_LocalScale: {x: 1.25, y: 2.25, z: 1.25}
   m_Children:
   - {fileID: 4595813975058736}
@@ -227,6 +227,8 @@ MonoBehaviour:
   BackFaceMaterial: {fileID: 2100000, guid: f009da675d1c8c14e8e39a707f5febcb, type: 2}
   InvisibleMaterial: {fileID: 0}
   portalColor: {r: 1, g: 1, b: 1, a: 1}
+  portalAlpha: 0
+  portalScale: 0
   recurseTexture: {fileID: 0}
   DefaultTexturePan: {x: 0.1, y: 0.07, z: -0.07, w: -0.05}
 --- !u!114 &114557290012706242

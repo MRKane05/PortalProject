@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: ba167d12508cbca4ba91bdbdc7bad249
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: box_dropper_model|Body_Box_dropper_reference.smd|Dupli|_Box.004
+    100002: Cylinder
+    100004: Cylinder.001
+    100006: Cylinder.002
+    100008: Cylinder.003
+    100010: //RootNode
+    100012: root
+    100014: Hatch
+    100016: LeverElbow
+    100018: leverMid
+    100020: LeverShort
+    100022: Slider
+    400000: box_dropper_model|Body_Box_dropper_reference.smd|Dupli|_Box.004
+    400002: Cylinder
+    400004: Cylinder.001
+    400006: Cylinder.002
+    400008: Cylinder.003
+    400010: //RootNode
+    400012: root
+    400014: Hatch
+    400016: LeverElbow
+    400018: leverMid
+    400020: LeverShort
+    400022: Slider
+    2100000: Box_dropper_Box_dropper
+    2300000: box_dropper_model|Body_Box_dropper_reference.smd|Dupli|_Box.004
+    2300002: Cylinder
+    2300004: Cylinder.001
+    2300006: Cylinder.002
+    2300008: Cylinder.003
+    2300010: Hatch
+    2300012: LeverElbow
+    2300014: leverMid
+    2300016: LeverShort
+    2300018: Slider
+    3300000: box_dropper_model|Body_Box_dropper_reference.smd|Dupli|_Box.004
+    3300002: Cylinder
+    3300004: Cylinder.001
+    3300006: Cylinder.002
+    3300008: Cylinder.003
+    3300010: Hatch
+    3300012: LeverElbow
+    3300014: leverMid
+    3300016: LeverShort
+    3300018: Slider
+    4300000: Cylinder
+    4300002: Cylinder.001
+    4300004: Cylinder.002
+    4300006: Cylinder.003
+    4300008: box_dropper_model|Body_Box_dropper_reference.smd|Dupli|_Box.004
+    4300010: Hatch
+    4300012: LeverShort
+    4300014: leverMid
+    4300016: LeverElbow
+    4300018: Slider
+    7400000: CylinderAction
+    9500000: //RootNode
+    11100000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box_dropper_Box_dropper
+    second: {fileID: 2100000, guid: b7795a88e972c30419cdc97373247a8a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
