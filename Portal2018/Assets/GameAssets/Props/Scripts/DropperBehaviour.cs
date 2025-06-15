@@ -42,7 +42,7 @@ public class DropperBehaviour : MonoBehaviour {
         {
             preparedCube = Instantiate(cubePrefab) as GameObject;
             preparedCube.name = "Dropper_Cube";
-            Debug.LogError("Prepared Cube Name: " + preparedCube.name);
+            //Debug.LogError("Prepared Cube Name: " + preparedCube.name);
             preparedCube.transform.position = cubeSpawnPoint.transform.position;
             Rigidbody cubeRB = preparedCube.GetComponent<Rigidbody>();
             float maxTorque = 3f;
