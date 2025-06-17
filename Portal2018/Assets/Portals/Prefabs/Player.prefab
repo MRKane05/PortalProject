@@ -147,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
   m_LocalRotation: {x: -0, y: -0.09075737, z: -0, w: -0.99587303}
-  m_LocalPosition: {x: 9.98, y: 4.21, z: 15.11}
+  m_LocalPosition: {x: 19.12, y: 3.81, z: 17.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 025cf319ae736e8468120713c2e5aef9, type: 3}
   m_Name: 
@@ -347,6 +347,7 @@ MonoBehaviour:
   _spawnCloneOnAwake: 1
   bReplaceShaders: 0
   lastExitedPortal: {fileID: 0}
+  bCanBePickedUp: 1
 --- !u!114 &114603961447189572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,7 +363,7 @@ MonoBehaviour:
   _noClipEnabled: 0
   _flySpeed: 1
   _movementInfo:
-    maxSpeedHorizontal: 5
+    maxSpeedHorizontal: 4
     maxSpeedVertical: 40
     accellerationGrounded: 5
     accellerationAerial: 0.25
@@ -432,7 +433,11 @@ MonoBehaviour:
     m_Bits: 513
   heldObject: {fileID: 0}
   playerObject: {fileID: 1614185999318264}
+  bObjectThroughPortal: 0
+  playerTransitionPortal: {fileID: 0}
   carryForce: 300
+  currentInterfacePortal: {fileID: 0}
+  InsidePortal: 0
 --- !u!114 &114950017476972466
 MonoBehaviour:
   m_ObjectHideFlags: 1

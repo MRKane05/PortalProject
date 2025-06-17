@@ -162,6 +162,12 @@ namespace Portals {
                 return;
             }
 
+            Teleportable objecTeleportable = obj.GetComponent<Teleportable>();
+            if (objecTeleportable && objecTeleportable.bCanBePickedUp == false)
+            {
+                return; //We can't pickup something that's flagged as not pickupable
+            }
+
             if (obj.tag != "Interactable")
             {
                 Debug.Log("Cannot grab object that's not tagged as being interactable");
@@ -187,6 +193,28 @@ namespace Portals {
 
             if (onObjectGrabbed != null) {
                 onObjectGrabbed(this, obj);
+            }
+
+            //Of course we also need to keep an eye on the object we've grabbed least it's dissolved
+            if (objecTeleportable)
+            {
+                objecTeleportable.TeleportableStateChanged += OnTeleportableStateChanged;
+            }
+        }
+
+        public void OnTeleportableStateChanged(Teleportable sender)
+        {
+            if (sender.gameObject == heldObject)
+            {
+                if (!sender.bCanBePickedUp) //We've probably been fizzled (or similar)
+                {
+                    ReleaseObject();
+                }
+            }
+            else
+            {
+                //Ok, we shouldn't be interacting with this. I've fucked up somehow
+                Debug.LogError("Unheld object fizzled");
             }
         }
 
@@ -243,6 +271,13 @@ namespace Portals {
                 return;
             }
 
+            //Remove our listener
+            Teleportable objecTeleportable = heldObject.GetComponent<Teleportable>();
+            if (objecTeleportable)
+            {
+                objecTeleportable.TeleportableStateChanged -= OnTeleportableStateChanged;
+            }
+
             rigidbody.drag = 0f;
             rigidbody.useGravity = true;
             rigidbody.constraints = grabbedObjectInitialConstraints;
@@ -254,6 +289,9 @@ namespace Portals {
             if (onObjectReleased != null) {
                 onObjectReleased(this, obj);
             }
+
+
+
         }
 
         public bool CarryingObject() {

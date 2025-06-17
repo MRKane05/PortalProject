@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114397571368986464}
   - component: {fileID: 65377375435808222}
   - component: {fileID: 114805375630769946}
+  - component: {fileID: 114039192741167188}
   m_Layer: 13
   m_Name: CompanionCube_Basic
   m_TagString: Interactable
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732325039214490}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.853, y: 3.49, z: 17.4}
+  m_LocalPosition: {x: 20.893568, y: 3.12, z: 17.228622}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,6 +115,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7000004, y: 0.7000004, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114039192741167188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732325039214490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9601cc41271274a911cbafb646a068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swapMaterials:
+  - baseMaterial: {fileID: 2100000, guid: f534f7f004031cd41b317154ecc99ad6, type: 2}
+    dissolveMaterial: {fileID: 2100000, guid: 61ba394ae3e99c34da9d781ad0f98d0d, type: 2}
+  swapInstances: []
+  dissolveSpeed: 2
 --- !u!114 &114397571368986464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,3 +165,4 @@ MonoBehaviour:
   _spawnCloneOnAwake: 1
   bReplaceShaders: 0
   lastExitedPortal: {fileID: 0}
+  bCanBePickedUp: 1
