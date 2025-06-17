@@ -178,11 +178,19 @@ namespace Portals {
             return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
         }
 
+        void AssignPortalCameraSettings(Camera portalCam)
+        {
+            //This might be necessary for layer occlusion culling, but for the moment lets just try to tighten things up a bit
+            portalCam.useOcclusionCulling = false;  //To fix glitches and issues
+            //PROBLEM: See about somehow setting the view distance really tight
+        }
+
         public RenderTexture RenderToTexture(Camera.MonoOrStereoscopicEye eye, Rect viewportRect, bool renderBackface, int _currentRenderDepth) {
             _framesSinceLastUse = 0;
 
             // Copy parent camera's settings
             CopyCameraSettings(_parent, _camera);
+            AssignPortalCameraSettings(_camera);    //For our Vita optimisations!
             //_camera.farClipPlane = _parent.farClipPlane * _portal.PortalScaleAverage();
 
             Matrix4x4 projectionMatrix;
@@ -257,7 +265,7 @@ namespace Portals {
 
             RenderTexture texture = GetTemporaryRT(_currentRenderDepth);
 
-            if (_portal.FakeInfiniteRecursion) {
+            if (_portal.FakeInfiniteRecursion) {    //This is now handled in the main loop as a fix for the Vita
                 // RenderTexture must be cleared when using fake infinite recursion because
                 // we might sometimes sample uninitialized garbage pixels otherwise, which can
                 // cause significant visual artifacts.
