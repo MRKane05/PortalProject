@@ -431,7 +431,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 5
-      minScalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -547,7 +547,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.04
-      minScalar: 0.02
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1509,8 +1509,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.5970096, g: 0.9811321, b: 0.97031176, a: 1}
-        key1: {r: 0.16862746, g: 1, b: 0.98039216, a: 1}
+        key0: {r: 0.5613208, g: 0.92555755, b: 1, a: 1}
+        key1: {r: 0.3529412, g: 0.8901961, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4964,7 +4964,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 5
-      minScalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5080,7 +5080,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.04
-      minScalar: 0.02
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6042,8 +6042,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.5970096, g: 0.9811321, b: 0.97031176, a: 1}
-        key1: {r: 0.16862746, g: 1, b: 0.98039216, a: 1}
+        key0: {r: 0.5613208, g: 0.92555755, b: 1, a: 1}
+        key1: {r: 0.3529412, g: 0.8901961, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9406,7 +9406,7 @@ ParticleSystemRenderer:
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0
+  m_VelocityScale: 0.07
   m_LengthScale: 2
   m_SortingFudge: 0
   m_NormalDirection: 1
@@ -9463,7 +9463,7 @@ ParticleSystemRenderer:
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0
+  m_VelocityScale: 0.07
   m_LengthScale: 2
   m_SortingFudge: 0
   m_NormalDirection: 1
