@@ -43,16 +43,9 @@ public class PortalSpawnerBase : MonoBehaviour {
         RaycastHit hit;
         bool hitWall;
 
-        /*
-        if (_shootThroughPortals)
-        {
-            hitWall = PortalPhysics.Raycast(ray, out hit, Mathf.Infinity, _canHit, QueryTriggerInteraction.Collide);
-        }
-        else*/
-        {
-            int mask = _canHit | PortalPhysics.PortalLayerMask;
-            hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
-        }
+        int mask = _canHit | PortalPhysics.PortalLayerMask;
+        hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
+
 
         if (hitWall)
         {
@@ -65,19 +58,9 @@ public class PortalSpawnerBase : MonoBehaviour {
             else
             {
                 bool spawnedPortal = TrySpawnPortal(bIsLeftPortal, hit, startDirection);
-                /*
-                if (!spawnedPortal)
-                {
-                    SpawnSplashParticles(hit.point, hit.normal, color);
-                }*/
+
             }
         }
-
-        // Spawn a bullet that will auto-destroy itself after it travels a certain distance
-        /*
-        if (_bulletPrefab)
-            SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
-        */
     }
 
     Quaternion CalculateRotation(Vector3 forward, Vector3 normal)

@@ -246,7 +246,7 @@ MonoBehaviour:
   _defaultTexture: {fileID: 2800000, guid: 88efae707f436d84f98a0f0542d1f6e5, type: 3}
   _transparencyMask: {fileID: 2800000, guid: 506e4e616989679458439ca3e8fc4f07, type: 3}
   _maxRecursion: 2
-  _fakeInfiniteRecursion: 1
+  _fakeInfiniteRecursion: 0
   _modifyGravity: 0
   _ignoredColliders: []
   _qualitySettings:

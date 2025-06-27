@@ -14,6 +14,8 @@ ModelImporter:
     100016: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     100018: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001E_0.002
     100020: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
+    100022: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    100024: ObservationWindow
     400000: Room002_LevelForm
     400002: Room002_LevelForm.002
     400004: Room003.001
@@ -25,6 +27,8 @@ ModelImporter:
     400016: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     400018: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001E_0.002
     400020: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
+    400022: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    400024: ObservationWindow
     2100000: CONCRETECONCRETE_MODULAR_WALL001E.001
     2100002: CONCRETECONCRETE_MODULAR_CEILING001A.001
     2100004: CONCRETECONCRETE_MODULAR_FLOOR001A.001
@@ -44,6 +48,7 @@ ModelImporter:
     2100032: CONCRETECONCRETE_MODULAR_WALL001F
     2100034: Untitled
     2100036: OpaqueGlass
+    2100038: mapstestchmb_a_01glassglasswindow_frosted
     2300000: Room002_LevelForm
     2300002: Room002_LevelForm.002
     2300004: Room003.001
@@ -54,6 +59,8 @@ ModelImporter:
     2300014: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     2300016: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001E_0.002
     2300018: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
+    2300020: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    2300022: ObservationWindow
     3300000: Room002_LevelForm
     3300002: Room002_LevelForm.002
     3300004: Room003.001
@@ -64,6 +71,8 @@ ModelImporter:
     3300014: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     3300016: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001E_0.002
     3300018: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
+    3300020: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    3300022: ObservationWindow
     4300000: Room003.003
     4300002: Room003.002
     4300004: Room003.001
@@ -74,6 +83,8 @@ ModelImporter:
     4300014: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
     4300016: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     4300018: Room002_LevelForm
+    4300020: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    4300022: ObservationWindow
     6400000: Room002_LevelForm
     6400002: Room002_LevelForm.002
     6400004: Room003.001
@@ -84,6 +95,8 @@ ModelImporter:
     6400014: world_geometry_CONCRETE/CONCRETE_MODULAR_FLOOR001C_0.001
     6400016: world_geometry_CONCRETE/CONCRETE_MODULAR_WALL001E_0.002
     6400018: world_geometry_maps/testchmb_a_01/metal/metalwall048b_0.002
+    6400020: window_tc01_maps/testchmb_a_01/glass/glasswindow_frosted_0.001
+    6400022: ObservationWindow
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
@@ -155,12 +168,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Untitled
-    second: {fileID: 2100000, guid: b87a3a5a107e7c74aaa4c28e3b6c9200, type: 2}
+    second: {fileID: 2100000, guid: 3df662690a409c940b8575ce1606d141, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: mapstestchmb_a_00metalmetalwall048b
     second: {fileID: 2100000, guid: 6eb5a3342c3eb8342ab398fee331a736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mapstestchmb_a_01glassglasswindow_frosted
+    second: {fileID: 2100000, guid: bf3ad7fac49fbfe4b9a13f2e1192989e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -227,9 +245,9 @@ ModelImporter:
     preserveHierarchy: 0
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVPackMargin: 6
     useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0

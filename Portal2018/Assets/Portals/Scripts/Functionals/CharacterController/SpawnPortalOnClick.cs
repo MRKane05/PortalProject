@@ -13,14 +13,16 @@ static internal class AnimationCurves {
 
 public class SpawnPortalOnClick : PortalSpawnerBase {
 
-    [SerializeField] Camera _camera;
+    [SerializeField] GameObject _camera;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] float _bulletSpawnOffset = 3.0f;
     [SerializeField] float _bulletSpeed = 20.0f;
     [SerializeField] GameObject _splashParticles;
 
     //And a driver for our attached "Gun"
+    public GameObject portalGunModel;
     public Animator portalGunAnimator;
+    
     float fireSpeed = 0.3f;
     float lastFireTime = 0f;
     bool bCanFire = true;
@@ -64,7 +66,94 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         }
 	}
 
-    private enum Polarity {
+    #region level functions
+    //This will be called from script when we're using this as a one sentry
+    public void DoScriptFire(Polarity polarity, Vector3 startPos, Vector3 startDir)
+    {
+        Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;
+
+
+        Ray ray = new Ray(startPos, startDir);
+        RaycastHit hit;
+        bool hitWall;
+
+        if (false)
+        { //_shootThroughPortals
+            hitWall = PortalPhysics.Raycast(ray, out hit, Mathf.Infinity, _canHit, QueryTriggerInteraction.Collide);
+        }
+        else
+        {
+            int mask = _canHit | PortalPhysics.PortalLayerMask;
+            hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
+        }
+
+        if (hitWall)
+        {
+            Portal portal = hit.collider.GetComponent<Portal>();
+            if (portal)
+            {
+                //For this implementation we don't much care about fancy effects
+                //WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
+            }
+            else
+            {
+                bool spawnedPortal = TrySpawnPortal(polarity == Polarity.Left, hit, startDir);
+                
+                if (!spawnedPortal)
+                {
+                    SpawnSplashParticles(hit.point, hit.normal, color);
+                }
+            }
+        }
+
+        // Spawn a bullet that will auto-destroy itself after it travels a certain distance
+        if (_bulletPrefab)
+        {
+            SpawnBullet(_bulletPrefab, startPos + startDir, startDir, hit.distance, color); //We don't need an offset for the stationary
+        }
+    }
+
+    public void PlacePortal(Polarity polarity, Vector3 startPosition, Vector3 startDirection)
+    {
+        Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;
+        Ray ray = new Ray(startPosition, startDirection);
+        RaycastHit hit;
+        bool hitWall;
+
+        int mask = _canHit | PortalPhysics.PortalLayerMask;
+        hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
+
+
+        if (hitWall)
+        {
+            Portal portal = hit.collider.GetComponent<Portal>();
+            if (portal)
+            {
+                //For this implementation we don't much care about fancy effects
+                //WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
+            }
+            else
+            {
+                bool spawnedPortal = TrySpawnPortal(polarity == Polarity.Left, hit, startDirection);
+            }
+        }
+    }
+
+    public void RevealHidePortalGun(bool bDoReveal)
+    {
+        if (portalGunModel)
+        {
+            if (bDoReveal)
+            {
+                portalGunModel.SetActive(true);
+                //Play the necessary animation
+            }
+        }
+    }
+
+    #endregion
+
+    public enum Polarity {
         Left,
         Right
     }
@@ -77,6 +166,15 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
     }
 
     private void Fire(Polarity polarity) {
+
+        if (LevelController.Instance)
+        {
+            if (polarity == Polarity.Right && LevelController.Instance.playerControlType == LevelController.enPlayerControlType.LEFTONLY)    //Disable the player's firing attempts
+            {
+                return;
+            }
+        }
+
         Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;
 
         //Will need to set the colors on the gun also
@@ -118,14 +216,20 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             //PROBLEM: Bullet effect needs to be offset slightly for the gun so that we're not firing from our nose
             SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
         }
-    }    private Vector2 CalculatePortalUVSpacePoint(Portal portal, Vector3 pointWorldSpace) {
+    }    
+    
+    private Vector2 CalculatePortalUVSpacePoint(Portal portal, Vector3 pointWorldSpace) {
         // This calculation is specific to the portal mesh used at the time of writing
         return portal.transform.InverseTransformPoint(pointWorldSpace) + Vector3.one * 0.5f;
     }
 
+
+    #region effects
     private Coroutine _wavingCoroutine;
-    private void WavePortalOverTime(Portal portal, Vector3 originWorldSpace, float amplitude, float duration) {
-        if (_wavingCoroutine != null) {
+    private void WavePortalOverTime(Portal portal, Vector3 originWorldSpace, float amplitude, float duration)
+    {
+        if (_wavingCoroutine != null)
+        {
             StopCoroutine(_wavingCoroutine);
         }
         _wavingCoroutine = StartCoroutine(WavePortalOverTimeRoutine(portal, originWorldSpace, amplitude, duration));
@@ -187,4 +291,6 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         bullet.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
         Destroy(bullet, 1.0f);
     }
+
+    #endregion
 }
