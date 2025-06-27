@@ -6,7 +6,12 @@ public class LevelController : MonoBehaviour {
 	private static LevelController instance = null;
 	public static LevelController Instance { get { return instance; } }
 
-	public GameObject playerObject;	//Will no doubt be referenced by lots of things
+	public GameObject playerObject; //Will no doubt be referenced by lots of things
+
+	[Space]
+	[Header("Settings for Portal Cameras")]
+	public float PortalCameraDistance = 25f;
+	public LayerMask PortalCameraLayerMask;// = LayerMask.NameToLayer("Default");
 
 	void Awake()
     {

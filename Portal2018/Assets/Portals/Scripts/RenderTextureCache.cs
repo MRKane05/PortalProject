@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class RenderTextureCache : MonoBehaviour
 {
@@ -105,6 +106,13 @@ public class RenderTextureCache : MonoBehaviour
         // Calculate dimensions with Vita optimizations
         int w = Mathf.Min(_cachedScreenWidth / downscaling, MAX_RT_WIDTH);
         int h = Mathf.Min(_cachedScreenHeight / downscaling, MAX_RT_HEIGHT);
+
+        //Actually what we could do for the Vita is enact some more aggressive case-handling for this...
+        if (downscaling == 2)
+        {
+            w = 256;
+            h = 256;
+        }
 
         // Force power-of-2 for Vita GPU efficiency
         w = Mathf.NextPowerOfTwo(w);

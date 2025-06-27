@@ -9,6 +9,7 @@ namespace Portals {
     using UnityEngine;
     using UnityEngine.VR;
     using UnityEngine.Rendering;
+    using PortalSystem;
 
     [ExecuteInEditMode]
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -439,19 +440,7 @@ namespace Portals {
             var parentPortal = _currentlyRenderingPortal;
             _currentlyRenderingPortal = _portal;
             _currentRenderDepth++;
-            /*
-            if (Camera.current.stereoEnabled) {
-                // Stereo rendering. Render both eyes.
-                if (Camera.current.stereoTargetEye == StereoTargetEyeMask.Both || Camera.current.stereoTargetEye == StereoTargetEyeMask.Left) {
-                    RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Left, viewportRect, renderBackface);
-                    block.SetTexture("_LeftEyeTexture", tex);
-                }
-                if (Camera.current.stereoTargetEye == StereoTargetEyeMask.Both || Camera.current.stereoTargetEye == StereoTargetEyeMask.Right) {
-                    RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Right, viewportRect, renderBackface);
-                    block.SetTexture("_RightEyeTexture", tex);
-                }
-            } else {
-            */
+
             // Mono rendering. Render only one eye, but set which texture to use based on the camera's target eye.
             RenderTexture tex = portalCamera.RenderToTexture(Camera.MonoOrStereoscopicEye.Mono, viewportRect, renderBackface, _currentRenderDepth);
             block.SetTexture("_LeftEyeTexture", tex);

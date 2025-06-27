@@ -19,6 +19,12 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
     [SerializeField] float _bulletSpeed = 20.0f;
     [SerializeField] GameObject _splashParticles;
 
+    //And a driver for our attached "Gun"
+    public Animator portalGunAnimator;
+    float fireSpeed = 0.3f;
+    float lastFireTime = 0f;
+    bool bCanFire = true;
+
 
     void Awake() {
         if (!isActiveAndEnabled) {
@@ -52,7 +58,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         leftClick = Input.GetButtonDown("Left Shoulder");
         rightClick = Input.GetButtonDown("Right Shoulder");
 #endif
-        if (leftClick || rightClick) {
+        if ((leftClick || rightClick) && bCanFire) {
             Polarity polarity = leftClick ? Polarity.Left : Polarity.Right;
             Fire(polarity);
         }
@@ -63,8 +69,25 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         Right
     }
 
+    IEnumerator WaitFireReturn()
+    {
+        yield return new WaitForSeconds(fireSpeed);
+        bCanFire = true;
+        portalGunAnimator.ResetTrigger("DoFire");
+    }
+
     private void Fire(Polarity polarity) {
         Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;
+
+        //Will need to set the colors on the gun also
+        if (portalGunAnimator)
+        {
+            bCanFire = false;
+            StartCoroutine(WaitFireReturn());
+            portalGunAnimator.SetTrigger("DoFire"); //This will need a callback to unset it
+        }
+
+
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         RaycastHit hit;
         bool hitWall;
@@ -88,10 +111,13 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
                 }
             }
         }
-        
+
         // Spawn a bullet that will auto-destroy itself after it travels a certain distance
         if (_bulletPrefab)
+        {
+            //PROBLEM: Bullet effect needs to be offset slightly for the gun so that we're not firing from our nose
             SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
+        }
     }    private Vector2 CalculatePortalUVSpacePoint(Portal portal, Vector3 pointWorldSpace) {
         // This calculation is specific to the portal mesh used at the time of writing
         return portal.transform.InverseTransformPoint(pointWorldSpace) + Vector3.one * 0.5f;

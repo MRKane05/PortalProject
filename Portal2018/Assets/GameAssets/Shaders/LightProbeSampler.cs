@@ -7,6 +7,8 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Renderer))]
 public class LightProbeSampler : MonoBehaviour
 {
+    public bool bPopulateChildRenderers = false;
+
     public List<Renderer> m_Renderers = new List<Renderer>();
     private MaterialPropertyBlock m_PropertyBlock;
 
@@ -36,6 +38,25 @@ public class LightProbeSampler : MonoBehaviour
     Vector3 lastUpdatePosition = Vector3.zero;
 
 
+    void GetChildRenderers(Transform thisChild)
+    {
+        Renderer AttachedRenderer = thisChild.gameObject.GetComponent<Renderer>();
+        
+        if (AttachedRenderer && !m_Renderers.Contains(AttachedRenderer))
+        {
+            m_Renderers.Add(AttachedRenderer);
+        }
+
+        if (thisChild.childCount > 0)
+        {
+            foreach(Transform newChild in thisChild)
+            {
+                GetChildRenderers(newChild);
+            }
+        }        
+    }
+
+
     void Start()
     {
         squareUpdateDistance = updateDistance * updateDistance;
@@ -51,6 +72,11 @@ public class LightProbeSampler : MonoBehaviour
 
     void Update()
     {
+        if (bPopulateChildRenderers)
+        {
+            GetChildRenderers(gameObject.transform);
+            bPopulateChildRenderers = false;
+        }
         // Update at specified interval for performance
         //if (Time.time - m_LastUpdateTime >= updateInterval)
         //Alternatively only update if we've moved
@@ -105,7 +131,14 @@ public class LightProbeSampler : MonoBehaviour
 
         for (int i = 0; i < m_Renderers.Count; i++)
         {
-            m_Renderers[i].SetPropertyBlock(m_PropertyBlock);
+            if (m_Renderers[i] != null)
+            {
+                m_Renderers[i].SetPropertyBlock(m_PropertyBlock);
+            }
+            else //There was a mistake here
+            {
+
+            }
         }
     }
 

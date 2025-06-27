@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.VR;
+using PortalSystem;
 
 namespace Portals {
     [ExecuteInEditMode]
@@ -182,8 +183,14 @@ namespace Portals {
         {
             //This might be necessary for layer occlusion culling, but for the moment lets just try to tighten things up a bit
             portalCam.useOcclusionCulling = false;  //To fix glitches and issues
-            //PROBLEM: See about somehow setting the view distance really tight
+            if (LevelController.Instance)
+            {
+                portalCam.cullingMask = LevelController.Instance.PortalCameraLayerMask;
+                portalCam.farClipPlane = LevelController.Instance.PortalCameraDistance;
+            }
         }
+
+        CommandBuffer currentCMD;
 
         public RenderTexture RenderToTexture(Camera.MonoOrStereoscopicEye eye, Rect viewportRect, bool renderBackface, int _currentRenderDepth) {
             _framesSinceLastUse = 0;
@@ -265,6 +272,7 @@ namespace Portals {
 
             RenderTexture texture = GetTemporaryRT(_currentRenderDepth);
 
+            
             if (_portal.FakeInfiniteRecursion) {    //This is now handled in the main loop as a fix for the Vita
                 // RenderTexture must be cleared when using fake infinite recursion because
                 // we might sometimes sample uninitialized garbage pixels otherwise, which can
@@ -275,7 +283,10 @@ namespace Portals {
             }
 
             _camera.targetTexture = texture;
+            
 
+            //PortalMeshRenderer.RenderMeshesInFrustum(texture, _camera, true);
+            //PortalMeshRenderer.CommandBufferRenderMeshesInFustrum(texture, _camera, true);
             _camera.Render();
 
             SaveFrameData(eye);
