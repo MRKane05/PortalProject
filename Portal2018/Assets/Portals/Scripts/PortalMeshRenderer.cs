@@ -15,6 +15,8 @@ namespace PortalSystem
         private static List<MeshFilter> cachedFilters = new List<MeshFilter>();
         private static List<RenderData> renderQueue = new List<RenderData>();
 
+        private static List<RenderData> cachedRenderList = new List<RenderData>();
+
         // Frustum planes for culling
         private static Plane[] frustumPlanes = new Plane[6];
 
@@ -27,6 +29,8 @@ namespace PortalSystem
             public int submeshIndex;
             public int materialIndex;
         }
+
+        private static CommandBuffer floatingBuffer;
 
         /// <summary>
         /// Renders all meshes within the specified view frustum to the target RenderTexture
@@ -139,34 +143,74 @@ namespace PortalSystem
         }
 
 
+        public static void SetupFloatingBuffer()
+        {
+            floatingBuffer = new CommandBuffer();
+            floatingBuffer.name = "Custom Render";
+            //Draw scene
+            //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
+        }
+
+        public static void CommandBufferRenderAll(RenderTexture targetTexture,
+           Camera _camera,
+           bool sortByDistance = true,
+           Color clearColor = default(Color))
+        {
+
+
+            CommandBuffer cmd = new CommandBuffer();
+            cmd.name = "Custom Render";
+
+            cmd.SetRenderTarget(targetTexture);
+
+            cmd.ClearRenderTarget(true, true, Color.black);
+
+            // Set camera matrices
+            cmd.SetViewProjectionMatrices(_camera.worldToCameraMatrix,
+                                         _camera.projectionMatrix);
+
+            //Draw scene
+            //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
+            CommandBufferRenderAll(targetTexture, cmd);
+            Graphics.ExecuteCommandBuffer(cmd);
+            cmd.Release();
+        }
+
+
         public static void CommandBufferRenderMeshesInFustrum(RenderTexture targetTexture,
            Camera _camera,
            bool sortByDistance = true,
            Color clearColor = default(Color))
             {
             // Extract frustum planes for culling
-            ExtractFrustumPlanes(_camera.GetStereoViewMatrix(Camera.StereoscopicEye.Left), frustumPlanes);
+            //ExtractFrustumPlanes(_camera.GetStereoViewMatrix(Camera.StereoscopicEye.Left), frustumPlanes);
 
             // Clear the render queue
-            renderQueue.Clear();
+            //renderQueue.Clear();
 
             // Collect all visible meshes
-            CollectVisibleMeshes(_camera.GetStereoViewMatrix(Camera.StereoscopicEye.Left), frustumPlanes, _camera.cullingMask, _camera.farClipPlane);
+           // CollectVisibleMeshes(_camera.GetStereoViewMatrix(Camera.StereoscopicEye.Left), frustumPlanes, _camera.cullingMask, _camera.farClipPlane);
 
             // Sort by distance if requested (for transparency)
+            /*
             if (sortByDistance)
             {
                 Vector3 cameraPos = _camera.transform.position; // ExtractCameraPosition(viewMatrix);
                 SortRenderQueueByDistance(cameraPos);
-            }
+            }*/
 
-            //CommandBuffer cmd = GetCommandBuffer(_camera.name);
-            //cmd.SetRenderTarget(targetTexture, 16);
-            
-            CommandBuffer cmd = new CommandBuffer();
-            cmd.name = "Custom Render";
-
+            CommandBuffer cmd = GetCommandBuffer(_camera.name);
             cmd.SetRenderTarget(targetTexture, 16);
+            
+            /*
+            if (floatingBuffer == null)
+            {
+                SetupFloatingBuffer();
+            }*/
+
+
+
+            cmd.SetRenderTarget(targetTexture);
             
             cmd.ClearRenderTarget(true, true, Color.black);
 
@@ -175,8 +219,8 @@ namespace PortalSystem
                                          _camera.projectionMatrix);
 
             //Draw scene
-            CommandBufferRenderCollectedMeshes(targetTexture, cmd);
-
+            //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
+            CommandBufferRenderAll(targetTexture, cmd);
             Graphics.ExecuteCommandBuffer(cmd);
             cmd.Release();
         }
@@ -269,6 +313,22 @@ namespace PortalSystem
                 clearColor, cullingMask, farPlane, false);
         }
 
+        private static void CacheAllMeshes()
+        {
+            cachedRenderers.Clear();
+            cachedRenderers = Object.FindObjectsOfType<MeshRenderer>().ToList();
+
+            foreach (MeshRenderer renderer in cachedRenderers)
+            {
+                //Quick hack to add everything
+                MeshFilter meshFilter = renderer.GetComponent<MeshFilter>();
+                if (meshFilter == null || meshFilter.sharedMesh == null)
+                    continue;
+
+                AddMeshToRenderList(meshFilter, renderer);
+            }
+        }
+
         private static void CollectVisibleMeshes(Matrix4x4 viewMatrix, Plane[] frustumPlanes,
             int cullingMask, float maxDistance)
         {
@@ -287,6 +347,7 @@ namespace PortalSystem
 
                 // Add to render queue
                 AddMeshToRenderQueue(meshFilter, renderer);
+                AddMeshToRenderList(meshFilter, renderer);
                 continue;
                 
                 /*
@@ -355,6 +416,37 @@ namespace PortalSystem
             }
         }
 
+        private static void AddMeshToRenderList(MeshFilter meshFilter, MeshRenderer mtrenderer)
+        {
+            Mesh mtmesh = meshFilter.sharedMesh;
+            Material[] materials = mtrenderer.sharedMaterials;
+
+            Matrix4x4 worldMatrix = mtrenderer.localToWorldMatrix;    //This outputs correct rotational information, but incorrect positions?
+
+            // Handle multi-material meshes
+            int submeshCount = mtmesh.subMeshCount;
+            for (int i = 0; i < submeshCount && i < materials.Length; i++)
+            {
+                Material mtmaterial = materials[i];
+                if (mtmaterial == null)
+                    continue;
+
+
+                RenderData renderData = new RenderData
+                {
+                    renderer = mtrenderer,
+                    mesh = mtmesh,
+                    material = mtmaterial,
+                    worldMatrix = worldMatrix,
+                    submeshIndex = i,
+                    materialIndex = i
+                };
+
+                //renderQueue.Add(renderData);
+                cachedRenderList.Add(renderData);
+            }
+        }
+
         private static void RenderCollectedMeshes(RenderTexture targetTexture)
         {
             foreach (RenderData data in renderQueue)
@@ -375,6 +467,26 @@ namespace PortalSystem
             }
         }
 
+        private static void CommandBufferRenderAll(RenderTexture targetTexture, CommandBuffer cmd)
+        {
+            if (cachedRenderList.Count() ==0)
+            {
+                CacheAllMeshes();
+            }
+
+
+            foreach (RenderData data in cachedRenderList)
+            {
+                if (data.material.SetPass(0))
+                {
+                    if (data.submeshIndex < data.mesh.subMeshCount)
+                    {
+                        cmd.DrawRenderer(data.renderer, data.material, data.submeshIndex);
+                    }
+                }
+            }
+        }
+
         private static void CommandBufferRenderCollectedMeshes(RenderTexture targetTexture, CommandBuffer cmd)
         {
             foreach (RenderData data in renderQueue)
@@ -383,7 +495,6 @@ namespace PortalSystem
                 {
                     if (data.submeshIndex < data.mesh.subMeshCount)
                     {
-
                         cmd.DrawRenderer(data.renderer, data.material, data.submeshIndex);
                     }
                 }

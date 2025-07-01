@@ -283,11 +283,12 @@ namespace Portals {
             }
 
             _camera.targetTexture = texture;
-            
+
 
             //PortalMeshRenderer.RenderMeshesInFrustum(texture, _camera, true);
             //PortalMeshRenderer.CommandBufferRenderMeshesInFustrum(texture, _camera, true);
-            _camera.Render();
+            //PortalMeshRenderer.CommandBufferRenderAll(texture, _camera);
+            _camera.Render(); //Render using Unity's camera system
 
             SaveFrameData(eye);
 
