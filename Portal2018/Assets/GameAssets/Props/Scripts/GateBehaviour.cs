@@ -15,6 +15,14 @@ public class GateBehaviour : MonoBehaviour {
             {
 				ourTeleportable.DoGateDissolve();
             }
-		}
+		} else
+        {
+			//We need to clear the portals attached to players portal spawner
+			PortalSpawnerBase attachedPortalSpawner = other.gameObject.GetComponentInChildren<PortalSpawnerBase>();
+			if (attachedPortalSpawner)
+            {
+				attachedPortalSpawner.HidePortals();
+            }
+        }
 	}
 }

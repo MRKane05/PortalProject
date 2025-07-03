@@ -270,8 +270,7 @@ namespace Portals {
                 _camera.useOcclusionCulling = false;
             }
 
-            RenderTexture texture = GetTemporaryRT(_currentRenderDepth);
-
+            
             
             if (_portal.FakeInfiniteRecursion) {    //This is now handled in the main loop as a fix for the Vita
                 // RenderTexture must be cleared when using fake infinite recursion because
@@ -282,7 +281,11 @@ namespace Portals {
                 //TransferWithBlit(texture, )
             }
 
-            _camera.targetTexture = texture;
+            //if (!_camera.targetTexture)
+            //{
+                RenderTexture texture = GetTemporaryRT(_currentRenderDepth);
+                _camera.targetTexture = texture;
+            //}
 
 
             //PortalMeshRenderer.RenderMeshesInFrustum(texture, _camera, true);
@@ -292,7 +295,7 @@ namespace Portals {
 
             SaveFrameData(eye);
 
-            return texture;
+            return _camera.targetTexture;
         }
 
         private void ClearRenderTexture(RenderTexture rt) {

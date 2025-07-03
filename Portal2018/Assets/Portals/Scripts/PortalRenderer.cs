@@ -304,15 +304,17 @@ namespace Portals {
 
         private bool ShouldRenderPortal(Camera camera) {
             // Don't render if renderer disabled. Not sure if this is possible anyway, but better to be safe.
-            bool isRendererEnabled = enabled && _renderer && _renderer.enabled;
-            if (!isRendererEnabled) { return false; }
+            bool isRendererEnabled = enabled && _renderer && _renderer.enabled;// && portalScale > 0.1f;
+            if (!isRendererEnabled) { 
+                return false;
+            }
 
             // Don't render non-supported camera types (preview cameras can cause issues)
             bool isCameraSupported = (_portal.SupportedCameraTypes & camera.cameraType) == camera.cameraType;
             if (!isCameraSupported) { return false; }
 
             // Only render if an exit portal is set
-            bool isExitPortalSet = _portal.ExitPortal != null;
+            bool isExitPortalSet = _portal.ExitPortal != null;// && _portal.ExitPortal.PortalRenderer.portalScale > 0.1f;
             if (!isExitPortalSet) { return false; }
 
             // Don't ever render an exit portal

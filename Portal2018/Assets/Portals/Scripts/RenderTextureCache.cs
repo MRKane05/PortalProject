@@ -134,6 +134,46 @@ public class RenderTextureCache : MonoBehaviour
         return newRT;
     }
 
+    public RenderTexture GetUniqueRT(int downscaling, int depthBufferQuality, bool allowHDR = false)
+    {
+        // Refresh cache if needed
+        if (_cachedScreenWidth == -1)
+        {
+            RefreshCachedValues(depthBufferQuality, allowHDR);
+        }
+
+        // Calculate dimensions with Vita optimizations
+        int w = Mathf.Min(_cachedScreenWidth / downscaling, MAX_RT_WIDTH);
+        int h = Mathf.Min(_cachedScreenHeight / downscaling, MAX_RT_HEIGHT);
+
+        //Actually what we could do for the Vita is enact some more aggressive case-handling for this...
+        if (downscaling == 2)
+        {
+            w = 256;
+            h = 256;
+        }
+
+        // Force power-of-2 for Vita GPU efficiency
+        w = Mathf.NextPowerOfTwo(w);
+        h = Mathf.NextPowerOfTwo(h);
+
+        RTSpec spec = new RTSpec(w, h, _cachedDepth, _cachedFormat);
+
+        // Try to get from cache first
+        /*
+        if (_availableRTs.ContainsKey(spec) && _availableRTs[spec].Count > 0)
+        {
+            RenderTexture rt = _availableRTs[spec].Dequeue();
+            _rentedRTs.Add(rt);
+            return rt;
+        }*/
+
+        // Create new RT if cache miss
+        RenderTexture newRT = CreateNewRT(spec);
+        _rentedRTs.Add(newRT);
+        return newRT;
+    }
+
     public void ReturnRT(RenderTexture rt)
     {
         if (rt == null || !_rentedRTs.Contains(rt)) return;

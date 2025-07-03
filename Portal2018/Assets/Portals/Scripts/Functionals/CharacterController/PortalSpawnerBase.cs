@@ -113,6 +113,14 @@ public class PortalSpawnerBase : MonoBehaviour {
         return false;
     }
 
+    public void HidePortals()
+    {
+        _leftPortal.gameObject.SetActive(false);
+        _leftPortal.PortalRenderer.setPortalAlpha(0);
+        _rightPortal.gameObject.SetActive(false);
+        _rightPortal.PortalRenderer.setPortalAlpha(0);
+    }
+
     void SetScaleOverTime(Portal parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio)
     {
         StartCoroutine(ScaleOverTimeRoutine(parentPortal, t, startSize, endSize, curve, duratio));
@@ -122,7 +130,7 @@ public class PortalSpawnerBase : MonoBehaviour {
     {
         float elapsed = 0;
         LazyPortalCamera lazyPortal = parentPortal.GetComponent<LazyPortalCamera>();
-
+        bool bScaleUp = endSize.x > 0f;
         while (elapsed < duration)
         {
             if (lazyPortal)
@@ -136,12 +144,23 @@ public class PortalSpawnerBase : MonoBehaviour {
                 t.localScale = Vector3.LerpUnclamped(startSize, endSize, scaleT);
                 yield return null;
                 elapsed += Time.deltaTime;
-                parentPortal.PortalRenderer.setPortalAlpha(scaleT);
+                if (bScaleUp)
+                {
+                    parentPortal.PortalRenderer.setPortalAlpha(scaleT);
+                } else
+                {
+                    parentPortal.PortalRenderer.setPortalAlpha(1.0f-scaleT);
+                }
+
             }
             yield return null;
             elapsed += Time.deltaTime;
         }
         t.localScale = endSize;
+        if (!bScaleUp)
+        {
+            parentPortal.gameObject.SetActive(false);
+        }
     }
 
     bool FindFit(Portal portal, Collider collider, out Vector3 newPosition)

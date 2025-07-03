@@ -5,6 +5,7 @@ using UnityEngine;
 //Basic door. Opens, closes, gets locked/unlocked, opens on command, it'll be added to as the game develops
 public class DoorBehaviour : MonoBehaviour {
 	public bool bStateLocked = false;
+	public bool bStatePermenantyLocked = false;
 	public bool bOpenWhenTriggered = false;
 	public bool bDoorOpen = false;
 	public float playerTriggerDistance = 3f;    //How close before our door will automatically open?
@@ -62,15 +63,20 @@ public class DoorBehaviour : MonoBehaviour {
         }
 	}
 
+	public void SetDoorPermenantyLocked(bool bToState)
+    {
+		bStatePermenantyLocked = bToState;
+	}
+
 	void Update()
     {
-		if (bDoorOpen && !Mathf.Approximately(lerpTime, 1f) && !bStateLocked)
+		if (bDoorOpen && !Mathf.Approximately(lerpTime, 1f) && !bStateLocked && !bStatePermenantyLocked)
         {
 			lerpTime = Mathf.Lerp(lerpTime, 1f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;
 			DoorRight.transform.localPosition = doorRightOffsetPosition * lerpTime;
 		}
-		if ((!bDoorOpen || bStateLocked) && !Mathf.Approximately(lerpTime, 0f))
+		if ((!bDoorOpen || bStateLocked || bStatePermenantyLocked) && !Mathf.Approximately(lerpTime, 0f))
         {
 			lerpTime = Mathf.Lerp(lerpTime, 0f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;

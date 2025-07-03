@@ -151,29 +151,33 @@ namespace PortalSystem
             //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
         }
 
+
+        public static CommandBuffer levelCMD;
+
         public static void CommandBufferRenderAll(RenderTexture targetTexture,
            Camera _camera,
            bool sortByDistance = true,
            Color clearColor = default(Color))
         {
 
-
-            CommandBuffer cmd = new CommandBuffer();
-            cmd.name = "Custom Render";
-
-            cmd.SetRenderTarget(targetTexture);
-
-            cmd.ClearRenderTarget(true, true, Color.black);
+            if (levelCMD == null)
+            {
+                //CommandBuffer cmd = new CommandBuffer();
+                levelCMD = new CommandBuffer();
+                levelCMD.name = "Custom Render";
+                CommandBufferPopulateAll(levelCMD);
+            }
 
             // Set camera matrices
-            cmd.SetViewProjectionMatrices(_camera.worldToCameraMatrix,
+            levelCMD.SetViewProjectionMatrices(_camera.worldToCameraMatrix,
                                          _camera.projectionMatrix);
 
-            //Draw scene
-            //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
-            CommandBufferRenderAll(targetTexture, cmd);
-            Graphics.ExecuteCommandBuffer(cmd);
-            cmd.Release();
+            levelCMD.SetRenderTarget(targetTexture);
+
+            levelCMD.ClearRenderTarget(true, true, Color.black);
+
+            Graphics.ExecuteCommandBuffer(levelCMD);
+            //cmd.Release();
         }
 
 
@@ -220,7 +224,7 @@ namespace PortalSystem
 
             //Draw scene
             //CommandBufferRenderCollectedMeshes(targetTexture, cmd);
-            CommandBufferRenderAll(targetTexture, cmd);
+            //CommandBufferRenderAll(cmd);
             Graphics.ExecuteCommandBuffer(cmd);
             cmd.Release();
         }
@@ -467,7 +471,7 @@ namespace PortalSystem
             }
         }
 
-        private static void CommandBufferRenderAll(RenderTexture targetTexture, CommandBuffer cmd)
+        private static void CommandBufferPopulateAll(CommandBuffer cmd)
         {
             if (cachedRenderList.Count() ==0)
             {

@@ -27,10 +27,6 @@ public class AutoPortalGovenor : PortalSpawnerBase {
 
         _leftPortal.gameObject.SetActive(false);
         _rightPortal.gameObject.SetActive(false);
-
-        //For the moment
-        //TriggerActive(true);
-
     }
   
     float cycleStartTime = 0;
