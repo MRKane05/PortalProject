@@ -113,7 +113,7 @@ public class PortalSpawnerBase : MonoBehaviour {
         return false;
     }
 
-    public void HidePortals()
+    public void HidePortals()   //Called from date to dissapear portals
     {
         _leftPortal.gameObject.SetActive(false);
         _leftPortal.PortalRenderer.setPortalAlpha(0);
@@ -180,6 +180,126 @@ public class PortalSpawnerBase : MonoBehaviour {
         }
     }
 
+    public static float InverseLerp(Vector3 a, Vector3 b, Vector3 value)
+    {
+        Vector3 AB = b - a;
+        Vector3 AV = value - a;
+        return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+    }
+
+    bool fitFromExtents(Portal portal, Vector3 forward, Vector3 centerPoint, Vector3[] corners, out Vector3 fitPosition)
+    {
+        //Raycast from the center to all of the corners, and if we hit something we need to offset our center point according to the hit (say the user aims at a wall close to the floor)
+        int repeats = 4; //Don't do this more than this many times to try and find a fit
+        corners = portal.WorldSpaceCorners;
+
+        Vector3[] offsetCorners = new Vector3[4];
+        Debug.DrawLine(centerPoint, centerPoint + forward, Color.green, 10f);
+        for (int i = 0; i < 4; i++)
+        {
+            offsetCorners[i] = centerPoint - corners[i];
+        }
+
+        float spherecastRadius = 0.01f;
+        bool bFitFound = false;
+        while (!bFitFound && repeats > 0)
+        {
+            Ray ray;
+            RaycastHit hit;
+            bool bHitPass = true;
+            corners = portal.WorldSpaceCorners;
+            for (int i = 0; i < 3; i++)
+            {
+                //Lets try going around the edges of our portal
+                /*
+                 * _cornerBuffer[0] = topLeft;
+                    _cornerBuffer[1] = topRight;
+                    _cornerBuffer[2] = bottomRight;
+                    _cornerBuffer[3] = bottomLeft;*/
+                ray = new Ray(corners[i] - forward *spherecastRadius, (corners[i + 1] - corners[i]).normalized);
+                if (Physics.SphereCast(ray, spherecastRadius * 0.95f, out hit, Vector3.Distance(corners[i], corners[i + 1]), _canHit, QueryTriggerInteraction.UseGlobal))
+                //if (Physics.Raycast(ray, out hit, (corners[i] - corners[i + 1]).magnitude, _canHit, QueryTriggerInteraction.UseGlobal))
+                {
+                    Debug.DrawLine(hit.point, hit.point - forward, Color.red, 10f);
+                    //Shift this into local space to see what we should do
+                    Vector3 LocalHit = portal.transform.InverseTransformPoint(hit.point);
+                    Debug.Log("Local Hit: " + LocalHit);
+
+                    //Ok, so we've got a reliable hit on one of our sides. We need to move our portal now to suit that hit
+                    //Vector3 HitDirection = hit.point - centerPoint;  //Not that this tell us all that much actually
+                    
+                    //Debug.Log("Hit on trace: " + i);
+                    //So if we've got a hit we need to offset our position to suit
+                    //float t = InverseLerp(corners[i], corners[i + 1], hit.point);
+                    //Debug.Log("Hit on trace: " + i + ", t: " + t);
+                    //Debug.DrawRay(hit.point, forward, Color.green, 5f);
+                    //So to calculate our move
+                    /*
+                    t = Mathf.Clamp01(Mathf.Abs(t));
+                    if (t > 0.5f) //move towards end
+                    {
+                        Debug.Log("ShiftU: " + (corners[i] - corners[i + 1]) * (1f - t));
+                        portal.transform.position += (corners[i] - corners[i+1]) * (1f - t);
+                    } else
+                    {
+                        Debug.Log("ShiftD: " + (corners[i + 1] - corners[i]) * t);
+                        portal.transform.position += (corners[i+1] - corners[i]) * t;
+                    }
+                    centerPoint = portal.transform.position;
+                    */
+                    
+                }
+
+                /*
+                ray = new Ray(centerPoint - forward.normalized * spherecastRadius, (offsetCorners[i]).normalized);
+                
+                if (Physics.SphereCast(ray, spherecastRadius * 0.95f, out hit, offsetCorners[i].magnitude, _canHit, QueryTriggerInteraction.UseGlobal))
+                {
+                    //Need to reposition the portal based off of this hit
+                    Debug.DrawLine(centerPoint - forward.normalized * spherecastRadius, hit.point, Color.red, 5f);
+                    Vector3 centerOffset = (centerPoint - forward.normalized * spherecastRadius + offsetCorners[i]);
+
+                    Debug.Log(centerOffset + ", H: " + hit.point);
+                    centerOffset -= hit.point;
+                    centerPoint += centerOffset;                   
+
+                    bHitPass = false;
+                }
+                else
+                {
+                    Debug.DrawLine(centerPoint - forward.normalized * spherecastRadius, centerPoint + offsetCorners[i] - forward.normalized * spherecastRadius, Color.yellow, 5f);
+                }
+                
+                //Original raycast
+                /
+                if (Physics.Raycast(ray, out hit, Vector3.Distance(centerPoint, centerPoint + offsetCorners[i]), _canHit, QueryTriggerInteraction.UseGlobal))
+                {
+                    //Need to reposition the portal based off of this hit
+                    centerPoint += centerPoint - hit.point;
+                    Debug.DrawLine(centerPoint, centerPoint + offsetCorners[i], Color.red, 5f);
+
+                    bHitPass = false;
+                } else
+                {
+                    Debug.DrawLine(centerPoint, centerPoint + offsetCorners[i], Color.yellow, 5f);
+                }*/
+            }
+
+            if (bHitPass)
+            {
+                bFitFound = true;
+            }
+            repeats--;
+        }
+        fitPosition = centerPoint;
+
+        if (!bFitFound)
+        {
+            return false;
+        }        
+        return true;
+    }
+
     bool FindFitMeshCollider(Portal portal, Collider collider, out Vector3 newPosition)
     {
         newPosition = portal.transform.position;
@@ -193,16 +313,92 @@ public class PortalSpawnerBase : MonoBehaviour {
         Vector3[] corners = portal.WorldSpaceCorners;
         Vector3 forward = portal.transform.forward;
 
+        //This needs a position according to the extents of the portal and hypothetical offset to make the portal fit
+
         int numIterations = _meshColliderIterationCount;
         Vector3 offset;
         bool viablePositionExists = FindViableCoplanarRectOnCollider(collider, center, corners, forward, numIterations, out offset);
+
         if (!viablePositionExists)
         {
             return false;
         }
 
         newPosition = portal.transform.position + offset;
+        /*
+        portal.transform.position = newPosition;
+
+        corners = portal.WorldSpaceCorners;
+        //Try and do the world-space fitting considering edges
+        Vector3 newOffset = newPosition;
+        bool fittedPositionExists = fitFromExtents(portal, forward, newPosition, corners, out newOffset);
+
+        if (!fittedPositionExists)
+        {
+            return false;
+        }
+
+        newPosition = newOffset; //Because this will have bene hard set in the above function
+        */
         return true;
+    }
+
+    public bool CheckMaterialValidForPortal(RaycastHit hit)
+    {
+        if (hit.transform == null) return false;
+
+        MeshCollider meshCollider = hit.collider as MeshCollider;
+        if (meshCollider == null || meshCollider.sharedMesh == null) return false;
+
+        Mesh mesh = meshCollider.sharedMesh;
+        int triangleIndex = hit.triangleIndex;
+
+        int subMeshIndex = GetSubMeshIndex(mesh, triangleIndex);
+
+        if (subMeshIndex == -1) return false;
+
+        MeshRenderer meshRenderer = hit.transform.GetComponent<MeshRenderer>();
+        if (meshRenderer == null) return false;
+
+        Material[] materials = meshRenderer.materials;
+        if (subMeshIndex >= materials.Length) return false;
+
+        Material hitMaterial = materials[subMeshIndex];
+        string matName = hitMaterial.name.ToLower();
+        //Debug.Log(matName);
+        if (LevelController.Instance)
+        {
+            for (int i = 0; i < LevelController.Instance.validPortalMaterialTags.Count; i++)
+            {
+                if (matName.Contains(LevelController.Instance.validPortalMaterialTags[i]))
+                {
+                    return true;
+                }
+            }
+        } else
+        {
+            return true;
+        }
+
+        return false;
+        // You can now work with the 'hitMaterial'
+    }
+
+    private int GetSubMeshIndex(Mesh mesh, int triangleIndex)
+    {
+        int subMeshCount = mesh.subMeshCount;
+        for (int i = 0; i < subMeshCount; i++)
+        {
+            int[] triangles = mesh.GetTriangles(i);
+            for (int j = 0; j < triangles.Length; j += 1)
+            {
+                if (triangleIndex >= j && triangleIndex < j + 1)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1; // Should not happen if triangleIndex is valid
     }
 
     bool FindViableCoplanarRectOnCollider(Collider collider, Vector3 center, Vector3[] corners, Vector3 forward, int iterations, out Vector3 offset)
@@ -322,7 +518,7 @@ public class PortalSpawnerBase : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, normalOffset * 2, _canHit, QueryTriggerInteraction.Collide))
             {
-                if (hit.collider == collider)
+                if (hit.collider == collider && collider.gameObject.layer != LayerMask.NameToLayer("BackfacePortal"))
                 {
                     outHits[i] = true;
                     numHits++;

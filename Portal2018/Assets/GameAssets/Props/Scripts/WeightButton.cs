@@ -8,6 +8,12 @@ public class BoolUnityEvent : UnityEvent<bool>
 {
 }
 
+[System.Serializable]
+public class BoolObjectUnityEvent : UnityEvent<GameObject, bool>
+{
+}
+
+
 //Basic pressureplate button
 public class WeightButton : MonoBehaviour
 {
@@ -21,6 +27,7 @@ public class WeightButton : MonoBehaviour
     float buttonLerpSpeed = 3f;
 
     public BoolUnityEvent OnButtonTriggered;  //This can't be public...
+    public BoolObjectUnityEvent OnButtonTriggeredMulti;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -62,6 +69,7 @@ public class WeightButton : MonoBehaviour
             {
                 bButtonTriggered = true;
                 OnButtonTriggered.Invoke(bButtonTriggered);
+                OnButtonTriggeredMulti.Invoke(gameObject, bButtonTriggered);
             }
         }
         if (!bSufficientWeight && !Mathf.Approximately(lerpTime, 0f))
@@ -72,6 +80,7 @@ public class WeightButton : MonoBehaviour
             {
                 bButtonTriggered = false;
                 OnButtonTriggered.Invoke(bButtonTriggered);
+                OnButtonTriggeredMulti.Invoke(gameObject, bButtonTriggered);
             }
         }
     }

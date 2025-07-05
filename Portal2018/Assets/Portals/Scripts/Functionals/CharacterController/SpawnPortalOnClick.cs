@@ -57,8 +57,8 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         bool leftClick = Input.GetMouseButtonDown(0);
         bool rightClick = Input.GetMouseButtonDown(1);
 #if !UNITY_EDITOR
-        leftClick = Input.GetButtonDown("Left Shoulder");
-        rightClick = Input.GetButtonDown("Right Shoulder");
+        leftClick = Input.GetButtonDown("Right Shoulder");
+        rightClick = Input.GetButtonDown("Left Shoulder");
 #endif
         if ((leftClick || rightClick) && bCanFire) {
             Polarity polarity = leftClick ? Polarity.Left : Polarity.Right;
@@ -198,13 +198,23 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         }
 
         if (hitWall) {
+            //Do a forward check to see if we can spawn
+            bool bValidSurface = hit.collider.gameObject.layer != LayerMask.NameToLayer("BackfacePortal");
             Portal portal = hit.collider.GetComponent<Portal>();
-            if (portal) {
+            if (portal)
+            {
                 //For this implementation we don't much care about fancy effects
                 //WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
-            } else {
-                bool spawnedPortal = TrySpawnPortal(polarity == Polarity.Left, hit, _camera.transform.forward);
-                if (!spawnedPortal) {
+            }
+            else
+            {
+                bool spawnedPortal = false;
+                if (bValidSurface)
+                {
+                    spawnedPortal = TrySpawnPortal(polarity == Polarity.Left, hit, _camera.transform.forward);
+                }
+                if (!spawnedPortal)
+                {
                     SpawnSplashParticles(hit.point, hit.normal, color);
                 }
             }
@@ -268,6 +278,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         ParticleSystem particles = obj.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule main = particles.main;
         main.startColor = color;
+        Destroy(obj, 3f); //Problem: Tiny gain to be made by having splash particles in a buffer
     }
 
     GameObject SpawnBullet(GameObject prefab, Vector3 position, Vector3 direction, float distance, Color color) {

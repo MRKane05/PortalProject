@@ -84,6 +84,7 @@ public class LightProbeSampler : MonoBehaviour
         {
             SampleLightProbes();
             m_LastUpdateTime = Time.time;
+            lastUpdatePosition = transform.position;
         }
     }
 

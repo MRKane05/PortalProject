@@ -12,6 +12,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject playerObject; //Will no doubt be referenced by lots of things
 	[HideInInspector]
 	public SpawnPortalOnClick playersPortalGun;
+	public List<string> validPortalMaterialTags = new List<string>();   //Not sure if this should simply be on the gun itself
 
 	[Space]
 	[Header("Settings for Portal Cameras")]
