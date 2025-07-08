@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4269340004975564}
   - component: {fileID: 65021774379670228}
   - component: {fileID: 114151143755231716}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33065655932723012}
   - component: {fileID: 23658606477914928}
   - component: {fileID: 65867312448687440}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GateSide (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4597914119084614}
   - component: {fileID: 198512557333880908}
   - component: {fileID: 199138967237845268}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ParticleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 33457596899681822}
   - component: {fileID: 23983461675341490}
   - component: {fileID: 65720670734532770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GateSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4869722024665828}
   - component: {fileID: 198742721504979534}
   - component: {fileID: 199646204150043110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ParticleEffect (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379434580924848}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.886898, y: 3.6452007, z: 15.239999}
+  m_LocalPosition: {x: -12.891867, y: -3.673171, z: -3.6887996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433131165886670}

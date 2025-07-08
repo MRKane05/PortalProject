@@ -29,7 +29,7 @@ public class ProcessLevelModel : MonoBehaviour {
         //Handle our layers
         if (thisTrans.gameObject.name.ToLower().Contains("noportal"))
         {
-            thisTrans.gameObject.layer = LayerMask.NameToLayer("PostProcessing");
+            thisTrans.gameObject.layer = LayerMask.NameToLayer("BackfacePortal");
         } else
         {
             thisTrans.gameObject.layer = LayerMask.NameToLayer("Default");
@@ -44,6 +44,17 @@ public class ProcessLevelModel : MonoBehaviour {
                 transCollider.enabled = false;
             }
         }
+
+        if (thisTrans.gameObject.name.ToLower().Contains("glass"))
+        {
+            MeshRenderer thisRenderer = thisTrans.gameObject.GetComponent<MeshRenderer>();
+            if (thisRenderer)
+            {
+                thisRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
+        }
+
+        //Should do a check for materials that are still the standard shader also
         
         if (thisTrans.childCount >0)
         {

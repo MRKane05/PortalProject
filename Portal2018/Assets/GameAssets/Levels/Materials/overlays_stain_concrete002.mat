@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: overlays_stain_tile001
+  m_Name: overlays_stain_concrete002
   m_Shader: {fileID: 4800000, guid: 5f7a92f2baab7ee469b43883ef70b0b7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6f87cb78b17b4b1459833ca104d16353, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03a4cbaccb922f540bf894e7c10542b2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

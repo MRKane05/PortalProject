@@ -9,8 +9,12 @@ public class ElevatorHandler : MonoBehaviour {
 
     public GameObject ElevatorShuttle; //Our bit wot does the moving
     public GameObject ElevatorBase, ElevatorDestination; //Our two exterior pieces that we'll move between
+    public ElevatorDoorsHandler ElevatorDoors;
 
     public float ElevatorMoveSpeed = 3f;
+
+    public bool bBaseDoorsOpen = false;
+    public float baseDoorAlpha = 0f;
 
     public void SetPlayerState(bool bPlayerInVolume)
     {
@@ -20,6 +24,11 @@ public class ElevatorHandler : MonoBehaviour {
         }
     }
 
+    public void PlayerEnteredOpenTrigger()
+    {
+        bBaseDoorsOpen = true;
+    }
+
     public void PlayerSteppedIntoElevator()
     {
         if (ElevatorState == enElevatorState.WAITING)   //Do our door close thing
@@ -27,15 +36,33 @@ public class ElevatorHandler : MonoBehaviour {
             ElevatorState = enElevatorState.DOORCLOSING;
         }
     }
+    float doorOpenSpeed = 3f;
 
     public void LateUpdate()
     {
+        //Door behavior
+        if (bBaseDoorsOpen && baseDoorAlpha < 1f)
+        {
+            baseDoorAlpha = Mathf.MoveTowards(baseDoorAlpha, 1f, Time.deltaTime * doorOpenSpeed);
+            ElevatorDoors.setDoorAlpha(baseDoorAlpha);
+        } 
+        
+        if (!bBaseDoorsOpen && baseDoorAlpha > 0f)
+        {
+            baseDoorAlpha = Mathf.MoveTowards(baseDoorAlpha, 0f, Time.deltaTime * doorOpenSpeed);
+            ElevatorDoors.setDoorAlpha(baseDoorAlpha);
+        }
+
         switch (ElevatorState)
         {
             case enElevatorState.WAITING:
                 break;
             case enElevatorState.DOORCLOSING:   //Just jump straight to the moving
-                ElevatorState = enElevatorState.MOVING;
+                bBaseDoorsOpen = false;
+                if (baseDoorAlpha < 0.001f)
+                {
+                    ElevatorState = enElevatorState.MOVING;
+                }
                 break;
             case enElevatorState.MOVING:
                 DoElevatorMove();
@@ -51,5 +78,12 @@ public class ElevatorHandler : MonoBehaviour {
     {
         //What we really need is something that will smoothly transition. What we're going to get for the moment is something that moves!
         ElevatorShuttle.transform.position = Vector3.MoveTowards(ElevatorShuttle.transform.position, ElevatorDestination.transform.position, ElevatorMoveSpeed*Time.deltaTime);
+        
+        //Break from our state when we get close enough to the top. I'm sure that this could be made dramatic
+        if (Vector3.SqrMagnitude(ElevatorShuttle.transform.position-ElevatorDestination.transform.position) < 0.1f)
+        {
+            bBaseDoorsOpen = true;
+            ElevatorState = enElevatorState.DOOROPENING;
+        }
     }
 }

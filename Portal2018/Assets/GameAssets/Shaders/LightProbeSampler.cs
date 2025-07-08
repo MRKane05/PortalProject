@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 [ExecuteInEditMode]
 
-[RequireComponent(typeof(Renderer))]
+//[RequireComponent(typeof(Renderer))]
 public class LightProbeSampler : MonoBehaviour
 {
     public bool bPopulateChildRenderers = false;

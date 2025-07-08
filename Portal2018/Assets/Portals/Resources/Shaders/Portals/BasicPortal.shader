@@ -97,11 +97,11 @@
 				defaultCol *= tex2D(_DefaultTexture, i.uv.xy + _defaultTextureOffset.zw + UVDistort.xy);
 
 				// Simplified portal mask sampling
-				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy * 0.025); // Reduce distortion
+				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy * 0.05); // Reduce distortion
 
 				// Optimize flame border calculation
 				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (_portalFade*1.2) + portalCol.r);
-				half3 portalFlames = _Color.rgb * portalFlameBorder;
+				half3 portalFlames = _Color.rgb * (portalFlameBorder + portalCol.b);
 
 				// Early discard for performance
 				clip(portalCol.a - _AlphaCutoff);

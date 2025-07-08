@@ -613,15 +613,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: -0, y: -0.7691592, z: -0, w: -0.6390573}
-  m_LocalPosition: {x: -12.57, y: 1.26, z: -1.2}
+  m_LocalRotation: {x: -0, y: -0.09075737, z: -0, w: -0.99587303}
+  m_LocalPosition: {x: 9.204, y: 3.81, z: 4.899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
   - {fileID: 4068778981482640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 460.557, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 275.502, z: 0}
 --- !u!4 &4358694052898930
 Transform:
   m_ObjectHideFlags: 1
@@ -825,8 +825,8 @@ Camera:
   m_GameObject: {fileID: 1965427446319756}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1806,7 +1806,7 @@ MonoBehaviour:
   _noClipEnabled: 0
   _flySpeed: 1
   _movementInfo:
-    maxSpeedHorizontal: 4
+    maxSpeedHorizontal: 3
     maxSpeedVertical: 40
     accellerationGrounded: 5
     accellerationAerial: 0.25
@@ -1849,7 +1849,7 @@ MonoBehaviour:
     type: 2}
   _canHit:
     serializedVersion: 2
-    m_Bits: 791
+    m_Bits: 279
   _normalOffset: 0.01
   _portalSpawnTime: 0.25
   _portalSpawnCurve:
