@@ -80,7 +80,7 @@ public class ElevatorHandler : MonoBehaviour {
         ElevatorShuttle.transform.position = Vector3.MoveTowards(ElevatorShuttle.transform.position, ElevatorDestination.transform.position, ElevatorMoveSpeed*Time.deltaTime);
         
         //Break from our state when we get close enough to the top. I'm sure that this could be made dramatic
-        if (Vector3.SqrMagnitude(ElevatorShuttle.transform.position-ElevatorDestination.transform.position) < 0.1f)
+        if (Mathf.Approximately(Vector3.SqrMagnitude(ElevatorShuttle.transform.position-ElevatorDestination.transform.position), 0f))
         {
             bBaseDoorsOpen = true;
             ElevatorState = enElevatorState.DOOROPENING;

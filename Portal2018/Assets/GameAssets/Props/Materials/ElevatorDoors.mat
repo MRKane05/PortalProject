@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ElevatorDoors
-  m_Shader: {fileID: 4800000, guid: b5987dda79b36114da9813dd403b324f, type: 3}
+  m_Shader: {fileID: 4800000, guid: db10c03cb35d87f4a8e22cea9f8e38bb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8196d4e6a88ef3142a39fbfd97f5db72, type: 3}
+        m_Texture: {fileID: 2800000, guid: 596f235b5f7957644aea2a1203aa018b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
