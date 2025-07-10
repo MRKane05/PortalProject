@@ -580,7 +580,8 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    18: BAKERY_INCLUDED
   platformArchitecture: {}
   scriptingBackend:
     PSP2: 1

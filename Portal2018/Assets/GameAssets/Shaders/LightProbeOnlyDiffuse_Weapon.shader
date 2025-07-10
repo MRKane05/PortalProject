@@ -2,6 +2,8 @@
     Properties{
       _MainTex("Diffuse Texture", 2D) = "white" {}
       _Color("Main Color", Color) = (1,1,1,1)
+
+      _Ambient("Ambient Color", Color) = (1,1,1,1)
     }
 
         SubShader{
@@ -38,6 +40,7 @@
                 sampler2D _MainTex;
                 float4 _MainTex_ST;
                 fixed4 _Color;
+                fixed4 _Ambient;
 
                 // Spherical Harmonics coefficients passed from script
                 float4 _SHAr;
@@ -67,7 +70,7 @@
                     float vC = normal.x * normal.x - normal.y * normal.y;
                     x3 = _SHC.rgb * vC;
 
-                    return x1 + x2 + x3;
+                    return x1 + x2 + x3 + _Ambient;
                 }
 
                 v2f vert(appdata v) {
