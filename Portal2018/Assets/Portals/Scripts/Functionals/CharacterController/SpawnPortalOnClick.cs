@@ -19,6 +19,9 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
     [SerializeField] float _bulletSpeed = 20.0f;
     [SerializeField] GameObject _splashParticles;
 
+    public AudioClip clip_fireBlue, clip_fireRed;
+    AudioSource ourAudio;
+
     //And a driver for our attached "Gun"
     public GameObject portalGunModel;
     public Animator portalGunAnimator;
@@ -38,6 +41,8 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         if (!isActiveAndEnabled) {
             return;
         }
+
+        ourAudio = gameObject.GetComponent<AudioSource>();
 
         _leftPortal = SpawnPortal(Vector3.zero, Quaternion.identity, LeftPortalColor);
         _rightPortal = SpawnPortal(Vector3.zero, Quaternion.identity, RightPortalColor);
@@ -173,6 +178,11 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             {
                 return;
             }
+        }
+
+        if (ourAudio)
+        {
+            ourAudio.PlayOneShot(polarity == Polarity.Left ? clip_fireBlue : clip_fireRed);
         }
 
         Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;

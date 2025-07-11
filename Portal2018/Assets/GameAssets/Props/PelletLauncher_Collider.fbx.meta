@@ -1,41 +1,15 @@
 fileFormatVersion: 2
-guid: 2153a9025b1199741b78b3f4a2851b89
+guid: a20394d079267fa41bd312ce2d29cda3
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: ArmBase
-    100002: ArmFinger
-    100004: ArmMain
-    100006: //RootNode
-    100008: Sphere
-    400000: ArmBase
-    400002: ArmFinger
-    400004: ArmMain
-    400006: //RootNode
-    400008: Sphere
-    2100000: acmat_0
-    2100002: HighEnergyPelletLauncher
-    2300000: ArmBase
-    2300002: ArmFinger
-    2300004: ArmMain
-    2300006: Sphere
-    3300000: ArmBase
-    3300002: ArmFinger
-    3300004: ArmMain
-    3300006: Sphere
-    4300000: Sphere
-    4300002: ArmBase
-    4300004: ArmMain
-    4300006: ArmFinger
-    7400000: Launch
-    9500000: //RootNode
-    11100000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: HighEnergyPelletLauncher
-    second: {fileID: 2100000, guid: fe3448aee6532884e9b383b24d67e25c, type: 2}
+    100000: //RootNode
+    400000: //RootNode
+    2100000: No Name
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: PelletLauncherCollider
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -62,35 +36,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Launch
-      takeName: ArmOperatorAxisAction
-      firstFrame: 0
-      lastFrame: 79
-      wrapMode: 1
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -114,11 +60,11 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.0022
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
@@ -139,7 +85,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

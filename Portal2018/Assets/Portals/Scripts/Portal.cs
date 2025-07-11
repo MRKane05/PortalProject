@@ -59,6 +59,17 @@ namespace Portals {
 
         public Color PortalColor = Color.white;
 
+        public List<AudioClip> portalOpenSounds;
+        public AudioSource ourAudio;
+
+        public void PlayPortalOpenSound()
+        {
+            if (ourAudio && portalOpenSounds.Count > 0)
+            {
+                ourAudio.PlayOneShot(portalOpenSounds[UnityEngine.Random.Range(0, portalOpenSounds.Count)]);
+            }
+        }
+
         public void setPortalColor(Color newColor)
         {
             PortalColor = newColor;

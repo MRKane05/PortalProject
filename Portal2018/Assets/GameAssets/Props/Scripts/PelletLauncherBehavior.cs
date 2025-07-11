@@ -6,6 +6,13 @@ public class PelletLauncherBehavior : MonoBehaviour {
 	public List<Animation> ArmAnimations = new List<Animation>();
     float pelletFireDelay = 0.5f;
     public GameObject pelletPrefab; //Might have to be a rigidbody, I'm not sure
+    GameObject ourPellet;
+
+    IEnumerator Start()
+    {
+        yield return new WaitForSeconds(3f);
+        DoFirePellet();
+    }
 
 	public void DoFirePellet()
     {
@@ -20,7 +27,13 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
     public void FirePellet()
     {
-        GameObject newPellet = Instantiate(pelletPrefab, transform.position, Quaternion.identity) as GameObject;
+        if (ourPellet == null)
+        {
+            ourPellet = Instantiate(pelletPrefab, transform.position, Quaternion.identity) as GameObject;
+        }
+        PelletProjectile newProjectile = ourPellet.GetComponent<PelletProjectile>();
+        newProjectile.transform.position = gameObject.transform.position;
+        newProjectile.setMoveDir(transform.up);
         //Set the pellet script pointing forward
         //Set the pellet timer
     }
@@ -28,6 +41,6 @@ public class PelletLauncherBehavior : MonoBehaviour {
     IEnumerator firePellet()
     {
         yield return new WaitForSeconds(pelletFireDelay);
-        DoFirePellet();
+        FirePellet();
     }
 }

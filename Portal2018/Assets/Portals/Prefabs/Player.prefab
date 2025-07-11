@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 114603961447189572}
   - component: {fileID: 114950017476972466}
   - component: {fileID: 114579552365318066}
+  - component: {fileID: 82976414804011166}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -393,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4916207596918762}
   - component: {fileID: 114762403182961838}
+  - component: {fileID: 82215202339894530}
   m_Layer: 15
   m_Name: PortalGun
   m_TagString: Untagged
@@ -613,8 +615,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: -0, y: -0.09075737, z: -0, w: -0.99587303}
-  m_LocalPosition: {x: 9.204, y: 3.81, z: 4.899}
+  m_LocalRotation: {x: -0, y: 0.67235553, z: -0, w: -0.7402284}
+  m_LocalPosition: {x: 3.31, y: -1.47, z: -2.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
@@ -1719,6 +1721,196 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1965427446319756}
   m_Enabled: 1
+--- !u!82 &82215202339894530
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1866525038828386}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &82976414804011166
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614185999318264}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95986865831258756
 Animator:
   serializedVersion: 3
@@ -1788,7 +1980,15 @@ MonoBehaviour:
   _camera: {fileID: 20543485654963758}
   _replacementShader: {fileID: 4800000, guid: f919f642bd5df034c9810c0bba3ec5a5, type: 3}
   _spawnCloneOnAwake: 1
+  _cloneDisableCollisions: 0
+  _isClone: 0
   bReplaceShaders: 0
+  enterPortalSounds:
+  - {fileID: 8300000, guid: 16ca4c1c11930f9448c4856ed2371074, type: 3}
+  - {fileID: 8300000, guid: 9048601df8c2c9e4a8d2ef3836e52075, type: 3}
+  exitPortalSounds:
+  - {fileID: 8300000, guid: 07008a9cd5515134294fee756daa2453, type: 3}
+  - {fileID: 8300000, guid: 6077e19ef272a984793d5286f529cf54, type: 3}
   lastExitedPortal: {fileID: 0}
   bCanBePickedUp: 1
 --- !u!114 &114603961447189572
@@ -1849,7 +2049,7 @@ MonoBehaviour:
     type: 2}
   _canHit:
     serializedVersion: 2
-    m_Bits: 279
+    m_Bits: 1303
   _normalOffset: 0.01
   _portalSpawnTime: 0.25
   _portalSpawnCurve:
@@ -1894,6 +2094,8 @@ MonoBehaviour:
   _bulletSpeed: 50
   _splashParticles: {fileID: 1575572374623432, guid: 8fbdb469f448eed4292a539878fbec36,
     type: 2}
+  clip_fireBlue: {fileID: 8300000, guid: d8d95939bb66c224791728c9087c9d41, type: 3}
+  clip_fireRed: {fileID: 8300000, guid: c2aab4d1af2868642b74656e22f89a90, type: 3}
   portalGunModel: {fileID: 1883978446506390}
   portalGunAnimator: {fileID: 95986865831258756}
 --- !u!114 &114806287536369406

@@ -102,6 +102,7 @@ public class PortalSpawnerBase : MonoBehaviour {
             portal.IgnoredColliders = new Collider[] { hit.collider };
             portal.gameObject.SetActive(true);
             portal.PortalSetPosition(newPosition + hit.normal * _normalOffset, hit.normal);
+            portal.PlayPortalOpenSound();
             // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
             Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
             //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface

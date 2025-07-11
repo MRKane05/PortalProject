@@ -29,8 +29,9 @@ namespace Portals {
         [SerializeField] private Camera _camera;
         [SerializeField] private Shader _replacementShader;
         [SerializeField] private bool _spawnCloneOnAwake = true;
+        [SerializeField] private bool _cloneDisableCollisions = false;
 
-        private bool _isClone;
+        public bool _isClone;
 
         // Shader that will be applied when passing through the portal
         private int _clippingPlaneShaderHash;
@@ -49,6 +50,10 @@ namespace Portals {
         private Vector3 _cameraPositionLastFrame;
 
         public bool bReplaceShaders = false;
+
+        AudioSource ourAudio;
+        public List<AudioClip> enterPortalSounds;
+        public List<AudioClip> exitPortalSounds;
 
         #endregion
 
@@ -117,6 +122,8 @@ namespace Portals {
             }
             else
             {
+                ourAudio = gameObject.GetComponent<AudioSource>();
+
                 _clippingPlaneShaderHash = Shader.PropertyToID("_ClippingPlane");
                 _contextByPortal = new Dictionary<Portal, PortalContext>();
                 _portalTriggersSeen = new HashSet<Portal>();
@@ -134,12 +141,15 @@ namespace Portals {
         {
             if (!_isClone)
             {
-                for (int i = 0; i < _cloneObjectPool.Count; i++)
+                if (_cloneObjectPool != null)
                 {
-                    Teleportable clone = _cloneObjectPool.Take();
-                    if (clone)
+                    for (int i = 0; i < _cloneObjectPool.Count; i++)
                     {
-                        Destroy(clone.gameObject);
+                        Teleportable clone = _cloneObjectPool.Take();
+                        if (clone)
+                        {
+                            Destroy(clone.gameObject);
+                        }
                     }
                 }
             }
@@ -396,6 +406,11 @@ namespace Portals {
         #region Teleportation
         private void EnterPortal(Portal portal)
         {
+            if (ourAudio && enterPortalSounds.Count > 0)
+            {
+                ourAudio.PlayOneShot(enterPortalSounds[UnityEngine.Random.Range(0, enterPortalSounds.Count)]);
+            }
+
             Teleportable clone = SpawnClone();
             clone.gameObject.SetActive(true);
             clone.SaveRigidbodyInfo();
@@ -516,6 +531,11 @@ namespace Portals {
 
         private void ExitPortal(Portal portal)
         {
+            if (ourAudio && exitPortalSounds.Count > 0)
+            {
+                ourAudio.PlayOneShot(exitPortalSounds[UnityEngine.Random.Range(0, enterPortalSounds.Count)]);
+            }
+
             PortalContext context = _contextByPortal[portal];
             lastExitedPortal = portal;
             // Do an extra teleport check in case...
@@ -638,6 +658,11 @@ namespace Portals {
             DisableInvalidComponentsRecursively(clone.gameObject);
             clone.gameObject.SetActive(false);
             clone._isClone = true;
+
+            if (_cloneDisableCollisions)
+            {
+                clone.gameObject.GetComponent<Collider>().enabled = false;
+            }
 
             return clone;
         }
