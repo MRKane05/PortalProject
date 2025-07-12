@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54086207109055710}
   - component: {fileID: 114397571368986464}
   - component: {fileID: 65377375435808222}
+  - component: {fileID: 135758138805366844}
   - component: {fileID: 114805375630769946}
   - component: {fileID: 114039192741167188}
   - component: {fileID: 114505179678314132}
@@ -41,13 +42,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732325039214490}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1351202, y: -1.803, z: 1.4618021}
+  m_LocalRotation: {x: 0, y: 0, z: 0.33076146, w: 0.94371444}
+  m_LocalPosition: {x: 3.907958, y: -5.26, z: 3.8016458}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 38.63}
 --- !u!23 &23917976620924478
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -264,6 +265,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec0940aad63987e45832c6b4dc587d24, type: 3}
   - {fileID: 8300000, guid: b28670bdff5cde346a144da166257630, type: 3}
   - {fileID: 8300000, guid: cae0278d889b7ae40a98220547bd74f5, type: 3}
+  bSilentFirstHit: 1
 --- !u!114 &114805375630769946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,3 +288,15 @@ MonoBehaviour:
   exitPortalSounds: []
   lastExitedPortal: {fileID: 0}
   bCanBePickedUp: 1
+--- !u!135 &135758138805366844
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732325039214490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3500002
+  m_Center: {x: 0.00000011920929, y: 0.00000047683716, z: 0}

@@ -8,6 +8,8 @@ public class PelletLauncherBehavior : MonoBehaviour {
     public GameObject pelletPrefab; //Might have to be a rigidbody, I'm not sure
     GameObject ourPellet;
 
+    public GameObject launchPoint;
+
     IEnumerator Start()
     {
         yield return new WaitForSeconds(3f);
@@ -18,24 +20,52 @@ public class PelletLauncherBehavior : MonoBehaviour {
     {
         //this'll have to be a co-routing to delay before the pellet is fired
         //But first animate the joints
+        PlayFireAnimations();
+        StartCoroutine(firePellet());
+    }
+
+    public void PlayFireAnimations()
+    {
         for (int i = 0; i < ArmAnimations.Count; i++)
         {
-            ArmAnimations[i].Play();
+            ArmAnimations[i].Rewind();
+            //ArmAnimations[i].CrossFade(ArmAnimations[i].clip.name, 0.25f);
+            ArmAnimations[i].Play(ArmAnimations[i].clip.name);
         }
-        StartCoroutine(firePellet());
     }
 
     public void FirePellet()
     {
         if (ourPellet == null)
         {
-            ourPellet = Instantiate(pelletPrefab, transform.position, Quaternion.identity) as GameObject;
+            ourPellet = Instantiate(pelletPrefab, launchPoint.transform.position, Quaternion.identity) as GameObject;
         }
+        ourPellet.SetActive(true);
+        ourPellet.transform.position = launchPoint.transform.position;
+
         PelletProjectile newProjectile = ourPellet.GetComponent<PelletProjectile>();
-        newProjectile.transform.position = gameObject.transform.position;
-        newProjectile.setMoveDir(transform.up);
-        //Set the pellet script pointing forward
-        //Set the pellet timer
+        newProjectile.ourPelletLauncher = this;
+        newProjectile.setMoveDir(launchPoint.transform.up);
+    }
+
+    public void PelletDied()
+    {
+        StartCoroutine(RespawnPellet());
+        ourPellet.SetActive(false);
+        ourPellet.GetComponent<Collider>().enabled = false;
+    }
+
+    IEnumerator RespawnPellet()
+    {
+        yield return new WaitForSeconds(3);
+        PlayFireAnimations();
+        yield return new WaitForSeconds(0.5f);
+        FirePellet();
+    }
+
+    public void PelletDocked()
+    {
+
     }
 
     IEnumerator firePellet()
