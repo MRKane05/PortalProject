@@ -38,6 +38,8 @@ public class PelletLauncherBehavior : MonoBehaviour {
         if (ourPellet == null)
         {
             ourPellet = Instantiate(pelletPrefab, launchPoint.transform.position, Quaternion.identity) as GameObject;
+            ourPellet.name = pelletPrefab.name;
+            ourPellet.name += Random.Range(0, 1234); //Make this into an original name for our clone handling
         }
         ourPellet.SetActive(true);
         ourPellet.transform.position = launchPoint.transform.position;

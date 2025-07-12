@@ -33,13 +33,14 @@ public class PelletProjectile : MonoBehaviour
 	}
 
 	// Use this for initialization
-	IEnumerator Start()
+	void Start()
 	{
+		/*
 		if (false)
 		{
 			setMoveDir(Vector3.up);
 			yield return new WaitForSeconds(0.5f);
-		}
+		}*/
 		//turn our collider back on now that we've left the area of our projector
 		//gameObject.GetComponent<Collider>().enabled = true;
 		effectsMaterial = new Material(effectsSphere.material);
@@ -79,10 +80,13 @@ public class PelletProjectile : MonoBehaviour
 	{
 		if (effectsMaterial)
 		{
-			effectsMaterial.SetTextureOffset("_MainTex", wrapVector(effectsPan * Time.time));   //In theory there's a breakdown point with this...
+			effectsMaterial.SetTextureOffset("_MainTex", wrapVector(effectsPan * Time.time));   //PROBLEM: This stops working when it's in the catcher, and I don't know why
 			if (!bPelletCaught)
 			{
 				effectsMaterial.SetColor("_Color", Color.Lerp(Color.white, Color.black, (Time.time - lifeStart) / (lifeSpan + 5f)));
+			} else
+            {
+				effectsMaterial.SetColor("_Color", Color.white);
 			}
 		}
 		if (Time.time > lifeStart + lifeSpan && !bPelletCaught)
@@ -128,15 +132,21 @@ public class PelletProjectile : MonoBehaviour
 				bPelletCaught = true;
 				//Disable our collider, rigid body, and our dock pellet should set our position
 				Teleportable teleportableScript = gameObject.GetComponent<Teleportable>();
-				Destroy(teleportableScript);
-				gameObject.GetComponent<Collider>().enabled = false;
-				Destroy(rb);
-				
+				if (teleportableScript._isClone) //We need to grab our original (this shouldn't be possible, but it is)
+                {
+					
+                }
+
+				//Destroy(teleportableScript);
+				//gameObject.GetComponent<Collider>().enabled = false;
+				//Destroy(rb);
+				rb.velocity = Vector3.zero;
+				rb.constraints = RigidbodyConstraints.FreezeAll;
 				//Tell our launcher that we've docked
 				ourPelletLauncher.PelletDocked();
 				catcherScript.DockPellet(gameObject, this);
 				//Set our brightness for the user to see
-				effectsMaterial.SetColor("_Color", Color.white);
+				//effectsMaterial.SetColor("_Color", Color.white);
 				//Turn down our audio
 				ourAudio.volume = 0.05f;
 			}

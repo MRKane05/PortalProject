@@ -174,7 +174,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1fcf973020f42294bb41aae09856dbb0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.66
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7ffbfb379c6080049adc529229caaa30, type: 3}
   pelletDissolveEffect: {fileID: 1575572374623432, guid: b04d54ceb8d16f74796f4daeb05b17a7,
     type: 2}
-  lifeSpan: 5
+  lifeSpan: 12
   lifeStart: 0
   ourPelletLauncher: {fileID: 0}
 --- !u!135 &135797389876800856
