@@ -29,7 +29,6 @@ public class PelletLauncherBehavior : MonoBehaviour {
         for (int i = 0; i < ArmAnimations.Count; i++)
         {
             ArmAnimations[i].Rewind();
-            //ArmAnimations[i].CrossFade(ArmAnimations[i].clip.name, 0.25f);
             ArmAnimations[i].Play(ArmAnimations[i].clip.name);
         }
     }

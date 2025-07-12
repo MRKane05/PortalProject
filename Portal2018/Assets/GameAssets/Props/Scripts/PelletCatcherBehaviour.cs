@@ -19,7 +19,8 @@ public class PelletCatcherBehaviour : MonoBehaviour {
         //And play our animations/sound!
         for (int i = 0; i < ArmAnimations.Count; i++)
         {
-            ArmAnimations[i].Play();
+            ArmAnimations[i].Rewind();
+            ArmAnimations[i].Play(ArmAnimations[i].clip.name);
         }
     }
 }

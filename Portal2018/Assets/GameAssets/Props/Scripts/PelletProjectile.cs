@@ -85,7 +85,7 @@ public class PelletProjectile : MonoBehaviour
 				effectsMaterial.SetColor("_Color", Color.Lerp(Color.white, Color.black, (Time.time - lifeStart) / (lifeSpan + 5f)));
 			}
 		}
-		if (Time.time > lifeStart + lifeSpan)
+		if (Time.time > lifeStart + lifeSpan && !bPelletCaught)
         {
 			DoPelletDie();
         }
