@@ -35,17 +35,8 @@ public class PelletProjectile : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		/*
-		if (false)
-		{
-			setMoveDir(Vector3.up);
-			yield return new WaitForSeconds(0.5f);
-		}*/
-		//turn our collider back on now that we've left the area of our projector
-		//gameObject.GetComponent<Collider>().enabled = true;
 		effectsMaterial = new Material(effectsSphere.material);
 		effectsSphere.material = effectsMaterial;
-		
 	}
 
 	//This also starts the projectile
@@ -75,15 +66,16 @@ public class PelletProjectile : MonoBehaviour
 	{
 		return Vector3.Reflect(velocityIn, reflectVector).normalized;
 	}
-
+	public float texAlpha = 1f;
 	void Update()
 	{
 		if (effectsMaterial)
 		{
+			texAlpha = (Time.time - lifeStart) / (lifeSpan + 1f);
 			effectsMaterial.SetTextureOffset("_MainTex", wrapVector(effectsPan * Time.time));   //PROBLEM: This stops working when it's in the catcher, and I don't know why
 			if (!bPelletCaught)
 			{
-				effectsMaterial.SetColor("_Color", Color.Lerp(Color.white, Color.black, (Time.time - lifeStart) / (lifeSpan + 5f)));
+				effectsMaterial.SetColor("_Color", Color.Lerp(Color.white, Color.black, texAlpha));
 			} else
             {
 				effectsMaterial.SetColor("_Color", Color.white);
@@ -99,9 +91,16 @@ public class PelletProjectile : MonoBehaviour
     {
 		GameObject pelletDissolve = Instantiate(pelletDissolveEffect, transform.position, transform.rotation) as GameObject;
 		pelletDissolve.GetComponent<AudioSource>().PlayOneShot(dissolveSounds[Random.Range(0, dissolveSounds.Count)]);
-		Destroy(pelletDissolve, 3f);	//Remove our effect
+		Destroy(pelletDissolve, 3f);	//Remove our effect after a small delay
 		ourPelletLauncher.PelletDied();
-		gameObject.GetComponent<Collider>().enabled = false;
+
+		Teleportable ourTeleport = gameObject.GetComponent<Teleportable>();
+		ourTeleport.HardDisableClone();
+
+		Destroy(gameObject);
+		//gameObject.GetComponent<Collider>().enabled = false;
+		//gameObject.SetActive(false);
+		//ourPellet.GetComponent<Collider>().enabled = false;
 	}
 
 	Vector2 wrapVector(Vector2 thisVector)

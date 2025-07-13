@@ -10,8 +10,13 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
     public GameObject launchPoint;
 
+    public List<AudioClip> launchSounds;
+
+    AudioSource ourAudio;
+
     IEnumerator Start()
     {
+        ourAudio = gameObject.GetComponent<AudioSource>();
         yield return new WaitForSeconds(3f);
         DoFirePellet();
     }
@@ -20,6 +25,10 @@ public class PelletLauncherBehavior : MonoBehaviour {
     {
         //this'll have to be a co-routing to delay before the pellet is fired
         //But first animate the joints
+        if (ourAudio && launchSounds.Count > 0)
+        {
+            ourAudio.PlayOneShot(launchSounds[Random.Range(0, launchSounds.Count)]);
+        }
         PlayFireAnimations();
         StartCoroutine(firePellet());
     }
@@ -52,8 +61,8 @@ public class PelletLauncherBehavior : MonoBehaviour {
     public void PelletDied()
     {
         StartCoroutine(RespawnPellet());
-        ourPellet.SetActive(false);
-        ourPellet.GetComponent<Collider>().enabled = false;
+        //ourPellet.SetActive(false);
+        //ourPellet.GetComponent<Collider>().enabled = false;
     }
 
     IEnumerator RespawnPellet()

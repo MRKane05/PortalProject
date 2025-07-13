@@ -39,15 +39,15 @@ GameObject:
   - component: {fileID: 135797389876800856}
   - component: {fileID: 54074156328017570}
   - component: {fileID: 114338377602507710}
-  - component: {fileID: 114220533689702586}
   - component: {fileID: 82611294421767218}
+  - component: {fileID: 114725192335508820}
   m_Layer: 0
   m_Name: Pellet_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1964333214820380
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,28 +258,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114220533689702586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1503636049166450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3f73add1147f14f8d133346e6a0c90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraType: 0
-  _camera: {fileID: 0}
-  _replacementShader: {fileID: 0}
-  _spawnCloneOnAwake: 1
-  _cloneDisableCollisions: 1
-  _isClone: 0
-  bReplaceShaders: 0
-  enterPortalSounds: []
-  exitPortalSounds: []
-  lastExitedPortal: {fileID: 0}
-  bCanBePickedUp: 0
 --- !u!114 &114338377602507710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,6 +290,28 @@ MonoBehaviour:
   lifeSpan: 12
   lifeStart: 0
   ourPelletLauncher: {fileID: 0}
+--- !u!114 &114725192335508820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503636049166450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3f73add1147f14f8d133346e6a0c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraType: 0
+  _camera: {fileID: 0}
+  _replacementShader: {fileID: 0}
+  _spawnCloneOnAwake: 1
+  _cloneDisableCollisions: 0
+  _isClone: 0
+  bReplaceShaders: 0
+  enterPortalSounds: []
+  exitPortalSounds: []
+  lastExitedPortal: {fileID: 0}
+  bCanBePickedUp: 0
 --- !u!135 &135797389876800856
 SphereCollider:
   m_ObjectHideFlags: 1

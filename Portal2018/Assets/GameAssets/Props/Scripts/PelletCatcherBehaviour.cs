@@ -24,16 +24,18 @@ public class PelletCatcherBehaviour : MonoBehaviour {
             //Debug.LogError("Opted to get original instead of Clone");
         }
 
-
-        thisPellet.transform.position = holdPoint.transform.position;
-        //And play our animations/sound!
-        for (int i = 0; i < ArmAnimations.Count; i++)
+        if (thisPellet)
         {
-            ArmAnimations[i].Rewind();
-            ArmAnimations[i].Play(ArmAnimations[i].clip.name);
+            thisPellet.transform.position = holdPoint.transform.position;
+            //And play our animations/sound!
+            for (int i = 0; i < ArmAnimations.Count; i++)
+            {
+                ArmAnimations[i].Rewind();
+                ArmAnimations[i].Play(ArmAnimations[i].clip.name);
+            }
+            //Should there be a trigger delay?
+            StartCoroutine(eventTriggerDelay());
         }
-        //Should there be a trigger delay?
-        StartCoroutine(eventTriggerDelay());
     }
 
     IEnumerator eventTriggerDelay()

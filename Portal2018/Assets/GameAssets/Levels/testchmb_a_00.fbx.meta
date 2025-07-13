@@ -1,0 +1,696 @@
+fileFormatVersion: 2
+guid: 3178503cc9e564643bdd907d07fdfeaf
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: env_soundscape_332554
+    100004: env_soundscape_469228
+    100006: env_soundscape_470859
+    100008: func_brush_395140
+    100010: func_brush_409952
+    100012: func_brush_440645
+    100014: func_brush_695277
+    100016: func_brush_695285
+    100018: func_brush_695293
+    100020: func_brush_695301
+    100022: func_brush_695312
+    100024: func_brush_695320
+    100026: func_brush_695328
+    100028: func_brush_695336
+    100030: func_brush_695420
+    100032: func_brush_695428
+    100034: func_brush_695436
+    100036: func_brush_695444
+    100038: func_brush_695452
+    100040: func_brush_695460
+    100042: hud_hint_enable
+    100044: info_overlay_43
+    100046: info_overlay_50
+    100048: info_overlay_51
+    100050: info_overlay_60
+    100052: info_overlay_67
+    100054: info_overlay_69
+    100056: info_overlay_Room002_indicatorLights
+    100058: intro_hudhint_chooser
+    100060: lamp_2_model
+    100062: Lift001
+    100064: Lift_002_exit
+    100066: Room001
+    100068: Room001.002
+    100070: Room001_glass
+    100072: Room002
+    100074: Room002_glass
+    100076: Room003
+    100078: Room004
+    100080: Room004.001
+    100082: Room004_glass
+    100084: Room005
+    100086: sign_01
+    100088: soundscape_explore_space
+    100090: soundscape_tight_space
+    100092: Cell_glass
+    100094: Cell_glass.001
+    100096: Cell_glass.002
+    100098: Cell_glass.003
+    100100: Cell_glass.004
+    100102: info_overlay_50_Room004_indicatorlights
+    100104: func_brush_695420_glass
+    100106: func_brush_695428_glass
+    100108: func_brush_695436_glass
+    100110: func_brush_695444_glass
+    100112: func_brush_695452_glass
+    100114: func_brush_695460_glass
+    400000: //RootNode
+    400002: env_soundscape_332554
+    400004: env_soundscape_469228
+    400006: env_soundscape_470859
+    400008: func_brush_395140
+    400010: func_brush_409952
+    400012: func_brush_440645
+    400014: func_brush_695277
+    400016: func_brush_695285
+    400018: func_brush_695293
+    400020: func_brush_695301
+    400022: func_brush_695312
+    400024: func_brush_695320
+    400026: func_brush_695328
+    400028: func_brush_695336
+    400030: func_brush_695420
+    400032: func_brush_695428
+    400034: func_brush_695436
+    400036: func_brush_695444
+    400038: func_brush_695452
+    400040: func_brush_695460
+    400042: hud_hint_enable
+    400044: info_overlay_43
+    400046: info_overlay_50
+    400048: info_overlay_51
+    400050: info_overlay_60
+    400052: info_overlay_67
+    400054: info_overlay_69
+    400056: info_overlay_Room002_indicatorLights
+    400058: intro_hudhint_chooser
+    400060: lamp_2_model
+    400062: Lift001
+    400064: Lift_002_exit
+    400066: Room001
+    400068: Room001.002
+    400070: Room001_glass
+    400072: Room002
+    400074: Room002_glass
+    400076: Room003
+    400078: Room004
+    400080: Room004.001
+    400082: Room004_glass
+    400084: Room005
+    400086: sign_01
+    400088: soundscape_explore_space
+    400090: soundscape_tight_space
+    400092: Cell_glass
+    400094: Cell_glass.001
+    400096: Cell_glass.002
+    400098: Cell_glass.003
+    400100: Cell_glass.004
+    400102: info_overlay_50_Room004_indicatorlights
+    400104: func_brush_695420_glass
+    400106: func_brush_695428_glass
+    400108: func_brush_695436_glass
+    400110: func_brush_695444_glass
+    400112: func_brush_695452_glass
+    400114: func_brush_695460_glass
+    2100000: CONCRETE_CONCRETE_MODULAR_WALL001A.001
+    2100002: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
+    2100004: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    2100006: LIGHTS_LIGHT_RECESSEDCOOL002.001
+    2100008: CONCRETE_CONCRETE_MODULAR_WALL001D.001
+    2100010: CONCRETE_CONCRETE_MODULAR_WALL001E.001
+    2100012: maps_testchmb_a_00_metal_metalwall048b
+    2100014: CONCRETECONCRETE_MODULAR_WALL001E.001
+    2100016: CONCRETECONCRETE_MODULAR_CEILING001A.001
+    2100018: CONCRETECONCRETE_MODULAR_FLOOR001A.001
+    2100020: ElevatorWall
+    2100022: maps_testchmb_a_00_plastic_plasticwall004a
+    2100024: SIGNAGE_HAZARD_ORANGE_03B.001
+    2100026: METAL_METALGRATE018.001
+    2100028: METAL_METALGRATE018B.001
+    2100030: maps_testchmb_a_00_plastic_plasticwall003a
+    2100032: maps_testchmb_a_00_plastic_plasticwall001a
+    2100034: CONCRETE_CONCRETE_MODULAR_FLOOR001C.001
+    2100036: maps_testchmb_a_00_plastic_plasticwall001b
+    2100038: METAL_METALWALL060A.001
+    2100040: CONCRETE_CONCRETE_MODULAR_FLOOR001B.001
+    2100042: METAL_METALWALL061F.001
+    2100044: maps_testchmb_a_00_metal_metalwall_bts_006a
+    2100046: METAL_METALWALL_BTS_006B_GRADIENT.001
+    2100048: LIGHTS_LIGHT_ORANGE001.001
+    2100050: VirtualRoom_Large
+    2100052: METAL_METALHULL013A
+    2100054: maps_testchmb_a_00_metal_metal_lift001
+    2100056: maps_testchmb_a_00_metal_metal_lift001_gradient
+    2100058: overlays_stain_concrete005
+    2100060: overlays_stain_tile001.001
+    2100062: maps_testchmb_a_00_glass_glasswindow_refract01
+    2100064: signage_overlay_button_accent.001
+    2100066: signage_indicator_lights_indicator_lights_floor.001
+    2100068: signage_indicator_lights_indicator_lights_wall.001
+    2100070: signage_indicator_lights_indicator_lights_corner_floor.001
+    2100072: decals_decalstain007a
+    2100074: decals_decalstain009a.001
+    2100076: maps_testchmb_a_00_glass_glasswindow_frosted
+    2100078: CONCRETE_CONCRETE_MODULAR_WALL001F.001
+    2100080: overlays_stain_concrete001.001
+    2100082: SIGNAGE_SIGNAGE_ARROW.001
+    2100084: SIGNAGE_SIGNAGE_EXIT.001
+    2100086: SIGNAGE_SIGNAGE_BORDER.001
+    2100088: CONCRETE_CONCRETE_MODULAR_WALL001C
+    2100090: VirtualRoom_Small
+    2100092: chmb_a_00_models_props_trainstation_trainstation_clock_glass001
+    2100094: maps_testchmb_a_00_metal_metalwall048c
+    2100096: signage_signage_overlay_boxhurt
+    2100098: signage_signage_overlay_boxdispenser
+    2300000: func_brush_395140
+    2300002: func_brush_409952
+    2300004: func_brush_440645
+    2300006: func_brush_695277
+    2300008: func_brush_695285
+    2300010: func_brush_695293
+    2300012: func_brush_695301
+    2300014: func_brush_695312
+    2300016: func_brush_695320
+    2300018: func_brush_695328
+    2300020: func_brush_695336
+    2300022: func_brush_695420
+    2300024: func_brush_695428
+    2300026: func_brush_695436
+    2300028: func_brush_695444
+    2300030: func_brush_695452
+    2300032: func_brush_695460
+    2300034: info_overlay_43
+    2300036: info_overlay_50
+    2300038: info_overlay_51
+    2300040: info_overlay_60
+    2300042: info_overlay_67
+    2300044: info_overlay_69
+    2300046: info_overlay_Room002_indicatorLights
+    2300048: Lift001
+    2300050: Lift_002_exit
+    2300052: Room001
+    2300054: Room001.002
+    2300056: Room001_glass
+    2300058: Room002
+    2300060: Room002_glass
+    2300062: Room003
+    2300064: Room004
+    2300066: Room004.001
+    2300068: Room004_glass
+    2300070: Room005
+    2300072: Cell_glass
+    2300074: Cell_glass.001
+    2300076: Cell_glass.002
+    2300078: Cell_glass.003
+    2300080: Cell_glass.004
+    2300082: info_overlay_50_Room004_indicatorlights
+    2300084: func_brush_695420_glass
+    2300086: func_brush_695428_glass
+    2300088: func_brush_695436_glass
+    2300090: func_brush_695444_glass
+    2300092: func_brush_695452_glass
+    2300094: func_brush_695460_glass
+    3300000: func_brush_395140
+    3300002: func_brush_409952
+    3300004: func_brush_440645
+    3300006: func_brush_695277
+    3300008: func_brush_695285
+    3300010: func_brush_695293
+    3300012: func_brush_695301
+    3300014: func_brush_695312
+    3300016: func_brush_695320
+    3300018: func_brush_695328
+    3300020: func_brush_695336
+    3300022: func_brush_695420
+    3300024: func_brush_695428
+    3300026: func_brush_695436
+    3300028: func_brush_695444
+    3300030: func_brush_695452
+    3300032: func_brush_695460
+    3300034: info_overlay_43
+    3300036: info_overlay_50
+    3300038: info_overlay_51
+    3300040: info_overlay_60
+    3300042: info_overlay_67
+    3300044: info_overlay_69
+    3300046: info_overlay_Room002_indicatorLights
+    3300048: Lift001
+    3300050: Lift_002_exit
+    3300052: Room001
+    3300054: Room001.002
+    3300056: Room001_glass
+    3300058: Room002
+    3300060: Room002_glass
+    3300062: Room003
+    3300064: Room004
+    3300066: Room004.001
+    3300068: Room004_glass
+    3300070: Room005
+    3300072: Cell_glass
+    3300074: Cell_glass.001
+    3300076: Cell_glass.002
+    3300078: Cell_glass.003
+    3300080: Cell_glass.004
+    3300082: info_overlay_50_Room004_indicatorlights
+    3300084: func_brush_695420_glass
+    3300086: func_brush_695428_glass
+    3300088: func_brush_695436_glass
+    3300090: func_brush_695444_glass
+    3300092: func_brush_695452_glass
+    3300094: func_brush_695460_glass
+    4300000: Room005
+    4300002: Lift_002_exit
+    4300004: Room001
+    4300006: Room001_glass
+    4300008: Room001.002
+    4300010: info_overlay_69
+    4300012: func_brush_409952
+    4300014: info_overlay_50
+    4300016: func_brush_695460
+    4300018: Room004.001
+    4300020: info_overlay_51
+    4300022: func_brush_695452
+    4300024: func_brush_695285
+    4300026: Room004
+    4300028: Room004_glass
+    4300030: func_brush_695436
+    4300032: func_brush_695444
+    4300034: func_brush_695336
+    4300036: func_brush_695420
+    4300038: func_brush_695320
+    4300040: func_brush_695312
+    4300042: func_brush_695428
+    4300044: func_brush_695277
+    4300046: func_brush_695301
+    4300048: func_brush_695328
+    4300050: func_brush_695293
+    4300052: func_brush_440645
+    4300054: Lift001
+    4300056: Room003
+    4300058: Room002
+    4300060: info_overlay_Room002_indicatorLights
+    4300062: func_brush_395140
+    4300064: info_overlay_67
+    4300066: Room002_glass
+    4300068: info_overlay_43
+    4300070: info_overlay_60
+    4300072: info_overlay_50_Room004_indicatorlights
+    4300074: Cell_glass.003
+    4300076: Cell_glass
+    4300078: Cell_glass.001
+    4300080: Cell_glass.002
+    4300082: Cell_glass.004
+    4300084: func_brush_695460_glass
+    4300086: func_brush_695452_glass
+    4300088: func_brush_695436_glass
+    4300090: func_brush_695444_glass
+    4300092: func_brush_695420_glass
+    4300094: func_brush_695428_glass
+    6400000: func_brush_395140
+    6400002: func_brush_409952
+    6400004: func_brush_440645
+    6400006: func_brush_695277
+    6400008: func_brush_695285
+    6400010: func_brush_695293
+    6400012: func_brush_695301
+    6400014: func_brush_695312
+    6400016: func_brush_695320
+    6400018: func_brush_695328
+    6400020: func_brush_695336
+    6400022: func_brush_695420
+    6400024: func_brush_695428
+    6400026: func_brush_695436
+    6400028: func_brush_695444
+    6400030: func_brush_695452
+    6400032: func_brush_695460
+    6400034: info_overlay_43
+    6400036: info_overlay_50
+    6400038: info_overlay_51
+    6400040: info_overlay_60
+    6400042: info_overlay_67
+    6400044: info_overlay_69
+    6400046: info_overlay_Room002_indicatorLights
+    6400048: Lift001
+    6400050: Lift_002_exit
+    6400052: Room001
+    6400054: Room001.002
+    6400056: Room001_glass
+    6400058: Room002
+    6400060: Room002_glass
+    6400062: Room003
+    6400064: Room004
+    6400066: Room004.001
+    6400068: Room004_glass
+    6400070: Room005
+    6400072: Cell_glass
+    6400074: Cell_glass.001
+    6400076: Cell_glass.002
+    6400078: Cell_glass.003
+    6400080: Cell_glass.004
+    6400082: info_overlay_50_Room004_indicatorlights
+    6400084: func_brush_695420_glass
+    6400086: func_brush_695428_glass
+    6400088: func_brush_695436_glass
+    6400090: func_brush_695444_glass
+    6400092: func_brush_695452_glass
+    6400094: func_brush_695460_glass
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_CEILING001A.001
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_FLOOR001A.001
+    second: {fileID: 2100000, guid: 3336b69bd7ff33c4fad4e87ec2369b68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_WALL001E.001
+    second: {fileID: 2100000, guid: e3686affc03473e48870876062355c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
+    second: {fileID: 2100000, guid: 3336b69bd7ff33c4fad4e87ec2369b68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001B.001
+    second: {fileID: 2100000, guid: 08480e4b12736674cb2ba86cb54cca85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001C.001
+    second: {fileID: 2100000, guid: 946a1a9c35105f34381d4da74003109e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001A.001
+    second: {fileID: 2100000, guid: 8b1dfccfd8b1eea43abebc8bdc39645b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001C
+    second: {fileID: 2100000, guid: a282368c01120f44eb6eb69f7be39ba3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001D.001
+    second: {fileID: 2100000, guid: 0c00b7fe3a8bede41a9669f9808961f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001E.001
+    second: {fileID: 2100000, guid: e3686affc03473e48870876062355c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001F.001
+    second: {fileID: 2100000, guid: 2a42a49d5a94e4644acf98b45f381493, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElevatorWall
+    second: {fileID: 2100000, guid: 7ae28bd9ffec8b14ab2a3093231f2332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_ORANGE001.001
+    second: {fileID: 2100000, guid: 5e0022ad28a58c84f8167b13c0a32b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_RECESSEDCOOL002.001
+    second: {fileID: 2100000, guid: de30e8fd4ae3bd944a612a6ffb43a244, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018.001
+    second: {fileID: 2100000, guid: 6128de75f12b18047ab375922e300839, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018B.001
+    second: {fileID: 2100000, guid: 2e0aee2ae2fa9e44fb0f5d12ece78166, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALHULL013A
+    second: {fileID: 2100000, guid: 6ea39fe00ba552b45b2dc767199d3273, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL060A.001
+    second: {fileID: 2100000, guid: ed652655fd99df54db5fb371c2ee61c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL061F.001
+    second: {fileID: 2100000, guid: 213b708c2b98cd142ab0c203e41d82bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL_BTS_006B_GRADIENT.001
+    second: {fileID: 2100000, guid: 5e1db335f7b5f3a4797db724b8d4ed37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_HAZARD_ORANGE_03B.001
+    second: {fileID: 2100000, guid: 871e480c4588b6e4baa57a484c5c042d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_ARROW.001
+    second: {fileID: 2100000, guid: f8645aade45824e41bae919ad6c16e98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_BORDER.001
+    second: {fileID: 2100000, guid: 2bb3ca01ea6b1224ea805e9535858c26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_EXIT.001
+    second: {fileID: 2100000, guid: 8e45dc5393ba8cd46b080bcafd8b3acc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualRoom_Large
+    second: {fileID: 2100000, guid: 15b8fcb648173c8439a014b2eca7eea9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualRoom_Small
+    second: {fileID: 2100000, guid: f0dc787c635983c4589c482ea765bf0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chmb_a_00_models_props_trainstation_trainstation_clock_glass001
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decals_decalstain007a
+    second: {fileID: 2100000, guid: 362ea97842e2e774cb8ee6b582a095d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decals_decalstain009a.001
+    second: {fileID: 2100000, guid: 89b489f86cfa96842a622406ddff0d06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_glass_glasswindow_frosted
+    second: {fileID: 2100000, guid: daeb45a388740474b82b69541eef0f2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_glass_glasswindow_refract01
+    second: {fileID: 2100000, guid: daeb45a388740474b82b69541eef0f2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_metal_metal_lift001
+    second: {fileID: 2100000, guid: 1663c35ae70428c44a03ace37137afd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_metal_metal_lift001_gradient
+    second: {fileID: 2100000, guid: de4275b0fdb626c43bbd69e084d20b48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_metal_metalwall048b
+    second: {fileID: 2100000, guid: e1dca99500aac9540ad5257b342cb1ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_metal_metalwall048c
+    second: {fileID: 2100000, guid: 4d99a6099702a0a49b297e1b8fa5301d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_metal_metalwall_bts_006a
+    second: {fileID: 2100000, guid: 5734ae77c01989d42ac65bd03e13d873, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_plastic_plasticwall001a
+    second: {fileID: 2100000, guid: d8063a0ff1cc8d742b7033ca754de22d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_plastic_plasticwall001b
+    second: {fileID: 2100000, guid: 935ccda0ab3f5b644b3582ee02bd16ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_plastic_plasticwall003a
+    second: {fileID: 2100000, guid: 9256dd596a4b4714db9dc09f68a3a151, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_00_plastic_plasticwall004a
+    second: {fileID: 2100000, guid: 42fd234f9c0462d4780e32fefa56fa7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_concrete001.001
+    second: {fileID: 2100000, guid: 0fbf58f6d6dcefc448d66b22f6fe6666, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_concrete005
+    second: {fileID: 2100000, guid: 45e74f26ed95839408303417438a4f63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_tile001.001
+    second: {fileID: 2100000, guid: 8175d5630b0578d4e89f3b6e9d85e1ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_indicator_lights_indicator_lights_corner_floor.001
+    second: {fileID: 2100000, guid: 193d8dcde7ecbe74fb7cafffba302217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_indicator_lights_indicator_lights_floor.001
+    second: {fileID: 2100000, guid: 193d8dcde7ecbe74fb7cafffba302217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_indicator_lights_indicator_lights_wall.001
+    second: {fileID: 2100000, guid: f9a581136bb65724f8770cf49ca36275, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_overlay_button_accent.001
+    second: {fileID: 2100000, guid: 8fdb929449b9f7f4dad5e26a7bce8763, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_boxdispenser
+    second: {fileID: 2100000, guid: 7072949707c666b408e5b8cde071a699, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_boxhurt
+    second: {fileID: 2100000, guid: d86e53fee4d060e4ca56ea8bbbece692, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 8
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

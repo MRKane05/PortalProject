@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3c249110b9c0b3e4eb10c120bdae098a
+timeCreated: 1499878588
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - m_Camera: {instanceID: 0}
+  - m_ReplacementShader: {fileID: 4800000, guid: f919f642bd5df034c9810c0bba3ec5a5,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
