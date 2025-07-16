@@ -46,8 +46,13 @@ public class TestChamberSign : MonoBehaviour {
     float TotalFlickerTime = 1f;
     float NextFlickerTime = 0;
 
+    AudioSource ourAudio;
+    public List<AudioClip> LightClickSounds;
+
     public void Start()
     {
+        ourAudio = gameObject.GetComponent<AudioSource>();
+
         TotalFlickerTime = Random.Range(1f, 2f);    //Add a random to how long this sign will flicker for
         AssignIconType(Icon_BoxHit, BoxHit);
         AssignIconType(Icon_BoxDrop, BoxDrop);
@@ -129,6 +134,8 @@ public class TestChamberSign : MonoBehaviour {
 
     public void SetTriggerPanelActive()
     {
+        ourAudio.Play();  //This really doesn't seem to be respecting the Volume settings?
+        PlayLightClick();
         bTriggerPanelActive = true;
         TriggerPanelActiveTime = Time.time;
         FlickerStartTime = Time.time;
@@ -148,6 +155,11 @@ public class TestChamberSign : MonoBehaviour {
         LevelNumber.faceColor = BlendCol;
     }
 
+    void PlayLightClick()
+    {
+        ourAudio.PlayOneShot(LightClickSounds[Random.Range(0, LightClickSounds.Count)]);
+    }
+
     bool bFlickerOn = true;
 
     void Update()
@@ -164,6 +176,7 @@ public class TestChamberSign : MonoBehaviour {
                 {
                     NextFlickerTime = Time.time + FlickerDuration.GetRandom();
                     bFlickerOn = !bFlickerOn;
+                    PlayLightClick();
                     if (bFlickerOn)
                     {
                         NextFlickerTime = Time.time + FlickerDuration.GetRandom() * Random.Range(2f, 5f);

@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: 75a12a126fad20146bbf9c813b8e49a4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Icon_BoxDrop
+    100002: Icon_BoxHit
+    100004: Icon_Droids
+    100006: Icon_Drowning
+    100008: Icon_Fling
+    100010: Icon_NoDrinkWater
+    100012: Icon_PelletPuzzle
+    100014: Icon_PortalJump
+    100016: IconPelletHit
+    100018: Plane
+    100020: //RootNode
+    100022: Camera
+    100024: LevelsCompleteTally
+    100026: Icon_PelletHit
+    100028: Plane.001
+    100030: Plane.003
+    400000: Icon_BoxDrop
+    400002: Icon_BoxHit
+    400004: Icon_Droids
+    400006: Icon_Drowning
+    400008: Icon_Fling
+    400010: Icon_NoDrinkWater
+    400012: Icon_PelletPuzzle
+    400014: Icon_PortalJump
+    400016: IconPelletHit
+    400018: Plane
+    400020: //RootNode
+    400022: Camera
+    400024: LevelsCompleteTally
+    400026: Icon_PelletHit
+    400028: Plane.001
+    400030: Plane.003
+    2000000: Camera
+    2100000: SignIcons
+    2100002: Sign_Rim
+    2100004: Sign
+    2100006: CompleteMeter
+    2300000: Icon_BoxDrop
+    2300002: Icon_BoxHit
+    2300004: Icon_Droids
+    2300006: Icon_Drowning
+    2300008: Icon_Fling
+    2300010: Icon_NoDrinkWater
+    2300012: Icon_PelletPuzzle
+    2300014: Icon_PortalJump
+    2300016: IconPelletHit
+    2300018: Plane
+    2300020: LevelsCompleteTally
+    2300022: Icon_PelletHit
+    2300024: Plane.001
+    2300026: Plane.003
+    3300000: Icon_BoxDrop
+    3300002: Icon_BoxHit
+    3300004: Icon_Droids
+    3300006: Icon_Drowning
+    3300008: Icon_Fling
+    3300010: Icon_NoDrinkWater
+    3300012: Icon_PelletPuzzle
+    3300014: Icon_PortalJump
+    3300016: IconPelletHit
+    3300018: Plane
+    3300020: LevelsCompleteTally
+    3300022: Icon_PelletHit
+    3300024: Plane.001
+    3300026: Plane.003
+    4300000: Icon_Drowning
+    4300002: Icon_PelletPuzzle
+    4300004: Icon_NoDrinkWater
+    4300006: Icon_Droids
+    4300008: IconPelletHit
+    4300010: Icon_Fling
+    4300012: Icon_BoxHit
+    4300014: Icon_PortalJump
+    4300016: Icon_BoxDrop
+    4300018: Plane
+    4300020: LevelsCompleteTally
+    4300022: Icon_PelletHit
+    4300024: Plane.003
+    4300026: Plane.001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CompleteMeter
+    second: {fileID: 2100000, guid: 96a09305416ace6468ec05391f1939ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign
+    second: {fileID: 2100000, guid: 4aaef10caf4042245a9e167b82c5c45e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SignIcons
+    second: {fileID: 2100000, guid: f679c578259f7404dae699265c0c6d6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign_Rim
+    second: {fileID: 2100000, guid: f49c808ca698e4a40809a39068db8efa, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.66
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
