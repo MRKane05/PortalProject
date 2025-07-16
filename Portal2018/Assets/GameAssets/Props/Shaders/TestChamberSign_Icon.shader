@@ -16,6 +16,7 @@
 
 		Pass
 		{
+			Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
