@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour {
 	private static LevelController instance = null;
 	public static LevelController Instance { get { return instance; } }
 
-	public enum enPlayerControlType { NULL, LEFTONLY, FULL }
+	public enum enPlayerControlType { NULL, NONE, LEFTONLY, FULL }
 	public enPlayerControlType playerControlType = enPlayerControlType.FULL;
 
 	public GameObject playerObject; //Will no doubt be referenced by lots of things

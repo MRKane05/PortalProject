@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoPortalGovenor : PortalSpawnerBase {
+    public enum enTriggerType { NULL, ONCE, EACHTIME }
+    public enTriggerType TriggerType = enTriggerType.ONCE;
+
 	public AutoportalBehavior BaseAutoportal; //The portal that won't change, this'll be our right-hand portal
 	public List<AutoportalBehavior> CyclingPortals; //The portals that'll cycle
     int currentPortalIndex = 0;
 	public float cycleTime = 4f; //How many seconds before we spawn the portal and move it somewhere else?
+
+    bool bHasBeenTriggered = false;
 
     void Start()
     {
@@ -34,6 +39,12 @@ public class AutoPortalGovenor : PortalSpawnerBase {
 
     public void TriggerActive(bool bIsActive)
     {
+        if (bHasBeenTriggered && TriggerType == enTriggerType.ONCE && bIsActive)
+        {
+            return;
+        }
+        bHasBeenTriggered = true;
+
         bCycleActive = bIsActive;
         if (bIsActive)
         {
