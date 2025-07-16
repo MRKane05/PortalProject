@@ -65,7 +65,6 @@ public class InputManager : MonoBehaviour {
                 moveDir += Camera.main.transform.right;
                 moved = true;
             }
-
         }
 
 #if !UNITY_EDITOR

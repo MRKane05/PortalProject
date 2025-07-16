@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class ElevatorParenting : MonoBehaviour
 {
+	public GameObject optionalBase;
 
 	void OnTriggerEnter(Collider collision)
 	{
 		if (collision.gameObject.name == "Player")
 		{
-			collision.gameObject.transform.SetParent(transform);
+			if (!optionalBase)
+			{
+				collision.gameObject.transform.SetParent(transform);
+			} else
+            {
+				collision.gameObject.transform.SetParent(optionalBase.transform);
+            }
 		}
 	}
 

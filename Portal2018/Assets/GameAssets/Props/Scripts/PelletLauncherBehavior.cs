@@ -13,12 +13,16 @@ public class PelletLauncherBehavior : MonoBehaviour {
     public List<AudioClip> launchSounds;
 
     AudioSource ourAudio;
+    public bool bCanFire = false;
 
     IEnumerator Start()
     {
         ourAudio = gameObject.GetComponent<AudioSource>();
-        yield return new WaitForSeconds(3f);
-        DoFirePellet();
+        if (bCanFire)
+        {
+            yield return new WaitForSeconds(3f);
+            DoFirePellet();
+        }
     }
 
 	public void DoFirePellet()

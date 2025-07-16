@@ -145,6 +145,7 @@ namespace Portals {
             // Clamp velocity to maximums
             float maxHorizontal = SizeMultiplier * _movementInfo.maxSpeedHorizontal;
             float maxVertical = SizeMultiplier * _movementInfo.maxSpeedVertical;
+
             horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxHorizontal);
             verticalVelocity = Vector3.ClampMagnitude(verticalVelocity, maxVertical);
 

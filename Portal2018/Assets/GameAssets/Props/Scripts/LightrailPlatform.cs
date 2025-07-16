@@ -15,8 +15,16 @@ public class LightrailPlatform : MonoBehaviour {
 	public float endPauseTime = 3f;
 	float pauseTime = 0f;
 	
+
+	public void SetLightrailActive(bool bState)
+    {
+		bPlatformActive = bState;
+    }
+
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
+		if (!bPlatformActive) { return; }
+
 		if (Time.time > pauseTime + endPauseTime)
 		{
 			LiftObject.transform.position = Vector3.MoveTowards(LiftObject.transform.position, railPoints[platformTarget].transform.position, platformSpeed * Time.deltaTime);
