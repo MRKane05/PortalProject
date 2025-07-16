@@ -174,6 +174,11 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
 
         if (LevelController.Instance)
         {
+            if (LevelController.Instance.playerControlType == LevelController.enPlayerControlType.NONE)
+            {
+                return;
+            }
+
             if (polarity == Polarity.Right && LevelController.Instance.playerControlType == LevelController.enPlayerControlType.LEFTONLY)    //Disable the player's firing attempts
             {
                 return;

@@ -154,6 +154,13 @@ public class PortalSpawnerBase : MonoBehaviour {
                 }
 
             }
+            if (bScaleUp)
+            {
+                parentPortal.PortalRenderer.setPortalAlpha(1.0f);
+            } else
+            {
+                parentPortal.PortalRenderer.setPortalAlpha(0.0f);
+            }
             yield return null;
             elapsed += Time.deltaTime;
         }
