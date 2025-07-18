@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1592289696974122
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65095492272254962}
   - component: {fileID: 114508828158253012}
   - component: {fileID: 114520498466362840}
-  - component: {fileID: 41083751108439584}
+  - component: {fileID: 82794547646936272}
   m_Layer: 14
   m_Name: CircularDoor
   m_TagString: Untagged
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 33348412643483484}
   - component: {fileID: 23197900294136448}
   - component: {fileID: 65811458938191276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 33613303125946864}
   - component: {fileID: 23654266686061404}
   - component: {fileID: 65429443636469434}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,8 +91,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592289696974122}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5.15, y: -4.892171, z: -2.532}
+  m_LocalRotation: {x: -0, y: -0.0046603065, z: -0, w: 0.9999892}
+  m_LocalPosition: {x: 12.588423, y: -1.7555354, z: -7.6867065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4967260077431264}
@@ -100,7 +100,7 @@ Transform:
   - {fileID: 4721843862658096}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.53400004, z: 0}
 --- !u!4 &4721843862658096
 Transform:
   m_ObjectHideFlags: 1
@@ -266,15 +266,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841550166810900}
   m_Mesh: {fileID: 4300006, guid: 2e31a0136081d714fa5f64713db99560, type: 3}
---- !u!41 &41083751108439584
-OcclusionPortal:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1592289696974122}
-  m_Open: 1
-  m_Center: {x: 0, y: 1.07, z: 0}
-  m_Size: {x: 2.89, y: 2.35, z: 1}
 --- !u!65 &65095492272254962
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -323,6 +314,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1081948, y: 1.9408247, z: 0.27103996}
   m_Center: {x: -0.5540974, y: 0.9704124, z: 0}
+--- !u!82 &82794547646936272
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592289696974122}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2f28e953fd845a444b7fdda422b4fe59, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.66
+  m_Pitch: 1.1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114508828158253012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,6 +427,7 @@ MonoBehaviour:
   playerTriggerDistance: 3
   doorOffsetPosition: {x: 1, y: 0, z: 0}
   doorLerpSpeed: 5
+  DoorMoveSound: {fileID: 8300000, guid: 2f28e953fd845a444b7fdda422b4fe59, type: 3}
   DoorLeft: {fileID: 1841550166810900}
   DoorRight: {fileID: 1697405470474858}
 --- !u!114 &114520498466362840
@@ -389,3 +476,4 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  bTriggerOnlyOnce: 0

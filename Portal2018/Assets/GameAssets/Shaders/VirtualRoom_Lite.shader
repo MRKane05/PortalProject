@@ -69,7 +69,9 @@
 				// vectors are orthogonal
 				float3 viewDirT =
 					mul(localSurface2ScaledObjectT, viewDirInObjectCoords);
-				float2 offset = ParallaxOffset(-1, _Parallax, viewDirT);
+				//float2 offset = ParallaxOffset(-1, _Parallax, viewDirT);
+				float2 offset = (-viewDirT.xy / viewDirT.z) * _Parallax;
+				offset = clamp(offset, -0.5, 0.5); // Prevent extreme UV offsets
 				o.uv += offset;
 
 				

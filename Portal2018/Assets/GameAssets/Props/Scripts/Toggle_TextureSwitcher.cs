@@ -12,8 +12,12 @@ public class Toggle_TextureSwitcher : MonoBehaviour {
 
     public Material cloneMaterial;
 
+    AudioSource ourAudio;
+    public AudioClip Audio_True, Audio_False;
+
     void Start()
     {
+        ourAudio = gameObject.GetComponent<AudioSource>();
         //Get the target material in our renderer and replace it with a clone that we'll act upon
         Material[] targetRendererMaterials = targetRenderer.sharedMaterials;
         for (int i=0; i<targetRendererMaterials.Length; i++)
@@ -32,5 +36,16 @@ public class Toggle_TextureSwitcher : MonoBehaviour {
     {
         bIsTrue = bNewState;
         cloneMaterial.SetTexture("_MainTex", bIsTrue ? TrueTexture : FalseTexture);
+        if (ourAudio)
+        {
+            if (bNewState && Audio_True)
+            {
+                ourAudio.PlayOneShot(Audio_True);
+            }
+            if (!bNewState && Audio_False)
+            {
+                ourAudio.PlayOneShot(Audio_False);
+            }
+        }
     }
 }

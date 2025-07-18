@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4702091696709606}
   - component: {fileID: 82838684357931302}
   - component: {fileID: 114249820413261134}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.45
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

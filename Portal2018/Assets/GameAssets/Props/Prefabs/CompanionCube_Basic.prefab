@@ -292,7 +292,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec0940aad63987e45832c6b4dc587d24, type: 3}
   - {fileID: 8300000, guid: b28670bdff5cde346a144da166257630, type: 3}
   - {fileID: 8300000, guid: cae0278d889b7ae40a98220547bd74f5, type: 3}
-  bSilentFirstHit: 1
+  bSilentUntilInteractedWith: 0
 --- !u!114 &114805375630769946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,6 +313,7 @@ MonoBehaviour:
   bReplaceShaders: 0
   enterPortalSounds: []
   exitPortalSounds: []
+  bIsHeld: 0
   lastExitedPortal: {fileID: 0}
   bCanBePickedUp: 1
 --- !u!135 &135758138805366844

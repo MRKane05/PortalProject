@@ -13,6 +13,8 @@ public class DoorBehaviour : MonoBehaviour {
 	Vector3 doorRightOffsetPosition = new Vector3(-0.8f, 0, 0);
 	public float doorLerpSpeed = 5f;
 	float lerpTime = 0;
+	public AudioClip DoorMoveSound;
+	AudioSource ourAudio;
 
 	OcclusionPortal OcclusionPortal;
 
@@ -20,6 +22,7 @@ public class DoorBehaviour : MonoBehaviour {
 
 	void Start()
     {
+		ourAudio = gameObject.GetComponent<AudioSource>();
 		doorRightOffsetPosition = new Vector3(-doorOffsetPosition.x, 0, 0); //Flip our stated door position
 		OcclusionPortal = gameObject.GetComponent<OcclusionPortal>();
     }
@@ -30,7 +33,10 @@ public class DoorBehaviour : MonoBehaviour {
 		if (other.gameObject.name == "Player")
 		{
 			if (!bStateLocked)
+			{
+				
 				SetDoorState(true);
+			}
 		}
 	}
 
@@ -39,7 +45,10 @@ public class DoorBehaviour : MonoBehaviour {
 		if (other.gameObject.name == "Player")
 		{
 			if (!bStateLocked)
+			{
+				
 				SetDoorState(false);
+			}
 		}
 	}
 
@@ -47,6 +56,7 @@ public class DoorBehaviour : MonoBehaviour {
 	{
 		if (bOpen == bDoorOpen) { return; } //Don't need to do anything
 		bDoorOpen = bOpen;
+		ourAudio.PlayOneShot(DoorMoveSound);
 		if (bOpen && OcclusionPortal)
 		{
 			OcclusionPortal.open = true;
