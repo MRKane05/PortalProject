@@ -15,7 +15,7 @@
 		Offset -1, 1
 		Pass
 		{
-			Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
+			//Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag

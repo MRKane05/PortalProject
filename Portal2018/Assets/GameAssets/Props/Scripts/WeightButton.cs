@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Portals;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -77,12 +78,20 @@ public class WeightButton : MonoBehaviour
                 
                 for (int i=0; i<objectsOn.Count; i++)
                 {
-                    if (objectsOn[i].name.ToLower().Contains("player")) {
+                    if (objectsOn[i].name.ToLower().Contains("player"))
+                    {
+                        bPlayerOn = true;
+                    }
+                    //Check and see if the player is simply holding this object on the switch
+                    Teleportable objectTeleport = objectsOn[i].GetComponent<Teleportable>();
+                    if (objectTeleport.bIsHeld)
+                    {
                         bPlayerOn = true;
                     }
                 }
                 if (!bPlayerOn)
                 {
+                    //PROBLEM: Kind of need to check and see if the cube might fall off before we call this
                     OnButtonTriggeredByObject.Invoke(true);
                 }
             }

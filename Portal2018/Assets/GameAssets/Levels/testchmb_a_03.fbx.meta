@@ -21,6 +21,25 @@ ModelImporter:
     100030: Room001_Grating_glass
     100032: Room001_noportal.001
     100034: Room003_noportal_glass
+    100036: Room003.001
+    100038: Room003_noportal.003
+    100040: Room003_noportal.004
+    100042: Room003_noportal.005
+    100044: Room003_noportal.006
+    100046: Room003_noportal.007
+    100048: Room003_noportal.008
+    100050: Room003_noportal.009
+    100052: Room003_noportal.010
+    100054: Room003_noportal.011
+    100056: Room003_noportal.012
+    100058: Room003_noportal.013
+    100060: Room003_noportal.015
+    100062: Room003_noportal.016
+    100064: Room003_noportal.017
+    100066: Room003_noportal.019
+    100068: Room003_noportal.020
+    100070: Room003.002
+    100072: Room003_noportal.002
     400000: func_brush_425285
     400002: Observationwindow_glass_noportal
     400004: observationwindow_glass_noportal
@@ -39,6 +58,25 @@ ModelImporter:
     400030: Room001_Grating_glass
     400032: Room001_noportal.001
     400034: Room003_noportal_glass
+    400036: Room003.001
+    400038: Room003_noportal.003
+    400040: Room003_noportal.004
+    400042: Room003_noportal.005
+    400044: Room003_noportal.006
+    400046: Room003_noportal.007
+    400048: Room003_noportal.008
+    400050: Room003_noportal.009
+    400052: Room003_noportal.010
+    400054: Room003_noportal.011
+    400056: Room003_noportal.012
+    400058: Room003_noportal.013
+    400060: Room003_noportal.015
+    400062: Room003_noportal.016
+    400064: Room003_noportal.017
+    400066: Room003_noportal.019
+    400068: Room003_noportal.020
+    400070: Room003.002
+    400072: Room003_noportal.002
     2100000: VirtualRoom_Large
     2100002: maps_testchmb_a_03_metal_metalwall048b_med
     2100004: maps_testchmb_a_02_metal_metalwall048b
@@ -79,6 +117,28 @@ ModelImporter:
     2100074: ElevatorWall
     2100076: SafetyLift
     2100078: SafetyGlass
+    2100080: No Name
+    2100082: concrete_modular_floor001b.001
+    2100084: metalwall048b.001
+    2100086: metalwall048b_med.tga
+    2100088: plasticwall004a.001
+    2100090: plasticwall003a.001
+    2100092: metalwall_bts_006b_gradient.001
+    2100094: signage_border.001
+    2100096: plasticwall001a.001
+    2100098: signage_arrow.001
+    2100100: signage_exit.001
+    2100102: plasticwall001b.001
+    2100104: light_recessedcool002.001
+    2100106: metalwall061f.001
+    2100108: metalwall048b_lrg.tga
+    2100110: metal_modular_floor001.001
+    2100112: metalwall_bts_006a.001
+    2100114: light_orange001.001
+    2100116: metal_lift001_gradient.001
+    2100118: metal_lift001.001
+    2100120: metalwall_bts_005a.001
+    2100122: maps_testchmb_a_03_metal_metal_lift001
     2300000: func_brush_425285
     2300002: Observationwindow_glass_noportal
     2300004: observationwindow_glass_noportal
@@ -96,6 +156,25 @@ ModelImporter:
     2300028: Room001_Grating_glass
     2300030: Room001_noportal.001
     2300032: Room003_noportal_glass
+    2300034: Room003.001
+    2300036: Room003_noportal.003
+    2300038: Room003_noportal.004
+    2300040: Room003_noportal.005
+    2300042: Room003_noportal.006
+    2300044: Room003_noportal.007
+    2300046: Room003_noportal.008
+    2300048: Room003_noportal.009
+    2300050: Room003_noportal.010
+    2300052: Room003_noportal.011
+    2300054: Room003_noportal.012
+    2300056: Room003_noportal.013
+    2300058: Room003_noportal.015
+    2300060: Room003_noportal.016
+    2300062: Room003_noportal.017
+    2300064: Room003_noportal.019
+    2300066: Room003_noportal.020
+    2300068: Room003.002
+    2300070: Room003_noportal.002
     3300000: func_brush_425285
     3300002: Observationwindow_glass_noportal
     3300004: observationwindow_glass_noportal
@@ -113,6 +192,25 @@ ModelImporter:
     3300028: Room001_Grating_glass
     3300030: Room001_noportal.001
     3300032: Room003_noportal_glass
+    3300034: Room003.001
+    3300036: Room003_noportal.003
+    3300038: Room003_noportal.004
+    3300040: Room003_noportal.005
+    3300042: Room003_noportal.006
+    3300044: Room003_noportal.007
+    3300046: Room003_noportal.008
+    3300048: Room003_noportal.009
+    3300050: Room003_noportal.010
+    3300052: Room003_noportal.011
+    3300054: Room003_noportal.012
+    3300056: Room003_noportal.013
+    3300058: Room003_noportal.015
+    3300060: Room003_noportal.016
+    3300062: Room003_noportal.017
+    3300064: Room003_noportal.019
+    3300066: Room003_noportal.020
+    3300068: Room003.002
+    3300070: Room003_noportal.002
     4300000: observationwindow_glass_noportal
     4300002: Room001
     4300004: Room001_glass
@@ -130,6 +228,25 @@ ModelImporter:
     4300028: Room003_noportal_glass
     4300030: Room001_noportal.001
     4300032: Room001_Grating_glass
+    4300034: Room003_noportal.010
+    4300036: Room003_noportal.009
+    4300038: Room003_noportal.008
+    4300040: Room003_noportal.007
+    4300042: Room003_noportal.006
+    4300044: Room003_noportal.005
+    4300046: Room003_noportal.004
+    4300048: Room003_noportal.003
+    4300050: Room003.001
+    4300052: Room003_noportal.020
+    4300054: Room003_noportal.019
+    4300056: Room003_noportal.017
+    4300058: Room003_noportal.016
+    4300060: Room003_noportal.015
+    4300062: Room003_noportal.013
+    4300064: Room003_noportal.012
+    4300066: Room003_noportal.011
+    4300068: Room003_noportal.002
+    4300070: Room003.002
     6400000: func_brush_425285
     6400002: Observationwindow_glass_noportal
     6400004: observationwindow_glass_noportal
@@ -147,6 +264,25 @@ ModelImporter:
     6400028: Room001_Grating_glass
     6400030: Room001_noportal.001
     6400032: Room003_noportal_glass
+    6400034: Room003.001
+    6400036: Room003_noportal.003
+    6400038: Room003_noportal.004
+    6400040: Room003_noportal.005
+    6400042: Room003_noportal.006
+    6400044: Room003_noportal.007
+    6400046: Room003_noportal.008
+    6400048: Room003_noportal.009
+    6400050: Room003_noportal.010
+    6400052: Room003_noportal.011
+    6400054: Room003_noportal.012
+    6400056: Room003_noportal.013
+    6400058: Room003_noportal.015
+    6400060: Room003_noportal.016
+    6400062: Room003_noportal.017
+    6400064: Room003_noportal.019
+    6400066: Room003_noportal.020
+    6400068: Room003.002
+    6400070: Room003_noportal.002
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -338,6 +474,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: maps_testchmb_a_03_plaster_plasterwall044c
     second: {fileID: 2100000, guid: 81d6704df47ce654088978b866ebd352, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalwall048b_lrg.tga
+    second: {fileID: 2100000, guid: a2673d9721e5eea40908d7fb886d2a48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalwall048b_med.tga
+    second: {fileID: 2100000, guid: 823e21b3d9ccbd8488bfd1d7d1aad82d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -11,7 +11,9 @@ public class PickupPortalGun : MonoBehaviour {
 		{
 			stationaryBehaviour.enabled = false;    //Turn off our stationary behavior
 			LevelController.Instance.playersPortalGun.RevealHidePortalGun(true);
+			LevelController.Instance.playerCollectPortalGun();
 			gameObject.SetActive(false); //Hide the model for this object
+			stationaryBehaviour.PlayStandCloseAnimation();			
 		}
 	}
 }

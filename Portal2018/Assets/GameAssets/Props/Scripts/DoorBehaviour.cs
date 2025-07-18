@@ -47,7 +47,7 @@ public class DoorBehaviour : MonoBehaviour {
 	{
 		if (bOpen == bDoorOpen) { return; } //Don't need to do anything
 		bDoorOpen = bOpen;
-		if (bOpen)
+		if (bOpen && OcclusionPortal)
 		{
 			OcclusionPortal.open = true;
 		}
@@ -81,7 +81,7 @@ public class DoorBehaviour : MonoBehaviour {
 			lerpTime = Mathf.Lerp(lerpTime, 0f, Time.deltaTime * doorLerpSpeed);
 			DoorLeft.transform.localPosition = doorOffsetPosition * lerpTime;
 			DoorRight.transform.localPosition = doorRightOffsetPosition * lerpTime;
-			if (lerpTime < 0.01f)	//Check to see if we should turn our occlusion off
+			if (lerpTime < 0.01f && OcclusionPortal)	//Check to see if we should turn our occlusion off
             {
 				OcclusionPortal.open = false;
 			}

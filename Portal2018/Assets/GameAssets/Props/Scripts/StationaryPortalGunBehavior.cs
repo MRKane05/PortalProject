@@ -12,8 +12,11 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	Vector3 setRotation = Vector3.zero;
 	float startDelay = 2f;
 	public GameObject gunBase;
+	public GameObject gunStand;
 
 	public GameObject outPortalLocation;
+
+	public Animation StandAnimator;
 
 	// Use this for initialization
 	IEnumerator Start()
@@ -30,6 +33,7 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 		if (Time.time - lastActionTime > gunPauseTime)  //We need to rotate our gun 90deg to the left
 		{
 			gunBase.transform.eulerAngles = Vector3.MoveTowards(gunBase.transform.eulerAngles, setRotation + new Vector3(0, -90, 0), Time.deltaTime * 90f / gunTurnTime);
+			gunStand.transform.eulerAngles = gunBase.transform.eulerAngles - new Vector3(0, 90, 0);
 		}
 		if (Time.time - lastActionTime > gunPauseTime + gunTurnTime)
 		{
@@ -46,5 +50,11 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 		{
 			LevelController.Instance.playersPortalGun.PlacePortal(SpawnPortalOnClick.Polarity.Right, outPortalLocation.transform.position, outPortalLocation.transform.forward);
 		}
+	}
+
+
+	public void PlayStandCloseAnimation()
+	{
+		StandAnimator.Play();
 	}
 }

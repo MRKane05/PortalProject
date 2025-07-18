@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectImpactSounds : MonoBehaviour {
 	AudioSource ourAudio;
     public List<AudioClip> bumpSounds;
-    public bool bSilentFirstHit = true;
+    public bool bSilentUntilInteractedWith = true;
 
     Rigidbody rb;
     Vector3 maxAngularVelocity = Vector3.zero;
@@ -19,9 +19,8 @@ public class ObjectImpactSounds : MonoBehaviour {
     {
         if (ourAudio && bumpSounds.Count > 0)
         {
-            if (bSilentFirstHit)
+            if (bSilentUntilInteractedWith)
             {
-                bSilentFirstHit = false;
                 return;
             }
             ourAudio.PlayOneShot(bumpSounds[Random.Range(0, bumpSounds.Count)]);

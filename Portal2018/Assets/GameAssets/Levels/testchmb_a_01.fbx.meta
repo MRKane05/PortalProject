@@ -1,0 +1,547 @@
+fileFormatVersion: 2
+guid: 47fca62ca40f2f0409fe06374f5ab76e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: info_overlay_1
+    100002: info_overlay_11
+    100004: info_overlay_12
+    100006: info_overlay_13
+    100008: info_overlay_14
+    100010: info_overlay_15
+    100012: info_overlay_16
+    100014: info_overlay_17
+    100016: info_overlay_18
+    100018: info_overlay_19
+    100020: info_overlay_20
+    100022: info_overlay_21
+    100024: info_overlay_22
+    100026: info_overlay_23
+    100028: info_overlay_24
+    100030: info_overlay_25
+    100032: info_overlay_26
+    100034: info_overlay_27
+    100036: info_overlay_28
+    100038: info_overlay_29
+    100040: info_overlay_30
+    100042: info_overlay_31
+    100044: info_overlay_32
+    100046: info_overlay_33
+    100048: info_overlay_34
+    100050: info_overlay_35
+    100052: info_overlay_36
+    100054: Lift001
+    100056: Lift002
+    100058: Lift003
+    100060: Room001
+    100062: Room001.001
+    100064: Room001_Floor
+    100066: Room001_noportal
+    100068: Room002
+    100070: Room002_noportal
+    100072: //RootNode
+    100074: Windo_glass_noportal
+    100076: window_glass_noportal
+    100078: window_glass_noportal.001
+    100080: window_glass_noportal.002
+    100082: world_geometry.001
+    100084: world_geometry.005
+    100086: world_geometry.007
+    400000: info_overlay_1
+    400002: info_overlay_11
+    400004: info_overlay_12
+    400006: info_overlay_13
+    400008: info_overlay_14
+    400010: info_overlay_15
+    400012: info_overlay_16
+    400014: info_overlay_17
+    400016: info_overlay_18
+    400018: info_overlay_19
+    400020: info_overlay_20
+    400022: info_overlay_21
+    400024: info_overlay_22
+    400026: info_overlay_23
+    400028: info_overlay_24
+    400030: info_overlay_25
+    400032: info_overlay_26
+    400034: info_overlay_27
+    400036: info_overlay_28
+    400038: info_overlay_29
+    400040: info_overlay_30
+    400042: info_overlay_31
+    400044: info_overlay_32
+    400046: info_overlay_33
+    400048: info_overlay_34
+    400050: info_overlay_35
+    400052: info_overlay_36
+    400054: Lift001
+    400056: Lift002
+    400058: Lift003
+    400060: Room001
+    400062: Room001.001
+    400064: Room001_Floor
+    400066: Room001_noportal
+    400068: Room002
+    400070: Room002_noportal
+    400072: //RootNode
+    400074: Windo_glass_noportal
+    400076: window_glass_noportal
+    400078: window_glass_noportal.001
+    400080: window_glass_noportal.002
+    400082: world_geometry.001
+    400084: world_geometry.005
+    400086: world_geometry.007
+    2100000: CONCRETE_CONCRETE_MODULAR_WALL001F.001
+    2100002: CONCRETE_CONCRETE_MODULAR_WALL001E.001
+    2100004: LIGHTS_LIGHT_RECESSEDCOOL002.001
+    2100006: maps_testchmb_a_01_plastic_plasticwall004a.001
+    2100008: maps_testchmb_a_01_plastic_plasticwall003a.001
+    2100010: SIGNAGE_SIGNAGE_EXIT.001
+    2100012: SIGNAGE_SIGNAGE_ARROW.001
+    2100014: SIGNAGE_SIGNAGE_BORDER.001
+    2100016: CONCRETE_CONCRETE_MODULAR_WALL001A.001
+    2100018: CONCRETE_CONCRETE_MODULAR_WALL001D.001
+    2100020: CONCRETE_CONCRETE_MODULAR_FLOOR001C.001
+    2100022: CONCRETE_CONCRETE_MODULAR_FLOOR001B.001
+    2100024: SIGNAGEHAZARD_ORANGE_03B
+    2100026: CONCRETECONCRETE_MODULAR_FLOOR001A
+    2100028: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    2100030: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
+    2100032: CONCRETECONCRETE_MODULAR_FLOOR001C
+    2100034: overlays_stain_tile001.001
+    2100036: overlays_stain_concrete002.001
+    2100038: maps_testchmb_a_01_metal_metalwall048b.001
+    2100040: VirtualWindow_Large
+    2100042: decals_decalstain009a.001
+    2100044: decals_decalstain005a.001
+    2100046: maps_testchmb_a_01_plastic_plasticwall001a.001
+    2100048: SIGNAGE_HAZARD_ORANGE_03B.001
+    2100050: VirtualWindow_Small
+    2100052: signage_signage_overlay_arrow.001
+    2100054: signage_overlay_button_accent.001
+    2100056: mapstestchmb_a_01glassglasswindow_frosted
+    2100058: decals_overlay_light_gradient.001
+    2100060: CONCRETECONCRETE_MODULAR_WALL001E.001
+    2100062: CONCRETECONCRETE_MODULAR_CEILING001A.001
+    2100064: CONCRETECONCRETE_MODULAR_FLOOR001A.001
+    2100066: ElevatorWall
+    2100068: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    2300000: info_overlay_1
+    2300002: info_overlay_11
+    2300004: info_overlay_12
+    2300006: info_overlay_13
+    2300008: info_overlay_14
+    2300010: info_overlay_15
+    2300012: info_overlay_16
+    2300014: info_overlay_17
+    2300016: info_overlay_18
+    2300018: info_overlay_19
+    2300020: info_overlay_20
+    2300022: info_overlay_21
+    2300024: info_overlay_22
+    2300026: info_overlay_23
+    2300028: info_overlay_24
+    2300030: info_overlay_25
+    2300032: info_overlay_26
+    2300034: info_overlay_27
+    2300036: info_overlay_28
+    2300038: info_overlay_29
+    2300040: info_overlay_30
+    2300042: info_overlay_31
+    2300044: info_overlay_32
+    2300046: info_overlay_33
+    2300048: info_overlay_34
+    2300050: info_overlay_35
+    2300052: info_overlay_36
+    2300054: Lift001
+    2300056: Lift002
+    2300058: Lift003
+    2300060: Room001
+    2300062: Room001.001
+    2300064: Room001_Floor
+    2300066: Room001_noportal
+    2300068: Room002
+    2300070: Room002_noportal
+    2300072: Windo_glass_noportal
+    2300074: window_glass_noportal
+    2300076: window_glass_noportal.001
+    2300078: window_glass_noportal.002
+    2300080: world_geometry.001
+    2300082: world_geometry.005
+    2300084: world_geometry.007
+    3300000: info_overlay_1
+    3300002: info_overlay_11
+    3300004: info_overlay_12
+    3300006: info_overlay_13
+    3300008: info_overlay_14
+    3300010: info_overlay_15
+    3300012: info_overlay_16
+    3300014: info_overlay_17
+    3300016: info_overlay_18
+    3300018: info_overlay_19
+    3300020: info_overlay_20
+    3300022: info_overlay_21
+    3300024: info_overlay_22
+    3300026: info_overlay_23
+    3300028: info_overlay_24
+    3300030: info_overlay_25
+    3300032: info_overlay_26
+    3300034: info_overlay_27
+    3300036: info_overlay_28
+    3300038: info_overlay_29
+    3300040: info_overlay_30
+    3300042: info_overlay_31
+    3300044: info_overlay_32
+    3300046: info_overlay_33
+    3300048: info_overlay_34
+    3300050: info_overlay_35
+    3300052: info_overlay_36
+    3300054: Lift001
+    3300056: Lift002
+    3300058: Lift003
+    3300060: Room001
+    3300062: Room001.001
+    3300064: Room001_Floor
+    3300066: Room001_noportal
+    3300068: Room002
+    3300070: Room002_noportal
+    3300072: Windo_glass_noportal
+    3300074: window_glass_noportal
+    3300076: window_glass_noportal.001
+    3300078: window_glass_noportal.002
+    3300080: world_geometry.001
+    3300082: world_geometry.005
+    3300084: world_geometry.007
+    4300000: world_geometry.001
+    4300002: Room002
+    4300004: world_geometry.005
+    4300006: info_overlay_14
+    4300008: info_overlay_13
+    4300010: info_overlay_12
+    4300012: info_overlay_11
+    4300014: Room002_noportal
+    4300016: window_glass_noportal
+    4300018: info_overlay_17
+    4300020: info_overlay_19
+    4300022: info_overlay_18
+    4300024: info_overlay_16
+    4300026: info_overlay_15
+    4300028: Room001_noportal
+    4300030: Room001
+    4300032: Room001.001
+    4300034: Room001_Floor
+    4300036: world_geometry.007
+    4300038: window_glass_noportal.002
+    4300040: window_glass_noportal.001
+    4300042: info_overlay_36
+    4300044: info_overlay_35
+    4300046: info_overlay_34
+    4300048: info_overlay_33
+    4300050: info_overlay_32
+    4300052: info_overlay_31
+    4300054: info_overlay_30
+    4300056: info_overlay_29
+    4300058: info_overlay_28
+    4300060: info_overlay_27
+    4300062: info_overlay_26
+    4300064: info_overlay_25
+    4300066: info_overlay_24
+    4300068: info_overlay_23
+    4300070: info_overlay_22
+    4300072: info_overlay_21
+    4300074: info_overlay_20
+    4300076: Windo_glass_noportal
+    4300078: info_overlay_1
+    4300080: Lift003
+    4300082: Lift002
+    4300084: Lift001
+    6400000: info_overlay_1
+    6400002: info_overlay_11
+    6400004: info_overlay_12
+    6400006: info_overlay_13
+    6400008: info_overlay_14
+    6400010: info_overlay_15
+    6400012: info_overlay_16
+    6400014: info_overlay_17
+    6400016: info_overlay_18
+    6400018: info_overlay_19
+    6400020: info_overlay_20
+    6400022: info_overlay_21
+    6400024: info_overlay_22
+    6400026: info_overlay_23
+    6400028: info_overlay_24
+    6400030: info_overlay_25
+    6400032: info_overlay_26
+    6400034: info_overlay_27
+    6400036: info_overlay_28
+    6400038: info_overlay_29
+    6400040: info_overlay_30
+    6400042: info_overlay_31
+    6400044: info_overlay_32
+    6400046: info_overlay_33
+    6400048: info_overlay_34
+    6400050: info_overlay_35
+    6400052: info_overlay_36
+    6400054: Lift001
+    6400056: Lift002
+    6400058: Lift003
+    6400060: Room001
+    6400062: Room001.001
+    6400064: Room001_Floor
+    6400066: Room001_noportal
+    6400068: Room002
+    6400070: Room002_noportal
+    6400072: Windo_glass_noportal
+    6400074: window_glass_noportal
+    6400076: window_glass_noportal.001
+    6400078: window_glass_noportal.002
+    6400080: world_geometry.001
+    6400082: world_geometry.005
+    6400084: world_geometry.007
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_CEILING001A.001
+    second: {fileID: 2100000, guid: 758bf0c6a611f6f4086f6cbbdb7d0fc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_FLOOR001A
+    second: {fileID: 2100000, guid: 799ee99656689f241ade18fe9e4dba97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_FLOOR001A.001
+    second: {fileID: 2100000, guid: 799ee99656689f241ade18fe9e4dba97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_FLOOR001C
+    second: {fileID: 2100000, guid: f06a94b4a54c93e438121f9e8cedb382, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETECONCRETE_MODULAR_WALL001E.001
+    second: {fileID: 2100000, guid: 57d1239cff566514aaefc3abdff4934e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    second: {fileID: 2100000, guid: 758bf0c6a611f6f4086f6cbbdb7d0fc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
+    second: {fileID: 2100000, guid: 799ee99656689f241ade18fe9e4dba97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001B.001
+    second: {fileID: 2100000, guid: dded8cbe931a69143855084b4cc4de47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001C.001
+    second: {fileID: 2100000, guid: f06a94b4a54c93e438121f9e8cedb382, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001A.001
+    second: {fileID: 2100000, guid: 6c419373a296ea945a9aa146574ac97d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001D.001
+    second: {fileID: 2100000, guid: b94d42fbef0e0dd4787554045bf4b65e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001E.001
+    second: {fileID: 2100000, guid: 57d1239cff566514aaefc3abdff4934e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001F.001
+    second: {fileID: 2100000, guid: 2a42a49d5a94e4644acf98b45f381493, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElevatorWall
+    second: {fileID: 2100000, guid: 7ae28bd9ffec8b14ab2a3093231f2332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_RECESSEDCOOL002.001
+    second: {fileID: 2100000, guid: 8bd108a9d01171e478ceb2833e4c922f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGEHAZARD_ORANGE_03B
+    second: {fileID: 2100000, guid: 3a7f880fa8c416543a89a024e5f9b332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_HAZARD_ORANGE_03B.001
+    second: {fileID: 2100000, guid: 3a7f880fa8c416543a89a024e5f9b332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_ARROW.001
+    second: {fileID: 2100000, guid: 8373b73a6570c954186d0f5855c3e3fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_BORDER.001
+    second: {fileID: 2100000, guid: 81240530361fcc34c98528a6f2f8670b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_EXIT.001
+    second: {fileID: 2100000, guid: dde681f5096f3804c8d2afa70e9124f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualWindow_Large
+    second: {fileID: 2100000, guid: 15b8fcb648173c8439a014b2eca7eea9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualWindow_Small
+    second: {fileID: 2100000, guid: f0dc787c635983c4589c482ea765bf0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decals_decalstain005a.001
+    second: {fileID: 2100000, guid: 8a5f0a8dd717c24418a70d3188246cf0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decals_decalstain009a.001
+    second: {fileID: 2100000, guid: 89b489f86cfa96842a622406ddff0d06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_01_metal_metalwall048b.001
+    second: {fileID: 2100000, guid: 6eb5a3342c3eb8342ab398fee331a736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_01_plastic_plasticwall001a.001
+    second: {fileID: 2100032, guid: baafae426a83d9244814f2c8da3fccef, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_01_plastic_plasticwall003a.001
+    second: {fileID: 2100030, guid: baafae426a83d9244814f2c8da3fccef, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_01_plastic_plasticwall004a.001
+    second: {fileID: 2100022, guid: baafae426a83d9244814f2c8da3fccef, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mapstestchmb_a_01glassglasswindow_frosted
+    second: {fileID: 2100184, guid: 1cd0b2a244535294ea25b7a634cabf3d, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_concrete002.001
+    second: {fileID: 2100000, guid: e909a54341527d744a6e106a623167bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_tile001.001
+    second: {fileID: 2100000, guid: 8175d5630b0578d4e89f3b6e9d85e1ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_overlay_button_accent.001
+    second: {fileID: 2100000, guid: 8fdb929449b9f7f4dad5e26a7bce8763, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_arrow.001
+    second: {fileID: 2100000, guid: 55f55b5738d2d6b4c927a064b2108fe6, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 6
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

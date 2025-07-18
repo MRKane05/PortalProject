@@ -2,7 +2,7 @@
     Properties{
       _MainTex("Diffuse Texture", 2D) = "white" {}
       _Color("Main Color", Color) = (1,1,1,1)
-
+      _Roughness("Roughness", Range(0.0, 1.0)) = 0.5
       _Ambient("Ambient Color", Color) = (1,1,1,1)
     }
 
@@ -35,12 +35,14 @@
                     float4 vertex : SV_POSITION;
                     float2 uv : TEXCOORD0;
                     float3 lighting : TEXCOORD1;
+                    half3 worldRefl : TEXCOORD2;
                 };
 
                 sampler2D _MainTex;
                 float4 _MainTex_ST;
                 fixed4 _Color;
                 fixed4 _Ambient;
+                half _Roughness;
 
                 // Spherical Harmonics coefficients passed from script
                 float4 _SHAr;
@@ -87,12 +89,28 @@
                     // Ensure lighting is never completely black
                     o.lighting = max(o.lighting, float3(0.05, 0.05, 0.05));
 
+                    /*
+                    //Reflection probe sampler that's not quite up to scratch
+                    float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                    // compute world space view direction
+                    float3 worldViewDir = normalize(UnityWorldSpaceViewDir(worldPos));
+                    // world space normal
+                    //float3 worldNormal = UnityObjectToWorldNormal(IN.normal);
+                    // world space reflection vector
+                    o.worldRefl = reflect(-worldViewDir, worldNormal);*/
+
                     return o;
                 }
 
                 fixed4 frag(v2f i) : SV_Target {
                     fixed4 tex = tex2D(_MainTex, i.uv) * _Color;
                     tex.rgb *= i.lighting;
+                    /*
+                    half4 skyData = UNITY_SAMPLE_TEXCUBE_LOD(unity_SpecCube0, i.worldRefl, _Roughness);
+                    half3 skyColor = DecodeHDR(skyData, unity_SpecCube0_HDR);
+
+                    tex.rgb += skyColor.rgb;*/
+
                     return tex;
                 }
                 ENDCG

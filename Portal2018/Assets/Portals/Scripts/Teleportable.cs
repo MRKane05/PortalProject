@@ -95,6 +95,9 @@ namespace Portals {
         }
 
         #region Initialization
+
+        public bool bIsHeld = false;
+
         protected void Awake()
         {
             // Awake is called on all clones

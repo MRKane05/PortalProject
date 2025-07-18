@@ -152,9 +152,11 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             {
                 portalGunModel.SetActive(true);
                 //Play the necessary animation
+                portalGunAnimator.SetTrigger("DoBringUp");
             }
         }
     }
+
 
     #endregion
 
@@ -180,6 +182,11 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             }
 
             if (polarity == Polarity.Right && LevelController.Instance.playerControlType == LevelController.enPlayerControlType.LEFTONLY)    //Disable the player's firing attempts
+            {
+                return;
+            }
+
+            if (LevelController.Instance.playerControlType == LevelController.enPlayerControlType.NOTYETLEFT)
             {
                 return;
             }

@@ -16,7 +16,7 @@
 
 		Pass
 		{
-			Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
+			//Tags{ "LIGHTMODE" = "VertexLM" "RenderType" = "Opaque" }
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -43,7 +43,7 @@
 			float4 _MainTex_ST;
 			fixed4 _Tint;
 			fixed4 _Blend;
-			half _TextureBlend;
+			fixed _TextureBlend;
 
 			v2f vert (appdata v)
 			{

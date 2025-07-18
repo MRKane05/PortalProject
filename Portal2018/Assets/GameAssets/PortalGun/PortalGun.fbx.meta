@@ -41,6 +41,7 @@ ModelImporter:
     100070: Wire_Center
     100072: Wire_LowerLeft
     100074: Wire_LowerRight
+    100076: BeamEffect
     400000: Arm_Base
     400002: Arm_Base.001
     400004: Arm_Base.002
@@ -79,6 +80,7 @@ ModelImporter:
     400070: Wire_Center
     400072: Wire_LowerLeft
     400074: Wire_LowerRight
+    400076: BeamEffect
     2000000: Camera
     2100000: PortalGunMaterial
     2100002: PortalGunCylinder
@@ -119,6 +121,7 @@ ModelImporter:
     2300068: Wire_Center
     2300070: Wire_LowerLeft
     2300072: Wire_LowerRight
+    2300074: BeamEffect
     3300000: Arm_Base
     3300002: Arm_Base.001
     3300004: Arm_Base.002
@@ -156,6 +159,7 @@ ModelImporter:
     3300068: Wire_Center
     3300070: Wire_LowerLeft
     3300072: Wire_LowerRight
+    3300074: BeamEffect
     4300000: PortalGun_Base
     4300002: FrontPieceBase
     4300004: GunTip
@@ -192,11 +196,19 @@ ModelImporter:
     4300066: PowerChamberCylinder
     4300068: Wire_LowerRight
     4300070: Wire_LowerLeft
+    4300072: BeamEffect
     7400000: Idle
     7400002: Fire
     7400004: Hold
+    7400006: BringUp
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BeamEffect
+    second: {fileID: 2100000, guid: 03a99e7a8f360f442afdf08c2c8e9c46, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -318,6 +330,34 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: BringUp
+      takeName: studio.portalgun_reference.smd.mesh_1.008Action
+      firstFrame: 90
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -341,7 +381,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.0004
+    previousCalculatedGlobalScale: 0.0005
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

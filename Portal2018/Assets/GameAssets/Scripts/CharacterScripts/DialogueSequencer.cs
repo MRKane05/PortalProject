@@ -75,7 +75,7 @@ public class DialogueSequencer : MonoBehaviour {
 				if (thisEvent.AudioLine)
                 {
 					ourAudio.PlayOneShot(thisEvent.AudioLine);
-					Debug.Log("Playing Audio: " + thisEvent.AudioLine.name);
+					//Debug.Log("Playing Audio: " + thisEvent.AudioLine.name);
 					yield return new WaitForSeconds(thisEvent.AudioLine.length);
 				}
 				break;

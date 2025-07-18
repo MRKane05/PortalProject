@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour {
 	private static LevelController instance = null;
 	public static LevelController Instance { get { return instance; } }
 
-	public enum enPlayerControlType { NULL, NONE, LEFTONLY, FULL }
+	public enum enPlayerControlType { NULL, NONE, LEFTONLY, FULL, NOTYETLEFT, NOTYETRIGHT }
 	public enPlayerControlType playerControlType = enPlayerControlType.FULL;
 
 	public GameObject playerObject; //Will no doubt be referenced by lots of things
@@ -30,8 +30,14 @@ public class LevelController : MonoBehaviour {
 		playersPortalGun = playerObject.GetComponentInChildren<SpawnPortalOnClick>();
 	}
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public void playerCollectPortalGun()	//An internal switch to allow player firing states
+    {
+		if (playerControlType == enPlayerControlType.NOTYETLEFT)
+        {
+			playerControlType = enPlayerControlType.LEFTONLY;
+        } else if (playerControlType == enPlayerControlType.NOTYETRIGHT)
+        {
+			playerControlType = enPlayerControlType.FULL;
+        }
+    }
 }

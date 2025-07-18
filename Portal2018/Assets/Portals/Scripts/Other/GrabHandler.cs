@@ -163,6 +163,7 @@ namespace Portals {
             }
 
             Teleportable objecTeleportable = obj.GetComponent<Teleportable>();
+            ObjectImpactSounds impactSounds = obj.GetComponent<ObjectImpactSounds>();
             if (objecTeleportable && objecTeleportable.bCanBePickedUp == false)
             {
                 return; //We can't pickup something that's flagged as not pickupable
@@ -178,7 +179,18 @@ namespace Portals {
                 string objectName = obj.name.Replace("(Clone)", "");
                 obj = GameObject.Find(objectName);
                 rigidbody = obj.GetComponent<Rigidbody>();
-                //Debug.LogError("Opted to get original instead of Clone");
+                objecTeleportable = obj.GetComponent<Teleportable>();
+                impactSounds = obj.GetComponent<ObjectImpactSounds>();
+            }
+
+            if (impactSounds)
+            {
+                impactSounds.bSilentUntilInteractedWith = false;    //We've interacted with this so turn our flag off to make noise
+            }
+
+            if (objecTeleportable)
+            {
+                objecTeleportable.bIsHeld = true;
             }
 
             rigidbody.useGravity = false;
@@ -276,6 +288,7 @@ namespace Portals {
             if (objecTeleportable)
             {
                 objecTeleportable.TeleportableStateChanged -= OnTeleportableStateChanged;
+                objecTeleportable.bIsHeld = false;
             }
 
             rigidbody.drag = 0f;
