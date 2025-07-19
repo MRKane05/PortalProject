@@ -171,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 1503636049166450}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243812686569951986, guid: 5958813c7ceef274c8a9160b25e6c5b8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1fcf973020f42294bb41aae09856dbb0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.66
@@ -290,6 +291,7 @@ MonoBehaviour:
   lifeSpan: 12
   lifeStart: 0
   ourPelletLauncher: {fileID: 0}
+  texAlpha: 1
 --- !u!114 &114725192335508820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +312,7 @@ MonoBehaviour:
   bReplaceShaders: 0
   enterPortalSounds: []
   exitPortalSounds: []
+  bIsHeld: 0
   lastExitedPortal: {fileID: 0}
   bCanBePickedUp: 0
 --- !u!135 &135797389876800856

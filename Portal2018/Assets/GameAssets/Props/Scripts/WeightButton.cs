@@ -83,11 +83,13 @@ public class WeightButton : MonoBehaviour
                         bPlayerOn = true;
                     }
                     //Check and see if the player is simply holding this object on the switch
+                    /*
+                    //Good idea, incorrect outcome
                     Teleportable objectTeleport = objectsOn[i].GetComponent<Teleportable>();
                     if (objectTeleport.bIsHeld)
                     {
                         bPlayerOn = true;
-                    }
+                    }*/
                 }
                 if (!bPlayerOn)
                 {

@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 33613303125946864}
   - component: {fileID: 23654266686061404}
   - component: {fileID: 65429443636469434}
+  - component: {fileID: 41308130943527450}
   m_Layer: 10
   m_Name: Door_Left
   m_TagString: Untagged
@@ -91,8 +92,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592289696974122}
-  m_LocalRotation: {x: -0, y: -0.0046603065, z: -0, w: 0.9999892}
-  m_LocalPosition: {x: 12.588423, y: -1.7555354, z: -7.6867065}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 15.56, y: 10.975, z: 4.883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4967260077431264}
@@ -266,6 +267,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841550166810900}
   m_Mesh: {fileID: 4300006, guid: 2e31a0136081d714fa5f64713db99560, type: 3}
+--- !u!41 &41308130943527450
+OcclusionPortal:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841550166810900}
+  m_Open: 1
+  m_Center: {x: 0.55, y: 0.97, z: 0}
+  m_Size: {x: 1.1, y: 1.95, z: 0.27}
 --- !u!65 &65095492272254962
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -322,10 +332,11 @@ AudioSource:
   m_GameObject: {fileID: 1592289696974122}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243812686569951986, guid: 5958813c7ceef274c8a9160b25e6c5b8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 2f28e953fd845a444b7fdda422b4fe59, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.66
+  m_Volume: 0.2
   m_Pitch: 1.1
   Loop: 0
   Mute: 0
@@ -384,7 +395,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

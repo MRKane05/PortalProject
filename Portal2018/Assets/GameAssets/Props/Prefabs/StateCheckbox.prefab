@@ -97,7 +97,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.66
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -199,4 +199,4 @@ MonoBehaviour:
   bIsTrue: 0
   cloneMaterial: {fileID: 0}
   Audio_True: {fileID: 8300000, guid: ab40bd609569c7c46b3d006f69baf16c, type: 3}
-  Audio_False: {fileID: 8300000, guid: ff30cfbbc064f1a428dbe5fc5d1ea10c, type: 3}
+  Audio_False: {fileID: 8300000, guid: b995389ec7355244fa1006402c53685b, type: 3}

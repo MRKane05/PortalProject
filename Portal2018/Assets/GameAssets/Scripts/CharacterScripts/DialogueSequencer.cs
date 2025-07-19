@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Audio;
+using DG.Tweening;
 
 [System.Serializable]
 public class SequenceEvent
@@ -16,7 +18,11 @@ public class SequenceEvent
 }
 
 public class DialogueSequencer : MonoBehaviour {
+	public AudioMixer AudioMixerGroup;
 	public List<SequenceEvent> SequenceEvents;
+
+	float voiceLineDropVolume = -10;
+	bool bDoingVolumeDown = false;
 
 	bool bSequenceActive = false;
 	AudioSource ourAudio;
@@ -42,9 +48,13 @@ public class DialogueSequencer : MonoBehaviour {
 	void PlayNextNode()
     {
 		if (currentNode < SequenceEvents.Count)
-        {
+		{
 			PlayNode(SequenceEvents[currentNode]);
-        }
+		}
+		else
+        {
+			AudioMixerGroup.DOSetFloat("GameVolume", 0f, 1f);	//Restore the backing game volume
+		}
     }
 
 	void PlayNode(SequenceEvent thisEvent)
@@ -59,6 +69,7 @@ public class DialogueSequencer : MonoBehaviour {
         {
 			
 			case SequenceEvent.enNodeType.DIALOGUE:
+				AudioMixerGroup.DOSetFloat("GameVolume", voiceLineDropVolume, 0.5f); //Turn down the game volume for the GlaDOS lines
 				goto default;
 				//Remember to put up our dialogue line
 				break;
