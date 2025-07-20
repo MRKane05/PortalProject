@@ -15,7 +15,6 @@ public class UIInteractionSound : MonoBehaviour {
 	{
 		if (instance)
 		{
-			Debug.Log("Somehow there's a duplicate UIInteractionSound in the scene");
 			Debug.Log(gameObject.name);
 			Destroy(gameObject);    //Remove ourselves from the scene
 		}

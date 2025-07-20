@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Portals;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,4 +40,22 @@ public class LevelController : MonoBehaviour {
 			playerControlType = enPlayerControlType.FULL;
         }
     }
+
+	public void PositionPlayerOnCheckpoint(string checkpointName)
+    {
+		Checkpoint[] Checkpoints = Object.FindObjectsOfType<Checkpoint>();
+		for (int i=0; i<Checkpoints.Length; i++)
+        {
+			if (Checkpoints[i].name == checkpointName)
+            {
+				Transform targetTrans = Checkpoints[i].transform;
+				//Set our player position to this point
+				playerObject.transform.position = targetTrans.position;
+				RigidbodyCharacterController playerCharacter = playerObject.GetComponent<RigidbodyCharacterController>();
+				playerCharacter.SetHeadRotation(targetTrans.eulerAngles.y);
+				//playerObject.transform.eulerAngles = targetTrans.eulerAngles;
+				break;
+            }
+        }
+	}
 }

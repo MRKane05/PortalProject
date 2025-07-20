@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 82036813330979222}
   - component: {fileID: 114745051170011734}
   - component: {fileID: 114439173345436190}
+  - component: {fileID: 114561219104240512}
   m_Layer: 0
   m_Name: Menu_Statics
   m_TagString: Untagged
@@ -324,6 +325,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f0803c65d2a964d8e8e9e28333069e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114561219104240512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545490400510770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ac1cb595491b8408af93fad1ba519f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114745051170011734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,7 +351,7 @@ MonoBehaviour:
   - name: Chamber 00
     SceneAsset: {fileID: 100000, guid: 3178503cc9e564643bdd907d07fdfeaf, type: 3}
     sceneChamberNumber: 0
-    bUnlocked: 0
+    bUnlocked: 1
   - name: Chamber 01
     SceneAsset: {fileID: 100000, guid: 3178503cc9e564643bdd907d07fdfeaf, type: 3}
     sceneChamberNumber: 1

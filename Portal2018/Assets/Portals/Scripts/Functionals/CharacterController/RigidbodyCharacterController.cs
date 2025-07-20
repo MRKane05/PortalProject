@@ -73,9 +73,17 @@ namespace Portals {
             _yFrameRotation = 0;
         }
 
-        private void OnPortalTeleport(Portal portal) {
+        private void OnPortalTeleport(Portal portal)
+        {
             _previousHeadRotation = portal.TeleportRotation(_previousHeadRotation);
             _head.GetComponent<Camera>().nearClipPlane *= portal.PortalScaleAverage;
+        }
+
+        //Called when the player is dropped into a checkpoint
+        public void SetHeadRotation(float newYaw)
+        {
+            _head.eulerAngles = new Vector3(0, newYaw, 0);
+            _previousHeadRotation = _head.rotation;
         }
 
         private void DoHeadRotation(float xRot, float yRot) {
