@@ -373,22 +373,8 @@ public class PortalSpawnerBase : MonoBehaviour {
 
         Material hitMaterial = materials[subMeshIndex];
         string matName = hitMaterial.name.ToLower();
-        //Debug.Log(matName);
-        if (LevelController.Instance)
-        {
-            for (int i = 0; i < LevelController.Instance.validPortalMaterialTags.Count; i++)
-            {
-                if (matName.Contains(LevelController.Instance.validPortalMaterialTags[i]))
-                {
-                    return true;
-                }
-            }
-        } else
-        {
-            return true;
-        }
 
-        return false;
+        return true;
         // You can now work with the 'hitMaterial'
     }
 

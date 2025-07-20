@@ -1829,7 +1829,7 @@ Prefab:
     - target: {fileID: 114745051170011734, guid: 8189b1297cfa4e844b9e7c037a46ca72,
         type: 2}
       propertyPath: GameSaveData.Chambers.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4535476402263672, guid: 8189b1297cfa4e844b9e7c037a46ca72, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1862,6 +1862,11 @@ Prefab:
     - target: {fileID: 4535476402263672, guid: 8189b1297cfa4e844b9e7c037a46ca72, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114745051170011734, guid: 8189b1297cfa4e844b9e7c037a46ca72,
+        type: 2}
+      propertyPath: LevelList.Array.data[0].bUnlocked
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8189b1297cfa4e844b9e7c037a46ca72, type: 2}
