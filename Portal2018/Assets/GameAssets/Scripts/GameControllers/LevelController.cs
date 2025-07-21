@@ -71,6 +71,7 @@ public class LevelController : MonoBehaviour {
 					playerCharacter.SetHeadRotation(targetTrans.eulerAngles.y);
 					//playerObject.transform.eulerAngles = targetTrans.eulerAngles;
 				}
+				Checkpoints[i].SetupPortalGun();
 				break;
             }
         }

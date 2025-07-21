@@ -4,6 +4,9 @@ using UnityEngine;
 
 //This is called whenever we pass through a checkpoint, and is a reference location to return the player to
 public class Checkpoint : MonoBehaviour {
+	public enum enOverridePortal { NONE, LEFT, RIGHT }  //A flag to see if we need to change portal gun behavior for this checkpoint
+	public enOverridePortal OverridePortal = enOverridePortal.NONE;
+
 	public string CheckpointName = "";
 	public string CheckpointTitle = "00"; //This is what's shown on the main menu
 
@@ -31,5 +34,24 @@ public class Checkpoint : MonoBehaviour {
 			HUDManager.Instance.DisplayMessage("Checkpoint");
 		}
 	}
+
+	public void SetupPortalGun()
+    {
+		if (OverridePortal != enOverridePortal.NONE)
+        {
+			switch (OverridePortal)
+            {				
+				case enOverridePortal.LEFT:
+					//This'll do for the moment, but it's far from correct
+					LevelController.Instance.playersPortalGun.RevealHidePortalGun(true);
+					LevelController.Instance.playerCollectPortalGun();
+					LevelController.Instance.reticuleHandler.ChangeStartState(true);
+					break;
+				case enOverridePortal.RIGHT:
+					break;
+
+			}
+        }
+    }
 
 }

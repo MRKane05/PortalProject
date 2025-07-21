@@ -13,7 +13,7 @@ public class ChamberSelectMenu : UIButtonFunction {
 	// Use this for initialization
 	IEnumerator Start () {
 		//We need to wait for our other systems to start up
-		for (int i = 0; i<10; i++)
+		for (int i = 0; i<2; i++)
         {
 			yield return null;
         }

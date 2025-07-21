@@ -79,11 +79,19 @@ public class GameLevelHandler : MonoBehaviour {
 			{
 				yield return null;
 			}
-			//So now our levelcontroller should be up and running
-			LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
-		} else if (LevelController.Instance.entryElevatorSystem != null) {
-			LevelController.Instance.entryElevatorSystem.SetPlayerElevatorStart();
 
+			LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
+			/*
+			if (LevelController.Instance.entryElevatorSystem != null)
+			{
+				LevelController.Instance.entryElevatorSystem.SetPlayerElevatorStart();
+
+			} else
+            {
+				//So now our levelcontroller should be up and running
+				LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
+				
+			}*/
 		}
 		bSceneLoading = false;
 	}
