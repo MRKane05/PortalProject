@@ -25,6 +25,7 @@ public class GameLevelHandler : MonoBehaviour {
 
 	public void StartNewGame()
     {
+		if (bSceneLoading) { return; }
 		//Set the player prefs checkpoints with data that's blank
 		//Load the first level and set everything in order
 		LoadLevel("test_chamber_00-01", "");
@@ -32,6 +33,7 @@ public class GameLevelHandler : MonoBehaviour {
 
 	public void ContinueGame()
     {
+		if (bSceneLoading) { return; }
 		//Pull the data from our player prefs
 		//Load the necessary level
 		//Set the player to the correct checkpoint after the level has loaded
@@ -53,8 +55,15 @@ public class GameLevelHandler : MonoBehaviour {
         }
     }
 
+	public void LoadTargetChamber(string targetLevel, string targetCheckpoint)
+    {
+		if (bSceneLoading) { return; }
+		StartCoroutine(LoadLevel(targetLevel, targetCheckpoint));
+    }
+
 	IEnumerator LoadLevel(string targetLevel, string targetCheckpoint)
 	{
+		bSceneLoading = true;
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetLevel);
 
 		// Wait until the asynchronous scene fully loads
@@ -76,5 +85,6 @@ public class GameLevelHandler : MonoBehaviour {
 			LevelController.Instance.entryElevatorSystem.SetPlayerElevatorStart();
 
 		}
+		bSceneLoading = false;
 	}
 }

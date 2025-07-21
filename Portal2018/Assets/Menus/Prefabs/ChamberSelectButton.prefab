@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 222313714413594026}
   - component: {fileID: 114776014389042792}
   - component: {fileID: 114180910122233696}
-  - component: {fileID: 114039695541584110}
+  - component: {fileID: 114767468021893104}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ChamberSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,18 +47,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114039695541584110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487516320239550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596e95abc78892145bf5ee8f82a1df38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonDescription: 
 --- !u!114 &114180910122233696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,8 +86,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: doPlayContinue
+      - m_Target: {fileID: 114767468021893104}
+        m_MethodName: SelectChamber
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -225,6 +213,20 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114767468021893104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487516320239550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e84a25b18adf9843a893b4fdc50eb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonDescription: 
+  targetCheckpoint: 
+  targetLevel: 
 --- !u!114 &114776014389042792
 MonoBehaviour:
   m_ObjectHideFlags: 1
