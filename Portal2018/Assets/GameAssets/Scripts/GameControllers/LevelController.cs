@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour {
 	public enPlayerControlType playerControlType = enPlayerControlType.FULL;
 
 	public GameObject playerObject; //Will no doubt be referenced by lots of things
+	public ReticuleHandler reticuleHandler;	//Also referenced by a lot of activity
 	[HideInInspector]
 	public SpawnPortalOnClick playersPortalGun;
 
@@ -18,6 +19,8 @@ public class LevelController : MonoBehaviour {
 	[Header("Settings for Portal Cameras")]
 	public float PortalCameraDistance = 25f;
 	public LayerMask PortalCameraLayerMask;// = LayerMask.NameToLayer("Default");
+
+	public ElevatorHandler entryElevatorSystem;
 
 	void Awake()
     {
@@ -41,6 +44,13 @@ public class LevelController : MonoBehaviour {
         }
     }
 
+	public void PositionPlayerOnTransform(Transform thisTransform)
+    {
+		playerObject.transform.position = thisTransform.position;
+		RigidbodyCharacterController playerCharacter = playerObject.GetComponent<RigidbodyCharacterController>();
+		playerCharacter.SetHeadRotation(thisTransform.eulerAngles.y);
+	}
+
 	public void PositionPlayerOnCheckpoint(string checkpointName)
     {
 		Checkpoint[] Checkpoints = Object.FindObjectsOfType<Checkpoint>();
@@ -48,12 +58,19 @@ public class LevelController : MonoBehaviour {
         {
 			if (Checkpoints[i].name == checkpointName)
             {
-				Transform targetTrans = Checkpoints[i].transform;
-				//Set our player position to this point
-				playerObject.transform.position = targetTrans.position;
-				RigidbodyCharacterController playerCharacter = playerObject.GetComponent<RigidbodyCharacterController>();
-				playerCharacter.SetHeadRotation(targetTrans.eulerAngles.y);
-				//playerObject.transform.eulerAngles = targetTrans.eulerAngles;
+				if (Checkpoints[i].entryElevatorSystem != null)
+				{
+					Checkpoints[i].entryElevatorSystem.SetPlayerElevatorStart();
+				}
+				else
+				{
+					Transform targetTrans = Checkpoints[i].transform;
+					//Set our player position to this point
+					playerObject.transform.position = targetTrans.position;
+					RigidbodyCharacterController playerCharacter = playerObject.GetComponent<RigidbodyCharacterController>();
+					playerCharacter.SetHeadRotation(targetTrans.eulerAngles.y);
+					//playerObject.transform.eulerAngles = targetTrans.eulerAngles;
+				}
 				break;
             }
         }

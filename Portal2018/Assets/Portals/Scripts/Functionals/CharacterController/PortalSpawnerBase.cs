@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PortalSpawnerBase : MonoBehaviour {
-    protected static Color RightPortalColor = new Color(1f, 0.627f, 0);
-    protected static Color LeftPortalColor = new Color(0, 0.627f, 1f);
+    //These could do with becoming a global reference...
+    public static Color RightPortalColor = new Color(1f, 0.627f, 0);
+    public static Color LeftPortalColor = new Color(0, 0.627f, 1f);
 
     [SerializeField] protected GameObject _portalPrefab;
     [SerializeField] protected LayerMask _canHit = -1;
@@ -112,6 +113,12 @@ public class PortalSpawnerBase : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public void HideOnlyLeft()
+    {
+        _leftPortal.gameObject.SetActive(false);
+        _leftPortal.PortalRenderer.setPortalAlpha(0);
     }
 
     public void HidePortals()   //Called from date to dissapear portals

@@ -10,5 +10,10 @@ public class MainMenuHandler : MonoBehaviour {
     {
         GameLevelHandler.Instance.ContinueGame();
     }
+
+    public void doNewGame()
+    {
+        GameLevelHandler.Instance.StartNewGame();
+    }
     #endregion
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GateBehaviour : MonoBehaviour {
 
+	public enum enBlockType { NULL, ALL, LEFTONLY }
+	public enBlockType BlockType = enBlockType.ALL;
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.name != "Player")
@@ -21,7 +24,14 @@ public class GateBehaviour : MonoBehaviour {
 			PortalSpawnerBase attachedPortalSpawner = other.gameObject.GetComponentInChildren<PortalSpawnerBase>();
 			if (attachedPortalSpawner)
             {
-				attachedPortalSpawner.HidePortals();
+				if (BlockType == enBlockType.LEFTONLY)
+				{
+					attachedPortalSpawner.HideOnlyLeft();
+				}
+				else
+				{
+					attachedPortalSpawner.HidePortals();
+				}
             }
         }
 	}

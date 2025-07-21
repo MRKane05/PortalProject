@@ -4,10 +4,11 @@ using UnityEngine;
 
 //This will most likely become an interpolation class that'll also be used for the likes of platforms, but for now lets just get elevators working
 public class ElevatorHandler : MonoBehaviour {
-    public enum enElevatorState { NULL, WAITING, DOORCLOSING, MOVING, DOOROPENING, FINISHED}
+    public enum enElevatorState { NULL, WAITING, DOORCLOSING, MOVING, DOOROPENING, FINISHED }
     public enElevatorState ElevatorState = enElevatorState.WAITING;
 
     public GameObject ElevatorShuttle; //Our bit wot does the moving
+    public GameObject ElevatorStartPosition;    //Used for when the player is doing an elevator start
     public GameObject ElevatorBase, ElevatorDestination; //Our two exterior pieces that we'll move between
     public ElevatorDoorsHandler ElevatorDoors;
 
@@ -38,7 +39,15 @@ public class ElevatorHandler : MonoBehaviour {
     }
     float doorOpenSpeed = 3f;
 
-    public void LateUpdate()
+    public void SetPlayerElevatorStart()
+    {
+        ElevatorDoors.setDoorAlpha(0f);     //Need to set the elevator doors close
+        ElevatorShuttle.transform.position = Vector3.Lerp(ElevatorDestination.transform.position, ElevatorBase.transform.position, 0.5f);   //Set the elevator position about half way
+        LevelController.Instance.PositionPlayerOnTransform(ElevatorStartPosition.transform); //Set the player in the elevator
+        ElevatorState = enElevatorState.MOVING; //Set the elevator to moving
+    }
+
+    void LateUpdate()
     {
         //Door behavior
         if (bBaseDoorsOpen && baseDoorAlpha < 1f)

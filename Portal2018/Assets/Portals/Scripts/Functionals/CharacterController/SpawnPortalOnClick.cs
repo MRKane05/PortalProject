@@ -58,6 +58,9 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
 
     }
 
+    float lastSurfaceCheck = 0;
+    float surfaceCheckFrequency = 0.25f;
+
     void Update () {
         bool leftClick = Input.GetMouseButtonDown(0);
         bool rightClick = Input.GetMouseButtonDown(1);
@@ -69,7 +72,28 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             Polarity polarity = leftClick ? Polarity.Left : Polarity.Right;
             Fire(polarity);
         }
+
+        //Every X seconds we need to check and see if we're aiming at something we can place a portal on
+        if (Time.time > lastSurfaceCheck + surfaceCheckFrequency)
+        {
+            lastSurfaceCheck = Time.time;
+            CheckAimSurface();
+        }
 	}
+
+    void CheckAimSurface()
+    {
+        Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
+        RaycastHit hit;
+        bool hitWall;
+        int mask = _canHit | PortalPhysics.PortalLayerMask;
+        hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
+        if (hitWall)
+        {
+            LevelController.Instance.reticuleHandler.SetValidSurface(!(hit.collider.gameObject.layer == 10));
+        }
+    }
+
 
     #region level functions
     //This will be called from script when we're using this as a one sentry
@@ -212,18 +236,58 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
         RaycastHit hit;
         bool hitWall;
 
-        if (false) { //_shootThroughPortals
-            hitWall = PortalPhysics.Raycast(ray, out hit, Mathf.Infinity, _canHit, QueryTriggerInteraction.Collide);
-        } else {
-            int mask = _canHit | PortalPhysics.PortalLayerMask;
-            hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
+        //We're looking to see if we hit a portal
+        hitWall = PortalPhysics.Raycast(ray, out hit, Mathf.Infinity, _canHit, QueryTriggerInteraction.Collide);
+        if (hitWall)
+        {
+            bool bValidSurface = hit.collider.gameObject.layer != LayerMask.NameToLayer("BackfacePortal");
+            if (bValidSurface)
+            {
+                Portal portal = hit.collider.GetComponent<Portal>();
+                if (portal)
+                {
+                    bool bCanPass = true;
+                    if (portal)
+                    {
+                        switch (polarity)
+                        {
+                            case Polarity.Left:
+                                if (portal == _rightPortal)
+                                {
+                                    bCanPass = false;
+                                }
+                                break;
+                            case Polarity.Right:
+                                if (portal == _leftPortal)
+                                {
+                                    bCanPass = false;
+                                }
+                                break;
+                        }
+                    }
+                    if (!bCanPass)
+                    {
+                        SpawnSplashParticles(hit.point, hit.normal, color);
+                        if (_bulletPrefab)
+                        {
+                            //PROBLEM: Bullet effect needs to be offset slightly for the gun so that we're not firing from our nose
+                            SpawnBullet(_bulletPrefab, _camera.transform.position + _camera.transform.forward * _bulletSpawnOffset, _camera.transform.forward, hit.distance, color);
+                        }
+                        return;
+                    }
+                }
+            }
         }
+
+        int mask = _canHit | PortalPhysics.PortalLayerMask;
+        hitWall = Physics.Raycast(ray, out hit, Mathf.Infinity, mask, QueryTriggerInteraction.Collide);
 
         if (hitWall) {
             //Do a forward check to see if we can spawn
             bool bValidSurface = hit.collider.gameObject.layer != LayerMask.NameToLayer("BackfacePortal");
             Portal portal = hit.collider.GetComponent<Portal>();
-            if (portal)
+
+            if (false) //(portal)
             {
                 //For this implementation we don't much care about fancy effects
                 //WavePortalOverTime(portal, hit.point, _portalWaveAmplitude, _portalWaveDuration);
@@ -234,10 +298,26 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
                 if (bValidSurface)
                 {
                     spawnedPortal = TrySpawnPortal(polarity == Polarity.Left, hit, _camera.transform.forward);
+
                 }
                 if (!spawnedPortal)
                 {
                     SpawnSplashParticles(hit.point, hit.normal, color);
+                    //We need to set the alpha details for this
+                    switch (polarity)
+                    {
+                        case Polarity.Left:
+                            _leftPortal.PortalRenderer.setPortalAlpha(0);
+                            break;
+                        case Polarity.Right:
+                            _rightPortal.PortalRenderer.setPortalAlpha(0);
+                            break;
+                    }
+                } else
+                {
+                    //This needs some switching based off of state, and I really need to catch when a portal gets put inside a wall or something
+                    //However we can still have a look to see if it's active and pass this information through to our HUD
+                    LevelController.Instance.reticuleHandler.PortalGunFired(polarity == Polarity.Left);
                 }
             }
         }

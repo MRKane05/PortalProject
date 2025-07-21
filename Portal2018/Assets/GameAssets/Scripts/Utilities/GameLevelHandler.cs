@@ -44,7 +44,7 @@ public class GameLevelHandler : MonoBehaviour {
 		Debug.Log("TargetCheckpoint: " + checkpointObject);
 
 		//Quick check that there's nothing faulty here
-		if (continueLevel.Length > 3 && checkpointObject.Length > 3)
+		if (continueLevel.Length > 3)
         {
 			StartCoroutine(LoadLevel(continueLevel, checkpointObject));
         } else
@@ -72,6 +72,9 @@ public class GameLevelHandler : MonoBehaviour {
 			}
 			//So now our levelcontroller should be up and running
 			LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
+		} else if (LevelController.Instance.entryElevatorSystem != null) {
+			LevelController.Instance.entryElevatorSystem.SetPlayerElevatorStart();
+
 		}
 	}
 }

@@ -332,6 +332,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    second: {fileID: 2100000, guid: 799ee99656689f241ade18fe9e4dba97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
     second: {fileID: 2100000, guid: 799ee99656689f241ade18fe9e4dba97, type: 2}
   - first:
