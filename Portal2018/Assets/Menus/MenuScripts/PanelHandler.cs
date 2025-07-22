@@ -176,7 +176,7 @@ public class PanelHandler : MonoBehaviour {
                 gameObject.SetActive(false); //simply disable this menu;
                 break;
             case enInteractionType.LOADED:
-                //RemoveSelfAndContents();
+                RemoveSelfAndContents();
                 //So that we don't get a flash we'll get this on the callback
                 break;
             default:

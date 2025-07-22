@@ -18,10 +18,13 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 
 	public Animation StandAnimator;
 
+	bool bIsActive = false;
+
 	// Use this for initialization
-	IEnumerator Start()
+	public void DoActionStart()
 	{
-		yield return new WaitForSeconds(startDelay);
+		bIsActive = true;
+		//yield return new WaitForSeconds(startDelay);
 		lastActionTime = Time.time;
 		//Start with a shot
 		LevelController.Instance.playersPortalGun.DoScriptFire(SpawnPortalOnClick.Polarity.Left, gameObject.transform.position, gameObject.transform.forward);
@@ -30,6 +33,7 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (!bIsActive) { return; }
 		if (Time.time - lastActionTime > gunPauseTime)  //We need to rotate our gun 90deg to the left
 		{
 			gunBase.transform.eulerAngles = Vector3.MoveTowards(gunBase.transform.eulerAngles, setRotation + new Vector3(0, -90, 0), Time.deltaTime * 90f / gunTurnTime);
