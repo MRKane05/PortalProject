@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class LevelController : MonoBehaviour {
 	private static LevelController instance = null;
@@ -31,7 +32,20 @@ public class LevelController : MonoBehaviour {
 
 		instance = this;    //This should be the correct one. We won't be doing additive or seamless loads
 		playersPortalGun = playerObject.GetComponentInChildren<SpawnPortalOnClick>();
+
+		//Remove our TempMusicHandler if there is one
+		if (TempMusicHandler.Instance)
+        {
+			RemoveTempMusicHandler();
+        }
 	}
+
+	public void RemoveTempMusicHandler()
+    {
+		//Fade out and destroy our music player
+		Sequence mySequence = DOTween.Sequence();
+		mySequence.Append(TempMusicHandler.Instance.GetComponent<AudioSource>().DOFade(0f, 0.5f).OnComplete(() => { Destroy(TempMusicHandler.Instance.gameObject); } ));
+    }
 
 	public void playerCollectPortalGun()	//An internal switch to allow player firing states
     {
@@ -75,5 +89,19 @@ public class LevelController : MonoBehaviour {
 				break;
             }
         }
+	}
+
+	void Update()
+    {
+		//Handle our pause menu
+		if ((Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Start")))
+		{
+			if (UIMenuHandler.Instance)
+			{
+				Debug.Log("Loading Pause Menu");
+				Time.timeScale = 0.00001f;  //Set our pause timescale. I'm not sure if this is effective elsewhere
+				UIMenuHandler.Instance.LoadMenuSceneAdditively("Menu_Pause", null, null);
+			}
+		}
 	}
 }

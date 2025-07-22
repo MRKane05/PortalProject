@@ -100,7 +100,7 @@
 				half4 portalCol = tex2D(_TransparencyMask, i.uv.xy + UVDistort.xy * 0.05); // Reduce distortion
 
 				// Optimize flame border calculation
-				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (_portalFade*1.2) + portalCol.r);
+				half portalFlameBorder = saturate(defaultCol.b + portalCol.y - (_portalFade*1.0) + portalCol.r);
 				half3 portalFlames = _Color.rgb * (portalFlameBorder + portalCol.b);
 
 				// Early discard for performance

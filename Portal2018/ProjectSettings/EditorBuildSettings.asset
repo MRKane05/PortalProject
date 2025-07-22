@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Menus/Scenes/OpeningSequence.unity
+    guid: e47cbfdc333607548bba945f31e0e45d
+  - enabled: 1
     path: Assets/Menus/Scenes/Menu_Start.unity
     guid: 07d4eddbd672c81479ed5f4f5cce8cb2
+  - enabled: 1
+    path: Assets/Menus/Scenes/Menu_Pause.unity
+    guid: e20e35cac1f20b3439acaec77b75ac96
+  - enabled: 1
+    path: Assets/Menus/Scenes/Menu_ChamberSelect.unity
+    guid: 62347e1ed8203b745a89094af7594bde
   - enabled: 1
     path: Assets/Scenes/Levels/test_chamber_00-01.unity
     guid: 85362ca61081737428d3061329aae7c8

@@ -22,7 +22,7 @@ public class GameLevelHandler : MonoBehaviour {
 		{
 			//Debug.Log("Duplicate attempt to create SaveUtility");
 			//Debug.Log(gameObject.name);
-			Destroy(this);  //This might get mopped up by the game manager, but that doesn't matter
+			DestroyImmediate(gameObject);  //This might get mopped up by the game manager, but that doesn't matter
 			return; //cancel this
 		}
 
@@ -64,6 +64,11 @@ public class GameLevelHandler : MonoBehaviour {
         }
     }
 
+	public void HardLoadScene(string targetScene)
+    {
+		SceneManager.LoadScene(targetScene);
+    }
+
 	public void LoadTargetChamber(string targetLevel, string targetCheckpoint)
     {
 		if (bSceneLoading) { return; }
@@ -72,6 +77,7 @@ public class GameLevelHandler : MonoBehaviour {
 
 	IEnumerator LoadLevel(string targetLevel, string targetCheckpoint)
 	{
+		Time.timeScale = 1f;
 		bSceneLoading = true;
 		loadingScreen.SetActive(true);
 		loadingScreenAlpha.alpha = 1f;
@@ -85,22 +91,27 @@ public class GameLevelHandler : MonoBehaviour {
 		}
 
 		yield return null;  //Give everything a beat
-		if (targetCheckpoint.Length > 3)
+		if (LevelController.Instance)
 		{
-			while (!LevelController.Instance)
+			if (targetCheckpoint.Length > 3)
 			{
-				yield return null;
-			}
+				while (!LevelController.Instance)
+				{
+					yield return null;
+				}
 
-			LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
+				LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
+			}
 		}
 
 		//really we should wait to get a check callback from our LevelController, but a small delay might just tick it off
+		
 		Sequence LoadScreenFade = DOTween.Sequence();
 		LoadScreenFade.AppendInterval(1f); //A timely wait
 		LoadScreenFade.Append(loadingScreenAlpha.DOFade(0f, 1f));
 
 		yield return new WaitForSeconds(2f);
+		
 		loadingScreen.SetActive(false); //turn our loading screen off after the load
 		bSceneLoading = false;
 	}
