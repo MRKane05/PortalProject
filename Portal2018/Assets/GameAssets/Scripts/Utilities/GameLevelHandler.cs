@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 //This script does things like handling the loading of the levels and feeding through the necessary information
 public class GameLevelHandler : MonoBehaviour {
@@ -9,6 +11,10 @@ public class GameLevelHandler : MonoBehaviour {
 	public static GameLevelHandler Instance { get { return instance; } }
 
 	bool bSceneLoading = false;
+
+	[Header("Loading Screen Details")]
+	public GameObject loadingScreen;
+	public CanvasGroup loadingScreenAlpha;
 
 	void Awake()
 	{
@@ -28,7 +34,10 @@ public class GameLevelHandler : MonoBehaviour {
 		if (bSceneLoading) { return; }
 		//Set the player prefs checkpoints with data that's blank
 		//Load the first level and set everything in order
-		LoadLevel("test_chamber_00-01", "");
+		PlayerPrefs.SetString("CheckpointLevel", "");
+		PlayerPrefs.SetString("CheckpointObject", "");
+		PlayerPrefs.Save();
+		StartCoroutine(LoadLevel("test_chamber_00-01", ""));
     }
 
 	public void ContinueGame()
@@ -64,6 +73,9 @@ public class GameLevelHandler : MonoBehaviour {
 	IEnumerator LoadLevel(string targetLevel, string targetCheckpoint)
 	{
 		bSceneLoading = true;
+		loadingScreen.SetActive(true);
+		loadingScreenAlpha.alpha = 1f;
+
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetLevel);
 
 		// Wait until the asynchronous scene fully loads
@@ -81,18 +93,15 @@ public class GameLevelHandler : MonoBehaviour {
 			}
 
 			LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
-			/*
-			if (LevelController.Instance.entryElevatorSystem != null)
-			{
-				LevelController.Instance.entryElevatorSystem.SetPlayerElevatorStart();
-
-			} else
-            {
-				//So now our levelcontroller should be up and running
-				LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
-				
-			}*/
 		}
+
+		//really we should wait to get a check callback from our LevelController, but a small delay might just tick it off
+		Sequence LoadScreenFade = DOTween.Sequence();
+		LoadScreenFade.AppendInterval(1f); //A timely wait
+		LoadScreenFade.Append(loadingScreenAlpha.DOFade(0f, 1f));
+
+		yield return new WaitForSeconds(2f);
+		loadingScreen.SetActive(false); //turn our loading screen off after the load
 		bSceneLoading = false;
 	}
 }
