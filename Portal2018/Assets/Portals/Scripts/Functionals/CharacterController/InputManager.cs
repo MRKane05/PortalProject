@@ -31,8 +31,8 @@ public class InputManager : MonoBehaviour {
         float yRotation = Input.GetAxis("Mouse Y") * _mouseSensitivity;
         _playerController.Rotate(xRotation, yRotation);
 #else
-        float xRotation = Input.GetAxis("Right Stick Horizontal") * 120f * Time.deltaTime;
-        float yRotation = -Input.GetAxis("Right Stick Vertical") * 120f * Time.deltaTime;
+        float xRotation = CurveInput(Input.GetAxis("Right Stick Horizontal")) * 120f * Time.deltaTime;
+        float yRotation = CurveInput(-Input.GetAxis("Right Stick Vertical")) * 120f * Time.deltaTime;
         _playerController.Rotate(xRotation, yRotation);
 #endif
 
@@ -69,9 +69,8 @@ public class InputManager : MonoBehaviour {
 
 #if !UNITY_EDITOR
         //Vita controls!!!
-        moveDir += Camera.main.transform.forward * -Input.GetAxis("Left Stick Vertical");
-        moveDir += Camera.main.transform.right * Input.GetAxis("Left Stick Horizontal");
-        //new Vector3(Input.GetAxis("Left Stick Horizontal"), 0, Input.GetAxis("Left Stick Vertical"));  //This is inverted for some weird reason
+        moveDir += Camera.main.transform.forward * CurveInput(-Input.GetAxis("Left Stick Vertical"));
+        moveDir += Camera.main.transform.right * CurveInput(Input.GetAxis("Left Stick Horizontal"));
 
         if (moveDir.sqrMagnitude > 0f)
         {
@@ -92,6 +91,11 @@ public class InputManager : MonoBehaviour {
         if (moved) {
             _playerController.Move(moveDir);
         }
+    }
+
+    float CurveInput(float thisInput)
+    {
+        return Mathf.Sign(thisInput) * (thisInput * thisInput);
     }
 
     void FixedUpdate() {

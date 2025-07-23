@@ -227,6 +227,7 @@ MonoBehaviour:
   buttonDescription: 
   targetCheckpoint: 
   targetLevel: 
+  ButtonTitle: {fileID: 114718794928638746}
 --- !u!114 &114776014389042792
 MonoBehaviour:
   m_ObjectHideFlags: 1

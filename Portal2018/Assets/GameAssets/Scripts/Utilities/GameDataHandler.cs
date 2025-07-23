@@ -24,6 +24,7 @@ public class LevelItem
 {
 	public string name = "Chamber 00";
 	public Object SceneAsset;
+	public string LoadedSceneName = "";
 	public int sceneChamberNumber = 0;
 	public bool bUnlocked = false;
 }
