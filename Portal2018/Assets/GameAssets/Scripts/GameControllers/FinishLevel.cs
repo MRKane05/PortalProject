@@ -15,7 +15,8 @@ public class FinishLevel : MonoBehaviour {
 			PlayerPrefs.SetString("CheckpointObject", "");
 			PlayerPrefs.SetString("CheckpointTitle", CheckpointTitle);
 			PlayerPrefs.Save();
-			SceneManager.LoadScene(nextLevel);
+			//SceneManager.LoadScene(nextLevel);
+			GameLevelHandler.Instance.LoadTargetChamber(nextLevel, "");
 		}
 	}
 }

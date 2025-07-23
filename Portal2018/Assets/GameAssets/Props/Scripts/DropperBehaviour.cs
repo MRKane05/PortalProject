@@ -8,6 +8,7 @@ public class DropperBehaviour : MonoBehaviour {
     public GameObject cubeSpawnPoint;
     public GameObject cubePrefab;
     [Space]
+    public bool bPrepareSecondCube = false;
     public GameObject preparedCube;
     public GameObject currentCube;
 
@@ -33,7 +34,10 @@ public class DropperBehaviour : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         triggerAnimation(true);
         yield return new WaitForSeconds(10f);
-        triggerCubeSpawn(); //Add another cube to our cache
+        if (bPrepareSecondCube)
+        {
+            triggerCubeSpawn(); //Add another cube to our cache
+        }
     }
 
     public void triggerCubeSpawn()  //Spawns into the prepared cube
