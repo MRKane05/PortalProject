@@ -702,6 +702,11 @@ namespace Portals {
                 {
                     behaviour.enabled = false;
                 }
+
+                if (behaviour is Teleportable_SpecialState) //Disable this object if we've got this tag (used for the FPS weapon that's visible through everything)
+                {
+                    obj.SetActive(false);
+                }
             }
 
             foreach (Transform child in obj.transform)
