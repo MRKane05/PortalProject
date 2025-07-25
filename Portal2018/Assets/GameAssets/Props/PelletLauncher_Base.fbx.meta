@@ -7,6 +7,7 @@ ModelImporter:
     400000: //RootNode
     2100000: HighEnergyPelletLauncher
     2100002: acmat_0
+    2100004: HighEnergyCatcher
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cylinder

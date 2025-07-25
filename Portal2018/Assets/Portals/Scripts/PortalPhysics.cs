@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Portals {
     public static class PortalPhysics {
-        public static int PortalLayer = 8;
+        public static int PortalLayer = 9;
         public static int PortalLayerMask = 1 << PortalLayer;
         
         private const float Epsilon = 0.001f;
@@ -18,8 +18,9 @@ namespace Portals {
             bool objectHit = Physics.Raycast(origin, direction, out objectHitInfo, maxDistance, layerMask, queryTriggerInteraction);
 
             // Recurse we hit a portal and we did not hit an object OR if we hit both, but the portal is closer
-            bool recurse = (portalHit && !objectHit) || (portalHit && objectHit && portalHitInfo.distance <= objectHitInfo.distance + Epsilon);
-            if (recurse) {
+            bool recurseA = (portalHit && !objectHit);
+            bool recurseB = (portalHit && objectHit && portalHitInfo.distance <= objectHitInfo.distance + Epsilon);
+            if (recurseA || recurseB) {
                 // We hit a portal
                 Portal portal = portalHitInfo.collider.GetComponent<Portal>();
                 if (!portal) {

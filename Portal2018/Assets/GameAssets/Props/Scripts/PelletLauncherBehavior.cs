@@ -14,6 +14,7 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
     AudioSource ourAudio;
     public bool bCanFire = false;
+    bool bPelletDocked = false;
 
     IEnumerator Start()
     {
@@ -27,6 +28,7 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
 	public void DoFirePellet()
     {
+        if (bPelletDocked) { return; }  //Make sure that we cannot fire another pellet
         //this'll have to be a co-routing to delay before the pellet is fired
         //But first animate the joints
         if (ourAudio && launchSounds.Count > 0)
@@ -64,6 +66,7 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
     public void PelletDied()
     {
+        if (bPelletDocked) { return; }  //Make sure that we cannot fire another pellet
         StartCoroutine(RespawnPellet());
         //ourPellet.SetActive(false);
         //ourPellet.GetComponent<Collider>().enabled = false;
@@ -79,7 +82,7 @@ public class PelletLauncherBehavior : MonoBehaviour {
 
     public void PelletDocked()
     {
-
+        bPelletDocked = true;
     }
 
     IEnumerator firePellet()

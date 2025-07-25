@@ -30,6 +30,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
     float lastFireTime = 0f;
     bool bCanFire = true;
 
+    public BoolUnityEvent GunFired;
 
     void Awake() {
         if (!isActiveAndEnabled) {
@@ -197,6 +198,8 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
     }
 
     private void Fire(Polarity polarity) {
+
+        GunFired.Invoke(polarity == Polarity.Left);
 
         if (LevelController.Instance)
         {
