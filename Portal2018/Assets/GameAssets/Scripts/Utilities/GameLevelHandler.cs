@@ -102,6 +102,11 @@ public class GameLevelHandler : MonoBehaviour {
 
 				LevelController.Instance.PositionPlayerOnCheckpoint(targetCheckpoint);
 			}
+            else
+            {
+				//We'll do a LevelController start
+				LevelController.Instance.PositionInStartingElevator();
+			}
 		}
 
 		//really we should wait to get a check callback from our LevelController, but a small delay might just tick it off

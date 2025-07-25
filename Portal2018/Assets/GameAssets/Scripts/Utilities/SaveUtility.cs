@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using UnityEngine;
 
 //In theory we'll only be saving on the map screen so won't need to know about this anywhere else. We're going to make our luck with this one!
@@ -9,8 +9,7 @@ public class SaveUtility : MonoBehaviour {
 	private static SaveUtility instance = null;
 	public static SaveUtility Instance { get { return instance; } }
 
-	string path = "ux0:data/PortalVH";
-
+	string path = "ux0:data/AptrRecon";
 
 	void Awake()
 	{
@@ -76,4 +75,31 @@ public class SaveUtility : MonoBehaviour {
 		return "";
 	}
 
+	public string CalculateFileChecksum(string FileName, string algorithm = "MD5")
+	{
+		if (!File.Exists(path + "/" + FileName))
+		{
+			return null; // Or throw an exception
+		}
+
+		using (FileStream stream = File.OpenRead(path + "/" + FileName))
+		{
+			HashAlgorithm hashAlgorithm;
+			switch (algorithm.ToUpper())
+			{
+				case "MD5":
+					hashAlgorithm = MD5.Create();
+					break;
+				case "SHA256":
+					hashAlgorithm = SHA256.Create();
+					break;
+				// Add more algorithms as needed
+				default:
+					throw new ArgumentException("Unsupported hashing algorithm.", algorithm);
+			}
+
+			byte[] hashBytes = hashAlgorithm.ComputeHash(stream);
+			return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+		}
+	}
 }

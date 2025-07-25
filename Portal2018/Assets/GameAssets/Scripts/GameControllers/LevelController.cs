@@ -68,6 +68,7 @@ public class LevelController : MonoBehaviour {
 	public void PositionPlayerOnCheckpoint(string checkpointName)
     {
 		Checkpoint[] Checkpoints = Object.FindObjectsOfType<Checkpoint>();
+		bool bCheckpointFound = false;
 		for (int i=0; i<Checkpoints.Length; i++)
         {
 			if (Checkpoints[i].name == checkpointName)
@@ -86,10 +87,24 @@ public class LevelController : MonoBehaviour {
 					//playerObject.transform.eulerAngles = targetTrans.eulerAngles;
 				}
 				Checkpoints[i].SetupPortalGun();
+				bCheckpointFound = true;
 				break;
             }
         }
+
+		if (!bCheckpointFound)
+        {
+			entryElevatorSystem.SetPlayerElevatorStart();
+		}
 	}
+
+	public void PositionInStartingElevator()
+    {
+		if (entryElevatorSystem)
+        {
+			entryElevatorSystem.SetPlayerElevatorStart();
+		}
+    }
 
 	void Update()
     {
