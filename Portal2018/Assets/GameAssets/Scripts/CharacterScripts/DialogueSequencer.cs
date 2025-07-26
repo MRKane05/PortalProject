@@ -40,10 +40,25 @@ public class DialogueSequencer : MonoBehaviour {
 			bSequenceActive = true;
 			if (SequenceEvents.Count > 0)
 			{
-				PlayNode(SequenceEvents[0]);
+				if (!LevelController.Instance.bDialoguePlaying)
+				{
+					PlayNode(SequenceEvents[0]);
+				} else
+                {
+					StartCoroutine(WaitForDialogueFree());
+                }
 			}
 		}
     }
+
+	IEnumerator WaitForDialogueFree()
+    {
+		while (LevelController.Instance.bDialoguePlaying)
+        {
+			yield return null;
+        }
+		PlayNode(SequenceEvents[0]);
+	}
 
 	void PlayNextNode()
     {
@@ -53,12 +68,14 @@ public class DialogueSequencer : MonoBehaviour {
 		}
 		else
         {
-			AudioMixerGroup.DOSetFloat("GameVolume", 0f, 1f);	//Restore the backing game volume
+			AudioMixerGroup.DOSetFloat("GameVolume", 0f, 1f);   //Restore the backing game volume
+			LevelController.Instance.bDialoguePlaying = false;
 		}
     }
 
 	void PlayNode(SequenceEvent thisEvent)
     {
+		LevelController.Instance.bDialoguePlaying = true;
 		StartCoroutine(doPlayNode(thisEvent));
 		currentNode++;
     }

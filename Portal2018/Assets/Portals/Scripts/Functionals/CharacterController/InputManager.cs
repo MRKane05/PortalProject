@@ -6,12 +6,8 @@ using Portals;
 public class InputManager : MonoBehaviour {
     [SerializeField] float _mouseSensitivity = 3.0f;
 
-    // TODO: Remove;
-    [SerializeField] bool _autowalk = false;
-
-
     RigidbodyCharacterController _playerController;
-    private bool _movementEnabled;
+    public bool _movementEnabled;
 
     void Awake() {
         _playerController = GetComponent<RigidbodyCharacterController>();
@@ -82,11 +78,6 @@ public class InputManager : MonoBehaviour {
         {
             gameObject.transform.position = Vector3.up * 5f;
         }*/
-
-        if (_autowalk) {
-            moveDir += Camera.main.transform.forward;
-            moved = true;
-        }
 
         if (moved) {
             _playerController.Move(moveDir);

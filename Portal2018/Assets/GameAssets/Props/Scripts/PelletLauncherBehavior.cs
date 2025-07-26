@@ -15,6 +15,7 @@ public class PelletLauncherBehavior : MonoBehaviour {
     AudioSource ourAudio;
     public bool bCanFire = false;
     bool bPelletDocked = false;
+    public ParticleSystem ScorchParticles;
 
     IEnumerator Start()
     {
@@ -23,6 +24,27 @@ public class PelletLauncherBehavior : MonoBehaviour {
         {
             yield return new WaitForSeconds(3f);
             DoFirePellet();
+        }
+    }
+
+    public void AddScorchMark(Vector3 position, Vector3 normal)
+    {
+        if (ScorchParticles)
+        {
+            ParticleSystem.Particle newParticle = new ParticleSystem.Particle();
+            newParticle.position = position + normal * 0.1f;
+            Quaternion particleRotation = Quaternion.LookRotation(normal); //Get our particle direction
+
+            //I don't know why this isn't working correctly. Particles are getting a funny angle on them
+            //particleRotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), normal); //Rotate around the direction of impact for some randomization
+
+            newParticle.rotation3D = particleRotation.ToEuler() * 57.295779f; // Because ToEuler is always in radians and our particles are in degrees
+           
+            newParticle.startLifetime = 20f;
+            newParticle.remainingLifetime = 20f;
+            newParticle.startSize3D = Vector3.one;
+            newParticle.startColor = Color.white;
+            ScorchParticles.Emit(newParticle);
         }
     }
 

@@ -120,6 +120,7 @@ public class PelletProjectile : MonoBehaviour
 		main.startColor = color;
 		Destroy(obj, 2f); //Problem: Tiny gain to be made by having splash particles in a buffer
 	}
+
 	void OnCollisionEnter(Collision collision)
 	{
 		//Look to see if we've hit out pellet catcher
@@ -155,12 +156,28 @@ public class PelletProjectile : MonoBehaviour
 		{
 
 			SpawnSplashParticles(collision.contacts[0].point, collision.contacts[0].normal, Color.white);
-
+			//Need to have a quick check to see what we've hit
+			if (collision.gameObject.isStatic)
+			{
+				PelletLauncherBehavior pelletLauncher = collision.gameObject.GetComponent<PelletLauncherBehavior>();
+				Teleportable ourTeleportable = collision.gameObject.GetComponent<Teleportable>();
+				Portal portalObject = collision.gameObject.GetComponent<Portal>();
+				if (!pelletLauncher && !ourTeleportable && !portalObject)
+				{
+					ourPelletLauncher.AddScorchMark(collision.contacts[0].point, collision.contacts[0].normal);
+				}
+			}
 			if (ourAudio && bounceSounds.Count > 0)
 			{
 				ourAudio.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Count)]);
 			}
 		}
+
+		PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+		if (playerHealth)
+        {
+			playerHealth.TakeDamage(110f, "Vaporize");	//Kill our player
+        }
     }
 
 	void OnCollisionExit(Collision collision)

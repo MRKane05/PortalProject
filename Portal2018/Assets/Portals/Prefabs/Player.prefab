@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 114950017476972466}
   - component: {fileID: 114579552365318066}
   - component: {fileID: 82976414804011166}
+  - component: {fileID: 114542754476399550}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -616,8 +617,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: -0, y: 0.67235553, z: -0, w: -0.7402284}
-  m_LocalPosition: {x: 19.034, y: 1.01, z: -3.616}
+  m_LocalRotation: {x: -0, y: -0.5406919, z: -0, w: 0.8412207}
+  m_LocalPosition: {x: 14.84, y: -0.7, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
@@ -1977,6 +1978,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576d06b4d05dfd94ca65e0804e44b3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114542754476399550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614185999318264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad3c3751b28a8e48a017150355fc281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraObject: {fileID: 1965427446319756}
+  BodyBase: {fileID: 1825981179147098}
+  Health: 100
+  HealthRegenDelay: 3
+  HealthRegenSpeed: 33
+  bIsInvincible: 0
 --- !u!114 &114579552365318066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2111,6 +2129,11 @@ MonoBehaviour:
   clip_fireRed: {fileID: 8300000, guid: c2aab4d1af2868642b74656e22f89a90, type: 3}
   portalGunModel: {fileID: 1883978446506390}
   portalGunAnimator: {fileID: 95986865831258756}
+  GunFired:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: BoolUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114806287536369406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2171,7 +2194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseSensitivity: 3
-  _autowalk: 0
+  _movementEnabled: 0
 --- !u!136 &136556431516409484
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -440,11 +440,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -785,34 +785,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelList:
   - name: Chamber 00
-    SceneAsset: {fileID: 102900000, guid: 85362ca61081737428d3061329aae7c8, type: 3}
     LoadedSceneName: test_chamber_00-01
-    sceneChamberNumber: 0
     bUnlocked: 1
   - name: Chamber 01
-    SceneAsset: {fileID: 102900000, guid: 85362ca61081737428d3061329aae7c8, type: 3}
     LoadedSceneName: test_chamber_00-01
-    sceneChamberNumber: 1
     bUnlocked: 0
   - name: Chamber 02
-    SceneAsset: {fileID: 102900000, guid: c937c01e538c776469d8f3c3f5c47324, type: 3}
     LoadedSceneName: test_chamber_02-03
-    sceneChamberNumber: 0
     bUnlocked: 0
   - name: Chamber 03
-    SceneAsset: {fileID: 102900000, guid: c937c01e538c776469d8f3c3f5c47324, type: 3}
     LoadedSceneName: test_chamber_02-03
-    sceneChamberNumber: 1
     bUnlocked: 0
   - name: Chamber 04
-    SceneAsset: {fileID: 102900000, guid: 0d9de7561921cc14184c2c40435b7e1e, type: 3}
     LoadedSceneName: test_chamber_04-05
-    sceneChamberNumber: 0
     bUnlocked: 0
   - name: Chamber 05
-    SceneAsset: {fileID: 102900000, guid: 0d9de7561921cc14184c2c40435b7e1e, type: 3}
     LoadedSceneName: test_chamber_04-05
-    sceneChamberNumber: 1
+    bUnlocked: 0
+  - name: Chamber 06
+    LoadedSceneName: test_chamber_06-07
+    bUnlocked: 0
+  - name: Chamber 07
+    LoadedSceneName: test_chamber_06-07
     bUnlocked: 0
   GameSaveData:
     Chambers: []

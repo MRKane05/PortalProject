@@ -23,6 +23,9 @@ public class LevelController : MonoBehaviour {
 
 	public ElevatorHandler entryElevatorSystem;
 
+	[HideInInspector]
+	public bool bDialoguePlaying = false;
+
 	void Awake()
     {
 		if (instance)

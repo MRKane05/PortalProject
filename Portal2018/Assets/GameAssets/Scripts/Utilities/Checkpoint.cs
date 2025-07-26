@@ -10,15 +10,12 @@ public class Checkpoint : PlayerActionTrigger {
 	public string CheckpointName = "";
 	public string CheckpointTitle = "00"; //This is what's shown on the main menu
 
-	public int CheckpointIndex = -1; //This is used when there are multiple chambers in a map and relates to unlocking. The first is zero, the second is 1 and so on. -1 is a null point
-
-
 	public ElevatorHandler entryElevatorSystem;
 
 
 	public override void DoTriggerAction()
     {
-		if (GameDataHandler.Instance && CheckpointIndex >= 0)
+		if (GameDataHandler.Instance)
 		{
 			GameDataHandler.Instance.UnlockedChamber(CheckpointName);
 		}
