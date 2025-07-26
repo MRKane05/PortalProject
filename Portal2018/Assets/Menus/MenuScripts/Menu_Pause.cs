@@ -27,4 +27,9 @@ public class Menu_Pause : PanelHandler {
 		//GameLevelHandler.Instance.HardLoadScene("Menu_Start");
 		
 	}
+
+	public void LoadCheckpoint()
+    {
+		GameLevelHandler.Instance.ContinueGame();
+    }
 }
