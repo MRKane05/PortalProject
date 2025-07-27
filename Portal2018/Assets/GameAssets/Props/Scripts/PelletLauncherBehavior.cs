@@ -39,11 +39,12 @@ public class PelletLauncherBehavior : MonoBehaviour {
             //particleRotation *= Quaternion.AngleAxis(Random.Range(0f, 360f), normal); //Rotate around the direction of impact for some randomization
 
             newParticle.rotation3D = particleRotation.ToEuler() * 57.295779f; // Because ToEuler is always in radians and our particles are in degrees
-           
-            newParticle.startLifetime = 20f;
-            newParticle.remainingLifetime = 20f;
+
+            newParticle.startLifetime = 20f; // ScorchParticles.startLifetime;
+            newParticle.remainingLifetime = 20f;// ScorchParticles.startLifetime;
             newParticle.startSize3D = Vector3.one;
-            newParticle.startColor = Color.white;
+            //newParticle.startColor = new Color(((float)Random.Range(0, 16)) / 16f, 1, 1, 0.75f); // ScorchParticles.startColor.a);
+            newParticle.startColor = new Color(((float)Random.Range(0, 16)) / 15f, 1, 1, 0.75f);
             ScorchParticles.Emit(newParticle);
         }
     }

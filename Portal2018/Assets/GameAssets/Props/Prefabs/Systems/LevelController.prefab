@@ -59,7 +59,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1122133598891876
 GameObject:
   m_ObjectHideFlags: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugLogText: {fileID: 114983154091453520}
   TextLog: 
-  bDisplayActive: 0
+  bDisplayActive: 1
 --- !u!114 &114192372441610310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e164f69f6781b4991f2deb5fcccb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControlType: 3
+  playerControlType: 2
   playerObject: {fileID: 0}
   reticuleHandler: {fileID: 114044148730871414}
   playersPortalGun: {fileID: 0}
@@ -714,6 +714,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 96023
   entryElevatorSystem: {fileID: 0}
+  bDialoguePlaying: 0
 --- !u!114 &114983154091453520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -809,7 +810,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

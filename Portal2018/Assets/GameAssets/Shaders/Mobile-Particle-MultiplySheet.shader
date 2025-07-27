@@ -32,7 +32,7 @@ Shader "Mobile/Particles/MultiplySheet"
                 CGPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
-                #pragma target 2.0
+                #pragma target 1.0
                 
                 #include "UnityCG.cginc"
                 
@@ -47,7 +47,7 @@ Shader "Mobile/Particles/MultiplySheet"
                     float4 vertex : POSITION;
                     fixed4 color : COLOR;
                     half2 texcoord : TEXCOORD0;
-                    uint VertexID : SV_VertexID;
+                    //uint VertexID : SV_VertexID;
                 };
                 
                 struct v2f
@@ -55,8 +55,8 @@ Shader "Mobile/Particles/MultiplySheet"
                     float4 vertex : SV_POSITION;
                     fixed4 color : COLOR;
                     half2 texcoord : TEXCOORD0;
-                    float2 screenUV : TEXCOORD1;
-                    float screenDepth : TEXCOORD2;
+                    //float2 screenUV : TEXCOORD1;
+                    //float screenDepth : TEXCOORD2;
                 };
 
                 inline float4 FastScreenPos(float4 clipPos) {
@@ -77,18 +77,19 @@ Shader "Mobile/Particles/MultiplySheet"
                     v2f o;
                     
                     o.vertex = UnityObjectToClipPos(v.vertex);
-                    o.color = v.color * _TintColor;
+                    o.color = fixed4(1, v.color.g, v.color.b, v.color.a) * _TintColor;
                     //We need to change the uv mapping based off of the tile number and the index of the particle
-                    uint particle_id = v.VertexID / 4;
-                    fixed xPos = particle_id % _Tiles;
+                    fixed particle_id = floor(v.color.r * 15.0); //fixed particle_id = floor(v.color.r * 16);// v.VertexID / 4;
+                    fixed xPos = particle_id - floor(particle_id / _Tiles) * _Tiles;
                     fixed yPos = floor(particle_id / _Tiles);
 
-                    o.texcoord = (v.texcoord / _Tiles) + float2(xPos/_Tiles, yPos/_Tiles);
-
+                    fixed2 tileSize = fixed2(1.0 / _Tiles, 1.0 / _Tiles);
+                    o.texcoord = v.texcoord * tileSize + fixed2(xPos * tileSize.x, yPos * tileSize.y);
+                    /*
                     float4 screenPos = ComputeScreenPos(o.vertex);
                     o.screenUV = screenPos.xy / screenPos.w;  // Do divide in vertex shader
                     o.screenDepth = screenPos.z / screenPos.w; // Also pre-calculate depth
-
+                    */
                     return o;
                 }
 

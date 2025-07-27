@@ -157,7 +157,7 @@ public class PelletProjectile : MonoBehaviour
 
 			SpawnSplashParticles(collision.contacts[0].point, collision.contacts[0].normal, Color.white);
 			//Need to have a quick check to see what we've hit
-			if (collision.gameObject.isStatic)
+			if (collision.gameObject.isStatic || true) //Because .isStatic is always false on build :/
 			{
 				PelletLauncherBehavior pelletLauncher = collision.gameObject.GetComponent<PelletLauncherBehavior>();
 				Teleportable ourTeleportable = collision.gameObject.GetComponent<Teleportable>();

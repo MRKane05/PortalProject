@@ -1,0 +1,473 @@
+fileFormatVersion: 2
+guid: 695fcabe223bc9141895c7e9f1a6bcf5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: info_overlay_0
+    100002: info_overlay_1
+    100004: info_overlay_10
+    100006: info_overlay_11
+    100008: info_overlay_12
+    100010: info_overlay_13
+    100012: info_overlay_14
+    100014: info_overlay_15
+    100016: info_overlay_16
+    100018: info_overlay_17
+    100020: info_overlay_18
+    100022: info_overlay_19
+    100024: info_overlay_2
+    100026: info_overlay_3
+    100028: info_overlay_4
+    100030: info_overlay_9
+    100032: LiquidSurface
+    100034: Observation_glass
+    100036: Room00_noportal
+    100038: Room00_noportal.001
+    100040: //RootNode
+    100042: world_geometry
+    400000: info_overlay_0
+    400002: info_overlay_1
+    400004: info_overlay_10
+    400006: info_overlay_11
+    400008: info_overlay_12
+    400010: info_overlay_13
+    400012: info_overlay_14
+    400014: info_overlay_15
+    400016: info_overlay_16
+    400018: info_overlay_17
+    400020: info_overlay_18
+    400022: info_overlay_19
+    400024: info_overlay_2
+    400026: info_overlay_3
+    400028: info_overlay_4
+    400030: info_overlay_9
+    400032: LiquidSurface
+    400034: Observation_glass
+    400036: Room00_noportal
+    400038: Room00_noportal.001
+    400040: //RootNode
+    400042: world_geometry
+    2100000: maps_testchmb_a_04_nature_hazard_liquid.001
+    2100002: maps_testchmb_a_04_plastic_plasticwall004a.001
+    2100004: overlays_stain_tile001.001
+    2100006: signage_indicator_lights_indicator_lights_corner_wall.001
+    2100008: signage_signage_overlay_toxic.001
+    2100010: decals_orange_spot.001
+    2100012: signage_indicator_lights_indicator_lights_wall.001
+    2100014: CONCRETE_CONCRETE_MODULAR_WALL001E
+    2100016: CONCRETE_CONCRETE_MODULAR_CEILING001A
+    2100018: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    2100020: ElevatorWall
+    2100022: signage_signage_overlay_energyball.001
+    2100024: signage_signage_overlay_fountain.001
+    2100026: maps_testchmb_a_04_plastic_plasticwall003a.001
+    2100028: maps_testchmb_a_04_metal_metalwall048b_med.001
+    2100030: maps_testchmb_a_04_plastic_plasticwall001a.001
+    2100032: METAL_METALWALL_BTS_005A.001
+    2100034: METAL_METALGRATE018B.001
+    2100036: maps_testchmb_a_04_plastic_plasticwall001b.001
+    2100038: maps_testchmb_a_04_metal_metal_lift001.001
+    2100040: maps_testchmb_a_04_metal_metal_lift001e.001
+    2100042: SIGNAGE_SIGNAGE_ARROW.001
+    2100044: SIGNAGE_SIGNAGE_EXIT.001
+    2100046: SIGNAGE_SIGNAGE_BORDER.001
+    2100048: SIGNAGE_HAZARD_ORANGE_03B.001
+    2100050: maps_testchmb_a_04_metal_metalwall048b_lrg.001
+    2100052: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    2100054: maps_testchmb_a_04_metal_metalwall048b.001
+    2100056: CONCRETE_CONCRETE_MODULAR_WALL001F.001
+    2100058: maps_testchmb_a_04_metal_metal_modular_floor001.001
+    2100060: CONCRETE_CONCRETE_MODULAR_WALL001A.001
+    2100062: CONCRETE_CONCRETE_MODULAR_WALL001D.001
+    2100064: CONCRETE_CONCRETE_MODULAR_WALL001B.001
+    2100066: maps_testchmb_a_04_metal_metalwall048e.001
+    2100068: CONCRETE_CONCRETE_MODULAR_FLOOR001A.001
+    2100070: CONCRETE_CONCRETE_MODULAR_FLOOR001B.001
+    2100072: LIGHTS_LIGHT_RECESSEDCOOL002.001
+    2100074: METAL_METALWALL060A.001
+    2100076: METAL_METALGRATE018
+    2100078: decals_decalstain009a.001
+    2100080: maps_testchmb_a_04_nature_hazard_liquid
+    2100082: maps_testchmb_a_04_plastic_plasticwall004a
+    2100084: overlays_stain_tile001
+    2100086: signage_indicator_lights_indicator_lights_corner_wall
+    2100088: signage_signage_overlay_toxic
+    2100090: decals_orange_spot
+    2100092: signage_indicator_lights_indicator_lights_wall
+    2100094: signage_signage_overlay_energyball
+    2100096: signage_signage_overlay_fountain
+    2100098: maps_testchmb_a_04_plastic_plasticwall003a
+    2100100: maps_testchmb_a_04_metal_metalwall048b_med
+    2100102: maps_testchmb_a_04_plastic_plasticwall001a
+    2100104: METAL_METALWALL_BTS_005A
+    2100106: METAL_METALGRATE018B
+    2100108: maps_testchmb_a_04_plastic_plasticwall001b
+    2100110: maps_testchmb_a_04_metal_metal_lift001
+    2100112: maps_testchmb_a_04_metal_metal_lift001e
+    2100114: SIGNAGE_SIGNAGE_ARROW
+    2100116: SIGNAGE_SIGNAGE_EXIT
+    2100118: SIGNAGE_SIGNAGE_BORDER
+    2100120: SIGNAGE_HAZARD_ORANGE_03B
+    2100122: maps_testchmb_a_04_metal_metalwall048b_lrg
+    2100124: maps_testchmb_a_04_metal_metalwall048b
+    2100126: CONCRETE_CONCRETE_MODULAR_WALL001F
+    2100128: maps_testchmb_a_04_metal_metal_modular_floor001
+    2100130: CONCRETE_CONCRETE_MODULAR_WALL001A
+    2100132: CONCRETE_CONCRETE_MODULAR_WALL001D
+    2100134: CONCRETE_CONCRETE_MODULAR_WALL001B
+    2100136: maps_testchmb_a_04_metal_metalwall048e
+    2100138: CONCRETE_CONCRETE_MODULAR_FLOOR001B
+    2100140: LIGHTS_LIGHT_RECESSEDCOOL002
+    2100142: METAL_METALWALL060A
+    2100144: decals_decalstain009a
+    2300000: info_overlay_0
+    2300002: info_overlay_1
+    2300004: info_overlay_10
+    2300006: info_overlay_11
+    2300008: info_overlay_12
+    2300010: info_overlay_13
+    2300012: info_overlay_14
+    2300014: info_overlay_15
+    2300016: info_overlay_16
+    2300018: info_overlay_17
+    2300020: info_overlay_18
+    2300022: info_overlay_19
+    2300024: info_overlay_2
+    2300026: info_overlay_3
+    2300028: info_overlay_4
+    2300030: info_overlay_9
+    2300032: LiquidSurface
+    2300034: Observation_glass
+    2300036: Room00_noportal
+    2300038: Room00_noportal.001
+    2300040: world_geometry
+    3300000: info_overlay_0
+    3300002: info_overlay_1
+    3300004: info_overlay_10
+    3300006: info_overlay_11
+    3300008: info_overlay_12
+    3300010: info_overlay_13
+    3300012: info_overlay_14
+    3300014: info_overlay_15
+    3300016: info_overlay_16
+    3300018: info_overlay_17
+    3300020: info_overlay_18
+    3300022: info_overlay_19
+    3300024: info_overlay_2
+    3300026: info_overlay_3
+    3300028: info_overlay_4
+    3300030: info_overlay_9
+    3300032: LiquidSurface
+    3300034: Observation_glass
+    3300036: Room00_noportal
+    3300038: Room00_noportal.001
+    3300040: world_geometry
+    4300000: LiquidSurface
+    4300002: Observation_glass
+    4300004: info_overlay_16
+    4300006: info_overlay_9
+    4300008: info_overlay_13
+    4300010: info_overlay_2
+    4300012: info_overlay_15
+    4300014: info_overlay_0
+    4300016: info_overlay_10
+    4300018: info_overlay_14
+    4300020: info_overlay_1
+    4300022: info_overlay_17
+    4300024: Room00_noportal.001
+    4300026: info_overlay_11
+    4300028: Room00_noportal
+    4300030: info_overlay_4
+    4300032: info_overlay_3
+    4300034: info_overlay_19
+    4300036: world_geometry
+    4300038: info_overlay_12
+    4300040: info_overlay_18
+    6400000: info_overlay_0
+    6400002: info_overlay_1
+    6400004: info_overlay_10
+    6400006: info_overlay_11
+    6400008: info_overlay_12
+    6400010: info_overlay_13
+    6400012: info_overlay_14
+    6400014: info_overlay_15
+    6400016: info_overlay_16
+    6400018: info_overlay_17
+    6400020: info_overlay_18
+    6400022: info_overlay_19
+    6400024: info_overlay_2
+    6400026: info_overlay_3
+    6400028: info_overlay_4
+    6400030: info_overlay_9
+    6400032: LiquidSurface
+    6400034: Observation_glass
+    6400036: Room00_noportal
+    6400038: Room00_noportal.001
+    6400040: world_geometry
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_CEILING001A
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    second: {fileID: 2100000, guid: 3336b69bd7ff33c4fad4e87ec2369b68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001B
+    second: {fileID: 2100000, guid: 08480e4b12736674cb2ba86cb54cca85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001A
+    second: {fileID: 2100000, guid: 8b1dfccfd8b1eea43abebc8bdc39645b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001B
+    second: {fileID: 2100000, guid: 9345c1caf61ea5744961c1e9e1d2149f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001D
+    second: {fileID: 2100000, guid: 0c00b7fe3a8bede41a9669f9808961f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001E
+    second: {fileID: 2100000, guid: e3686affc03473e48870876062355c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001F
+    second: {fileID: 2100000, guid: 2a42a49d5a94e4644acf98b45f381493, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElevatorWall
+    second: {fileID: 2100000, guid: 7ae28bd9ffec8b14ab2a3093231f2332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_RECESSEDCOOL002
+    second: {fileID: 2100000, guid: 8bd108a9d01171e478ceb2833e4c922f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018
+    second: {fileID: 2100000, guid: 2dee35ab1f35c3d46bc3c5a4e0152424, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018B
+    second: {fileID: 2100000, guid: 90e83a7671c96d846af494624ea696c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL060A
+    second: {fileID: 2100000, guid: 8b99793cb626ad04daf8307067d8864b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL_BTS_005A
+    second: {fileID: 2100000, guid: 7ed328c9dc0186d438ed0b07ffc5f6b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_HAZARD_ORANGE_03B
+    second: {fileID: 2100000, guid: 3a7f880fa8c416543a89a024e5f9b332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_ARROW
+    second: {fileID: 2100000, guid: 8373b73a6570c954186d0f5855c3e3fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_BORDER
+    second: {fileID: 2100000, guid: 81240530361fcc34c98528a6f2f8670b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_EXIT
+    second: {fileID: 2100000, guid: dde681f5096f3804c8d2afa70e9124f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decals_decalstain009a
+    second: {fileID: 2100000, guid: 89b489f86cfa96842a622406ddff0d06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metal_lift001
+    second: {fileID: 2100000, guid: ab164671eb471464ba89c70a3412216c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metal_lift001e
+    second: {fileID: 2100000, guid: f6242603e3fb32a45b0b50ab05388883, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metal_modular_floor001
+    second: {fileID: 2100000, guid: a61d1a2099dc529419ceb66cc6ee3885, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metalwall048b
+    second: {fileID: 2100000, guid: 6eb5a3342c3eb8342ab398fee331a736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metalwall048b_lrg
+    second: {fileID: 2100000, guid: a2673d9721e5eea40908d7fb886d2a48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metalwall048b_med
+    second: {fileID: 2100000, guid: 823e21b3d9ccbd8488bfd1d7d1aad82d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_metal_metalwall048e
+    second: {fileID: 2100000, guid: 87891a7c4ac93a9418510a1d542eacea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_nature_hazard_liquid
+    second: {fileID: 2100000, guid: ba2f5c4e34148b64d896a29cf96f3916, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_plastic_plasticwall001a
+    second: {fileID: 2100000, guid: ae89f84c8f2a9414d95376ba4f515b62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_plastic_plasticwall001b
+    second: {fileID: 2100000, guid: 03282b16c7465ae4fad4f49be8a0a9aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_plastic_plasticwall003a
+    second: {fileID: 2100000, guid: bf492eac226bf3e4c960420aae6e8e82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_04_plastic_plasticwall004a
+    second: {fileID: 2100000, guid: 5b0baa0bea0699248bb967335e3fd878, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: overlays_stain_tile001
+    second: {fileID: 2100000, guid: 8175d5630b0578d4e89f3b6e9d85e1ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_indicator_lights_indicator_lights_corner_wall
+    second: {fileID: 2100000, guid: e792375fc00545040974f40d8b6ee228, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_indicator_lights_indicator_lights_wall
+    second: {fileID: 2100000, guid: f9a581136bb65724f8770cf49ca36275, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_energyball
+    second: {fileID: 2100000, guid: dddd47bb94018604a80bed51bfccd533, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_fountain
+    second: {fileID: 2100000, guid: e2601ca3c8ea6b141bf7e36ddab754f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_toxic
+    second: {fileID: 2100000, guid: 3be8a4de95f41224f9af60f6595e828e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 2
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
