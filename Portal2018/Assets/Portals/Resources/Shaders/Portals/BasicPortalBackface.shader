@@ -45,7 +45,7 @@
 				float4 screenUV : TEXCOORD1;
 				float4 objPos : TEXCOORD2;
 				float4 reconUV : TEXCOORD3;
-				UNITY_FOG_COORDS(1)
+				//UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
 
@@ -85,7 +85,7 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _DefaultTexture);
-				UNITY_TRANSFER_FOG(o,o.vertex);
+				//UNITY_TRANSFER_FOG(o,o.vertex);
 				o.screenUV = ComputeScreenPos(o.vertex);
 				//o.objPos = v.vertex;
 				//o.reconUV = reconstructFrontFaceUV(v.vertex);
@@ -121,7 +121,7 @@
 				//col.rgb += portalCol.rgb * _Color.rgb;	//Put a glow on the border
 				
 				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
+				//UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG

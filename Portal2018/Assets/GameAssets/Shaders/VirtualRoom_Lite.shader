@@ -35,7 +35,7 @@
 			{
 				float2 uv : TEXCOORD0;
 				float2 uv2 : TEXCOORD1;
-				UNITY_FOG_COORDS(1)
+				//UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
 
@@ -85,7 +85,7 @@
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv + bumpCol.xy * _BumpDistort);
 				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
+				//UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG

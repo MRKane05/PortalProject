@@ -25,6 +25,17 @@ ModelImporter:
     100038: Room00_noportal.001
     100040: //RootNode
     100042: world_geometry
+    100044: Elevator001_noportal
+    100046: Elevator002_noportal
+    100048: Observation_glass_noportal
+    100050: Room002
+    100052: Room002.001
+    100054: Room002.002
+    100056: Room002_ceiling
+    100058: Room002_dropElevator
+    100060: Room002_noportal
+    100062: DotPath01
+    100064: LiquidSurface_glass
     400000: info_overlay_0
     400002: info_overlay_1
     400004: info_overlay_10
@@ -47,6 +58,17 @@ ModelImporter:
     400038: Room00_noportal.001
     400040: //RootNode
     400042: world_geometry
+    400044: Elevator001_noportal
+    400046: Elevator002_noportal
+    400048: Observation_glass_noportal
+    400050: Room002
+    400052: Room002.001
+    400054: Room002.002
+    400056: Room002_ceiling
+    400058: Room002_dropElevator
+    400060: Room002_noportal
+    400062: DotPath01
+    400064: LiquidSurface_glass
     2100000: maps_testchmb_a_04_nature_hazard_liquid.001
     2100002: maps_testchmb_a_04_plastic_plasticwall004a.001
     2100004: overlays_stain_tile001.001
@@ -120,6 +142,7 @@ ModelImporter:
     2100140: LIGHTS_LIGHT_RECESSEDCOOL002
     2100142: METAL_METALWALL060A
     2100144: decals_decalstain009a
+    2100146: VirtualRoom_Large
     2300000: info_overlay_0
     2300002: info_overlay_1
     2300004: info_overlay_10
@@ -141,6 +164,17 @@ ModelImporter:
     2300036: Room00_noportal
     2300038: Room00_noportal.001
     2300040: world_geometry
+    2300042: Elevator001_noportal
+    2300044: Elevator002_noportal
+    2300046: Observation_glass_noportal
+    2300048: Room002
+    2300050: Room002.001
+    2300052: Room002.002
+    2300054: Room002_ceiling
+    2300056: Room002_dropElevator
+    2300058: Room002_noportal
+    2300060: DotPath01
+    2300062: LiquidSurface_glass
     3300000: info_overlay_0
     3300002: info_overlay_1
     3300004: info_overlay_10
@@ -162,6 +196,17 @@ ModelImporter:
     3300036: Room00_noportal
     3300038: Room00_noportal.001
     3300040: world_geometry
+    3300042: Elevator001_noportal
+    3300044: Elevator002_noportal
+    3300046: Observation_glass_noportal
+    3300048: Room002
+    3300050: Room002.001
+    3300052: Room002.002
+    3300054: Room002_ceiling
+    3300056: Room002_dropElevator
+    3300058: Room002_noportal
+    3300060: DotPath01
+    3300062: LiquidSurface_glass
     4300000: LiquidSurface
     4300002: Observation_glass
     4300004: info_overlay_16
@@ -183,6 +228,17 @@ ModelImporter:
     4300036: world_geometry
     4300038: info_overlay_12
     4300040: info_overlay_18
+    4300042: Elevator002_noportal
+    4300044: Elevator001_noportal
+    4300046: Room002
+    4300048: Room002.002
+    4300050: Room002.001
+    4300052: Room002_dropElevator
+    4300054: Room002_ceiling
+    4300056: Room002_noportal
+    4300058: Observation_glass_noportal
+    4300060: DotPath01
+    4300062: LiquidSurface_glass
     6400000: info_overlay_0
     6400002: info_overlay_1
     6400004: info_overlay_10
@@ -204,6 +260,17 @@ ModelImporter:
     6400036: Room00_noportal
     6400038: Room00_noportal.001
     6400040: world_geometry
+    6400042: Elevator001_noportal
+    6400044: Elevator002_noportal
+    6400046: Observation_glass_noportal
+    6400048: Room002
+    6400050: Room002.001
+    6400052: Room002.002
+    6400054: Room002_ceiling
+    6400056: Room002_dropElevator
+    6400058: Room002_noportal
+    6400060: DotPath01
+    6400062: LiquidSurface_glass
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -295,6 +362,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: SIGNAGE_SIGNAGE_EXIT
     second: {fileID: 2100000, guid: dde681f5096f3804c8d2afa70e9124f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualRoom_Large
+    second: {fileID: 2100000, guid: 15b8fcb648173c8439a014b2eca7eea9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -436,9 +508,9 @@ ModelImporter:
     preserveHierarchy: 0
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVPackMargin: 8
     useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0

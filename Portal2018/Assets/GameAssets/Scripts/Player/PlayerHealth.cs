@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour {
 	Vector3 cameraLocalGrounded = new Vector3(0f, -0.6f, 0f);   //Where the camera will drop to
 	public bool bIsInvincible = false;
 
+	public Animator portalGunAnimator;
+
 
 	InputManager ourInputManager;
 	void Start () {
@@ -36,9 +38,10 @@ public class PlayerHealth : MonoBehaviour {
     {
 		//For the moment lets just make our camera drop
 		BodyBase.SetActive(false); //turn off the players body
-								  
-		ourInputManager._movementEnabled = false;	//Disable player input and movement
-    }
+		ourInputManager._movementEnabled = false;   //Disable player input and movement
+		portalGunAnimator.SetTrigger("PlayerDie");
+
+	}
 
 	void LateUpdate () {
 		if (!bPlayerAlive)	//Make the camera drop

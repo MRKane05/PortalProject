@@ -12,6 +12,9 @@ public class HUDManager : MonoBehaviour {
 	public CanvasGroup MessageGroup;
 	public TextMeshProUGUI Message;
 	bool bMessageDisplaying = false;
+	[Space]
+	[Header("Overlayers")]
+	public CanvasGroup drowningEffect;
 
 	void Awake()
 	{
@@ -36,4 +39,11 @@ public class HUDManager : MonoBehaviour {
 		mySequence.AppendInterval(2f);
 		mySequence.Append(MessageGroup.DOFade(0f, 1f).OnComplete(() => bMessageDisplaying = false));
 	}
+
+	public void SetPlayerDrowned()
+    {
+		drowningEffect.gameObject.SetActive(true);
+		drowningEffect.alpha = 0;
+		drowningEffect.DOFade(1f, 1f);
+    }
 }

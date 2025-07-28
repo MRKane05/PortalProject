@@ -42,6 +42,7 @@ ModelImporter:
     100072: Wire_LowerLeft
     100074: Wire_LowerRight
     100076: BeamEffect
+    100078: ElectricHoldBeam
     400000: Arm_Base
     400002: Arm_Base.001
     400004: Arm_Base.002
@@ -81,9 +82,11 @@ ModelImporter:
     400072: Wire_LowerLeft
     400074: Wire_LowerRight
     400076: BeamEffect
+    400078: ElectricHoldBeam
     2000000: Camera
     2100000: PortalGunMaterial
     2100002: PortalGunCylinder
+    2100004: BeamFlare
     2300000: Arm_Base
     2300002: Arm_Base.001
     2300004: Arm_Base.002
@@ -122,6 +125,7 @@ ModelImporter:
     2300070: Wire_LowerLeft
     2300072: Wire_LowerRight
     2300074: BeamEffect
+    2300076: ElectricHoldBeam
     3300000: Arm_Base
     3300002: Arm_Base.001
     3300004: Arm_Base.002
@@ -160,6 +164,7 @@ ModelImporter:
     3300070: Wire_LowerLeft
     3300072: Wire_LowerRight
     3300074: BeamEffect
+    3300076: ElectricHoldBeam
     4300000: PortalGun_Base
     4300002: FrontPieceBase
     4300004: GunTip
@@ -197,10 +202,12 @@ ModelImporter:
     4300068: Wire_LowerRight
     4300070: Wire_LowerLeft
     4300072: BeamEffect
+    4300074: ElectricHoldBeam
     7400000: Idle
     7400002: Fire
     7400004: Hold
     7400006: BringUp
+    7400008: Drop
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects:
@@ -209,6 +216,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BeamEffect
     second: {fileID: 2100000, guid: 03a99e7a8f360f442afdf08c2c8e9c46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BeamFlare
+    second: {fileID: 2100000, guid: 11912b1346311254b940ed9cf4975d76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElectricBeam
+    second: {fileID: 2100000, guid: 8cb9271ef801117468502233db2001b4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -223,7 +240,7 @@ ModelImporter:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -249,8 +266,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: studio.portalgun_reference.smd.mesh_1.008Action
-      firstFrame: -1
-      lastFrame: 25
+      firstFrame: 25
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -305,8 +322,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Hold
       takeName: studio.portalgun_reference.smd.mesh_1.008Action
-      firstFrame: 67
-      lastFrame: 89
+      firstFrame: 130
+      lastFrame: 140
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -335,6 +352,34 @@ ModelImporter:
       takeName: studio.portalgun_reference.smd.mesh_1.008Action
       firstFrame: 90
       lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Drop
+      takeName: ElectricHoldBeamAction
+      firstFrame: 147
+      lastFrame: 155
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

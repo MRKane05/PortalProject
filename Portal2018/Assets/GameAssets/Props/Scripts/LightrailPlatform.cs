@@ -14,22 +14,44 @@ public class LightrailPlatform : MonoBehaviour {
 	public float platformSpeed = 1.5f;
 	public float endPauseTime = 3f;
 	float pauseTime = 0f;
-	
+	[Space]
+	[Header("Effect Settings")]
+	public GameObject beamObject;
+	public ParticleSystem[] glowParticleSystems;
 
 	public void SetLightrailActive(bool bState)
     {
 		bPlatformActive = bState;
+		if (beamObject)
+        {
+			beamObject.SetActive(bState);
+        }
+
+		if (glowParticleSystems.Length > 0)
+        {
+			foreach (ParticleSystem pSys in glowParticleSystems)
+			{
+				if (bState)
+				{
+					pSys.Play();
+				}
+				else
+				{
+					pSys.Stop();
+				}
+			}
+        }
     }
 
 	// Update is called once per frame
-	void LateUpdate () {
+	void FixedUpdate () {
 		if (!bPlatformActive) { return; }
 
 		if (Time.time > pauseTime + endPauseTime)
 		{
-			LiftObject.transform.position = Vector3.MoveTowards(LiftObject.transform.position, railPoints[platformTarget].transform.position, platformSpeed * Time.deltaTime);
+			LiftObject.transform.position = Vector3.MoveTowards(LiftObject.transform.position, railPoints[platformTarget].transform.position, platformSpeed * Time.fixedDeltaTime);
 		}
-		if (Mathf.Approximately(Vector3.SqrMagnitude(railPoints[platformTarget].transform.position - LiftObject.transform.position), 0f))
+		if ((Vector3.SqrMagnitude(railPoints[platformTarget].transform.position - LiftObject.transform.position) < 0.01f))
         {
 			platformTarget++;
 			platformTarget = (int)Mathf.Repeat(platformTarget, railPoints.Count);
