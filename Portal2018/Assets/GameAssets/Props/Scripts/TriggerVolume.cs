@@ -11,15 +11,21 @@ public class TriggerVolume : MonoBehaviour {
 	{
 		if (other.gameObject.name == "Player")
 		{
-			numTriggers++;
-			if (bTriggerOnlyOnce)
-			{
-				if (numTriggers <= 1)
-					TriggerEvent.Invoke();
-			} else
-            {
+			DoTrigger();
+		}
+	}
+
+	public virtual void DoTrigger()
+    {
+		numTriggers++;
+		if (bTriggerOnlyOnce)
+		{
+			if (numTriggers <= 1)
 				TriggerEvent.Invoke();
-            }
+		}
+		else
+		{
+			TriggerEvent.Invoke();
 		}
 	}
 }

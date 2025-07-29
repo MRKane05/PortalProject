@@ -25,6 +25,7 @@ public class DissolveObject : MonoBehaviour
     public List<SwapMaterials> swapInstances = new List<SwapMaterials>();
     public float dissolveSpeed = 0.75f;
     float dissolveAmount = 0f;
+    public DestroyTrigger ourParentTrigger;
 
     //public Renderer[] ourRenderers;
     void populateInstances()
@@ -117,6 +118,10 @@ public class DissolveObject : MonoBehaviour
             }
         }
         yield return null;
+        if (ourParentTrigger)
+        {
+            ourParentTrigger.ObjectDestroyed();
+        }
         Destroy(gameObject);
     }
 }

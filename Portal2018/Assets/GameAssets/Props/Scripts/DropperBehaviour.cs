@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //A basic behavior method for our cube dropper. This'll also have to include spawning/respawning a cube after it's been destroyed. For the moment lets start simple
-public class DropperBehaviour : MonoBehaviour {
+public class DropperBehaviour : DestroyTrigger
+{
     public List<Animation> ArmAnimations = new List<Animation>();
     public GameObject cubeSpawnPoint;
     public GameObject cubePrefab;
@@ -13,13 +14,15 @@ public class DropperBehaviour : MonoBehaviour {
     public GameObject currentCube;
 
     bool bTriggerAvaliable = true;
-    
+    public bool bDropWhenDestroyed = false;
+
     public void DoCubeAction()  //This'll need an action to pre-prepare extra cubes...
     {
         if (!bTriggerAvaliable)
         {
             return; //We can't do another trigger.
-        } else
+        }
+        else
         {
             bTriggerAvaliable = false;
         }
@@ -51,6 +54,8 @@ public class DropperBehaviour : MonoBehaviour {
             Rigidbody cubeRB = preparedCube.GetComponent<Rigidbody>();
             float maxTorque = 3f;
             cubeRB.AddTorque(new Vector3(Random.Range(-maxTorque, maxTorque), Random.Range(-maxTorque, maxTorque), Random.Range(-maxTorque, maxTorque)));   //To make it more interesting
+            DissolveObject cubeDissolve = preparedCube.GetComponent<DissolveObject>();
+            cubeDissolve.ourParentTrigger = this;
         }
     }
 
@@ -62,10 +67,19 @@ public class DropperBehaviour : MonoBehaviour {
         }
         if (bState)
         {
-            for (int i=0; i<ArmAnimations.Count; i++)
+            for (int i = 0; i < ArmAnimations.Count; i++)
             {
                 ArmAnimations[i].Play();
             }
+        }
+    }
+
+    public override void OnObjectDestroyed()
+    {
+        if (bDropWhenDestroyed)
+        {
+            bTriggerAvaliable = true;
+            DoCubeAction();
         }
     }
 }

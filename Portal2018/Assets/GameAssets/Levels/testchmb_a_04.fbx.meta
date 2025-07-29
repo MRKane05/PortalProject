@@ -36,6 +36,7 @@ ModelImporter:
     100060: Room002_noportal
     100062: DotPath01
     100064: LiquidSurface_glass
+    100066: Room002.003
     400000: info_overlay_0
     400002: info_overlay_1
     400004: info_overlay_10
@@ -69,6 +70,7 @@ ModelImporter:
     400060: Room002_noportal
     400062: DotPath01
     400064: LiquidSurface_glass
+    400066: Room002.003
     2100000: maps_testchmb_a_04_nature_hazard_liquid.001
     2100002: maps_testchmb_a_04_plastic_plasticwall004a.001
     2100004: overlays_stain_tile001.001
@@ -175,6 +177,7 @@ ModelImporter:
     2300058: Room002_noportal
     2300060: DotPath01
     2300062: LiquidSurface_glass
+    2300064: Room002.003
     3300000: info_overlay_0
     3300002: info_overlay_1
     3300004: info_overlay_10
@@ -207,6 +210,7 @@ ModelImporter:
     3300058: Room002_noportal
     3300060: DotPath01
     3300062: LiquidSurface_glass
+    3300064: Room002.003
     4300000: LiquidSurface
     4300002: Observation_glass
     4300004: info_overlay_16
@@ -239,6 +243,7 @@ ModelImporter:
     4300058: Observation_glass_noportal
     4300060: DotPath01
     4300062: LiquidSurface_glass
+    4300064: Room002.003
     6400000: info_overlay_0
     6400002: info_overlay_1
     6400004: info_overlay_10
@@ -271,6 +276,7 @@ ModelImporter:
     6400058: Room002_noportal
     6400060: DotPath01
     6400062: LiquidSurface_glass
+    6400064: Room002.003
   externalObjects:
   - first:
       type: UnityEngine:Material

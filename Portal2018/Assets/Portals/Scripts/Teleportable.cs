@@ -905,7 +905,11 @@ namespace Portals {
         public void DoGateDissolve()
         {
             bCanBePickedUp = false;
-            TeleportableStateChanged(this); //Call this through to anything that might be carrying us (and it should also release the physics stuff)
+            if (TeleportableStateChanged != null)
+            {
+                TeleportableStateChanged.Invoke(this); //Call this through to anything that might be carrying us (and it should also release the physics stuff)
+            }
+
             Rigidbody rb = gameObject.GetComponent<Rigidbody>();
             rb.useGravity = false; //Turn this off so that our prop just drifts away
             //Ok, we need to handle the velocity of the rigidbody to make sure that it doesn't massively zip away from the player
