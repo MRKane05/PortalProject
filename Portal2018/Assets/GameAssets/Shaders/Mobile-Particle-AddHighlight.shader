@@ -9,6 +9,7 @@
 Shader "Mobile/Particles/Additive Highlight" {
 Properties {
     _MainTex ("Particle Texture", 2D) = "white" {}
+    _PickupTex("Pickup Texture", 2D) = "white" {}
     _HighlightAmount("Highlight Amount", Range(0, 2)) = 1.0
 }
 
@@ -28,7 +29,7 @@ Category {
             SetTexture [_MainTex] {
                 combine texture * primary
             }
-            SetTexture[_MainTex] {
+            SetTexture[_PickupTex] {
                 constantColor(1,1,1,[_HighlightAmount])
                 combine texture * constant + previous
             }

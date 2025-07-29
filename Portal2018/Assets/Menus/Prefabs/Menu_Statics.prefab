@@ -811,6 +811,9 @@ MonoBehaviour:
   - name: Chamber 08
     LoadedSceneName: test_chamber_08
     bUnlocked: 0
+  - name: Chamber 09
+    LoadedSceneName: test_chamber_09
+    bUnlocked: 0
   GameSaveData:
     Chambers: []
 --- !u!114 &114854030087449766

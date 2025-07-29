@@ -572,11 +572,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 224744519966435962, guid: 1716244b13955eb4c826d341f4a7838e,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4081762787012304, guid: 1716244b13955eb4c826d341f4a7838e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 9.960069
@@ -609,6 +604,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114894384289978136, guid: 1716244b13955eb4c826d341f4a7838e,
+        type: 2}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 2021149930}
+    - target: {fileID: 114894384289978136, guid: 1716244b13955eb4c826d341f4a7838e,
+        type: 2}
+      propertyPath: entryElevatorSystem
+      value: 
+      objectReference: {fileID: 1266326754}
+    - target: {fileID: 114983154091453520, guid: 1716244b13955eb4c826d341f4a7838e,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983154091453520, guid: 1716244b13955eb4c826d341f4a7838e,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114315812040095662, guid: 1716244b13955eb4c826d341f4a7838e,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -619,21 +634,11 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114894384289978136, guid: 1716244b13955eb4c826d341f4a7838e,
+    - target: {fileID: 224744519966435962, guid: 1716244b13955eb4c826d341f4a7838e,
         type: 2}
-      propertyPath: playerObject
-      value: 
-      objectReference: {fileID: 2021149930}
-    - target: {fileID: 114894384289978136, guid: 1716244b13955eb4c826d341f4a7838e,
-        type: 2}
-      propertyPath: playerControlType
-      value: 2
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114894384289978136, guid: 1716244b13955eb4c826d341f4a7838e,
-        type: 2}
-      propertyPath: entryElevatorSystem
-      value: 
-      objectReference: {fileID: 1266326754}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1716244b13955eb4c826d341f4a7838e, type: 2}
   m_IsPrefabAsset: 0
@@ -1096,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedf10de846b8dd4b89284a98503e5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: test_chamber_10
+  nextLevel: test_chamber_08
   CheckpointTitle: __
 --- !u!65 &217011644
 BoxCollider:
@@ -1960,6 +1965,8 @@ MonoBehaviour:
   bPlatformActive: 0
   platformSpeed: 2
   endPauseTime: 3
+  beamObject: {fileID: 0}
+  glowParticleSystems: []
 --- !u!1 &559237205
 GameObject:
   m_ObjectHideFlags: 0
