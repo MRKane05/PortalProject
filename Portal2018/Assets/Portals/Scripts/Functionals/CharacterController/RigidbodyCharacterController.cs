@@ -7,8 +7,8 @@ namespace Portals {
     public class RigidbodyCharacterController : MonoBehaviour {
         [System.Serializable]
         public struct MovementInfo {
-            public float maxSpeedHorizontal;
-            public float maxSpeedVertical;
+            public float maxWalkSpeed;
+            public float maxFallVelocity;
             public float accellerationGrounded;
             public float accellerationAerial;
             public float dragGrounded;
@@ -64,6 +64,7 @@ namespace Portals {
         private void FixedUpdate() {
             DoGroundCheck();
             FixRotation();
+            //DoMove(moveDir);
             ApplyDrag();
         }
 
@@ -151,8 +152,8 @@ namespace Portals {
             horizontalVelocity -= dragForce;
 
             // Clamp velocity to maximums
-            float maxHorizontal = SizeMultiplier * _movementInfo.maxSpeedHorizontal;
-            float maxVertical = SizeMultiplier * _movementInfo.maxSpeedVertical;
+            float maxHorizontal = SizeMultiplier * (_isGrounded ? _movementInfo.maxWalkSpeed : _movementInfo.maxFallVelocity);
+            float maxVertical = SizeMultiplier * _movementInfo.maxFallVelocity;
 
             horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxHorizontal);
             verticalVelocity = Vector3.ClampMagnitude(verticalVelocity, maxVertical);
@@ -171,9 +172,18 @@ namespace Portals {
                 _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             }
         }
-        
+
+        Vector3 moveDir = Vector3.zero;
+
         public void Move(Vector3 direction) {
+            moveDir = direction;
+            DoGroundCheck();
+            DoMove(direction);
+        }
+
+        void DoMove(Vector3 direction) { 
             float scaleFactor = SizeMultiplier;
+
             /*
 #if !UNITY_EDITOR
             // https://answers.unity.com/questions/1602433/player-movement-is-at-a-completely-different-speed.html

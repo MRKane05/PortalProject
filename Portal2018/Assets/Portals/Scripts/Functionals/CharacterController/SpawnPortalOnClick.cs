@@ -142,7 +142,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             SpawnBullet(_bulletPrefab, startPos + startDir, startDir, hit.distance, color); //We don't need an offset for the stationary
         }
     }
-
+    /*
     public void PlacePortal(Polarity polarity, Vector3 startPosition, Vector3 startDirection)
     {
         Color color = polarity == Polarity.Left ? LeftPortalColor : RightPortalColor;
@@ -168,6 +168,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
             }
         }
     }
+    */
 
     public void RevealHidePortalGun(bool bDoReveal)
     {

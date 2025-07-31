@@ -62,6 +62,35 @@ namespace Portals {
         public List<AudioClip> portalOpenSounds;
         public AudioSource ourAudio;
 
+        [HideInInspector]
+        public GameObject hitObject;
+        Vector3 HitObjectPosition = Vector3.zero;
+
+        public void SetHitObject(GameObject thisObject)
+        {
+            hitObject = thisObject;
+            HitObjectPosition = thisObject.transform.position;
+        }
+
+        void LateUpdate()
+        {
+            if (hitObject)
+            {
+                //Check and see if this has moved
+                if (Vector3.SqrMagnitude(hitObject.transform.position-HitObjectPosition) > 0.01f)
+                {
+                    ClosePortal();
+                }
+            }
+        }
+
+        public void ClosePortal()
+        {
+            //Play Portal close effect
+            PortalRenderer.setPortalAlpha(0f);
+            gameObject.SetActive(false);
+        }
+
         public void PlayPortalOpenSound()
         {
             if (ourAudio && portalOpenSounds.Count > 0)

@@ -1,0 +1,511 @@
+fileFormatVersion: 2
+guid: 7b4dcb9f64628404baa8bbaac2f778ec
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: info_overlay_1
+    100002: ObservationSmall_glass
+    100004: Room001
+    100006: Room001.002
+    100008: Room001.005
+    100010: Room001_floor
+    100012: Room001_floor_noportal
+    100014: Room001_grates_glass
+    100016: Room002.001
+    100018: Room002_floor
+    100020: Room002_noportal
+    100022: Room002_observation_glass
+    100024: Room002_pit
+    100026: Room003.005
+    100028: Room003_norportal
+    100030: Room003_observationLarge_glass
+    100032: Room003_observationSmall_glass
+    100034: Room003_pitJump_glass
+    100036: Room003_pitJump_glass.001
+    100038: Room00_noportal
+    100040: Room00_noportal.001
+    100042: //RootNode
+    100044: world_geometry.005
+    100046: Room002_pit_glass
+    100048: Room003_pitJump
+    100050: Room003_noportal
+    100052: Room003_noportal.001
+    400000: info_overlay_1
+    400002: ObservationSmall_glass
+    400004: Room001
+    400006: Room001.002
+    400008: Room001.005
+    400010: Room001_floor
+    400012: Room001_floor_noportal
+    400014: Room001_grates_glass
+    400016: Room002.001
+    400018: Room002_floor
+    400020: Room002_noportal
+    400022: Room002_observation_glass
+    400024: Room002_pit
+    400026: Room003.005
+    400028: Room003_norportal
+    400030: Room003_observationLarge_glass
+    400032: Room003_observationSmall_glass
+    400034: Room003_pitJump_glass
+    400036: Room003_pitJump_glass.001
+    400038: Room00_noportal
+    400040: Room00_noportal.001
+    400042: //RootNode
+    400044: world_geometry.005
+    400046: Room002_pit_glass
+    400048: Room003_pitJump
+    400050: Room003_noportal
+    400052: Room003_noportal.001
+    2100000: METAL_METALGRATE018
+    2100002: METAL_METALGRATE018B
+    2100004: maps_testchmb_a_06_metal_metal_modular_floor001
+    2100006: METAL_METALWALL048C_GRADIENT
+    2100008: LIGHTS_LIGHT_ORANGE001
+    2100010: SIGNAGE_HAZARD_ORANGE_03B
+    2100012: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    2100014: maps_testchmb_a_06_metal_metalwall048b_med
+    2100016: maps_testchmb_a_06_metal_metalwall048b
+    2100018: maps_testchmb_a_06_metal_metalwall048b_lrg
+    2100020: LIGHTS_WHITE001
+    2100022: METAL_METALWALL061F
+    2100024: CONCRETE_CONCRETE_MODULAR_FLOOR001C
+    2100026: maps_testchmb_a_06_plastic_plasticwall001a
+    2100028: maps_testchmb_a_06_plastic_plasticwall003a
+    2100030: maps_testchmb_a_06_plastic_plasticwall004a
+    2100032: maps_testchmb_a_06_plastic_plasticwall001b
+    2100034: METAL_METALWALL060A
+    2100036: CONCRETE_CONCRETE_MODULAR_WALL001A
+    2100038: CONCRETE_CONCRETE_MODULAR_WALL001F
+    2100040: CONCRETE_CONCRETE_MODULAR_WALL001E
+    2100042: CONCRETE_CONCRETE_MODULAR_WALL001D
+    2100044: METAL_METALWALL_BTS_006B_GRADIENT
+    2100046: CONCRETE_CONCRETE_MODULAR_CEILING001A
+    2100048: LIGHTS_LIGHT_RECESSEDCOOL002
+    2100050: maps_testchmb_a_02_metal_metal_lift001
+    2100052: maps_testchmb_a_02_metal_metal_lift001_gradient
+    2100054: METAL_METALWALL_BTS_005A.002
+    2100056: METAL_METALWALL_BTS_005A
+    2100058: SIGNAGE_SIGNAGE_ARROW
+    2100060: SIGNAGE_SIGNAGE_EXIT
+    2100062: SIGNAGE_SIGNAGE_BORDER
+    2100064: CONCRETE_CONCRETE_MODULAR_FLOOR001B
+    2100066: VirtualRoom_Small
+    2100068: CONCRETE_CONCRETE_MODULAR_WALL001E.002
+    2100070: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    2100072: CONCRETE_CONCRETE_MODULAR_FLOOR001A.002
+    2100074: ElevatorWall
+    2100076: maps_testchmb_a_06_metal_metalwall_bts_006a
+    2100078: VirtualRoom_Large
+    2100080: signage_signage_overlay_fling2
+    2100082: signage_signage_overlay_dots2
+    2100084: signage_signage_overlay_dots3
+    2100086: signage_signage_overlay_dots1
+    2100088: signage_signage_overlay_fling1
+    2300000: info_overlay_1
+    2300002: ObservationSmall_glass
+    2300004: Room001
+    2300006: Room001.002
+    2300008: Room001.005
+    2300010: Room001_floor
+    2300012: Room001_floor_noportal
+    2300014: Room001_grates_glass
+    2300016: Room002.001
+    2300018: Room002_floor
+    2300020: Room002_noportal
+    2300022: Room002_observation_glass
+    2300024: Room002_pit
+    2300026: Room003.005
+    2300028: Room003_norportal
+    2300030: Room003_observationLarge_glass
+    2300032: Room003_observationSmall_glass
+    2300034: Room003_pitJump_glass
+    2300036: Room003_pitJump_glass.001
+    2300038: Room00_noportal
+    2300040: Room00_noportal.001
+    2300042: world_geometry.005
+    2300044: Room002_pit_glass
+    2300046: Room003_pitJump
+    2300048: Room003_noportal
+    2300050: Room003_noportal.001
+    3300000: info_overlay_1
+    3300002: ObservationSmall_glass
+    3300004: Room001
+    3300006: Room001.002
+    3300008: Room001.005
+    3300010: Room001_floor
+    3300012: Room001_floor_noportal
+    3300014: Room001_grates_glass
+    3300016: Room002.001
+    3300018: Room002_floor
+    3300020: Room002_noportal
+    3300022: Room002_observation_glass
+    3300024: Room002_pit
+    3300026: Room003.005
+    3300028: Room003_norportal
+    3300030: Room003_observationLarge_glass
+    3300032: Room003_observationSmall_glass
+    3300034: Room003_pitJump_glass
+    3300036: Room003_pitJump_glass.001
+    3300038: Room00_noportal
+    3300040: Room00_noportal.001
+    3300042: world_geometry.005
+    3300044: Room002_pit_glass
+    3300046: Room003_pitJump
+    3300048: Room003_noportal
+    3300050: Room003_noportal.001
+    4300000: Room003_pitJump_glass.001
+    4300002: Room003.005
+    4300004: Room003_pitJump_glass
+    4300006: world_geometry.005
+    4300008: Room001
+    4300010: Room001_grates_glass
+    4300012: Room001_floor_noportal
+    4300014: Room001_floor
+    4300016: ObservationSmall_glass
+    4300018: Room00_noportal.001
+    4300020: Room00_noportal
+    4300022: Room003_norportal
+    4300024: Room003_observationSmall_glass
+    4300026: Room003_observationLarge_glass
+    4300028: info_overlay_1
+    4300030: Room002_floor
+    4300032: Room002_pit
+    4300034: Room002_noportal
+    4300036: Room002.001
+    4300038: Room002_observation_glass
+    4300040: Room001.002
+    4300042: Room001.005
+    4300044: Room002_pit_glass
+    4300046: Room003_pitJump
+    4300048: Room003_noportal
+    4300050: Room003_noportal.001
+    6400000: info_overlay_1
+    6400002: ObservationSmall_glass
+    6400004: Room001
+    6400006: Room001.002
+    6400008: Room001.005
+    6400010: Room001_floor
+    6400012: Room001_floor_noportal
+    6400014: Room001_grates_glass
+    6400016: Room002.001
+    6400018: Room002_floor
+    6400020: Room002_noportal
+    6400022: Room002_observation_glass
+    6400024: Room002_pit
+    6400026: Room003.005
+    6400028: Room003_norportal
+    6400030: Room003_observationLarge_glass
+    6400032: Room003_observationSmall_glass
+    6400034: Room003_pitJump_glass
+    6400036: Room003_pitJump_glass.001
+    6400038: Room00_noportal
+    6400040: Room00_noportal.001
+    6400042: world_geometry.005
+    6400044: Room002_pit_glass
+    6400046: Room003_pitJump
+    6400048: Room003_noportal
+    6400050: Room003_noportal.001
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_CEILING001A
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_CEILING001A.001
+    second: {fileID: 2100000, guid: 661611a17909ef64ca442bec434220d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A
+    second: {fileID: 2100000, guid: 3336b69bd7ff33c4fad4e87ec2369b68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001A.002
+    second: {fileID: 2100000, guid: 3336b69bd7ff33c4fad4e87ec2369b68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001B
+    second: {fileID: 2100000, guid: 08480e4b12736674cb2ba86cb54cca85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_FLOOR001C
+    second: {fileID: 2100000, guid: 946a1a9c35105f34381d4da74003109e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001A
+    second: {fileID: 2100000, guid: 8b1dfccfd8b1eea43abebc8bdc39645b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001D
+    second: {fileID: 2100000, guid: 0c00b7fe3a8bede41a9669f9808961f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001E
+    second: {fileID: 2100000, guid: e3686affc03473e48870876062355c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001E.002
+    second: {fileID: 2100000, guid: e3686affc03473e48870876062355c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CONCRETE_CONCRETE_MODULAR_WALL001F
+    second: {fileID: 2100000, guid: 2a42a49d5a94e4644acf98b45f381493, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElevatorWall
+    second: {fileID: 2100000, guid: 7ae28bd9ffec8b14ab2a3093231f2332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_ORANGE001
+    second: {fileID: 2100000, guid: 5e0022ad28a58c84f8167b13c0a32b20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_LIGHT_RECESSEDCOOL002
+    second: {fileID: 2100000, guid: de30e8fd4ae3bd944a612a6ffb43a244, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LIGHTS_WHITE001
+    second: {fileID: 2100000, guid: 3a58c695714ca6e4793fb6f4c590943d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018
+    second: {fileID: 2100000, guid: 6128de75f12b18047ab375922e300839, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALGRATE018B
+    second: {fileID: 2100000, guid: 2e0aee2ae2fa9e44fb0f5d12ece78166, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL060A
+    second: {fileID: 2100000, guid: ed652655fd99df54db5fb371c2ee61c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL061F
+    second: {fileID: 2100000, guid: 213b708c2b98cd142ab0c203e41d82bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL_BTS_005A
+    second: {fileID: 2100000, guid: fdbe7a3cf84dc0545bee86adee533a04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL_BTS_005A.002
+    second: {fileID: 2100000, guid: fdbe7a3cf84dc0545bee86adee533a04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METAL_METALWALL_BTS_006B_GRADIENT
+    second: {fileID: 2100000, guid: 5e1db335f7b5f3a4797db724b8d4ed37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_HAZARD_ORANGE_03B
+    second: {fileID: 2100000, guid: 871e480c4588b6e4baa57a484c5c042d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_ARROW
+    second: {fileID: 2100000, guid: f8645aade45824e41bae919ad6c16e98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_BORDER
+    second: {fileID: 2100000, guid: 2bb3ca01ea6b1224ea805e9535858c26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIGNAGE_SIGNAGE_EXIT
+    second: {fileID: 2100000, guid: 8e45dc5393ba8cd46b080bcafd8b3acc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualRoom_Large
+    second: {fileID: 2100000, guid: 15b8fcb648173c8439a014b2eca7eea9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VirtualRoom_Small
+    second: {fileID: 2100000, guid: f0dc787c635983c4589c482ea765bf0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_02_metal_metal_lift001
+    second: {fileID: 2100000, guid: 1663c35ae70428c44a03ace37137afd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_02_metal_metal_lift001_gradient
+    second: {fileID: 2100000, guid: de4275b0fdb626c43bbd69e084d20b48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_metal_metal_modular_floor001
+    second: {fileID: 2100000, guid: 4a49a73c4dfade84787b001af10a0772, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_metal_metalwall048b
+    second: {fileID: 2100000, guid: e1dca99500aac9540ad5257b342cb1ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_metal_metalwall048b_lrg
+    second: {fileID: 2100000, guid: a2673d9721e5eea40908d7fb886d2a48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_metal_metalwall048b_med
+    second: {fileID: 2100000, guid: 823e21b3d9ccbd8488bfd1d7d1aad82d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_metal_metalwall_bts_006a
+    second: {fileID: 2100000, guid: 5734ae77c01989d42ac65bd03e13d873, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_plastic_plasticwall001a
+    second: {fileID: 2100000, guid: d8063a0ff1cc8d742b7033ca754de22d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_plastic_plasticwall001b
+    second: {fileID: 2100000, guid: 935ccda0ab3f5b644b3582ee02bd16ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_plastic_plasticwall003a
+    second: {fileID: 2100000, guid: 9256dd596a4b4714db9dc09f68a3a151, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maps_testchmb_a_06_plastic_plasticwall004a
+    second: {fileID: 2100000, guid: 42fd234f9c0462d4780e32fefa56fa7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_dots1
+    second: {fileID: 2100000, guid: 3de92d414e64cd24ab0ab2525bee0fbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_dots2
+    second: {fileID: 2100000, guid: 4b398b5ff021e7544bd78271935e4658, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_dots3
+    second: {fileID: 2100000, guid: 4eb27019c3bb5a64b8e191291769e413, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_fling1
+    second: {fileID: 2100000, guid: 3323b4cb6b488a04bb8559d95f13ba7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: signage_signage_overlay_fling2
+    second: {fileID: 2100000, guid: 33e893f64830cdd418ff2ed0dffd112f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 8
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

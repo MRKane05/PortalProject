@@ -37,7 +37,7 @@ public class PortalSpawnerBase : MonoBehaviour {
         return portal;
     }
 
-    public void PlacePortal(bool bIsLeftPortal, Vector3 startPosition, Vector3 startDirection)
+    public void PlacePortal(bool bIsLeftPortal, Transform spawnerTransform, Vector3 startPosition, Vector3 startDirection)
     {
         Color color = bIsLeftPortal ? LeftPortalColor : RightPortalColor;
         Ray ray = new Ray(startPosition, startDirection);
@@ -58,8 +58,7 @@ public class PortalSpawnerBase : MonoBehaviour {
             }
             else
             {
-                bool spawnedPortal = TrySpawnPortal(bIsLeftPortal, hit, startDirection);
-
+                bool spawnedPortal = HardSpawnPortal(bIsLeftPortal, spawnerTransform, hit, startDirection);// TrySpawnPortal(bIsLeftPortal, hit, startDirection);
             }
         }
     }
@@ -104,6 +103,44 @@ public class PortalSpawnerBase : MonoBehaviour {
             portal.gameObject.SetActive(true);
             portal.PortalSetPosition(newPosition + hit.normal * _normalOffset, hit.normal);
             portal.PlayPortalOpenSound();
+            portal.SetHitObject(hit.collider.gameObject);
+            // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
+            Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
+            //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface
+            SetScaleOverTime(portal, portalRenderer.transform, Vector3.zero, Vector3.one * PortalScale, _portalSpawnCurve, _portalSpawnTime);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool HardSpawnPortal(bool bIsLeft, Transform spawnerTransform, RaycastHit hit, Vector3 forwardDir)
+    {
+        Portal portal = bIsLeft ? _leftPortal : _rightPortal;
+
+        // Calculate the portal's rotation based off the hit object's normal.
+        // Portals on walls should be upright, portals on the ground can be rotated in any way.
+        //Quaternion rotation = CalculateRotation(forwardDir, hit.normal);
+
+        // Set portal position and rotation. Need to do this before calling FindFit so we can get
+        // the portal's corners in world space
+        portal.transform.position = hit.point;
+        portal.transform.rotation = spawnerTransform.rotation;
+
+        // Make sure the portal can fit flushly on the object we've hit.
+        // If it can fit, but it's hanging off the edge, push it in.
+        // Otherwise, disable the portal.
+        Vector3 newPosition;
+        portal.gameObject.SetActive(false);
+        if (FindFit(portal, hit.collider, out newPosition))
+        {
+            portal.transform.position = newPosition + hit.normal * _normalOffset;
+            portal.IgnoredColliders = new Collider[] { hit.collider };
+            portal.gameObject.SetActive(true);
+            portal.PortalSetPosition(newPosition + hit.normal * _normalOffset, hit.normal);
+            portal.PlayPortalOpenSound();
+            portal.SetHitObject(hit.collider.gameObject);
             // Scale the portal's renderer up from 0 to 1 for a nice visual pop-in
             Renderer portalRenderer = portal.GetComponentInChildren<MeshRenderer>();
             //PROBLEM: Hack here to keep things scaled for a plane as oppoed to a generated surface
@@ -117,16 +154,13 @@ public class PortalSpawnerBase : MonoBehaviour {
 
     public void HideOnlyLeft()
     {
-        _leftPortal.gameObject.SetActive(false);
-        _leftPortal.PortalRenderer.setPortalAlpha(0);
+        _leftPortal.ClosePortal();
     }
 
     public void HidePortals()   //Called from date to dissapear portals
     {
-        _leftPortal.gameObject.SetActive(false);
-        _leftPortal.PortalRenderer.setPortalAlpha(0);
-        _rightPortal.gameObject.SetActive(false);
-        _rightPortal.PortalRenderer.setPortalAlpha(0);
+        _leftPortal.ClosePortal();
+        _rightPortal.ClosePortal();
     }
 
     void SetScaleOverTime(Portal parentPortal, Transform t, Vector3 startSize, Vector3 endSize, AnimationCurve curve, float duratio)

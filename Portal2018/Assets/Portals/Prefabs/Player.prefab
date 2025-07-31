@@ -711,15 +711,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
-  m_LocalRotation: {x: -0, y: -0.5406919, z: -0, w: 0.8412207}
-  m_LocalPosition: {x: 16.13, y: 0.99, z: -2.35}
+  m_LocalRotation: {x: -0.00000009483906, y: -0.7641313, z: 0.000000062439845, w: 0.6450608}
+  m_LocalPosition: {x: -2.225, y: 4.2, z: -2.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
   - {fileID: 4068778981482640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 266.676, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 260.34, z: 0}
 --- !u!4 &4334034336313816
 Transform:
   m_ObjectHideFlags: 1
@@ -2178,10 +2178,10 @@ MonoBehaviour:
   _noClipEnabled: 0
   _flySpeed: 1
   _movementInfo:
-    maxSpeedHorizontal: 3
-    maxSpeedVertical: 40
+    maxWalkSpeed: 3
+    maxFallVelocity: 50
     accellerationGrounded: 5
-    accellerationAerial: 0.25
+    accellerationAerial: 0.125
     dragGrounded: 0.4
     dragAerial: 0.02
     jumpForce: 160
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea15085df3bcc4844a35848a6e6b934a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upVector: {x: 0, y: 1, z: 0}
+  upVector: {x: 0, y: 1.25, z: 0}
   useGravity: 1
   invert: 0
 --- !u!114 &114663702991070240

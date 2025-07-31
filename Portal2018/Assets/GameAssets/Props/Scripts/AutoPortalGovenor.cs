@@ -49,8 +49,8 @@ public class AutoPortalGovenor : PortalSpawnerBase {
         if (bIsActive)
         {
             cycleStartTime = Time.time;
-            PlacePortal(false, BaseAutoportal.AutoPortalSpawnPoint.transform.position, BaseAutoportal.AutoPortalSpawnPoint.transform.forward);
-            PlacePortal(true, CyclingPortals[0].AutoPortalSpawnPoint.transform.position, CyclingPortals[0].AutoPortalSpawnPoint.transform.forward);
+            PlacePortal(false, BaseAutoportal.AutoPortalSpawnPoint.transform, BaseAutoportal.AutoPortalSpawnPoint.transform.position, BaseAutoportal.AutoPortalSpawnPoint.transform.forward);
+            PlacePortal(true, CyclingPortals[0].AutoPortalSpawnPoint.transform, CyclingPortals[0].AutoPortalSpawnPoint.transform.position, CyclingPortals[0].AutoPortalSpawnPoint.transform.forward);
         } else
         {
             //We need to close down our portals
@@ -66,7 +66,7 @@ public class AutoPortalGovenor : PortalSpawnerBase {
         {
             cycleStartTime = Time.time;
             currentPortalIndex = (int)Mathf.Repeat(cycleTime++, CyclingPortals.Count);
-            PlacePortal(true, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.position, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.forward);
+            PlacePortal(true, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.position, CyclingPortals[currentPortalIndex].AutoPortalSpawnPoint.transform.forward);
         }
 	}
 }

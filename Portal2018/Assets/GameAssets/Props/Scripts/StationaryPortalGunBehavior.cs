@@ -52,7 +52,7 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	{
 		if (c.gameObject.name == "Player")
 		{
-			LevelController.Instance.playersPortalGun.PlacePortal(SpawnPortalOnClick.Polarity.Right, outPortalLocation.transform.position, outPortalLocation.transform.forward);
+			LevelController.Instance.playersPortalGun.PlacePortal(false, outPortalLocation.transform, outPortalLocation.transform.position, outPortalLocation.transform.forward);
 		}
 	}
 
