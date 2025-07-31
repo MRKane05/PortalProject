@@ -712,7 +712,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614185999318264}
   m_LocalRotation: {x: -0.00000009483906, y: -0.7641313, z: 0.000000062439845, w: 0.6450608}
-  m_LocalPosition: {x: -2.225, y: 4.2, z: -2.015}
+  m_LocalPosition: {x: 34.9, y: 0.818, z: -2.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305081267724896}
@@ -2179,11 +2179,11 @@ MonoBehaviour:
   _flySpeed: 1
   _movementInfo:
     maxWalkSpeed: 3
-    maxFallVelocity: 50
+    maxFallVelocity: 60
     accellerationGrounded: 5
     accellerationAerial: 0.125
     dragGrounded: 0.4
-    dragAerial: 0.02
+    dragAerial: 0.01
     jumpForce: 160
   _maxLookAngle: 89
   _portalLookSnapAngle: 15
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea15085df3bcc4844a35848a6e6b934a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upVector: {x: 0, y: 1.25, z: 0}
+  upVector: {x: 0, y: 1.35, z: 0}
   useGravity: 1
   invert: 0
 --- !u!114 &114663702991070240
