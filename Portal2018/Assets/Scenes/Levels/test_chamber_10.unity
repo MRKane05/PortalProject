@@ -518,6 +518,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 40f8ebf310dd91e4f93a1d81c1d5e208, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f8ebf310dd91e4f93a1d81c1d5e208, type: 3}
   m_IsPrefabAsset: 0
@@ -2435,6 +2439,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8b7472d975d0c1747a45c0dceaff9abe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b7472d975d0c1747a45c0dceaff9abe, type: 3}
   m_IsPrefabAsset: 0
@@ -3779,6 +3787,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3d8807d9d27229542b077747a71bf7dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d8807d9d27229542b077747a71bf7dd, type: 3}
   m_IsPrefabAsset: 0
@@ -4825,16 +4837,6 @@ Prefab:
     - target: {fileID: 4328838437750176, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114644301495478486, guid: 638471f7ca84fa8499eb8cee8968e88d,
-        type: 2}
-      propertyPath: upVector.y
-      value: 1.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 114603961447189572, guid: 638471f7ca84fa8499eb8cee8968e88d,
-        type: 2}
-      propertyPath: _movementInfo.dragAerial
-      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638471f7ca84fa8499eb8cee8968e88d, type: 2}

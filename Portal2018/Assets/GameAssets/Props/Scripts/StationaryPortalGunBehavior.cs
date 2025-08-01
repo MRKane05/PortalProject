@@ -20,6 +20,8 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 
 	bool bIsActive = false;
 
+	public SpawnPortalOnClick.Polarity portalPolartiy = SpawnPortalOnClick.Polarity.Left;
+
 	// Use this for initialization
 	public void DoActionStart()
 	{
@@ -27,7 +29,7 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 		//yield return new WaitForSeconds(startDelay);
 		lastActionTime = Time.time;
 		//Start with a shot
-		LevelController.Instance.playersPortalGun.DoScriptFire(SpawnPortalOnClick.Polarity.Left, gameObject.transform.position, gameObject.transform.forward);
+		LevelController.Instance.playersPortalGun.DoScriptFire(portalPolartiy, gameObject.transform.position, gameObject.transform.forward);
 	}
 
 	// Update is called once per frame
@@ -44,7 +46,7 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 			lastActionTime = Time.time;
 			gunBase.transform.eulerAngles = setRotation + new Vector3(0, -90, 0); //Make sure this is strictly correct
 			setRotation = gunBase.transform.eulerAngles;
-			LevelController.Instance.playersPortalGun.DoScriptFire(SpawnPortalOnClick.Polarity.Left, gunBase.transform.position, gunBase.transform.forward);
+			LevelController.Instance.playersPortalGun.DoScriptFire(portalPolartiy, gunBase.transform.position, gunBase.transform.forward);
 		}
 	}
 
@@ -52,7 +54,11 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	{
 		if (c.gameObject.name == "Player")
 		{
-			LevelController.Instance.playersPortalGun.PlacePortal(false, outPortalLocation.transform, outPortalLocation.transform.position, outPortalLocation.transform.forward);
+			//Place out portal
+			if (outPortalLocation)
+			{
+				LevelController.Instance.playersPortalGun.PlacePortal(false, outPortalLocation.transform, outPortalLocation.transform.position, outPortalLocation.transform.forward);
+			}
 		}
 	}
 
