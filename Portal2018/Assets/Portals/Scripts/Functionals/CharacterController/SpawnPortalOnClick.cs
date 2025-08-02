@@ -209,7 +209,7 @@ public class SpawnPortalOnClick : PortalSpawnerBase {
                 return;
             }
 
-            if (polarity == Polarity.Right && LevelController.Instance.playerControlType == LevelController.enPlayerControlType.LEFTONLY)    //Disable the player's firing attempts
+            if (polarity == Polarity.Right && (LevelController.Instance.playerControlType == LevelController.enPlayerControlType.LEFTONLY || LevelController.Instance.playerControlType == LevelController.enPlayerControlType.NOTYETRIGHT))    //Disable the player's firing attempts
             {
                 return;
             }

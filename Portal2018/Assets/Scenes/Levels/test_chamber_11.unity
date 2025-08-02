@@ -1262,7 +1262,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4607761865541450, guid: db343e0ccd9ab4245a3da74e35579b81, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -270
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 114336416486986268, guid: db343e0ccd9ab4245a3da74e35579b81,
         type: 2}
@@ -1332,6 +1332,11 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.25098038
+      objectReference: {fileID: 0}
+    - target: {fileID: 114970890316051136, guid: db343e0ccd9ab4245a3da74e35579b81,
+        type: 2}
+      propertyPath: bPickupLeft
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db343e0ccd9ab4245a3da74e35579b81, type: 2}
