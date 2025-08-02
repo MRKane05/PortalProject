@@ -18,6 +18,9 @@ public class SequenceEvent
 }
 
 public class DialogueSequencer : MonoBehaviour {
+	public enum enSequenceType { NULL, DIALOGUE, EVENTS }
+	public enSequenceType SequenceType = enSequenceType.DIALOGUE;
+
 	public AudioMixer AudioMixerGroup;
 	public float EventIntermission = 0.5f;//How long between each event
 	public List<SequenceEvent> SequenceEvents;
@@ -43,7 +46,7 @@ public class DialogueSequencer : MonoBehaviour {
 			bSequenceActive = true;
 			if (SequenceEvents.Count > 0)
 			{
-				if (!LevelController.Instance.bDialoguePlaying)
+				if (!LevelController.Instance.bDialoguePlaying && SequenceType == enSequenceType.DIALOGUE)
 				{
 					PlayNode(SequenceEvents[0]);
 				} else
@@ -71,14 +74,27 @@ public class DialogueSequencer : MonoBehaviour {
 		}
 		else
         {
-			AudioMixerGroup.DOSetFloat("GameVolume", 0f, 1f);   //Restore the backing game volume
-			LevelController.Instance.bDialoguePlaying = false;
+			if (SequenceType == enSequenceType.DIALOGUE)
+			{
+				AudioMixerGroup.DOSetFloat("GameVolume", 0f, 1f);   //Restore the backing game volume
+				LevelController.Instance.bDialoguePlaying = false;
+            }
+            else
+            {
+				//Reset our sequence because Dialogue plays only once, but sequences can play upon triggering
+				currentNode = 0;
+				bSequenceActive = false;
+
+			}
 		}
     }
 
 	void PlayNode(SequenceEvent thisEvent)
     {
-		LevelController.Instance.bDialoguePlaying = true;
+		if (SequenceType == enSequenceType.DIALOGUE)
+		{
+			LevelController.Instance.bDialoguePlaying = true;
+		}
 		StartCoroutine(doPlayNode(thisEvent));
 		currentNode++;
     }
@@ -90,27 +106,30 @@ public class DialogueSequencer : MonoBehaviour {
 
 	IEnumerator doPlayNode(SequenceEvent thisEvent)
     {		
-			thisEvent.TriggerEvents.Invoke();	//Invoke events
+		thisEvent.TriggerEvents.Invoke();	//Invoke events
 
-			//Do audio
-			if (thisEvent.AudioLine)
-            {
-				AudioMixerGroup.DOSetFloat("GameVolume", voiceLineDropVolume, 0.5f); //Turn down the game volume for the GlaDOS lines
-				ourAudio.PlayOneShot(thisEvent.AudioLine);
-				//Debug.Log("Playing Audio: " + thisEvent.AudioLine.name);
-				yield return new WaitForSeconds(thisEvent.AudioLine.length);	//Don't kill a sequence while dialogue is playing
-			}
-
-			//Do Pause
-			float waitStart = Time.time;
-			while (Time.time < waitStart + thisEvent.PauseDuration)
+		//Do audio
+		if (thisEvent.AudioLine)
+        {
+			if (SequenceType == enSequenceType.DIALOGUE)
 			{
-				yield return null;
-				if (bKillSequence)
-				{
-					break;
-				}
+				AudioMixerGroup.DOSetFloat("GameVolume", voiceLineDropVolume, 0.5f); //Turn down the game volume for the GlaDOS lines
 			}
+			ourAudio.PlayOneShot(thisEvent.AudioLine);
+		//Debug.Log("Playing Audio: " + thisEvent.AudioLine.name);
+		yield return new WaitForSeconds(thisEvent.AudioLine.length);	//Don't kill a sequence while dialogue is playing
+		}
+
+		//Do Pause
+		float waitStart = Time.time;
+		while (Time.time < waitStart + thisEvent.PauseDuration)
+		{
+			yield return null;
+			if (bKillSequence)
+			{
+				break;
+			}
+		}
 		yield return new WaitForSeconds(EventIntermission);  //A small pause at the end of this
 		PlayNextNode();
     }

@@ -156,6 +156,14 @@ namespace Portals {
         }
 
         void GrabObject(GameObject obj) {
+            //This could also be an interation with a button or other similar object
+            PedestalButton button = obj.GetComponent<PedestalButton>();
+            if (button)
+            {
+                button.PlayerInteract();
+                return; //Forget the rest of this action
+            }
+
             Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
             if (rigidbody == null) {
                 Debug.Log("Cannot grab object without a Rigidbody");

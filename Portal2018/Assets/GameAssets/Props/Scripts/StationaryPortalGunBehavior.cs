@@ -11,6 +11,8 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	float lastActionTime = 0;
 	Vector3 setRotation = Vector3.zero;
 	float startDelay = 2f;
+	public List<float> gunPositions = new List<float>();
+	public int currentMoveAngle = 0;
 	public GameObject gunBase;
 	public GameObject gunStand;
 
@@ -21,34 +23,57 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 	bool bIsActive = false;
 
 	public SpawnPortalOnClick.Polarity portalPolartiy = SpawnPortalOnClick.Polarity.Left;
+	public ParticleSystem FlareParticles;
+	AudioSource ourAudio;
+	Animation ourAnimation;
+	public AudioClip RotateSound;
+    public AudioClip FireSound;
+	public AudioClip ChargeSound;
+
+    void Start()
+    {
+		ourAudio = gameObject.GetComponent<AudioSource>();
+		ourAnimation = gameObject.GetComponent<Animation>();
+    }
+
 
 	// Use this for initialization
 	public void DoActionStart()
 	{
 		bIsActive = true;
-		//yield return new WaitForSeconds(startDelay);
-		lastActionTime = Time.time;
-		//Start with a shot
-		LevelController.Instance.playersPortalGun.DoScriptFire(portalPolartiy, gameObject.transform.position, gameObject.transform.forward);
+		ourAnimation.Play();
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (!bIsActive) { return; }
-		if (Time.time - lastActionTime > gunPauseTime)  //We need to rotate our gun 90deg to the left
+	public void DoGunFlare()
+    {
+		//Sound effects
+		//Visual effect of gun flaring up
+		if (ourAudio && ChargeSound)
 		{
-			gunBase.transform.eulerAngles = Vector3.MoveTowards(gunBase.transform.eulerAngles, setRotation + new Vector3(0, -90, 0), Time.deltaTime * 90f / gunTurnTime);
-			gunStand.transform.eulerAngles = gunBase.transform.eulerAngles - new Vector3(0, 90, 0);
+			ourAudio.PlayOneShot(ChargeSound);
 		}
-		if (Time.time - lastActionTime > gunPauseTime + gunTurnTime)
-		{
-			lastActionTime = Time.time;
-			gunBase.transform.eulerAngles = setRotation + new Vector3(0, -90, 0); //Make sure this is strictly correct
-			setRotation = gunBase.transform.eulerAngles;
-			LevelController.Instance.playersPortalGun.DoScriptFire(portalPolartiy, gunBase.transform.position, gunBase.transform.forward);
+		if (FlareParticles)
+        {
+			FlareParticles.Emit(1);
 		}
 	}
+
+	public void DoGunFire()
+    {
+		LevelController.Instance.playersPortalGun.DoScriptFire(portalPolartiy, gunBase.transform.position, gunBase.transform.forward);
+		if (ourAudio && FireSound)
+		{
+			ourAudio.PlayOneShot(FireSound);
+		}
+	}
+
+	public void DoRotate()
+    {
+		if (ourAudio && RotateSound)
+        {
+			ourAudio.PlayOneShot(RotateSound);
+        }
+    }
 
 	void OnTriggerEnter(Collider c)
 	{
@@ -65,6 +90,8 @@ public class StationaryPortalGunBehavior : MonoBehaviour
 
 	public void PlayStandCloseAnimation()
 	{
+		//We want to kill our animation too
+		ourAnimation.Stop();
 		StandAnimator.Play();
 	}
 }
