@@ -124,20 +124,23 @@ Shader "Mobile/Unlit LiquidSurface RefMap(Supports Lightmap)" {
         // fragment shader
         fixed4 frag(v2f IN) : SV_Target
         {
-            fixed4 col, tex;
+            fixed4 col;
 
         // Fetch lightmap
             half4 bakedColorTex = UNITY_SAMPLE_TEX2D(unity_Lightmap, IN.uv0.xy);
             col.rgb = DecodeLightmap(bakedColorTex);
-
-            // Fetch color texture
-            tex = _Brighten + tex2D(_MainTex, IN.uv1.xy);
-            col.rgb = tex.rgb * col.rgb;
-            col.a = 1;
+            
 
             fixed3 detailNormal = UnpackNormal(tex2D(_BumpMap, IN.uv1.xy + fixed2(_Time.x * 0.33, _Time.x * 0.5)));
             fixed3 secondNormal = UnpackNormal(tex2D(_BumpMap, IN.uv1.xy + fixed2(_Time.x * -0.25, _Time.x * 0.25) + detailNormal.xy * 0.0125));
+            
             detailNormal = blend_whiteout(detailNormal, secondNormal);
+            // Fetch color texture
+            fixed4 tex = _Brighten + tex2D(_MainTex, IN.uv1.xy + detailNormal.xy * 0.05 + fixed2(_Time.x * 0.25, _Time.x * -0.25));
+            col.rgb = tex.rgb * col.rgb;
+            col.a = 1;
+
+
             fixed3 normal = blend_whiteout(IN.worldRefl, detailNormal);
             //Cubemap reflection
             half4 reflcol = texCUBE(_Cube, normal);
